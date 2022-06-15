@@ -1,2 +1,3 @@
 secret_*
-externals/
+externals/*
+!externals/README.md
