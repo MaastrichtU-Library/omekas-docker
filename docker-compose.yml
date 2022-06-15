@@ -10,6 +10,7 @@ services:
       VIRTUAL_HOST: omeka.local
     volumes:
       - omeka:/var/www/html/volume
+      - ./omeka-s/secret_database.ini:/var/www/html/volume/config/database.ini
 
   db:
     image: mysql:5.7
