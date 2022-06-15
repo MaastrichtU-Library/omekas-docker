@@ -4,23 +4,49 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     nano
 
-# Install modules
-# TODO: Implement this using .sh script with config file of modules to be installed
-
 
 # Remove the symlink to volume/
 RUN rm /var/www/html/modules && \
     rm -fr /var/www/html/volume/modules/ && \
     mkdir /var/www/html/modules/
 
+# Install modules
+# TODO: Implement this using .sh script with config file of modules to be installed
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/3.3.6.13/AdvancedSearch-3.3.6.13.zip --output /tmp/AdvancedSearch.zip && \
     unzip /tmp/AdvancedSearch.zip -d modules/ && \
     rm /tmp/AdvancedSearch.zip
 
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/download/3.3.13.4/BulkEdit-3.3.13.4.zip --output /tmp/BulkEdit.zip && \
+    unzip /tmp/BulkEdit.zip -d modules/ && \
+    rm /tmp/BulkEdit.zip
+
+RUN curl -L https://github.com/symac/Omeka-S-module-ExtractOcr/releases/download/v3.3.2.1/ExtractOcr-3.3.2.1.zip --output /tmp/ExtractOcr.zip && \
+    unzip /tmp/ExtractOcr.zip -d modules/ && \
+    rm /tmp/ExtractOcr.zip
+
+RUN curl -L https://github.com/omeka-s-modules/FacetedBrowse/releases/download/v1.1.0/FacetedBrowse-1.1.0.zip --output /tmp/FacetedBrowse.zip && \
+    unzip /tmp/FacetedBrowse.zip -d modules/ && \
+    rm /tmp/FacetedBrowse.zip
+
+RUN curl -L https://github.com/omeka-s-modules/MetadataBrowse/releases/download/v1.4.1/MetadataBrowse-1.4.1.zip --output /tmp/MetadataBrowse.zip && \
+    unzip /tmp/MetadataBrowse.zip -d modules/ && \
+    rm /tmp/MetadataBrowse.zip
+
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/releases/download/3.3.4.2/PdfViewer-3.3.4.2.zip --output /tmp/PdfViewer.zip && \
+    unzip /tmp/PdfViewer.zip -d modules/ && \
+    rm /tmp/PdfViewer.zip
+
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Reference/releases/download/3.4.37.3/Reference-3.4.37.3.zip --output /tmp/Reference.zip && \
+    unzip /tmp/Reference.zip -d modules/ && \
+    rm /tmp/Reference.zip
+
 RUN chown -R www-data:www-data /var/www/html/modules/
 
+# NOTE: Downloaded modules need to be installed in the Admin UI. The Installation-Status survives a rebuild of the Omeka S container, so I guess the installation makes changes to the database only.
+# TODO: Find out how to install modules unattendedly
+
 # Install theme
-# TODO: Implement this
-# TODO: Only install the theme if it doesn't exist. Prevent overriding code-changes introduced by a UB-developer
+# The theme will be volume-binded from the host system
+# TODO: Implement unattended installation of theme
 
 CMD ["apache2-foreground"]
