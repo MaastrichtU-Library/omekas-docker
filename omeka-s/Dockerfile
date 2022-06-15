@@ -11,7 +11,6 @@ RUN rm /var/www/html/modules && \
     mkdir /var/www/html/modules/
 
 # Install modules
-# TODO: Implement this using .sh script with config file of modules to be installed
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/3.3.6.13/AdvancedSearch-3.3.6.13.zip --output /tmp/AdvancedSearch.zip && \
     unzip /tmp/AdvancedSearch.zip -d modules/ && \
     rm /tmp/AdvancedSearch.zip
@@ -43,10 +42,5 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Reference/releases/downl
 RUN chown -R www-data:www-data /var/www/html/modules/
 
 # NOTE: Downloaded modules need to be installed in the Admin UI. The Installation-Status survives a rebuild of the Omeka S container, so I guess the installation makes changes to the database only.
-# TODO: Find out how to install modules unattendedly
-
-# Install theme
-# The theme will be volume-binded from the host system
-# TODO: Implement unattended installation of theme
 
 CMD ["apache2-foreground"]
