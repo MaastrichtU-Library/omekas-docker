@@ -11,6 +11,7 @@ services:
     volumes:
       - omeka:/var/www/html/volume
       - ./omeka-s/secret_database.ini:/var/www/html/volume/config/database.ini
+      - ./externals/omekas-theme-um-theses:/var/www/html/themes/UM-A
 
   db:
     image: mysql:5.7
