@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+
+  omekas:
+    depends_on:
+      - db
+    build: omeka-s/
+    container_name: omekas
+    environment: 
+      VIRTUAL_HOST: omeka.local
+    volumes:
+      - omeka:/var/www/html/volume
+
+  db:
+    image: mysql:5.7
+    container_name: omekas_db
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: very_difficult_password_1 
+      MYSQL_DATABASE: omekas
+      MYSQL_USER: omekas
+      MYSQL_PASSWORD: difficult_omek4s_password
+      
+  proxy:
+    image: jwilder/nginx-proxy
+    container_name: proxy
+    environment:
+      DEFAULT_HOST: omeka.local
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/ssl/certs:/etc/nginx/certs/
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+    
+
+volumes:
+  db:
+  omeka:
+ 
