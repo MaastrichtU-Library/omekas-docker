@@ -1,7 +1,7 @@
 # Omeka S docker
 Dockerized instance of Omeka S.
 
-Based on the Docker image by 'giocomai'. (Docker Hub)[https://hub.docker.com/r/giocomai/omeka-s-docker] | (GitHub)[https://github.com/giocomai/omeka-s-docker]
+Based on the Docker image by 'giocomai'. [Docker Hub](https://hub.docker.com/r/giocomai/omeka-s-docker) | [GitHub](https://github.com/giocomai/omeka-s-docker)
 
 
 ## Preparation
@@ -47,7 +47,7 @@ Tip: You might need to edit `/etc/hosts` and create an entry for omeka.local tha
 
 
 ## Create a fresh, empty environment
-Omeka config settings, themes, modules and files are saved in a persistent docker volume. Execute these commands to **delete all data** and go back to an empty, fresh experience.
+Omeka config settings, themes and files are saved in a persistent docker volume. Execute these commands to **delete all data** and go back to an empty, fresh experience.
 ```
 docker-compose down
 
