@@ -39,6 +39,10 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Reference/releases/downl
     unzip /tmp/Reference.zip -d modules/ && \
     rm /tmp/Reference.zip
 
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/3.5.34.3/SearchSolr-3.5.34.3.zip --output /tmp/SearchSolr.zip && \
+    unzip /tmp/SearchSolr.zip -d modules/ && \
+    rm /tmp/SearchSolr.zip
+
 RUN chown -R www-data:www-data /var/www/html/modules/
 
 # NOTE: Downloaded modules need to be installed in the Admin UI. The Installation-Status survives a rebuild of the Omeka S container, so I guess the installation makes changes to the database only.
