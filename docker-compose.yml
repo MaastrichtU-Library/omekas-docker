@@ -23,7 +23,7 @@ services:
       MYSQL_DATABASE: omekas
       MYSQL_USER: omekas
       MYSQL_PASSWORD: difficult_omek4s_password
-      
+
   proxy:
     image: jwilder/nginx-proxy
     container_name: proxy
@@ -35,10 +35,9 @@ services:
     volumes:
       - /etc/ssl/certs:/etc/nginx/certs/
       - /var/run/docker.sock:/tmp/docker.sock:ro
-
-    
+      - ./proxy/omeka.conf:/etc/nginx/vhost.d/omeka.local
 
 volumes:
   db:
   omeka:
- 
+

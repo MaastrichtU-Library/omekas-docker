@@ -69,3 +69,4 @@ docker volume rm omekas-docker_db omekas-docker_omeka
 - [ ] Activate theme for site unattendedly
 - [ ] Load representative test data / demo content into Omeka S (SQL import + copy items and media to files/ folder?)
 - [ ] Determine which .htaccess tricks need to be reimplemented here (or in nginx-proxy)
+- [ ] Increase upload size in .htaccess as well
