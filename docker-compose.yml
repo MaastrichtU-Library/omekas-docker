@@ -27,7 +27,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:5.2.0-apache
-    container_name: phpmyadmin
+    container_name: omekas_phpmyadmin
     depends_on:
       - db
     environment:

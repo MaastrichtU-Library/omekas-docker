@@ -123,3 +123,6 @@ More info on https://stackoverflow.com/questions/7175619/apache-solr-string-fiel
 - [ ] Load many PDFs
 - [ ] Compare performance SolrSearch vs. SQL-search
 - [ ] Play with the (Solr) Suggester
+
+## TODO ExtractOCR
+- [ ] 'application/octet-stream' issue in allowed Media types (add to settings?)
