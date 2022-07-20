@@ -25,6 +25,17 @@ services:
       MYSQL_USER: omekas
       MYSQL_PASSWORD: difficult_omek4s_password
 
+  phpmyadmin:
+    image: phpmyadmin:5.2.0-apache
+    container_name: phpmyadmin
+    depends_on:
+      - db
+    environment:
+      VIRTUAL_HOST: db.local
+      # Remove the 2 lines below to restore the login screen
+      PMA_USER: omekas
+      PMA_PASSWORD: difficult_omek4s_password
+
   solr:
     image: solr:8.11.1
     container_name: omekas_solr
