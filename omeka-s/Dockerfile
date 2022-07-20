@@ -43,4 +43,5 @@ RUN chown -R www-data:www-data /var/www/html/modules/
 
 # NOTE: Downloaded modules need to be installed in the Admin UI. The Installation-Status survives a rebuild of the Omeka S container, so I guess the installation makes changes to the database only.
 
-CMD ["apache2-foreground"]
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]

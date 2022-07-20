@@ -1,3 +1,4 @@
+.idea
 secret_*
 externals/*
 !externals/README.md
