@@ -19,9 +19,9 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/downlo
     unzip /tmp/BulkEdit.zip -d modules/ && \
     rm /tmp/BulkEdit.zip
 
-RUN curl -L https://github.com/symac/Omeka-S-module-ExtractOcr/releases/download/v3.3.2.1/ExtractOcr-3.3.2.1.zip --output /tmp/ExtractOcr.zip && \
-    unzip /tmp/ExtractOcr.zip -d modules/ && \
-    rm /tmp/ExtractOcr.zip
+RUN curl -L https://github.com/omeka-s-modules/ExtractText/releases/download/v1.2.1/ExtractText-1.2.1.zip --output /tmp/ExtractText.zip && \
+    unzip /tmp/ExtractText.zip -d modules/ && \
+    rm /tmp/ExtractText.zip
 
 RUN curl -L https://github.com/omeka-s-modules/FacetedBrowse/releases/download/v1.1.0/FacetedBrowse-1.1.0.zip --output /tmp/FacetedBrowse.zip && \
     unzip /tmp/FacetedBrowse.zip -d modules/ && \
