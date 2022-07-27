@@ -23,6 +23,10 @@ RUN curl -L https://github.com/omeka-s-modules/ExtractText/releases/download/v1.
     unzip /tmp/ExtractText.zip -d modules/ && \
     rm /tmp/ExtractText.zip
 
+RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v1.3.0/HideProperties-1.3.0.zip --output /tmp/HideProperties.zip && \
+    unzip /tmp/HideProperties.zip -d modules/ && \
+    rm /tmp/HideProperties.zip
+
 RUN curl -L https://github.com/omeka-s-modules/FacetedBrowse/releases/download/v1.1.0/FacetedBrowse-1.1.0.zip --output /tmp/FacetedBrowse.zip && \
     unzip /tmp/FacetedBrowse.zip -d modules/ && \
     rm /tmp/FacetedBrowse.zip
