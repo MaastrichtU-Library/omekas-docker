@@ -36,4 +36,13 @@ return [
             'base_uri' => 'http://omeka.local/files',
         ],
     ],
+    'group' => [
+        'config' => [
+            // Apply the groups of item sets to items and medias.
+            'group_recursive_item_sets' => false,
+            // Apply the item groups to medias. Implied and not taken in account
+            // when `group_recursive_item_sets` is true.
+            'group_recursive_items' => true,
+        ],
+    ],
 ];

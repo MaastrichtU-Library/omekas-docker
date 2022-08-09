@@ -31,6 +31,14 @@ RUN curl -L https://github.com/omeka-s-modules/FacetedBrowse/releases/download/v
     unzip /tmp/FacetedBrowse.zip -d modules/ && \
     rm /tmp/FacetedBrowse.zip
 
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Group/releases/download/3.3.4.1/Group-3.3.4.1.zip --output /tmp/Group.zip && \
+    unzip /tmp/Group.zip -d modules/ && \
+    rm /tmp/Group.zip
+
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Guest/releases/download/3.4.16.3/Guest-3.4.16.3.zip --output /tmp/Guest.zip && \
+    unzip /tmp/Guest.zip -d modules/ && \
+    rm /tmp/Guest.zip
+
 RUN curl -L https://github.com/omeka-s-modules/MetadataBrowse/releases/download/v1.4.1/MetadataBrowse-1.4.1.zip --output /tmp/MetadataBrowse.zip && \
     unzip /tmp/MetadataBrowse.zip -d modules/ && \
     rm /tmp/MetadataBrowse.zip
