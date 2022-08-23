@@ -83,7 +83,7 @@ perform the steps described in the Module's [README](https://github.com/Daniel-K
 
 5. In admin or site settings --> enable the search form
 6. Add a navigation link to the search page in the navigation settings of the site.
-7. Workaround when SolrSearch does not return results for text queries. Add a **'*'->'_text_' Copy field** in the Solr admin backend. Go to core **omekas** --> **Schema** and add a Copy Field with source **'*'** and destination **_text**_. 
+7. Workaround when SolrSearch does not return results for text queries. Add a `* -> _text_` **Copy field** in the Solr admin backend. Go to core **omekas** --> **Schema** and add a Copy Field with source `*` and destination `_text_`. 
 
 
 Note: There are Solr field names that resemble eachother. The Solr schema definition is different though. For example:
@@ -118,10 +118,7 @@ More info on https://stackoverflow.com/questions/7175619/apache-solr-string-fiel
 
 ## TODO Solr
 - [ ] Modify theme so that search bar on all pages performs the solrsearch
-- [ ] Enable Full text extract
 - [ ] Load many PDFs
 - [ ] Compare performance SolrSearch vs. SQL-search
 - [ ] Play with the (Solr) Suggester
 
-## TODO ExtractOCR
-- [ ] 'application/octet-stream' issue in allowed Media types (add to settings?)
