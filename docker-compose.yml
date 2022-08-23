@@ -36,6 +36,18 @@ services:
       PMA_USER: omekas
       PMA_PASSWORD: difficult_omek4s_password
 
+  solr:
+    image: solr:8.11.1
+    container_name: omekas_solr
+    environment:
+      VIRTUAL_HOST: solr.local
+      VIRTUAL_PORT: 8983
+    volumes:
+      - solrdata:/var/solr
+    command:
+      - solr-precreate
+      - omekas
+
   proxy:
     image: jwilder/nginx-proxy
     container_name: proxy
@@ -52,4 +64,5 @@ services:
 volumes:
   db:
   omeka:
+  solrdata:
 
