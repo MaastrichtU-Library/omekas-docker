@@ -48,6 +48,30 @@ services:
       - solr-precreate
       - omekas
 
+  # NOTE: This container acts as a SAML-IdP for testing and SHOULD NEVER BE USED IN PRODUCTION!
+  # The admin interface is accessible at http://samlidp.local/simplesaml (user/pwd: admin/secret)
+  # Users and passwords are defined in the ./samlidp/users.php file
+  samlidp:
+    image: kristophjunge/test-saml-idp:1.15
+    container_name: samlidp
+    ports:
+      # Having these ports exposed lets both container-to-container and client-to-container traffic use the http://samlidp.local:8080/... URL
+      - "8080:8080"
+      - "8443:8443"
+    environment:
+      VIRTUAL_HOST: samlidp.local
+      VIRTUAL_PORT: 8080
+      SIMPLESAMLPHP_SP_ENTITY_ID: http://omeka.local/shibboleth
+      SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: http://omeka.local/Shibboleth.sso/SAML2/POST
+      SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SERVICE: http://omeka.local/Shibboleth.sso/SLO/Redirect
+    volumes:
+      - ./samlidp/users.php:/var/www/simplesamlphp/config/authsources.php
+    networks:
+      default:
+        aliases:
+          # Having this alias lets the omekas-container connect to the metadata URL using the samlidp.local:8080 URL
+          - samlidp.local
+
   proxy:
     image: jwilder/nginx-proxy
     container_name: proxy

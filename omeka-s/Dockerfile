@@ -3,12 +3,15 @@ FROM giocomai/omeka-s-docker:v3.2.0
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     nano
-
-
+    
 # Remove the symlink to volume/
 RUN rm /var/www/html/modules && \
     rm -fr /var/www/html/volume/modules/ && \
     mkdir /var/www/html/modules/
+
+# Some modules require composer
+# In Docker it cannot be installed via apt because of unmet php dependencies
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install modules
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/3.3.6.13/AdvancedSearch-3.3.6.13.zip --output /tmp/AdvancedSearch.zip && \
@@ -46,6 +49,35 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Reference/releases/downl
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/3.5.34.3/SearchSolr-3.5.34.3.zip --output /tmp/SearchSolr.zip && \
     unzip /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
+
+
+
+
+### Shibboleth section ### 
+
+# The Omeka S module Shibboleth depends on the OS package 'php-ldap'
+# Compile LDAP extension into PHP (simply installing php-ldap via apt does not work in Docker)
+RUN apt-get update && \
+    apt-get install libldap2-dev -y && \
+    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+    docker-php-ext-install ldap
+
+RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Shibboleth/-/archive/3.3.0.7/Omeka-S-module-Shibboleth-3.3.0.7.zip --output /tmp/Shibboleth.zip && \
+    unzip /tmp/Shibboleth.zip -d modules/ && \
+    # This zip archive contains a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-Shibboleth-3.3.0.7 modules/Shibboleth && \
+    # install module's dependencies via composer
+    cd modules/Shibboleth && \
+    composer update && \
+    composer install --no-dev && \
+    rm /tmp/Shibboleth.zip   
+
+# Install Shibboleth client
+RUN apt-get update && \
+    apt-get install libapache2-mod-shib -y
+
+
+### END OF Shibboleth section ###
 
 RUN chown -R www-data:www-data /var/www/html/modules/
 

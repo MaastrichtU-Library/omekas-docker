@@ -121,6 +121,18 @@ For queries on type 'string' only **exact** matches are possible. 'text_general'
 More info on https://stackoverflow.com/questions/7175619/apache-solr-string-field-or-text-field
 
 
+## Shibboleth - DRAFT
+Shibboleth is used for single-sign on and works over the SAML protocol. There is an Omeka S module for Shibboleth,
+which couples the Omeka S "user-system" with the Shibboleth client installed on the same system. The module also 
+redirects Omeka-login URLs to Shibboleth login URLs and fetches the SAML attributes from the Shibboleth session.
+
+**Some documentation**
+
+- Omeka S module and docs: https://gitlab.com/Daniel-KM/Omeka-S-module-Shibboleth
+- Instructions to configure a Shibboleth client as SP: https://wiki.surfnet.nl/display/surfconextdev/My+First+SP+-+Shibboleth
+- For development purposes this test IdP (SimpleSamlPhp) container is used: https://hub.docker.com/r/kristophjunge/test-saml-idp
+
+
 
 
 ## TODO Docker
@@ -137,4 +149,8 @@ More info on https://stackoverflow.com/questions/7175619/apache-solr-string-fiel
 - [ ] Load many PDFs
 - [ ] Play with the (Solr) Suggester
 - [ ] Find out how to precreate the * -> Copy field during bootstrap of Solr.
+
+## TODO SSO
+- [ ] Use event hook to create user at first Shibboleth login
+- [ ] Extend section about Shibboleth in README
 
