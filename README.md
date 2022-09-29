@@ -153,4 +153,5 @@ redirects Omeka-login URLs to Shibboleth login URLs and fetches the SAML attribu
 ## TODO SSO
 - [ ] Use event hook to create user at first Shibboleth login
 - [ ] Extend section about Shibboleth in README
+- [ ] Further investigate the `StaticDataConnector` in case we want to map SAML users with a certain student-attribute set to a generic student user in Omeka S. Might be relevant in case of GDPR... See https://shibboleth.atlassian.net/wiki/spaces/IDP4/pages/1265631588/StaticDataConnector
 

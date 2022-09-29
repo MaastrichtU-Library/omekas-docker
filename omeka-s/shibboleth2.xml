@@ -1,5 +1,7 @@
 <SPConfig xmlns="urn:mace:shibboleth:3.0:native:sp:config"
     xmlns:conf="urn:mace:shibboleth:3.0:native:sp:config"
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
     clockSkew="180">
 
     <OutOfProcess tranLogFormat="%u|%s|%IDP|%i|%ac|%t|%attr|%n|%b|%E|%S|%SS|%L|%UA|%a" />
@@ -39,7 +41,38 @@
             <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1 ::1" />
           
             <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
-            <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="true">
+                <mdui:UIInfo>
+                    <mdui:DisplayName xml:lang="nl">Omeka S</mdui:DisplayName>
+                    <mdui:DisplayName xml:lang="en">Omeka S</mdui:DisplayName>
+                    <mdui:Description xml:lang="nl">UB Maastricht collectiebeheersysteem Omeka S voor digitaal erfgoed en master scripties</mdui:Description>
+                    <mdui:Description xml:lang="en">UL Maastricht collection management system Omeka S for digital heritage and master theses</mdui:Description>
+                    <mdui:Logo height="300" width="500">https://library.maastrichtuniversity.nl/wp-content/uploads/UM_Logo_OnlineLibrary2021_groot1.png</mdui:Logo>
+                </mdui:UIInfo>
+                <md:Organization>
+                    <md:OrganizationName xml:lang="nl">Universiteitsbibliotheek Maastricht</md:OrganizationName>
+                    <md:OrganizationName xml:lang="en">Maastricht University Library</md:OrganizationName>
+                    <md:OrganizationDisplayName xml:lang="nl">Universiteitsbibliotheek Maastricht</md:OrganizationDisplayName>
+                    <md:OrganizationDisplayName xml:lang="en">Maastricht University Library</md:OrganizationDisplayName>
+                    <md:OrganizationURL xml:lang="nl">https://library.maastrichtuniversity.nl</md:OrganizationURL>
+                    <md:OrganizationURL xml:lang="en">https://library.maastrichtuniversity.nl</md:OrganizationURL>
+                </md:Organization>
+                <md:ContactPerson contactType="support">
+                    <md:GivenName>ICTS</md:GivenName>
+                    <md:SurName>Servicedesk</md:SurName>
+                    <md:EmailAddress>placeholder@example.org</md:EmailAddress>
+                </md:ContactPerson>
+                <md:ContactPerson contactType="technical">
+                    <md:GivenName>Maarten</md:GivenName>
+                    <md:SurName>Coonen</md:SurName>
+                    <md:EmailAddress>placeholder@example.org</md:EmailAddress>
+                </md:ContactPerson>
+                <md:ContactPerson contactType="administrative">
+                    <md:GivenName>Maarten</md:GivenName>
+                    <md:SurName>Seegers</md:SurName>
+                    <md:EmailAddress>placeholder@example.org</md:EmailAddress>
+                </md:ContactPerson>
+            </Handler>
 
             <!-- Status reporting service. -->
             <!-- <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1"/> -->
