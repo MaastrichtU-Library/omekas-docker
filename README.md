@@ -121,12 +121,30 @@ For queries on type 'string' only **exact** matches are possible. 'text_general'
 More info on https://stackoverflow.com/questions/7175619/apache-solr-string-field-or-text-field
 
 
-## Shibboleth - DRAFT
+## Shibboleth
 Shibboleth is used for single-sign on and works over the SAML protocol. There is an Omeka S module for Shibboleth,
 which couples the Omeka S "user-system" with the Shibboleth client installed on the same system. The module also 
 redirects Omeka-login URLs to Shibboleth login URLs and fetches the SAML attributes from the Shibboleth session.
 
-**Some documentation**
+Briefly, the single-sign on works as follows:
+1. User tries to access http://omeka.local/admin
+2. Omeka Shibboleth module redirects to the Shibboleth client (shibd service) that is installed on the system.
+3. Shibboleth client acts as the Service Provider (SP) and redirects the user to the Identity Provider (IdP) defined in the Shibboleth config.
+4. User logs in at the IdP.
+5. SAML assertion token is transferred to the Assertion Consumer Service (ACS) URL defined in the IdP settings. The ACS is here a HTTP-POST endpoint at Omeka S.
+6. Shibboleth client processes the assertion token and performs attribute mapping.
+7. Omeka Shibboleth module performs a second attribute mapping, as defined in `local.config.php`
+8. User is successfully logged in.
+
+**Configuration files**
+
+- Omeka Shibboleth Module: `omeka-s/local.config.php`
+- Shibboleth client: `omeka-s/shibboleth2.xml`
+- Shibboleth client attribute mapping: `omeka-s/attribute-map-ub.xml`
+- Apache Shibboleth: `omeka-s/000-default.conf`
+- Test SAML IDP container: `docker-compose.yml` environment variables
+
+**Further documentation**
 
 - Omeka S module and docs: https://gitlab.com/Daniel-KM/Omeka-S-module-Shibboleth
 - Instructions to configure a Shibboleth client as SP: https://wiki.surfnet.nl/display/surfconextdev/My+First+SP+-+Shibboleth
@@ -152,6 +170,5 @@ redirects Omeka-login URLs to Shibboleth login URLs and fetches the SAML attribu
 
 ## TODO SSO
 - [ ] Use event hook to create user at first Shibboleth login
-- [ ] Extend section about Shibboleth in README
 - [ ] Further investigate the `StaticDataConnector` in case we want to map SAML users with a certain student-attribute set to a generic student user in Omeka S. Might be relevant in case of GDPR... See https://shibboleth.atlassian.net/wiki/spaces/IDP4/pages/1265631588/StaticDataConnector
 
