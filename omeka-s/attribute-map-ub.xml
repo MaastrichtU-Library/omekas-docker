@@ -1,0 +1,15 @@
+    <Attributes xmlns="urn:mace:shibboleth:2.0:attribute-map" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+        <!--
+        The mappings are a mix of SAML 1.1 and SAML 2.0 attribute names agreed to within the Shibboleth
+        community. The non-OID URNs are SAML 1.1 names and most of the OIDs are SAML 2.0 names, with a
+        few exceptions for newer attributes where the name is the same for both versions. You will
+        usually want to uncomment or map the names for both SAML versions as a unit.
+        -->
+
+        <!-- saml-idp-test attributes -->
+        <Attribute name="eduPersonAffiliation" nameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" id="eduPersonAffiliation"/>
+        <Attribute name="uid" nameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" id="uid"/>
+        <Attribute name="email" nameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" id="mail"/>
+
+    </Attributes>

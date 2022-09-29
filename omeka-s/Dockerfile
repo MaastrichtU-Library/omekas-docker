@@ -76,6 +76,10 @@ RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Shibboleth/-/archive/3.3
 RUN apt-get update && \
     apt-get install libapache2-mod-shib -y
 
+# Add the SSL key pair that signs metadata and SAML messages that are exchanged between IdP and this SP.
+COPY ./dev-certs/shib-dev.crt /etc/shibboleth/shib-dev.crt
+COPY ./dev-certs/shib-dev.key /etc/shibboleth/shib-dev.key
+RUN chown _shibd /etc/shibboleth/shib-dev.key
 
 ### END OF Shibboleth section ###
 
