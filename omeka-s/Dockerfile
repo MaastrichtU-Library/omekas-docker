@@ -1,4 +1,4 @@
-FROM giocomai/omeka-s-docker:v3.2.0
+FROM giocomai/omeka-s-docker:v3.2.3
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -11,7 +11,7 @@ RUN rm /var/www/html/modules && \
     mkdir /var/www/html/modules/
 
 # Install modules
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/3.3.6.13/AdvancedSearch-3.3.6.13.zip --output /tmp/AdvancedSearch.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/3.3.6.18/AdvancedSearch-3.3.6.18.zip --output /tmp/AdvancedSearch.zip && \
     unzip /tmp/AdvancedSearch.zip -d modules/ && \
     rm /tmp/AdvancedSearch.zip
 
@@ -46,6 +46,7 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Reference/releases/downl
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/3.5.34.3/SearchSolr-3.5.34.3.zip --output /tmp/SearchSolr.zip && \
     unzip /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
+
 
 RUN chown -R www-data:www-data /var/www/html/modules/
 
