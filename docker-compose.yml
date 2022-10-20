@@ -37,7 +37,7 @@ services:
       PMA_PASSWORD: difficult_omek4s_password
 
   solr:
-    image: solr:8.11.1
+    build: solr/
     container_name: omekas_solr
     environment:
       VIRTUAL_HOST: solr.local
