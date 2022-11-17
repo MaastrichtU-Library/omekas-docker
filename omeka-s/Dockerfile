@@ -4,16 +4,42 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     nano
 
-
 # Remove the symlink to volume/
 RUN rm /var/www/html/modules && \
     rm -fr /var/www/html/volume/modules/ && \
     mkdir /var/www/html/modules/
 
+
+# Some Omeka S modules require additional PHP extensions
+# As the PHP Docker image is kept as small as possible (see https://hub.docker.com/_/php), we need to install these extensions.
+# The helper script `docker-php-ext-install` can be used to compile extensions into PHP.
+# The helper script 'docker-php-extension-installer' is even more convenient, as it simplifies the installation of PHP extensions by automatically adding and removing Debian (apt) and Alpine (apk) packages.
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions \
+    # for module Ark
+    dba bcmath
+
+
+# Some modules require composer
+# In Docker it cannot be installed via apt because of unmet php dependencies
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Install modules
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/3.3.6.18/AdvancedSearch-3.3.6.18.zip --output /tmp/AdvancedSearch.zip && \
     unzip /tmp/AdvancedSearch.zip -d modules/ && \
     rm /tmp/AdvancedSearch.zip
+
+RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/3.5.13.3/Omeka-S-module-Ark-3.5.13.3.zip --output /tmp/Ark.zip && \
+    unzip /tmp/Ark.zip -d modules/ && \
+    # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-Ark-3.5.13.3 modules/Ark && \
+    # install module's dependencies via composer
+    cd modules/Ark && \
+    composer update && \
+    composer install --no-dev && \
+    rm /tmp/Ark.zip
 
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/download/3.3.13.4/BulkEdit-3.3.13.4.zip --output /tmp/BulkEdit.zip && \
     unzip /tmp/BulkEdit.zip -d modules/ && \
@@ -46,7 +72,6 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Reference/releases/downl
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/3.5.34.3/SearchSolr-3.5.34.3.zip --output /tmp/SearchSolr.zip && \
     unzip /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
-
 
 RUN chown -R www-data:www-data /var/www/html/modules/
 
