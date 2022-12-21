@@ -45,6 +45,10 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/downlo
     unzip /tmp/BulkEdit.zip -d modules/ && \
     rm /tmp/BulkEdit.zip
 
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-CleanUrl/releases/download/3.17.4.3/CleanUrl-3.17.4.3.zip --output /tmp/CleanUrl.zip && \
+    unzip /tmp/CleanUrl.zip -d modules/ && \
+    rm /tmp/CleanUrl.zip
+
 RUN curl -L https://github.com/omeka-s-modules/ExtractText/releases/download/v1.2.1/ExtractText-1.2.1.zip --output /tmp/ExtractText.zip && \
     unzip /tmp/ExtractText.zip -d modules/ && \
     rm /tmp/ExtractText.zip
