@@ -90,5 +90,8 @@ COPY ./config/ /var/www/html/config/
 RUN chown -R www-data:www-data /var/www/html/config/
 
 
+# Copy other files into the container
+COPY .htaccess /var/www/html/.htaccess
 COPY ./docker-entrypoint.sh /
+
 ENTRYPOINT ["/docker-entrypoint.sh"]

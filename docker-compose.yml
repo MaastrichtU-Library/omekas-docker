@@ -10,7 +10,6 @@ services:
       VIRTUAL_HOST: omeka.local
     volumes:
       - omeka:/var/www/html/volume
-      - ./omeka-s/.htaccess:/var/www/html/.htaccess
       - ./omeka-s/local-ark-site-resolver.php:/var/www/html/local-ark-site-resolver.php
       - ./externals/omekas-theme-um-theses:/var/www/html/themes/UM-A
 
