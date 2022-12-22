@@ -12,8 +12,8 @@ RewriteRule ^.*$ - [L]
 RewriteCond %{REQUEST_URI} ^(.+)/+$
 RewriteRule .* %1 [R=307,L]
 
-# Redirect incoming ARK URLs to the local resolver code
-RewriteRule ^ark:/99999/([a-zA-Z0-9]+)$ helper/local-ark-site-resolver.php?ark=ark:/99999/$1 [PT,L]
+# Redirect incoming ARK URLs to the forward proxy code
+RewriteRule ^ark:/([0-9]{5})/([a-zA-Z0-9]+)$ helper/10-ark-fwd-proxy.php?ark=ark:/$1/$2 [PT,L]
 
 # The following rewrites all other queries to index.php. The
 # condition ensures that if you are using Apache aliases to do
