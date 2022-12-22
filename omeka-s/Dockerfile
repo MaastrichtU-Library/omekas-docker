@@ -4,7 +4,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     nano
 
-# Remove the symlink to volume/
+# Remove the modules-symlink to volume/
 RUN rm /var/www/html/modules && \
     rm -fr /var/www/html/volume/modules/ && \
     mkdir /var/www/html/modules/
@@ -80,6 +80,15 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/down
 RUN chown -R www-data:www-data /var/www/html/modules/
 
 # NOTE: Downloaded modules need to be installed in the Admin UI. The Installation-Status survives a rebuild of the Omeka S container, so I guess the installation makes changes to the database only.
+
+
+# Remove the config-symlinks to volume/
+RUN rm /var/www/html/config/* && \
+    rm -fr /var/www/html/volume/config/
+# and add our own config files
+COPY ./config/ /var/www/html/config/
+RUN chown -R www-data:www-data /var/www/html/config/
+
 
 COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

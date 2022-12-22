@@ -18,10 +18,10 @@ Based on the Docker image by 'giocomai'. [Docker Hub](https://hub.docker.com/r/g
 
 1. Copy the example database config for Omeka S
     ```
-    cp omeka-s/example_database.ini omeka-s/secret_database.ini
+    cp omeka-s/config/example_database.ini omeka-s/config/database.ini
     ```
 
-1. Edit the `secret_database.ini` file with a text editor and enter the same values for:
+1. Edit the `database.ini` file with a text editor and enter the same values for:
     ```
     user     = 
     password = 
@@ -130,7 +130,6 @@ More info on https://stackoverflow.com/questions/7175619/apache-solr-string-fiel
 - [ ] Activate theme for site unattendedly
 - [ ] Load representative test data / demo content into Omeka S (SQL import + copy items and media to files/ folder?)
 - [ ] Determine which .htaccess tricks need to be reimplemented here (or in nginx-proxy)
-- [ ] Increase upload size in .htaccess as well
 
 ## TODO Solr
 - [ ] Modify theme so that search bar on all pages performs the solrsearch

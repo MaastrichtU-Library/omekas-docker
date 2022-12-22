@@ -1,4 +1,5 @@
 .idea
 secret_*
+config/database.ini
 externals/*
 !externals/README.md
