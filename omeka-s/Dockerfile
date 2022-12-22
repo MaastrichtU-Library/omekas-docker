@@ -77,8 +77,6 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/down
     unzip /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
 
-RUN chown -R www-data:www-data /var/www/html/modules/
-
 # NOTE: Downloaded modules need to be installed in the Admin UI. The Installation-Status survives a rebuild of the Omeka S container, so I guess the installation makes changes to the database only.
 
 
@@ -86,12 +84,15 @@ RUN chown -R www-data:www-data /var/www/html/modules/
 RUN rm /var/www/html/config/* && \
     rm -fr /var/www/html/volume/config/
 # and add our own config files
-COPY ./config/ /var/www/html/config/
-RUN chown -R www-data:www-data /var/www/html/config/
+COPY config/ /var/www/html/config/
 
 
-# Copy other files into the container
+# Copy other files and folders into the container
 COPY .htaccess /var/www/html/.htaccess
-COPY ./docker-entrypoint.sh /
+COPY helper/ /var/www/html/helper
+COPY docker-entrypoint.sh /
+
+# Set correct ownership on www folders
+RUN chown -R www-data:www-data /var/www/html/
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

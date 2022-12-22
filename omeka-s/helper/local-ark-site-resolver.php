@@ -8,17 +8,17 @@
 
 
 # You need to add a rewrite rule like below to your Apache configuration or .htaccess file to forward incoming ARKs to this local resolver code:
-# RewriteRule ^ark:/99999/([a-zA-Z0-9]+)$ local-ark-site-resolver.php?ark=ark:/99999/$1 [PT,L]
+# RewriteRule ^ark:/99999/([a-zA-Z0-9]+)$ helper/local-ark-site-resolver.php?ark=ark:/99999/$1 [PT,L]
 
 # This local resolver code works like this:
 # 1. Global resolver https://n2t.net/ark:/99999/a12vpho redirects to [302] > https://<BASE URL of your NAAN registration>/ark:/99999/a12vpho
-# 2. RewriteRule redirects to ./local-ark-site-resolver.php?ark=ark:/99999/a12vpho
+# 2. RewriteRule redirects to ./helper/local-ark-site-resolver.php?ark=ark:/99999/a12vpho
 # 3. The local resolver redirects to [302] > https://<BASE URL of your NAAN registration>/<$omeka_basepath>/<$slug>/ark:/99999/a12vpho
 
 # Example:
 # 0. https://n2t.net/ark:/99999/a12vpho
 # 1. https://omeka.local/ark:/99999/a12vpho
-# 2. https://omeka.local/local-ark-site-resolver.php?ark=ark:/99999/a12vpho
+# 2. https://omeka.local/helper/local-ark-site-resolver.php?ark=ark:/99999/a12vpho
 # 3. https://omeka.local/s/examplesite/ark:/99999/a12vpho
 
 
@@ -32,7 +32,7 @@ if (isset($_GET["ark"])) {
 	$ark=preg_replace('/[^a-z0-9\:\/]/i','',$_GET["ark"]);
 
 	# get omeka database settings
-	$database_settings=parse_ini_file("config/database.ini");
+	$database_settings=parse_ini_file("../config/database.ini");
 
 	# connect to db via mysqli
 	try {
