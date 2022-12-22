@@ -89,7 +89,6 @@ COPY config/ /var/www/html/config/
 
 # Copy other files and folders into the container
 COPY .htaccess /var/www/html/.htaccess
-COPY helper/ /var/www/html/helper
 COPY docker-entrypoint.sh /
 
 # Set correct ownership on www folders
