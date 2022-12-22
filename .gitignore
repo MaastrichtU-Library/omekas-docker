@@ -1,5 +1,5 @@
 .idea
 secret_*
-config/database.ini
+omeka-s/config/database.ini
 externals/*
 !externals/README.md
