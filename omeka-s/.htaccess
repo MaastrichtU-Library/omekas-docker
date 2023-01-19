@@ -1,6 +1,18 @@
 SetEnv APPLICATION_ENV "production"
 
 RewriteEngine On
+
+# Redirect incoming ARK URLs to the forward proxy code
+RewriteCond %{REQUEST_URI} ark:/([0-9]{5})/([a-zA-Z0-9]+)$
+RewriteRule ^ark:/([0-9]{5})/([a-zA-Z0-9]+)$ helper/10-ark-fwd-proxy.php?ark=ark:/$1/$2 [PT,L]
+
+# Do not process any further rewrite rules when request URI is one of these:
+RewriteCond %{REQUEST_URI} helper/10-ark-fwd-proxy.php [OR]
+RewriteCond %{REQUEST_URI} helper/11-local-ark-site-resolver.php [OR]
+RewriteCond %{REQUEST_URI} ^s/*/ark:/([0-9]{5})/([a-zA-Z0-9]+)$
+RewriteRule .* - [L]
+
+
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.
 RewriteCond %{REQUEST_FILENAME} -s [OR]
@@ -11,9 +23,6 @@ RewriteRule ^.*$ - [L]
 # Strip any trailing slashes from incoming requests
 RewriteCond %{REQUEST_URI} ^(.+)/+$
 RewriteRule .* %1 [R=307,L]
-
-# Redirect incoming ARK URLs to the forward proxy code
-RewriteRule ^ark:/([0-9]{5})/([a-zA-Z0-9]+)$ helper/10-ark-fwd-proxy.php?ark=ark:/$1/$2 [PT,L]
 
 # The following rewrites all other queries to index.php. The
 # condition ensures that if you are using Apache aliases to do
