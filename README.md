@@ -6,7 +6,27 @@ Based on the Docker image by 'giocomai'. [Docker Hub](https://hub.docker.com/r/g
 
 ## Preparation
 
-**Database connection settings**
+**Load external dependencies**
+
+After initial clone of this git repository you will have an empty `externals/` directory.
+For proper Omeka S experience, `docker-compose.yml` will volume bind additional stuff from other git repositories into the Omeka S container. 
+
+List of externals:
+
+- Various helper scripts, e.g. ARK resolving: [omekas-helpers](https://gitlab.maastrichtuniversity.nl/ub-omekas/omekas-helpers)
+- UB Theme for Omeka S: [omekas-theme-um-theses](https://gitlab.maastrichtuniversity.nl/ub-omekas/omekas-theme-um-theses)
+
+Execute the commands below to populate the externals folder.
+```
+cd externals/
+git clone git@gitlab.maastrichtuniversity.nl:ub-omekas/omekas-helpers.git
+git clone git@gitlab.maastrichtuniversity.nl:ub-omekas/omekas-theme-um-theses.git
+```
+**IMPORTANT:** The externals repositories are not automatically updated locally, so make sure to `git pull` changes 
+from those repositories periodically.
+
+
+**Set database connection settings**
 
 1. Edit the `docker-compose.yml` file and enter values for:
     ```
@@ -18,10 +38,10 @@ Based on the Docker image by 'giocomai'. [Docker Hub](https://hub.docker.com/r/g
 
 1. Copy the example database config for Omeka S
     ```
-    cp omeka-s/example_database.ini omeka-s/secret_database.ini
+    cp omeka-s/config/example_database.ini omeka-s/config/database.ini
     ```
 
-1. Edit the `secret_database.ini` file with a text editor and enter the same values for:
+1. Edit the `database.ini` file with a text editor and enter the same values for:
     ```
     user     = 
     password = 
@@ -29,16 +49,21 @@ Based on the Docker image by 'giocomai'. [Docker Hub](https://hub.docker.com/r/g
     host     = 
     ```
 
+## Build instructions
+Build the entire project with docker compose
+```
+docker compose build
+```
 
 ## Run instructions
 Run the project with docker-compose
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 To see logs:
 ```
-docker-compose logs -f
+docker compose logs -f
 ```
 
 Open your web browser and access Omeka at http://omeka.local/ 
@@ -49,7 +74,7 @@ Tip: You might need to edit `/etc/hosts` and create an entry for omeka.local tha
 ## Create a fresh, empty environment
 Omeka config settings, themes and files are saved in a persistent docker volume. Execute these commands to **delete all data** and go back to an empty, fresh experience.
 ```
-docker-compose down
+docker compose down
 
 docker volume ls
 
@@ -130,7 +155,6 @@ More info on https://stackoverflow.com/questions/7175619/apache-solr-string-fiel
 - [ ] Activate theme for site unattendedly
 - [ ] Load representative test data / demo content into Omeka S (SQL import + copy items and media to files/ folder?)
 - [ ] Determine which .htaccess tricks need to be reimplemented here (or in nginx-proxy)
-- [ ] Increase upload size in .htaccess as well
 
 ## TODO Solr
 - [ ] Modify theme so that search bar on all pages performs the solrsearch
