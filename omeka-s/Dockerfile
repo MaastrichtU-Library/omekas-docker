@@ -140,6 +140,7 @@ RUN curl -L https://github.com/omeka-s-themes/default/releases/download/v1.6.4/t
 
 # Copy other files and folders into the container
 COPY .htaccess /var/www/html/.htaccess
+COPY init-arkandnoid-db.tar.gz /tmp/
 COPY docker-entrypoint.sh /
 
 # Set correct ownership on www folders
