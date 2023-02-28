@@ -9,20 +9,28 @@ services:
     environment: 
       VIRTUAL_HOST: omeka.local
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - omeka:/var/www/html/volume
-      - ./externals/omekas-theme-um-theses:/var/www/html/themes/UM-A
+      - ./omeka-s/sideload:/data/sftp/omeka-sideload/
+      - ./externals/omekas-theme-um-theses:/var/www/html/themes/omekas-theme-um-theses
+      - ./externals/omekas-theme-3d-models:/var/www/html/themes/omekas-theme-3d-models
+      - ./externals/omeka-s-theme-um-observant:/var/www/html/themes/omeka-s-theme-um-observant
       - ./externals/omekas-helpers:/var/www/html/helper
 
   db:
     image: mysql:5.7
     container_name: omekas_db
-    volumes:
-      - db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: very_difficult_password_1 
       MYSQL_DATABASE: omekas
       MYSQL_USER: omekas
       MYSQL_PASSWORD: difficult_omek4s_password
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - db:/var/lib/mysql
+      # Load the initial Omeka database contents when the data volume above is empty (e.g. at first start after removal of the data volume)
+      - ./db/init-omekas-db.sql:/docker-entrypoint-initdb.d/init-omekas-db.sql
+
 
   phpmyadmin:
     image: phpmyadmin:5.2.0-apache
@@ -42,6 +50,7 @@ services:
       VIRTUAL_HOST: solr.local
       VIRTUAL_PORT: 8983
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - solrdata:/var/solr
     command:
       - solr-precreate
@@ -56,6 +65,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /etc/ssl/certs:/etc/nginx/certs/
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./proxy/omeka.conf:/etc/nginx/vhost.d/omeka.local

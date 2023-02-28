@@ -8,6 +8,9 @@ then
     chown www-data:www-data /var/www/html/volume/files/temp
 fi
 
+# Unpack the initial ARK database
+tar -xvf /tmp/init-arkandnoid-db.tar.gz -C /var/www/html/files/
+
 ### End of Omeka configurations ###
 
 # Start the Apache daemon
