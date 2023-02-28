@@ -105,7 +105,7 @@ docker volume rm omekas-docker_db omekas-docker_omeka omekas-docker_solrdata
 
 
 ## TODO Docker
-- [ ] Configure Advanced Search and Solr and preload that with the initial database restore.
+- [ ] 
 
 ## TODO Solr
 - [ ] Play with the (Solr) Suggester
