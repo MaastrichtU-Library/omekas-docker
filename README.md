@@ -86,7 +86,23 @@ Use the following credentials to login to the admin panel:
 
 
 ## Create a fresh, empty environment
-Omeka config settings, themes and files are saved in a persistent docker volume. Execute these commands to **delete all data** and go back to an empty, fresh experience.
+Omeka and Solr config settings, data and files are saved in persistent docker volumes. Execute these commands to **delete all data** and go back to an empty, fresh experience.
+
+**Please remember to redo the manual configuration actions** [Configure CleanUrl module](README-01-CleanUrl.md) and [Configure Solr backend](README-02-Solr.md)
+after creating the fresh environment.
+
+Briefly:
+```
+# Stop and remove everything
+docker compose down && docker volume rm omekas-docker_db omekas-docker_omeka omekas-docker_solrdata
+
+# Start everything
+docker compose up -d
+
+# Redo the manual config actions
+```
+
+Detailed
 ```
 docker compose down
 
@@ -100,7 +116,14 @@ docker volume ls
 
 
 docker volume rm omekas-docker_db omekas-docker_omeka omekas-docker_solrdata
+
+# Start everything
+docker compose up -d
+
+# Redo the manual config actions
 ```
+
+
 
 
 
