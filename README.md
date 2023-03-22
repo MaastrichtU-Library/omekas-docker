@@ -13,14 +13,14 @@ For proper Omeka S experience, `docker-compose.yml` will volume bind additional 
 
 List of externals:
 
-- Various helper scripts, e.g. ARK resolving: [omekas-helpers](https://gitlab.maastrichtuniversity.nl/ub-omekas/omekas-helpers)
-- UB Theme for Omeka S: [omekas-theme-um-theses](https://gitlab.maastrichtuniversity.nl/ub-omekas/omekas-theme-um-theses)
+- Various helper scripts, e.g. ARK resolving: [omekas-helpers](https://github.com/MaastrichtU-Library/omekas-helpers.git)
+- UB Theme for Omeka S: [omekas-theme-um](https://github.com/MaastrichtU-Library/omekas-theme-um.git)
 
 Execute the commands below to populate the externals folder.
 ```
 cd externals/
-git clone git@gitlab.maastrichtuniversity.nl:ub-omekas/omekas-helpers.git
-git clone git@gitlab.maastrichtuniversity.nl:ub-omekas/omekas-theme-um-theses.git
+git clone https://github.com/MaastrichtU-Library/omekas-helpers.git
+git clone https://github.com/MaastrichtU-Library/omekas-theme-um.git
 ```
 **IMPORTANT:** The externals repositories are not automatically updated locally, so make sure to `git pull` changes 
 from those repositories periodically.
