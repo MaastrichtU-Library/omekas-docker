@@ -132,5 +132,5 @@ docker compose up -d
 
 ## TODO Solr
 - [ ] Play with the (Solr) Suggester
-- [ ] Find out how to precreate the * -> Copy field during bootstrap of Solr.
+- [ ] Find out how to precreate the `* -> _text_` Copy field during bootstrap of Solr.
 

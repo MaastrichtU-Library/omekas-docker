@@ -31,8 +31,6 @@ Perform the steps described in the Module's [README](https://github.com/Daniel-K
 #### IMPORTANT NOTICE
 Workaround when SolrSearch does not return results for text queries. Add a `* -> _text_` **Copy field** in the Solr admin backend. Go to core **omekas** --> **Schema** and add a Copy Field with source `*` and destination `_text_`. 
 
-_Maarten, 23-8-2022: I still need to figure out how to automate the precreation of this field._
-
 
 
 
@@ -40,15 +38,15 @@ _Maarten, 23-8-2022: I still need to figure out how to automate the precreation 
 ```
 dcterms_creator_s
 - type: string
-- example value: "Schmidt, Janina",
+- example value: "Doe, John",
 
 dcterms_creator_ss
 - type: strings
-- example value: ["Schmidt, Janina"],
+- example value: ["Doe, John"],
 
 dcterms_creator_txt
 - type: text_general
-- example value: ["Schmidt, Janina"],
+- example value: ["Doe, John"],
 ```
 Type 'string' (s) & 'strings' (ss) store the **exact** string. Type 'text_general' (txt) performs tokenization, lower-casing etc.
 For queries on type 'string' only **exact** matches are possible. 'text_general' is more flexible.
