@@ -123,8 +123,12 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/down
     unzip /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
 
-RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v1.12.0/ValueSuggest-1.12.0.zip --output /tmp/ValueSuggest.zip && \
+#RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v1.12.0/ValueSuggest-1.12.0.zip --output /tmp/ValueSuggest.zip && \
+#    unzip /tmp/ValueSuggest.zip -d modules/ && \
+#    rm /tmp/ValueSuggest.zip
+RUN curl -L https://github.com/mcoonen/ValueSuggest/archive/refs/tags/v1.12.0_viaf-patch.zip --output /tmp/ValueSuggest.zip && \
     unzip /tmp/ValueSuggest.zip -d modules/ && \
+    mv modules/ValueSuggest-1.12.0_viaf-patch modules/ValueSuggest && \
     rm /tmp/ValueSuggest.zip
 
 
