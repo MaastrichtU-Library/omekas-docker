@@ -4,7 +4,29 @@ services:
   omekas:
     depends_on:
       - db
-    build: omeka-s/
+    build:
+      context: omeka-s/
+      args:
+        - ENV_OMEKAS_DOCKER_IMAGE_VERSION
+        - ENV_MODULE_AdvancedSearch_VERSION
+        - ENV_MODULE_ArchiveRepertory_VERSION
+        - ENV_MODULE_Ark_VERSION
+        - ENV_MODULE_BlocksDisposition_VERSION
+        - ENV_MODULE_BulkEdit_VERSION
+        - ENV_MODULE_CleanUrl_VERSION
+        - ENV_MODULE_CSVImport_VERSION
+        - ENV_MODULE_CustomVocab_VERSION
+        - ENV_MODULE_EUCookieBar_VERSION
+        - ENV_MODULE_ExtractText_VERSION
+        - ENV_MODULE_FileSideload_VERSION
+        - ENV_MODULE_Generic_VERSION
+        - ENV_MODULE_HideProperties_VERSION
+        - ENV_MODULE_ModelViewer_VERSION
+        - ENV_MODULE_NumericDataTypes_VERSION
+        - ENV_MODULE_PdfViewer_VERSION
+        - ENV_MODULE_SearchSolr_VERSION
+        - ENV_MODULE_ValueSuggest_VERSION
+        - ENV_THEME_Default_VERSION
     container_name: omekas
     environment: 
       VIRTUAL_HOST: omeka.local

@@ -1,4 +1,5 @@
-FROM giocomai/omeka-s-docker:v3.2.0
+ARG ENV_OMEKAS_DOCKER_IMAGE_VERSION
+FROM giocomai/omeka-s-docker:${ENV_OMEKAS_DOCKER_IMAGE_VERSION}
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -40,66 +41,79 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install modules
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/3.4.6.20/AdvancedSearch-3.4.6.20.zip --output /tmp/AdvancedSearch.zip && \
+ARG ENV_MODULE_AdvancedSearch_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/${ENV_MODULE_AdvancedSearch_VERSION}/AdvancedSearch-${ENV_MODULE_AdvancedSearch_VERSION}.zip --output /tmp/AdvancedSearch.zip && \
     unzip /tmp/AdvancedSearch.zip -d modules/ && \
     rm /tmp/AdvancedSearch.zip
 
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory/releases/download/3.15.16/ArchiveRepertory-3.15.16.zip --output /tmp/ArchiveRepertory.zip && \
+ARG ENV_MODULE_ArchiveRepertory_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory/releases/download/${ENV_MODULE_ArchiveRepertory_VERSION}/ArchiveRepertory-${ENV_MODULE_ArchiveRepertory_VERSION}.zip --output /tmp/ArchiveRepertory.zip && \
     unzip /tmp/ArchiveRepertory.zip -d modules/ && \
     rm /tmp/ArchiveRepertory.zip
 
-RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/3.5.13.3/Omeka-S-module-Ark-3.5.13.3.zip --output /tmp/Ark.zip && \
+ARG ENV_MODULE_Ark_VERSION
+RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
     unzip /tmp/Ark.zip -d modules/ && \
     # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
-    mv modules/Omeka-S-module-Ark-3.5.13.3 modules/Ark && \
+    mv modules/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION} modules/Ark && \
     # install module's dependencies via composer
     cd modules/Ark && \
     composer update && \
     composer install --no-dev && \
     rm /tmp/Ark.zip
 
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BlocksDisposition/releases/download/3.3.2.2/BlocksDisposition-3.3.2.2.zip --output /tmp/BlocksDisposition.zip && \
+ARG ENV_MODULE_BlocksDisposition_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BlocksDisposition/releases/download/${ENV_MODULE_BlocksDisposition_VERSION}/BlocksDisposition-${ENV_MODULE_BlocksDisposition_VERSION}.zip --output /tmp/BlocksDisposition.zip && \
     unzip /tmp/BlocksDisposition.zip -d modules/ && \
     rm /tmp/BlocksDisposition.zip
 
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/download/3.3.13.4/BulkEdit-3.3.13.4.zip --output /tmp/BulkEdit.zip && \
+ARG ENV_MODULE_BulkEdit_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/download/${ENV_MODULE_BulkEdit_VERSION}/BulkEdit-${ENV_MODULE_BulkEdit_VERSION}.zip --output /tmp/BulkEdit.zip && \
     unzip /tmp/BulkEdit.zip -d modules/ && \
     rm /tmp/BulkEdit.zip
 
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-CleanUrl/archive/refs/tags/3.17.4.4-fork-mcoonen.zip --output /tmp/CleanUrl.zip && \
+ARG ENV_MODULE_CleanUrl_VERSION
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-CleanUrl/archive/refs/tags/${ENV_MODULE_CleanUrl_VERSION}.zip --output /tmp/CleanUrl.zip && \
     unzip /tmp/CleanUrl.zip -d modules/ && \
-    mv modules/Omeka-S-module-CleanUrl-3.17.4.4-fork-mcoonen modules/CleanUrl && \
+    mv modules/Omeka-S-module-CleanUrl-${ENV_MODULE_CleanUrl_VERSION} modules/CleanUrl && \
     # install module's dependencies via composer
     cd modules/CleanUrl && \
     composer update && \
     composer install --no-dev && \
     rm /tmp/CleanUrl.zip
 
-RUN curl -L https://github.com/omeka-s-modules/CSVImport/releases/download/v2.3.1/CSVImport-2.3.1.zip --output /tmp/CSVImport.zip && \
+ARG ENV_MODULE_CSVImport_VERSION
+RUN curl -L https://github.com/omeka-s-modules/CSVImport/releases/download/v${ENV_MODULE_CSVImport_VERSION}/CSVImport-${ENV_MODULE_CSVImport_VERSION}.zip --output /tmp/CSVImport.zip && \
     unzip /tmp/CSVImport.zip -d modules/ && \
     rm /tmp/CSVImport.zip
 
-RUN curl -L https://github.com/omeka-s-modules/CustomVocab/releases/download/v1.6.0/CustomVocab-1.6.0.zip --output /tmp/CustomVocab.zip && \
+ARG ENV_MODULE_CustomVocab_VERSION
+RUN curl -L https://github.com/omeka-s-modules/CustomVocab/releases/download/v${ENV_MODULE_CustomVocab_VERSION}/CustomVocab-${ENV_MODULE_CustomVocab_VERSION}.zip --output /tmp/CustomVocab.zip && \
     unzip /tmp/CustomVocab.zip -d modules/ && \
     rm /tmp/CustomVocab.zip
 
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-EUCookieBar/releases/download/3.3.4.3/EUCookieBar-3.3.4.3.zip --output /tmp/EUCookieBar.zip && \
+ARG ENV_MODULE_EUCookieBar_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-EUCookieBar/releases/download/${ENV_MODULE_EUCookieBar_VERSION}/EUCookieBar-${ENV_MODULE_EUCookieBar_VERSION}.zip --output /tmp/EUCookieBar.zip && \
     unzip /tmp/EUCookieBar.zip -d modules/ && \
     rm /tmp/EUCookieBar.zip
 
-RUN curl -L https://github.com/omeka-s-modules/ExtractText/releases/download/v1.2.1/ExtractText-1.2.1.zip --output /tmp/ExtractText.zip && \
+ARG ENV_MODULE_ExtractText_VERSION
+RUN curl -L https://github.com/omeka-s-modules/ExtractText/releases/download/v${ENV_MODULE_ExtractText_VERSION}/ExtractText-${ENV_MODULE_ExtractText_VERSION}.zip --output /tmp/ExtractText.zip && \
     unzip /tmp/ExtractText.zip -d modules/ && \
     rm /tmp/ExtractText.zip
 
-RUN curl -L https://github.com/omeka-s-modules/FileSideload/releases/download/v1.5.0/FileSideload-1.5.0.zip --output /tmp/FileSideload.zip && \
+ARG ENV_MODULE_FileSideload_VERSION
+RUN curl -L https://github.com/omeka-s-modules/FileSideload/releases/download/v${ENV_MODULE_FileSideload_VERSION}/FileSideload-${ENV_MODULE_FileSideload_VERSION}.zip --output /tmp/FileSideload.zip && \
     unzip /tmp/FileSideload.zip -d modules/ && \
     rm /tmp/FileSideload.zip
 
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Generic/releases/download/3.3.34/Generic-3.3.34.zip --output /tmp/Generic.zip && \
+ARG ENV_MODULE_Generic_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Generic/releases/download/${ENV_MODULE_Generic_VERSION}/Generic-${ENV_MODULE_Generic_VERSION}.zip --output /tmp/Generic.zip && \
     unzip /tmp/Generic.zip -d modules/ && \
     rm /tmp/Generic.zip
 
-RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v1.3.0/HideProperties-1.3.0.zip --output /tmp/HideProperties.zip && \
+ARG ENV_MODULE_HideProperties_VERSION
+RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${ENV_MODULE_HideProperties_VERSION}/HideProperties-${ENV_MODULE_HideProperties_VERSION}.zip --output /tmp/HideProperties.zip && \
     unzip /tmp/HideProperties.zip -d modules/ && \
     rm /tmp/HideProperties.zip
 
@@ -107,29 +121,47 @@ RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v1.3.
 #    unzip /tmp/MetadataBrowse.zip -d modules/ && \
 #    rm /tmp/MetadataBrowse.zip
 
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ModelViewer/releases/download/3.3.0.7-132/ModelViewer-3.3.0.7-132.zip --output /tmp/ModelViewer.zip && \
+ARG ENV_MODULE_ModelViewer_VERSION
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ModelViewer/releases/download/${ENV_MODULE_ModelViewer_VERSION}/ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
+#    unzip /tmp/ModelViewer.zip -d modules/ && \
+#    rm /tmp/ModelViewer.zip
+RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-ModelViewer/-/archive/${ENV_MODULE_ModelViewer_VERSION}/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
     unzip /tmp/ModelViewer.zip -d modules/ && \
+    mv modules/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION} modules/ModelViewer && \
+    # install module's dependencies via composer
+    cd modules/ModelViewer && \
+    composer update && \
+    composer install --no-dev && \    
     rm /tmp/ModelViewer.zip
 
-RUN curl -L https://github.com/omeka-s-modules/NumericDataTypes/releases/download/v1.8.0/NumericDataTypes-1.8.0.zip --output /tmp/NumericDataTypes.zip && \
+ARG ENV_MODULE_NumericDataTypes_VERSION
+RUN curl -L https://github.com/omeka-s-modules/NumericDataTypes/releases/download/v${ENV_MODULE_NumericDataTypes_VERSION}/NumericDataTypes-${ENV_MODULE_NumericDataTypes_VERSION}.zip --output /tmp/NumericDataTypes.zip && \
     unzip /tmp/NumericDataTypes.zip -d modules/ && \
     rm /tmp/NumericDataTypes.zip
 
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/releases/download/3.3.4.2/PdfViewer-3.3.4.2.zip --output /tmp/PdfViewer.zip && \
+ARG ENV_MODULE_PdfViewer_VERSION
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/releases/download/${ENV_MODULE_PdfViewer_VERSION}/PdfViewer-${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
+#    unzip /tmp/PdfViewer.zip -d modules/ && \
+#    rm /tmp/PdfViewer.zip
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
     unzip /tmp/PdfViewer.zip -d modules/ && \
+    mv modules/Omeka-S-module-PdfViewer-${ENV_MODULE_PdfViewer_VERSION} modules/PdfViewer && \
+    # install module's dependencies via composer
+    cd modules/PdfViewer && \
+    composer update && \
+    composer install --no-dev && \    
     rm /tmp/PdfViewer.zip
-
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/3.5.40.4/SearchSolr-3.5.40.4.zip --output /tmp/SearchSolr.zip && \
+    
+ARG ENV_MODULE_SearchSolr_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
     unzip /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
 
-#RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v1.12.0/ValueSuggest-1.12.0.zip --output /tmp/ValueSuggest.zip && \
-#    unzip /tmp/ValueSuggest.zip -d modules/ && \
-#    rm /tmp/ValueSuggest.zip
-RUN curl -L https://github.com/mcoonen/ValueSuggest/archive/refs/tags/v1.12.0_viaf-patch.zip --output /tmp/ValueSuggest.zip && \
+ARG ENV_MODULE_ValueSuggest_VERSION
+RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v${ENV_MODULE_ValueSuggest_VERSION}/ValueSuggest-${ENV_MODULE_ValueSuggest_VERSION}.zip --output /tmp/ValueSuggest.zip && \
     unzip /tmp/ValueSuggest.zip -d modules/ && \
-    mv modules/ValueSuggest-1.12.0_viaf-patch modules/ValueSuggest && \
     rm /tmp/ValueSuggest.zip
+
 
 
 # NOTE: Downloaded modules need to be installed in the Admin UI. The Installation-Status survives a rebuild of the Omeka S container, so I guess the installation makes changes to the database only.
@@ -137,7 +169,8 @@ RUN curl -L https://github.com/mcoonen/ValueSuggest/archive/refs/tags/v1.12.0_vi
 
 # Install the default theme
 # Our own themes will be volume-binded in docker-compose.yml
-RUN curl -L https://github.com/omeka-s-themes/default/releases/download/v1.6.4/theme-default-v1.6.4.zip --output /tmp/theme-default.zip && \
+ARG ENV_THEME_Default_VERSION
+RUN curl -L https://github.com/omeka-s-themes/default/releases/download/v${ENV_THEME_Default_VERSION}/default-${ENV_THEME_Default_VERSION}.zip --output /tmp/theme-default.zip && \
     unzip /tmp/theme-default.zip -d themes/ && \
     rm /tmp/theme-default.zip
 
