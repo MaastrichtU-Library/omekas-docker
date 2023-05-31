@@ -134,6 +134,11 @@ RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-ModelViewer/-/archive/${EN
     composer install --no-dev && \    
     rm /tmp/ModelViewer.zip
 
+ARG ENV_MODULE_NdeTermennetwerk_VERSION
+RUN curl -L https://github.com/omeka-s-modules/NdeTermennetwerk/releases/download/v${ENV_MODULE_NdeTermennetwerk_VERSION}/NdeTermennetwerk-${ENV_MODULE_NdeTermennetwerk_VERSION}.zip --output /tmp/NdeTermennetwerk.zip && \
+    unzip /tmp/NdeTermennetwerk.zip -d modules/ && \
+    rm /tmp/NdeTermennetwerk.zip
+
 ARG ENV_MODULE_NumericDataTypes_VERSION
 RUN curl -L https://github.com/omeka-s-modules/NumericDataTypes/releases/download/v${ENV_MODULE_NumericDataTypes_VERSION}/NumericDataTypes-${ENV_MODULE_NumericDataTypes_VERSION}.zip --output /tmp/NumericDataTypes.zip && \
     unzip /tmp/NumericDataTypes.zip -d modules/ && \
