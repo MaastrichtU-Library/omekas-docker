@@ -66,6 +66,10 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/downlo
     unzip /tmp/BulkEdit.zip -d modules/ && \
     rm /tmp/BulkEdit.zip
 
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkExport/releases/download/3.4.15/BulkExport-3.4.15.zip --output /tmp/BulkExport.zip && \
+    unzip /tmp/BulkExport.zip -d modules/ && \
+    rm /tmp/BulkExport.zip
+
 RUN curl -L https://github.com/mcoonen/Omeka-S-module-CleanUrl/archive/refs/tags/3.17.4.4-fork-mcoonen.zip --output /tmp/CleanUrl.zip && \
     unzip /tmp/CleanUrl.zip -d modules/ && \
     mv modules/Omeka-S-module-CleanUrl-3.17.4.4-fork-mcoonen modules/CleanUrl && \
@@ -102,6 +106,10 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Generic/releases/downloa
 RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v1.3.0/HideProperties-1.3.0.zip --output /tmp/HideProperties.zip && \
     unzip /tmp/HideProperties.zip -d modules/ && \
     rm /tmp/HideProperties.zip
+
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/3.3.12.17/Log-3.3.12.17.zip --output /tmp/Log.zip && \
+    unzip /tmp/Log.zip -d modules/ && \
+    rm /tmp/Log.zip
 
 #RUN curl -L https://github.com/omeka-s-modules/MetadataBrowse/releases/download/v1.4.1/MetadataBrowse-1.4.1.zip --output /tmp/MetadataBrowse.zip && \
 #    unzip /tmp/MetadataBrowse.zip -d modules/ && \
