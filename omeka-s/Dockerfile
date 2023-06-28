@@ -32,7 +32,9 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions \
     # for module Ark
-    dba bcmath
+    dba bcmath \
+    # for module BulkExport
+    zip
 
 
 # Some modules require composer
