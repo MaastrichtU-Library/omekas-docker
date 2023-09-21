@@ -125,6 +125,7 @@ ARG ENV_MODULE_ModelViewer_VERSION
 #RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ModelViewer/releases/download/${ENV_MODULE_ModelViewer_VERSION}/ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
 #    unzip /tmp/ModelViewer.zip -d modules/ && \
 #    rm /tmp/ModelViewer.zip
+
 RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-ModelViewer/-/archive/${ENV_MODULE_ModelViewer_VERSION}/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
     unzip /tmp/ModelViewer.zip -d modules/ && \
     mv modules/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION} modules/ModelViewer && \
