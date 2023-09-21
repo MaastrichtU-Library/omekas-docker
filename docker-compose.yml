@@ -13,6 +13,7 @@ services:
         - ENV_MODULE_Ark_VERSION
         - ENV_MODULE_BlocksDisposition_VERSION
         - ENV_MODULE_BulkEdit_VERSION
+        - ENV_MODULE_BulkExport_VERSION
         - ENV_MODULE_CleanUrl_VERSION
         - ENV_MODULE_CSVImport_VERSION
         - ENV_MODULE_CustomVocab_VERSION
@@ -21,6 +22,7 @@ services:
         - ENV_MODULE_FileSideload_VERSION
         - ENV_MODULE_Generic_VERSION
         - ENV_MODULE_HideProperties_VERSION
+        - ENV_MODULE_Log_VERSION
         - ENV_MODULE_ModelViewer_VERSION
         - ENV_MODULE_NdeTermennetwerk_VERSION
         - ENV_MODULE_NumericDataTypes_VERSION

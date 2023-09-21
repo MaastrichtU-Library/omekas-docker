@@ -151,7 +151,8 @@ ARG ENV_MODULE_PdfViewer_VERSION
 #RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/releases/download/${ENV_MODULE_PdfViewer_VERSION}/PdfViewer-${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
 #    unzip /tmp/PdfViewer.zip -d modules/ && \
 #    rm /tmp/PdfViewer.zip
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
+#RUN curl -L https://github.com/mcoonen/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
     unzip /tmp/PdfViewer.zip -d modules/ && \
     mv modules/Omeka-S-module-PdfViewer-${ENV_MODULE_PdfViewer_VERSION} modules/PdfViewer && \
     # install module's dependencies via composer
