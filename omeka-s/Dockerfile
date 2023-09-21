@@ -33,7 +33,9 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions \
     # for module Ark
-    dba bcmath
+    dba bcmath \
+    # for module BulkExport
+    zip
 
 
 # Some modules require composer
@@ -72,15 +74,10 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/downlo
     unzip /tmp/BulkEdit.zip -d modules/ && \
     rm /tmp/BulkEdit.zip
 
-ARG ENV_MODULE_CleanUrl_VERSION
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-CleanUrl/archive/refs/tags/${ENV_MODULE_CleanUrl_VERSION}.zip --output /tmp/CleanUrl.zip && \
-    unzip /tmp/CleanUrl.zip -d modules/ && \
-    mv modules/Omeka-S-module-CleanUrl-${ENV_MODULE_CleanUrl_VERSION} modules/CleanUrl && \
-    # install module's dependencies via composer
-    cd modules/CleanUrl && \
-    composer update && \
-    composer install --no-dev && \
-    rm /tmp/CleanUrl.zip
+ARG ENV_MODULE_BulkExport_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkExport/releases/download/${ENV_MODULE_BulkExport_VERSION}/BulkExport-${ENV_MODULE_BulkExport_VERSION}.zip --output /tmp/BulkExport.zip && \
+    unzip /tmp/BulkExport.zip -d modules/ && \
+    rm /tmp/BulkExport.zip
 
 ARG ENV_MODULE_CSVImport_VERSION
 RUN curl -L https://github.com/omeka-s-modules/CSVImport/releases/download/v${ENV_MODULE_CSVImport_VERSION}/CSVImport-${ENV_MODULE_CSVImport_VERSION}.zip --output /tmp/CSVImport.zip && \
@@ -116,6 +113,11 @@ ARG ENV_MODULE_HideProperties_VERSION
 RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${ENV_MODULE_HideProperties_VERSION}/HideProperties-${ENV_MODULE_HideProperties_VERSION}.zip --output /tmp/HideProperties.zip && \
     unzip /tmp/HideProperties.zip -d modules/ && \
     rm /tmp/HideProperties.zip
+
+ARG ENV_MODULE_Log_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${ENV_MODULE_Log_VERSION}/Log-${ENV_MODULE_Log_VERSION}.zip --output /tmp/Log.zip && \
+    unzip /tmp/Log.zip -d modules/ && \
+    rm /tmp/Log.zip
 
 #RUN curl -L https://github.com/omeka-s-modules/MetadataBrowse/releases/download/v1.4.1/MetadataBrowse-1.4.1.zip --output /tmp/MetadataBrowse.zip && \
 #    unzip /tmp/MetadataBrowse.zip -d modules/ && \
