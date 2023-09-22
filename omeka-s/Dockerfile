@@ -113,6 +113,16 @@ ARG ENV_MODULE_HideProperties_VERSION
 RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${ENV_MODULE_HideProperties_VERSION}/HideProperties-${ENV_MODULE_HideProperties_VERSION}.zip --output /tmp/HideProperties.zip && \
     unzip /tmp/HideProperties.zip -d modules/ && \
     rm /tmp/HideProperties.zip
+    
+ARG ENV_MODULE_IiifServer_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
+    unzip /tmp/IiifServer.zip -d modules/ && \
+    rm /tmp/IiifServer.zip
+
+ARG ENV_MODULE_ImageServer_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
+    unzip /tmp/ImageServer.zip -d modules/ && \
+    rm /tmp/ImageServer.zip    
 
 ARG ENV_MODULE_Log_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${ENV_MODULE_Log_VERSION}/Log-${ENV_MODULE_Log_VERSION}.zip --output /tmp/Log.zip && \
@@ -165,6 +175,11 @@ ARG ENV_MODULE_SearchSolr_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
     unzip /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
+
+ARG ENV_MODULE_UniversalViewer_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer/releases/download/${ENV_MODULE_UniversalViewer_VERSION}/UniversalViewer-${ENV_MODULE_UniversalViewer_VERSION}.zip --output /tmp/UniversalViewer.zip && \
+    unzip /tmp/UniversalViewer.zip -d modules/ && \
+    rm /tmp/UniversalViewer.zip
 
 ARG ENV_MODULE_ValueSuggest_VERSION
 RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v${ENV_MODULE_ValueSuggest_VERSION}/ValueSuggest-${ENV_MODULE_ValueSuggest_VERSION}.zip --output /tmp/ValueSuggest.zip && \
