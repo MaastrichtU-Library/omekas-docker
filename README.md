@@ -73,7 +73,6 @@ Tip: You might need to edit `/etc/hosts` and create an entry for omeka.local tha
 
 ## Manual configurations post-start
 There are some manual configuration steps to perform after the Docker containers have started.
-- [Configure CleanUrl module](README-01-CleanUrl.md)
 - [Configure Solr backend](README-02-Solr.md)
 
 
