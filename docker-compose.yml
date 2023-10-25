@@ -46,7 +46,7 @@ services:
 #      - ./externals/Omeka-S-module-ModelViewer:/var/www/html/modules/ModelViewer
 
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: omekas_db
     command: --max_allowed_packet=2147483648
     environment:
