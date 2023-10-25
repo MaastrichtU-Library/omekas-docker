@@ -47,6 +47,7 @@ services:
   db:
     image: mysql:5.7
     container_name: omekas_db
+    command: --max_allowed_packet=2147483648
     environment:
       MYSQL_ROOT_PASSWORD: very_difficult_password_1 
       MYSQL_DATABASE: omekas
