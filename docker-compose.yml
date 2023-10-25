@@ -15,6 +15,7 @@ services:
         - ENV_MODULE_BulkEdit_VERSION
         - ENV_MODULE_BulkExport_VERSION
         - ENV_MODULE_CleanUrl_VERSION
+        - ENV_MODULE_CreateMissingThumbnails_VERSION
         - ENV_MODULE_CSVImport_VERSION
         - ENV_MODULE_CustomVocab_VERSION
         - ENV_MODULE_EUCookieBar_VERSION
