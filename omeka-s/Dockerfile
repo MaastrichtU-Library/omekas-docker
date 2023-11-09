@@ -79,6 +79,11 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkExport/releases/down
     unzip /tmp/BulkExport.zip -d modules/ && \
     rm /tmp/BulkExport.zip
 
+ARG ENV_MODULE_CreateMissingThumbnails_VERSION
+RUN curl -L https://github.com/biblibre/omeka-s-module-CreateMissingThumbnails/releases/download/v${ENV_MODULE_CreateMissingThumbnails_VERSION}/CreateMissingThumbnails-${ENV_MODULE_CreateMissingThumbnails_VERSION}.zip --output /tmp/CreateMissingThumbnails.zip && \
+    unzip /tmp/CreateMissingThumbnails.zip -d modules/ && \
+    rm /tmp/CreateMissingThumbnails.zip
+
 ARG ENV_MODULE_CSVImport_VERSION
 RUN curl -L https://github.com/omeka-s-modules/CSVImport/releases/download/v${ENV_MODULE_CSVImport_VERSION}/CSVImport-${ENV_MODULE_CSVImport_VERSION}.zip --output /tmp/CSVImport.zip && \
     unzip /tmp/CSVImport.zip -d modules/ && \
