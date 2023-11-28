@@ -123,7 +123,22 @@ docker compose up -d
 ```
 
 
+## Troubleshooting and debugging
+There are several ways to troubleshoot errors in Omeka S.
 
+1. **Use the Log module in Omeka's admin panel**. Omeka errors that are usually written to the application.log file are also stored in the database so that they can be viewed in the Log admin panel.
+1. **Docker logs**. The output of various Omeka and Apache logs files is piped to the Docker logs. This is defined in the `omeka-s/docker-entrypoint.sh` file. You can inspect the log entries using one of the commands below.
+    ```
+    # For Omeka S only:
+    docker compose logs -f omekas
+
+    # Or for the whole compose project:
+    docker compose logs -f
+    ```
+1. **Omeka S debug mode**. Some errors are not written to the logs and can only be viewed in the web browser. To enable this, put Omeka to development mode in the `omeka-s/.htaccess` file.
+    ```
+    SetEnv APPLICATION_ENV "development"
+    ```
 
 
 ## TODO Docker

@@ -5,6 +5,12 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     nano
 
+# Remove the apache log symlinks to /dev/stdout & /dev/stderr that were set by the upstream 'php:<x.y>-apache-bookworm' image
+RUN rm /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log && \
+    touch /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log && \
+    chown www-data:www-data /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log
+
+
 # Remove the modules-symlink to volume/
 RUN rm /var/www/html/modules && \
     rm -fr /var/www/html/volume/modules/ && \
