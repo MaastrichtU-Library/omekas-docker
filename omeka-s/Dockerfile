@@ -163,7 +163,6 @@ ARG ENV_MODULE_PdfViewer_VERSION
 #    unzip /tmp/PdfViewer.zip -d modules/ && \
 #    rm /tmp/PdfViewer.zip
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
-#RUN curl -L https://github.com/mcoonen/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
     unzip /tmp/PdfViewer.zip -d modules/ && \
     mv modules/Omeka-S-module-PdfViewer-${ENV_MODULE_PdfViewer_VERSION} modules/PdfViewer && \
     # install module's dependencies via composer
@@ -173,9 +172,18 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/archive/refs/t
     rm /tmp/PdfViewer.zip
     
 ARG ENV_MODULE_SearchSolr_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
+#    unzip /tmp/SearchSolr.zip -d modules/ && \
+#    rm /tmp/SearchSolr.zip
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-SearchSolr/archive/refs/tags/${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
     unzip /tmp/SearchSolr.zip -d modules/ && \
+    mv modules/Omeka-S-module-SearchSolr-${ENV_MODULE_SearchSolr_VERSION} modules/SearchSolr && \
+    # install module's dependencies via composer
+    cd modules/SearchSolr && \
+    composer update && \
+    composer install --no-dev && \
     rm /tmp/SearchSolr.zip
+
 
 ARG ENV_MODULE_ValueSuggest_VERSION
 RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v${ENV_MODULE_ValueSuggest_VERSION}/ValueSuggest-${ENV_MODULE_ValueSuggest_VERSION}.zip --output /tmp/ValueSuggest.zip && \
