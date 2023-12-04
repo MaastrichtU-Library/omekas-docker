@@ -10,6 +10,11 @@ RUN rm /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/o
     touch /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log && \
     chown www-data:www-data /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log
 
+# Increase some limits in PHP config
+RUN cp $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini && \
+    sed -i 's/memory_limit = 128M/memory_limit = 512M/g' $PHP_INI_DIR/php.ini && \
+    sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1024M/g' $PHP_INI_DIR/php.ini && \
+    sed -i 's/post_max_size = 8M/post_max_size = 1024M/g' $PHP_INI_DIR/php.ini
 
 # Remove the modules-symlink to volume/
 RUN rm /var/www/html/modules && \
