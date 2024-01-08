@@ -13,8 +13,13 @@ tar -xvf /tmp/init-arkandnoid-db.tar.gz -C /var/www/html/files/
 
 ### End of Omeka configurations ###
 
+
 # Start the Apache daemon
 service apache2 start
 
 # End with a persistent foreground process
-tail -F /var/www/html/logs/application.log
+tail -F /var/www/html/logs/application.log \
+        /var/www/html/logs/sql.log \
+        /var/log/apache2/access.log \
+        /var/log/apache2/error.log \
+#        /var/log/apache2/other_vhosts_access.log
