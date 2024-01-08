@@ -146,5 +146,4 @@ There are several ways to troubleshoot errors in Omeka S.
 
 ## TODO Solr
 - [ ] Play with the (Solr) Suggester
-- [ ] Find out how to precreate the `* -> _text_` Copy field during bootstrap of Solr.
 
