@@ -10,5 +10,7 @@ COPY ./commons-text-1.10.0.jar /opt/solr/server/solr-webapp/webapp/WEB-INF/lib/c
 
 USER $SOLR_USER
 
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["solr-foreground"]
+COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
+
+ENTRYPOINT ["/opt/docker-entrypoint.sh"]
+
