@@ -139,6 +139,7 @@ There are several ways to troubleshoot errors in Omeka S.
     ```
     SetEnv APPLICATION_ENV "development"
     ```
+1. **Remote debugging in PHPstorm**. When developing theme- or module-code it is recommended to use the debugging capabilities of Xdebug and PhpStorm. Please read [these instructions](README-03-PhpStorm-Xdebug.md).
 
 
 ## TODO Docker

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Add an /etc/hosts entry for the IP of the Docker host machine (required for Xdebug connections to PhpStorm on the host)
+echo "$(ip route|awk '/default/ { print $3 }') dockerhost.local" >> /etc/hosts
+
 ### Omeka configurations that need to happen during runtime ###
 # Note: Docker volume-binds are not available during build stage.
 if [[ ! -d /var/www/html/files/temp ]]

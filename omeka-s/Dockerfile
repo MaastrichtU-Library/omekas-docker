@@ -3,7 +3,9 @@ FROM giocomai/omeka-s-docker:${ENV_OMEKAS_DOCKER_IMAGE_VERSION}
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    nano
+    nano \
+    # iproute2 is used to retrieve the IP of the docker host machine (needed for Xdebug connections)
+    iproute2
 
 # Remove the apache log symlinks to /dev/stdout & /dev/stderr that were set by the upstream 'php:<x.y>-apache-bookworm' image
 RUN rm /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log && \
@@ -46,7 +48,13 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     # for module Ark
     dba bcmath \
     # for module BulkExport
-    zip
+    zip \
+    # for remote debugging in IDE (e.g. PhpStorm)
+    xdebug \
+    && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#    && echo "xdebug.log = /tmp/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_host = dockerhost.local" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 
 # Some modules require composer
