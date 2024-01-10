@@ -87,8 +87,7 @@ Use the following credentials to login to the admin panel:
 ## Create a fresh, empty environment
 Omeka and Solr config settings, data and files are saved in persistent docker volumes. Execute these commands to **delete all data** and go back to an empty, fresh experience.
 
-**Please remember to redo the manual configuration actions** [Configure CleanUrl module](README-01-CleanUrl.md) and [Configure Solr backend](README-02-Solr.md)
-after creating the fresh environment.
+**Please remember to redo the manual configuration actions** [Configure Solr backend](README-02-Solr.md) after creating the fresh environment.
 
 Briefly:
 ```
@@ -139,12 +138,4 @@ There are several ways to troubleshoot errors in Omeka S.
     ```
     SetEnv APPLICATION_ENV "development"
     ```
-1. **Remote debugging in PHPstorm**. When developing theme- or module-code it is recommended to use the debugging capabilities of Xdebug and PhpStorm. Please read [these instructions](README-03-PhpStorm-Xdebug.md).
-
-
-## TODO Docker
-- [ ] 
-
-## TODO Solr
-- [ ] Play with the (Solr) Suggester
-
+1. **Remote debugging in PhpStorm**. When developing theme- or module-code it is recommended to use the debugging capabilities of Xdebug and PhpStorm. Please read [the PhpStorm Xdebug instructions](README-03-PhpStorm-Xdebug.md).
