@@ -27,43 +27,43 @@ The instructions below are written for a specific module development use case wh
 1. Open Settings (Ctrl + Alt + S)
 1. Click on **PHP** in the menu
 1. Choose a CLI interpreter. 
-  1. Click the `...` button
-  1. Click `+` and choose **From Docker, Vagrant, ... (etc)**
-  1. Select the **Docker** radio button
-  1. Choose server (usually the default 'Docker' socket) 
-  1. Choose image name: 'omekas-docker-omekas:latest'
-  1. Choose PHP interpreter path: 'php'
-  1. The CLI interpreter is now added. It should detect and display the PHP (here: 8.2.11) and Xdebug (here: 3.3.1) versions.
-  1. Click **OK** to save and exit this screen.
+    1. Click the `...` button
+    1. Click `+` and choose **From Docker, Vagrant, ... (etc)**
+    1. Select the **Docker** radio button
+    1. Choose server (usually the default 'Docker' socket) 
+    1. Choose image name: 'omekas-docker-omekas:latest'
+    1. Choose PHP interpreter path: 'php'
+    1. The CLI interpreter is now added. It should detect and display the PHP (here: 8.2.11) and Xdebug (here: 3.3.1) versions.
+    1. Click **OK** to save and exit this screen.
 1. Click on the **Open folder** icon next to **Docker container:**
 1. Edit the volume binding using the pencil icon. 
-  1. Host path: (keep the default)
-  1. Container path: /var/www/html/modules/Ark
-  1. Click **OK** to save and exit this screen.
+    1. Host path: (keep the default)
+    1. Container path: /var/www/html/modules/Ark
+    1. Click **OK** to save and exit this screen.
 1. Confirm that the value at **Path mappings** is now correct. This has been set by the previous step.
 1. Expand the **PHP** menu option
 1. Click on **PHP -> Debug**
-  1. Usually, the default settings are sufficient. If not, then one can change it here.
-  1. Click **OK** to save.
+    1. Usually, the default settings are sufficient. If not, then one can change it here.
+    1. Click **OK** to save.
 1. Click on **PHP -> Server** to set the location of the web server
-  1. Click `+` to create a new server configuration and enter the values
-  1. Name: Omeka S Docker (or something else, does not really matter)
-  1. Host: omeka.local
-  1. Port: 80
-  1. Debugger: Xdebug
-  1. Check the box for 'Use path mappings... (etc)'
-  1. At the first "subfolder" of "Project files" -> Absolute path on the server: /var/www/html/modules/Ark
+    1. Click `+` to create a new server configuration and enter the values
+    1. Name: Omeka S Docker (or something else, does not really matter)
+    1. Host: omeka.local
+    1. Port: 80
+    1. Debugger: Xdebug
+    1. Check the box for 'Use path mappings... (etc)'
+    1. At the first "subfolder" of "Project files" -> Absolute path on the server: /var/www/html/modules/Ark
 1. Expand the **Build, Execution, Deployment** menu option and click on **Deployment**
-  1. Confirm that these settings are correct:
-  1. Type: Local or mounted older
-  1. Folder: (path/to/...)/externals/Omeka-S-module-Ark
-  1. Web server URL: http://omeka.local
+    1. Confirm that these settings are correct:
+    1. Type: Local or mounted older
+    1. Folder: (path/to/...)/externals/Omeka-S-module-Ark
+    1. Web server URL: http://omeka.local
 1. Click **OK** to close Settings
 1. Create a debug configuration
-  1. Click the Run dropdown and choose **Edit configurations**
-  1. Click `+` and choose **PHP remote debug**
-  1. give it a name and keep all default settings
-  1. Click **OK** to save and exit these settings.
+    1. Click the Run dropdown and choose **Edit configurations**
+    1. Click `+` and choose **PHP remote debug**
+    1. give it a name and keep all default settings
+    1. Click **OK** to save and exit these settings.
 1. Press the debug icon or the phone icon to start listening for incoming Xdebug connections.
 
 
