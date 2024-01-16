@@ -52,8 +52,10 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     # for remote debugging in IDE (e.g. PhpStorm)
     xdebug \
     && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    # Uncomment this to write xdebug logs to a file
 #    && echo "xdebug.log = /tmp/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    # Uncomment this one to start debugger on every request, regardless of the cookie set by the browser extension
+#    && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.client_host = dockerhost.local" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 
