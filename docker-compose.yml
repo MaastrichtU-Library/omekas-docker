@@ -84,9 +84,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - solrdata:/var/solr
-    command:
-      - solr-precreate
-      - omekas
+
 
   proxy:
     image: jwilder/nginx-proxy

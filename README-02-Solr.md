@@ -28,8 +28,6 @@ Perform the steps described in the Module's [README](https://github.com/Daniel-K
 5. In admin or site settings --> enable the search form
 6. Add a navigation link to the search page in the navigation settings of the site.
 
-#### IMPORTANT NOTICE
-Workaround when SolrSearch does not return results for text queries. Add a `* -> _text_` **Copy field** in the Solr admin backend. Go to core **omekas** --> **Schema** and add a Copy Field with source `*` and destination `_text_`. 
 
 
 

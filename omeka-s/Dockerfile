@@ -3,7 +3,20 @@ FROM giocomai/omeka-s-docker:${ENV_OMEKAS_DOCKER_IMAGE_VERSION}
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    nano
+    nano \
+    # iproute2 is used to retrieve the IP of the docker host machine (needed for Xdebug connections)
+    iproute2
+
+# Remove the apache log symlinks to /dev/stdout & /dev/stderr that were set by the upstream 'php:<x.y>-apache-bookworm' image
+RUN rm /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log && \
+    touch /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log && \
+    chown www-data:www-data /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log
+
+# Increase some limits in PHP config
+RUN cp $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini && \
+    sed -i 's/memory_limit = 128M/memory_limit = 512M/g' $PHP_INI_DIR/php.ini && \
+    sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1024M/g' $PHP_INI_DIR/php.ini && \
+    sed -i 's/post_max_size = 8M/post_max_size = 1024M/g' $PHP_INI_DIR/php.ini
 
 # Remove the modules-symlink to volume/
 RUN rm /var/www/html/modules && \
@@ -35,7 +48,13 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     # for module Ark
     dba bcmath \
     # for module BulkExport
-    zip
+    zip \
+    # for remote debugging in IDE (e.g. PhpStorm)
+    xdebug \
+    && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#    && echo "xdebug.log = /tmp/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_host = dockerhost.local" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 
 # Some modules require composer
@@ -167,7 +186,6 @@ ARG ENV_MODULE_PdfViewer_VERSION
 #    unzip /tmp/PdfViewer.zip -d modules/ && \
 #    rm /tmp/PdfViewer.zip
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
-#RUN curl -L https://github.com/mcoonen/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
     unzip /tmp/PdfViewer.zip -d modules/ && \
     mv modules/Omeka-S-module-PdfViewer-${ENV_MODULE_PdfViewer_VERSION} modules/PdfViewer && \
     # install module's dependencies via composer
@@ -177,8 +195,16 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/archive/refs/t
     rm /tmp/PdfViewer.zip
     
 ARG ENV_MODULE_SearchSolr_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
+#    unzip /tmp/SearchSolr.zip -d modules/ && \
+#    rm /tmp/SearchSolr.zip
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-SearchSolr/archive/refs/tags/${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
     unzip /tmp/SearchSolr.zip -d modules/ && \
+    mv modules/Omeka-S-module-SearchSolr-${ENV_MODULE_SearchSolr_VERSION} modules/SearchSolr && \
+    # install module's dependencies via composer
+    cd modules/SearchSolr && \
+    composer update && \
+    composer install --no-dev && \
     rm /tmp/SearchSolr.zip
 
 ARG ENV_MODULE_UniversalViewer_VERSION
