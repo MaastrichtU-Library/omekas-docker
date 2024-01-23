@@ -16,6 +16,61 @@ if ! [ -f /var/solr/solr_schema_modified ]; then
     # Copy all to '_text_' field for cases where there is no default field described.
     # See: https://gitlab.com/Daniel-KM/Omeka-S-module-SearchSolr/-/blob/master/README.md#fixing-the-issue-when-there-is-no-result
     curl --retry 5 --connect-timeout 5 -X POST --data-binary '{"add-copy-field":{"source":"*","dest":"_text_" }}' 'http://localhost:8983/solr/omekas/schema'
+
+    # Add the 'solr.ASCIIFoldingFilterFactory' class to the index- and query-analyzers
+    curl --retry 5 --connect-timeout 5 -X POST -H 'Content-type:application/json' http://localhost:8983/solr/omekas/schema --data-binary @- << EOF
+{
+	"replace-field-type": {
+		"name": "text_general",
+		"class": "solr.TextField",
+		"positionIncrementGap": "100",
+		"multiValued": true,
+		"indexAnalyzer": {
+			"tokenizer": {
+				"class": "solr.StandardTokenizerFactory"
+			},
+			"filters": [
+				{
+					"class": "solr.StopFilterFactory",
+					"words": "stopwords.txt",
+					"ignoreCase": "true"
+				},
+				{
+					"class": "solr.LowerCaseFilterFactory"
+				},
+				{	class: "solr.ASCIIFoldingFilterFactory",
+					preserveOriginal: "true"
+				}
+			]
+		},
+		"queryAnalyzer": {
+			"tokenizer": {
+				"class": "solr.StandardTokenizerFactory"
+			},
+			"filters": [
+				{
+					"class": "solr.StopFilterFactory",
+					"words": "stopwords.txt",
+					"ignoreCase": "true"
+				},
+				{
+					"class": "solr.SynonymGraphFilterFactory",
+					"expand": "true",
+					"ignoreCase": "true",
+					"synonyms": "synonyms.txt"
+				},
+				{
+					"class": "solr.LowerCaseFilterFactory"
+				},
+				{	class: "solr.ASCIIFoldingFilterFactory",
+					preserveOriginal: "true"
+				}
+			]
+		}
+	}
+}
+EOF
+
     touch /var/solr/solr_schema_modified
     echo "Done"
 fi
