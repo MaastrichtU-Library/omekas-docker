@@ -9,8 +9,13 @@ precreate-core omekas
 # Start Solr in foreground and continue with the rest of this script 
 solr-foreground &
 
+# Wait until Solr has started and port 8983 becomes available
+until nc -z localhost 8983; do
+    >&2 echo "Solr is unavailable - sleeping"
+    sleep 1
+done
+
 # Change the Solr Schema on intial start only
-sleep 10
 if ! [ -f /var/solr/solr_schema_modified ]; then
     echo "Modifying Solr schema via API..."
     # Copy all to '_text_' field for cases where there is no default field described.
