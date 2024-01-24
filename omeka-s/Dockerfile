@@ -100,6 +100,13 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkExport/releases/down
     unzip /tmp/BulkExport.zip -d modules/ && \
     rm /tmp/BulkExport.zip
 
+ARG ENV_MODULE_Common_VERSION
+RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Common/-/archive/${ENV_MODULE_Common_VERSION}/Omeka-S-module-Common-${ENV_MODULE_Common_VERSION}.zip --output /tmp/Common.zip && \
+    unzip /tmp/Common.zip -d modules/ && \
+    # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-Common-${ENV_MODULE_Common_VERSION} modules/Common && \
+    rm /tmp/Common.zip
+
 ARG ENV_MODULE_CreateMissingThumbnails_VERSION
 RUN curl -L https://github.com/biblibre/omeka-s-module-CreateMissingThumbnails/releases/download/v${ENV_MODULE_CreateMissingThumbnails_VERSION}/CreateMissingThumbnails-${ENV_MODULE_CreateMissingThumbnails_VERSION}.zip --output /tmp/CreateMissingThumbnails.zip && \
     unzip /tmp/CreateMissingThumbnails.zip -d modules/ && \
@@ -187,16 +194,8 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/archive/refs/t
     rm /tmp/PdfViewer.zip
     
 ARG ENV_MODULE_SearchSolr_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
-#    unzip /tmp/SearchSolr.zip -d modules/ && \
-#    rm /tmp/SearchSolr.zip
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-SearchSolr/archive/refs/tags/${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
     unzip /tmp/SearchSolr.zip -d modules/ && \
-    mv modules/Omeka-S-module-SearchSolr-${ENV_MODULE_SearchSolr_VERSION} modules/SearchSolr && \
-    # install module's dependencies via composer
-    cd modules/SearchSolr && \
-    composer update && \
-    composer install --no-dev && \
     rm /tmp/SearchSolr.zip
 
 
