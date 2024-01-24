@@ -73,6 +73,7 @@ services:
     build: solr/
     container_name: omekas_solr
     environment:
+      ENV_SOLR_CORE: omekas
       VIRTUAL_HOST: solr.local
       VIRTUAL_PORT: 8983
     volumes:
