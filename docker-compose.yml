@@ -14,7 +14,7 @@ services:
         - ENV_MODULE_BlocksDisposition_VERSION
         - ENV_MODULE_BulkEdit_VERSION
         - ENV_MODULE_BulkExport_VERSION
-        - ENV_MODULE_CleanUrl_VERSION
+        - ENV_MODULE_Common_VERSION
         - ENV_MODULE_CreateMissingThumbnails_VERSION
         - ENV_MODULE_CSVImport_VERSION
         - ENV_MODULE_CustomVocab_VERSION
@@ -76,6 +76,7 @@ services:
     build: solr/
     container_name: omekas_solr
     environment:
+      ENV_SOLR_CORE: omekas
       VIRTUAL_HOST: solr.local
       VIRTUAL_PORT: 8983
     volumes:
