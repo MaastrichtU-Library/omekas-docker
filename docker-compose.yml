@@ -24,7 +24,7 @@ services:
         - ENV_MODULE_Generic_VERSION
         - ENV_MODULE_HideProperties_VERSION
         - ENV_MODULE_IiifServer_VERSION
-        - ENV_MODULE_ImageServer_VERSION=3.6.14
+        - ENV_MODULE_ImageServer_VERSION
         - ENV_MODULE_Log_VERSION
         - ENV_MODULE_ModelViewer_VERSION
         - ENV_MODULE_NdeTermennetwerk_VERSION
