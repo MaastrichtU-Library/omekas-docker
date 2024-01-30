@@ -173,6 +173,11 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
 #    unzip /tmp/MetadataBrowse.zip -d modules/ && \
 #    rm /tmp/MetadataBrowse.zip
 
+ARG ENV_MODULE_Mirador_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+    unzip /tmp/MiradorViewer.zip -d modules/ && \
+    rm /tmp/MiradorViewer.zip
+
 ARG ENV_MODULE_ModelViewer_VERSION
 #RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ModelViewer/releases/download/${ENV_MODULE_ModelViewer_VERSION}/ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
 #    unzip /tmp/ModelViewer.zip -d modules/ && \
