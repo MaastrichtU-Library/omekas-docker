@@ -146,7 +146,14 @@ ARG ENV_MODULE_HideProperties_VERSION
 RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${ENV_MODULE_HideProperties_VERSION}/HideProperties-${ENV_MODULE_HideProperties_VERSION}.zip --output /tmp/HideProperties.zip && \
     unzip /tmp/HideProperties.zip -d modules/ && \
     rm /tmp/HideProperties.zip
-    
+
+ARG ENV_MODULE_IiifSearch_VERSION
+RUN curl -L https://codeload.github.com/smachefert/Omeka-S-module-IiifSearch/zip/${ENV_MODULE_IiifSearch_VERSION} --output /tmp/IiifSearch.zip && \
+    unzip /tmp/IiifSearch.zip -d modules/ && \
+    # Archives downloaded from commit hash contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-IiifSearch-${ENV_MODULE_IiifSearch_VERSION} modules/IiifSearch && \
+    rm /tmp/IiifSearch.zip
+
 ARG ENV_MODULE_IiifServer_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
     unzip /tmp/IiifServer.zip -d modules/ && \

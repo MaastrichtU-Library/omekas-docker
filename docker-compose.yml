@@ -23,6 +23,7 @@ services:
         - ENV_MODULE_FileSideload_VERSION
         - ENV_MODULE_Generic_VERSION
         - ENV_MODULE_HideProperties_VERSION
+        - ENV_MODULE_IiifSearch_VERSION
         - ENV_MODULE_IiifServer_VERSION
         - ENV_MODULE_ImageServer_VERSION
         - ENV_MODULE_Log_VERSION
