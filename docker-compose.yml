@@ -14,7 +14,7 @@ services:
         - ENV_MODULE_BlocksDisposition_VERSION
         - ENV_MODULE_BulkEdit_VERSION
         - ENV_MODULE_BulkExport_VERSION
-        - ENV_MODULE_CleanUrl_VERSION
+        - ENV_MODULE_Common_VERSION
         - ENV_MODULE_CreateMissingThumbnails_VERSION
         - ENV_MODULE_CSVImport_VERSION
         - ENV_MODULE_CustomVocab_VERSION
@@ -38,12 +38,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - omeka:/var/www/html/volume
       - ./omeka-s/sideload:/data/sftp/omeka-sideload/
-      - ./externals/omekas-theme-um-theses:/var/www/html/themes/omekas-theme-um-theses
-      - ./externals/omekas-theme-3d-models:/var/www/html/themes/omekas-theme-3d-models
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
       - ./externals/freedom:/var/www/html/themes/freedom
       - ./externals/omekas-helpers:/var/www/html/helper
-#      - ./externals/Omeka-S-module-ModelViewer:/var/www/html/modules/ModelViewer
 
   db:
     image: mysql:8.0
@@ -76,14 +73,13 @@ services:
     build: solr/
     container_name: omekas_solr
     environment:
+      ENV_SOLR_CORE: omekas
       VIRTUAL_HOST: solr.local
       VIRTUAL_PORT: 8983
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - solrdata:/var/solr
-    command:
-      - solr-precreate
-      - omekas
+
 
   proxy:
     image: jwilder/nginx-proxy

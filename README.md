@@ -87,8 +87,7 @@ Use the following credentials to login to the admin panel:
 ## Create a fresh, empty environment
 Omeka and Solr config settings, data and files are saved in persistent docker volumes. Execute these commands to **delete all data** and go back to an empty, fresh experience.
 
-**Please remember to redo the manual configuration actions** [Configure CleanUrl module](README-01-CleanUrl.md) and [Configure Solr backend](README-02-Solr.md)
-after creating the fresh environment.
+**Please remember to redo the manual configuration actions** [Configure Solr backend](README-02-Solr.md) after creating the fresh environment.
 
 Briefly:
 ```
@@ -123,13 +122,20 @@ docker compose up -d
 ```
 
 
+## Troubleshooting and debugging
+There are several ways to troubleshoot errors in Omeka S.
 
+1. **Use the Log module in Omeka's admin panel**. Omeka errors that are usually written to the application.log file are also stored in the database so that they can be viewed in the Log admin panel.
+1. **Docker logs**. The output of various Omeka and Apache logs files is piped to the Docker logs. This is defined in the `omeka-s/docker-entrypoint.sh` file. You can inspect the log entries using one of the commands below.
+    ```
+    # For Omeka S only:
+    docker compose logs -f omekas
 
-
-## TODO Docker
-- [ ] 
-
-## TODO Solr
-- [ ] Play with the (Solr) Suggester
-- [ ] Find out how to precreate the `* -> _text_` Copy field during bootstrap of Solr.
-
+    # Or for the whole compose project:
+    docker compose logs -f
+    ```
+1. **Omeka S debug mode**. Some errors are not written to the logs and can only be viewed in the web browser. To enable this, put Omeka to development mode in the `omeka-s/.htaccess` file.
+    ```
+    SetEnv APPLICATION_ENV "development"
+    ```
+1. **Remote debugging in PhpStorm**. When developing theme- or module-code it is recommended to use the debugging capabilities of Xdebug and PhpStorm. Please read [the PhpStorm Xdebug instructions](README-03-PhpStorm-Xdebug.md).
