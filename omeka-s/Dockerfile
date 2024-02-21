@@ -4,6 +4,8 @@ FROM giocomai/omeka-s-docker:${ENV_OMEKAS_DOCKER_IMAGE_VERSION}
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     nano \
+    # packages required for (IIIF) image processing
+    libvips-tools \
     # iproute2 is used to retrieve the IP of the docker host machine (needed for Xdebug connections)
     iproute2
 
