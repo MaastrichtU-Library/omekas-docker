@@ -10,9 +10,24 @@ RUN apt-get update && \
     unzip \
     # iproute2 is used to retrieve the IP of the docker host machine (needed for Xdebug connections)
     iproute2 \
-    # Libraries required for Omeka S
+    # dependencies for PHP extensions
+    libfreetype6-dev \
+    zlib1g-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libtiff-dev \
     imagemagick \
-    libmagickwand-dev
+    ghostscript \
+    # for module ExtractText
+    poppler-utils \
+    # for Omeka S module NumericDataTypes
+    libicu-dev
+
+# Imagemagick config
+# Thumbnails in Omeka S created by Imagemagick
+# Processing PDF was disabled in ImageMagick config because of a vulnerability in GhostScript < 9.24 (see https://www.kb.cert.org/vuls/id/332928/)
+# We're using GhostScript version 10.00.0 or higher, so we can safely re-enable the ImageMagick processing for PDF
+RUN sed -i 's_<policy domain="coder" rights="none" pattern="PDF" />_<policy domain="coder" rights="read|write" pattern="PDF" />_g' /etc/ImageMagick-6/policy.xml
 
 # PHP config
 COPY php-config/99-omeka.ini $PHP_INI_DIR/conf.d/
