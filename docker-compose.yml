@@ -7,7 +7,8 @@ services:
     build:
       context: omeka-s/
       args:
-        - ENV_OMEKAS_DOCKER_IMAGE_VERSION
+        - ENV_PHP_VERSION
+        - ENV_OMEKAS_VERSION
         - ENV_MODULE_AdvancedSearch_VERSION
         - ENV_MODULE_ArchiveRepertory_VERSION
         - ENV_MODULE_Ark_VERSION
@@ -41,6 +42,7 @@ services:
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
       - ./externals/freedom:/var/www/html/themes/freedom
       - ./externals/omekas-helpers:/var/www/html/helper
+
 
   db:
     image: mysql:8.0

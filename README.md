@@ -1,7 +1,7 @@
 # Omeka S docker
-Dockerized instance of Omeka S.
+Maastricht University Library maintained Omeka S Docker environment. Based on the official PHP-FPM image on [Docker Hub](https://hub.docker.com/_/php) and customized for our needs.
 
-Based on the Docker image by 'giocomai'. [Docker Hub](https://hub.docker.com/r/giocomai/omeka-s-docker) | [GitHub](https://github.com/giocomai/omeka-s-docker)
+Credits to the setup by 'giocomai' [Docker Hub](https://hub.docker.com/r/giocomai/omeka-s-docker) | [GitHub](https://github.com/giocomai/omeka-s-docker) which was very inspirational in creating this Docker environment.
 
 
 ## Preparation
