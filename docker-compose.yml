@@ -29,6 +29,7 @@ services:
         - ENV_MODULE_NumericDataTypes_VERSION
         - ENV_MODULE_PdfViewer_VERSION
         - ENV_MODULE_SearchSolr_VERSION
+        - ENV_MODULE_Statistics_VERSION
         - ENV_MODULE_ValueSuggest_VERSION
         - ENV_THEME_Default_VERSION
     container_name: omekas

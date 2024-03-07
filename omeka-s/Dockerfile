@@ -237,6 +237,10 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/down
     unzip -q /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
 
+ARG ENV_MODULE_Statistics_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Statistics/releases/download/${ENV_MODULE_Statistics_VERSION}/Statistics-${ENV_MODULE_Statistics_VERSION}.zip --output /tmp/Stats.zip && \
+    unzip -q /tmp/Stats.zip -d modules/ && \
+    rm /tmp/Stats.zip
 
 ARG ENV_MODULE_ValueSuggest_VERSION
 RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v${ENV_MODULE_ValueSuggest_VERSION}/ValueSuggest-${ENV_MODULE_ValueSuggest_VERSION}.zip --output /tmp/ValueSuggest.zip && \
