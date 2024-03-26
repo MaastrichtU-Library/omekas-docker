@@ -189,9 +189,9 @@ RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${EN
     rm /tmp/HideProperties.zip
 
 ARG ENV_MODULE_IiifSearch_VERSION
-RUN curl -L https://codeload.github.com/smachefert/Omeka-S-module-IiifSearch/zip/${ENV_MODULE_IiifSearch_VERSION} --output /tmp/IiifSearch.zip && \
+RUN curl -L https://github.com/smachefert/Omeka-S-module-IiifSearch/archive/refs/tags/v${ENV_MODULE_IiifSearch_VERSION}.zip --output /tmp/IiifSearch.zip && \
     unzip /tmp/IiifSearch.zip -d modules/ && \
-    # Archives downloaded from commit hash contain a long and versioned module name so we rename it.
+    # Archives downloaded from commit hash or version tag contain a long and versioned module name so we rename it.
     mv modules/Omeka-S-module-IiifSearch-${ENV_MODULE_IiifSearch_VERSION} modules/IiifSearch && \
     rm /tmp/IiifSearch.zip
 
