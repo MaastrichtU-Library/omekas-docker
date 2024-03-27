@@ -103,6 +103,23 @@ services:
         aliases:
           - iipsrv.local
 
+  cantaloupe:
+    image: uclalibrary/cantaloupe:5.0.6-3
+    container_name: cantaloupe
+    environment:
+      CANTALOUPE_ENDPOINT_ADMIN_SECRET: foobar	# usr is admin
+      CANTALOUPE_ENDPOINT_ADMIN_ENABLED: true
+      VIRTUAL_HOST: cantaloupe.local
+    ports:
+      - "8182:8182"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./tiled-images:/imageroot
+    networks:
+      default:
+        aliases:
+          - cantaloupe.local
+
   proxy:
     image: jwilder/nginx-proxy
     container_name: proxy
