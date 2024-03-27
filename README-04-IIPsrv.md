@@ -1,7 +1,7 @@
 ## IIP Image Server instructions
 
 The setup is as follows:
-- Host machine: use `vips` to convert images to tiled tiff (pyramidical) and store them in the folder `./iipsrv-images/`
+- Host machine: use `vips` to convert images to tiled tiff (pyramidical) and store them in the folder `./tiled-images/`
 - IIPsrv docker container: has the `./iipsrv-images/` folder mounted as `/mnt/images/` and can serve the images over HTTP
 - Omeka S docker container: contains viewers to display images coming from external (IIPsrv) IIIF information files (e.g. `/mnt/images/example_image.tif/info.json`)
 
@@ -20,7 +20,7 @@ Create an entry for in your `/etc/hosts` file so that the browser on your host m
 1. **On the host machine:** convert the source image(s) to a format suited for IIPsrv
 ```
 # Example
-vips tiffsave /path/to/source/imagefile.tif ./iipsrv-images/outputfile.tif --tile --pyramid --compression deflate --tile-width 128 --tile-height 128
+vips tiffsave /path/to/source/imagefile.tif ./tiled-images/outputfile.tif --tile --pyramid --compression deflate --tile-width 128 --tile-height 128
 ```
 
 2. Make sure that the `iipsrv` Docker container is running.

@@ -97,7 +97,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./iipsrv/ports.conf:/etc/apache2/ports.conf
-      - ./iipsrv-images:/mnt/images/
+      - ./tiled-images:/mnt/images/
     networks:
       default:
         aliases:
