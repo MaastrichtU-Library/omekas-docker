@@ -4,3 +4,5 @@ omeka-s/config/database.ini
 omeka-s/sideload/
 externals/*
 !externals/README.md
+iipsrv-images/*
+!iipsrv-images/.gitkeep

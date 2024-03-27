@@ -87,6 +87,21 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - solrdata:/var/solr
 
+  iipsrv:
+    image: camicroscope/iipimage:version-3.11.0
+    container_name: iipsrv
+    environment:
+      VIRTUAL_HOST: iipsrv.local
+    expose:
+      - "80"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./iipsrv/ports.conf:/etc/apache2/ports.conf
+      - ./iipsrv-images:/mnt/images/
+    networks:
+      default:
+        aliases:
+          - iipsrv.local
 
   proxy:
     image: jwilder/nginx-proxy
