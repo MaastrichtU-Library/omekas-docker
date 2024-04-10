@@ -58,7 +58,8 @@ RUN rm -fr /var/www/html && \
     curl -L https://github.com/omeka/omeka-s/releases/download/v${ENV_OMEKAS_VERSION}/omeka-s-${ENV_OMEKAS_VERSION}.zip --output /var/www/latest_omeka_s.zip && \
     unzip -q /var/www/latest_omeka_s.zip -d /var/www/ && \
     rm /var/www/latest_omeka_s.zip && \
-    mv /var/www/omeka-s /var/www/html
+    mv /var/www/omeka-s /var/www/html && \
+    chown -R www-data:www-data /var/www
 
 # Put files/ folder in data volume and symlink to it from Omeka S folder
 RUN mkdir -p /var/www/html/volume/files/ && \
@@ -102,6 +103,9 @@ RUN install-php-extensions xdebug \
 # In Docker it cannot be installed via apt because of unmet php dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Switching to www-data to avoid running composer as root (see https://getcomposer.org/root)
+USER www-data
+
 # Install modules
 ARG ENV_MODULE_AdvancedSearch_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/${ENV_MODULE_AdvancedSearch_VERSION}/AdvancedSearch-${ENV_MODULE_AdvancedSearch_VERSION}.zip --output /tmp/AdvancedSearch.zip && \
@@ -114,7 +118,8 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory/release
     rm /tmp/ArchiveRepertory.zip
 
 ARG ENV_MODULE_Ark_VERSION
-RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
+#RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
+RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
     unzip -q /tmp/Ark.zip -d modules/ && \
     # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
     mv modules/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION} modules/Ark && \
@@ -196,17 +201,13 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
 #    rm /tmp/MetadataBrowse.zip
 
 ARG ENV_MODULE_ModelViewer_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ModelViewer/releases/download/${ENV_MODULE_ModelViewer_VERSION}/ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
-#    unzip -q /tmp/ModelViewer.zip -d modules/ && \
-#    rm /tmp/ModelViewer.zip
-
 RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-ModelViewer/-/archive/${ENV_MODULE_ModelViewer_VERSION}/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
     unzip -q /tmp/ModelViewer.zip -d modules/ && \
     mv modules/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION} modules/ModelViewer && \
     # install module's dependencies via composer
     cd modules/ModelViewer && \
     composer update && \
-    composer install --no-dev && \    
+    composer install --no-dev && \
     rm /tmp/ModelViewer.zip
 
 ARG ENV_MODULE_NdeTermennetwerk_VERSION
@@ -247,10 +248,7 @@ RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v$
     unzip -q /tmp/ValueSuggest.zip -d modules/ && \
     rm /tmp/ValueSuggest.zip
 
-
-
-# NOTE: Downloaded modules need to be installed in the Admin UI.
-
+RUN echo "INFO: Please install the modules via the Omeka S admin panel."
 
 # Install the default theme
 # Our own themes will be volume-binded in docker-compose.yml
@@ -260,6 +258,8 @@ RUN rm -fr themes/default && \
     unzip -q /tmp/theme-default.zip -d themes/ && \
     rm /tmp/theme-default.zip
 
+# Switch back to root user
+USER root
 
 # Copy other files and folders into the container
 COPY config/ /var/www/html/config/
