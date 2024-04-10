@@ -47,6 +47,10 @@ services:
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
       - ./externals/freedom:/var/www/html/themes/freedom
       - ./externals/omekas-helpers:/var/www/html/helper
+    networks:
+      default:
+        aliases:
+          - omeka.local
 
 
   db:
@@ -88,7 +92,7 @@ services:
       - solrdata:/var/solr
 
   iipsrv:
-    image: camicroscope/iipimage:version-3.11.0
+    image: camicroscope/iipimage:${ENV_IIPSRV_VERSION}
     container_name: iipsrv
     environment:
       VIRTUAL_HOST: iipsrv.local
@@ -104,7 +108,7 @@ services:
           - iipsrv.local
 
   cantaloupe:
-    image: uclalibrary/cantaloupe:5.0.6-3
+    image: uclalibrary/cantaloupe:${ENV_CANTALOUPE_VERSION}
     container_name: cantaloupe
     environment:
       CANTALOUPE_ENDPOINT_ADMIN_SECRET: foobar	# usr is admin
@@ -119,6 +123,18 @@ services:
       default:
         aliases:
           - cantaloupe.local
+
+  mirador:
+    build:
+      context: mirador/
+      args:
+        - ENV_MIRADOR_VERSION
+    container_name: mirador
+    environment:
+      VIRTUAL_HOST: viewer.local
+      VIRTUAL_PORT: 4444
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   proxy:
     image: jwilder/nginx-proxy
