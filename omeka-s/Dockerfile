@@ -54,6 +54,9 @@ RUN a2dismod mpm_prefork && \
 # Enable http/2 to serve multiple files over the same tcp connection. This increases performance for IIIF image tiles.
 RUN a2enmod http2
 
+# Required to enable CORS for serving IIIF images to external clients.
+RUN a2enmod headers
+
 # Install Omeka S
 ARG ENV_OMEKAS_VERSION
 RUN rm -fr /var/www/html && \
