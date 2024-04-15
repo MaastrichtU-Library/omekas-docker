@@ -229,6 +229,10 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
 ARG ENV_MODULE_Mirador_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
     unzip /tmp/MiradorViewer.zip -d modules/ && \
+    # install module's dependencies via composer
+    cd modules/Mirador && \
+    composer update && \
+    composer install --no-dev && \
     rm /tmp/MiradorViewer.zip
 
 ARG ENV_MODULE_ModelViewer_VERSION
