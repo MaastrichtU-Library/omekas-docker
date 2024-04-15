@@ -47,6 +47,10 @@ services:
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
       - ./externals/freedom:/var/www/html/themes/freedom
       - ./externals/omekas-helpers:/var/www/html/helper
+    networks:
+      default:
+        aliases:
+          - omeka.local
 
 
   db:
@@ -86,7 +90,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - solrdata:/var/solr
-
 
   proxy:
     image: jwilder/nginx-proxy
