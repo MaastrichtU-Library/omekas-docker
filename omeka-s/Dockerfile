@@ -72,6 +72,10 @@ RUN mkdir -p /var/www/html/volume/files/ && \
     ln -s /var/www/html/volume/files/ /var/www/html/files
 VOLUME /var/www/html/volume/
 
+# Precreate the IIIF manifest cache folders
+RUN mkdir -p /var/www/html/files/iiif/2 && \
+    mkdir -p /var/www/html/files/iiif/3
+
 # Omeka S core and modules require additional PHP extensions
 # As the PHP Docker image is kept as small as possible (see https://hub.docker.com/_/php), we need to install these extensions.
 # The builtin helper script `docker-php-ext-install` can be used to compile extensions into PHP.
