@@ -18,6 +18,8 @@ RUN apt-get update && \
     libtiff-dev \
     imagemagick \
     ghostscript \
+    # for (IIIF) image processing
+    libvips-tools \
     # for module ExtractText
     poppler-utils \
     # for Omeka S module NumericDataTypes
@@ -50,7 +52,10 @@ RUN a2dismod mpm_prefork && \
     a2enmod rewrite
 
 # Enable http/2 to serve multiple files over the same tcp connection. This increases performance for IIIF image tiles.
-#RUN a2enmod http2
+RUN a2enmod http2
+
+# Required to enable CORS for serving IIIF images to external clients.
+RUN a2enmod headers
 
 # Install Omeka S
 ARG ENV_OMEKAS_VERSION
@@ -58,13 +63,18 @@ RUN rm -fr /var/www/html && \
     curl -L https://github.com/omeka/omeka-s/releases/download/v${ENV_OMEKAS_VERSION}/omeka-s-${ENV_OMEKAS_VERSION}.zip --output /var/www/latest_omeka_s.zip && \
     unzip -q /var/www/latest_omeka_s.zip -d /var/www/ && \
     rm /var/www/latest_omeka_s.zip && \
-    mv /var/www/omeka-s /var/www/html
+    mv /var/www/omeka-s /var/www/html && \
+    chown -R www-data:www-data /var/www
 
 # Put files/ folder in data volume and symlink to it from Omeka S folder
 RUN mkdir -p /var/www/html/volume/files/ && \
     rm -Rf /var/www/html/files/ && \
     ln -s /var/www/html/volume/files/ /var/www/html/files
 VOLUME /var/www/html/volume/
+
+# Precreate the IIIF manifest cache folders
+RUN mkdir -p /var/www/html/files/iiif/2 && \
+    mkdir -p /var/www/html/files/iiif/3
 
 # Omeka S core and modules require additional PHP extensions
 # As the PHP Docker image is kept as small as possible (see https://hub.docker.com/_/php), we need to install these extensions.
@@ -102,6 +112,9 @@ RUN install-php-extensions xdebug \
 # In Docker it cannot be installed via apt because of unmet php dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Switching to www-data to avoid running composer as root (see https://getcomposer.org/root)
+USER www-data
+
 # Install modules
 ARG ENV_MODULE_AdvancedSearch_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/${ENV_MODULE_AdvancedSearch_VERSION}/AdvancedSearch-${ENV_MODULE_AdvancedSearch_VERSION}.zip --output /tmp/AdvancedSearch.zip && \
@@ -114,7 +127,8 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory/release
     rm /tmp/ArchiveRepertory.zip
 
 ARG ENV_MODULE_Ark_VERSION
-RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
+#RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
+RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
     unzip -q /tmp/Ark.zip -d modules/ && \
     # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
     mv modules/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION} modules/Ark && \
@@ -186,6 +200,23 @@ RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${EN
     unzip -q /tmp/HideProperties.zip -d modules/ && \
     rm /tmp/HideProperties.zip
 
+ARG ENV_MODULE_IiifSearch_VERSION
+RUN curl -L https://github.com/smachefert/Omeka-S-module-IiifSearch/archive/refs/tags/v${ENV_MODULE_IiifSearch_VERSION}.zip --output /tmp/IiifSearch.zip && \
+    unzip /tmp/IiifSearch.zip -d modules/ && \
+    # Archives downloaded from commit hash or version tag contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-IiifSearch-${ENV_MODULE_IiifSearch_VERSION} modules/IiifSearch && \
+    rm /tmp/IiifSearch.zip
+
+ARG ENV_MODULE_IiifServer_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
+    unzip /tmp/IiifServer.zip -d modules/ && \
+    rm /tmp/IiifServer.zip
+
+ARG ENV_MODULE_ImageServer_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
+    unzip /tmp/ImageServer.zip -d modules/ && \
+    rm /tmp/ImageServer.zip    
+
 ARG ENV_MODULE_Log_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${ENV_MODULE_Log_VERSION}/Log-${ENV_MODULE_Log_VERSION}.zip --output /tmp/Log.zip && \
     unzip -q /tmp/Log.zip -d modules/ && \
@@ -195,18 +226,23 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
 #    unzip -q /tmp/MetadataBrowse.zip -d modules/ && \
 #    rm /tmp/MetadataBrowse.zip
 
-ARG ENV_MODULE_ModelViewer_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ModelViewer/releases/download/${ENV_MODULE_ModelViewer_VERSION}/ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
-#    unzip -q /tmp/ModelViewer.zip -d modules/ && \
-#    rm /tmp/ModelViewer.zip
+ARG ENV_MODULE_Mirador_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+    unzip /tmp/MiradorViewer.zip -d modules/ && \
+    # install module's dependencies via composer
+    cd modules/Mirador && \
+    composer update && \
+    composer install --no-dev && \
+    rm /tmp/MiradorViewer.zip
 
+ARG ENV_MODULE_ModelViewer_VERSION
 RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-ModelViewer/-/archive/${ENV_MODULE_ModelViewer_VERSION}/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
     unzip -q /tmp/ModelViewer.zip -d modules/ && \
     mv modules/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION} modules/ModelViewer && \
     # install module's dependencies via composer
     cd modules/ModelViewer && \
     composer update && \
-    composer install --no-dev && \    
+    composer install --no-dev && \
     rm /tmp/ModelViewer.zip
 
 ARG ENV_MODULE_NdeTermennetwerk_VERSION
@@ -237,16 +273,22 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/down
     unzip -q /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
 
+ARG ENV_MODULE_Statistics_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Statistics/releases/download/${ENV_MODULE_Statistics_VERSION}/Statistics-${ENV_MODULE_Statistics_VERSION}.zip --output /tmp/Stats.zip && \
+    unzip -q /tmp/Stats.zip -d modules/ && \
+    rm /tmp/Stats.zip
+
+ARG ENV_MODULE_UniversalViewer_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer/releases/download/${ENV_MODULE_UniversalViewer_VERSION}/UniversalViewer-${ENV_MODULE_UniversalViewer_VERSION}.zip --output /tmp/UniversalViewer.zip && \
+    unzip /tmp/UniversalViewer.zip -d modules/ && \
+    rm /tmp/UniversalViewer.zip
 
 ARG ENV_MODULE_ValueSuggest_VERSION
 RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v${ENV_MODULE_ValueSuggest_VERSION}/ValueSuggest-${ENV_MODULE_ValueSuggest_VERSION}.zip --output /tmp/ValueSuggest.zip && \
     unzip -q /tmp/ValueSuggest.zip -d modules/ && \
     rm /tmp/ValueSuggest.zip
 
-
-
-# NOTE: Downloaded modules need to be installed in the Admin UI.
-
+RUN echo "INFO: Please install the modules via the Omeka S admin panel."
 
 # Install the default theme
 # Our own themes will be volume-binded in docker-compose.yml
@@ -256,6 +298,8 @@ RUN rm -fr themes/default && \
     unzip -q /tmp/theme-default.zip -d themes/ && \
     rm /tmp/theme-default.zip
 
+# Switch back to root user
+USER root
 
 # Copy other files and folders into the container
 COPY config/ /var/www/html/config/

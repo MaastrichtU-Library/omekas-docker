@@ -13,6 +13,9 @@ RewriteCond %{REQUEST_URI} helper/11-local-ark-site-resolver.php [OR]
 RewriteCond %{REQUEST_URI} ^s/*/ark:/([0-9]{5})/([a-zA-Z0-9]+)$
 RewriteRule .* - [L]
 
+#The following rule allows for download statistics in the statistics module. Please alter the protocol to your needs.
+RewriteRule ^files/original/(.*)$ http://%{HTTP_HOST}/download/files/original/$1 [NC,L]
+
 
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.

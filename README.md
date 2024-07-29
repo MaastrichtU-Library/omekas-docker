@@ -6,6 +6,14 @@ Credits to the setup by 'giocomai' [Docker Hub](https://hub.docker.com/r/giocoma
 
 ## Preparation
 
+**Edit /etc/hosts file**
+
+In order to resolve DNS entries to the Dockerized Omeka S infra, you need to edit `/etc/hosts` on your host machine. Insert the following line that points all containers to `127.0.0.1`.
+```
+127.0.0.1	localhost omeka.local solr.local db.local iipsrv.local cantaloupe.local viewer.local
+```
+
+
 **Load external dependencies**
 
 After initial clone of this git repository you will have an empty `externals/` directory.
@@ -50,15 +58,25 @@ from those repositories periodically.
     ```
 
 ## Build instructions
-Build the entire project with docker compose
+Build the Omeka S infra with:
 ```
 docker compose build
 ```
 
+Additionally, to build the external IIIF-tooling, use:
+```
+docker compose -f docker-compose-iiif-external.yml build
+```
+
 ## Run instructions
-Run the project with docker-compose
+Run the Omeka S infra with:
 ```
 docker compose up -d
+```
+
+To run external IIIF-tooling as well, use:
+```
+docker compose -f docker-compose-iiif-external.yml up -d
 ```
 
 To see logs:
@@ -66,25 +84,22 @@ To see logs:
 docker compose logs -f
 ```
 
-Open your web browser and access Omeka at http://omeka.local/ 
-
-Tip: You might need to edit `/etc/hosts` and create an entry for omeka.local that points to either `127.0.0.1` or the public IP of your machine.
-
-
 ## Manual configurations post-start
 There are some manual configuration steps to perform after the Docker containers have started.
 - [Configure Solr backend](README-02-Solr.md)
 
 
 ## Usage
-Open a browser and go to http://omeka.local.
+When all containers have started, you will find the services at the following URLs:
+- **Omeka S:** http://omeka.local _(usr/pwd: admin@example.org / foobar)_
+- **mySQL backend:** http://db.local
+- **Solr backend:** http://solr.local
+- **IIP IIIF server:** http://iipsrv.local
+- **Cantaloupe IIIF server:** http://cantaloupe.local _(usr/pwd: admin / foobar)_
+- **Mirador external IIIF viewer:** http://viewer.local
 
-Use the following credentials to login to the admin panel:
-- User: admin@example.org
-- Pass: foobar
 
-
-## Create a fresh, empty environment
+## Remove all containers and data
 Omeka and Solr config settings, data and files are saved in persistent docker volumes. Execute these commands to **delete all data** and go back to an empty, fresh experience.
 
 **Please remember to redo the manual configuration actions** [Configure Solr backend](README-02-Solr.md) after creating the fresh environment.
