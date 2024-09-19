@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Copied this from the original Docker image's `docker-entrypoint.sh` for version 9.7.0
+# This script creates sets some vars and creates some dirs if they don't exist, such as the SOLR home dir `/var/solr/data`
+# Essential for running Solr (copied) 
+init-var-solr
+
 # Enable job control (required for fg-command)
 set -m
 
