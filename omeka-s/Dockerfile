@@ -273,6 +273,11 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/down
     unzip -q /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
 
+ARG ENV_MODULE_Sitemaps_VERSION
+RUN curl -L https://github.com/ManOnDaMoon/omeka-s-module-Sitemaps/releases/download/v${ENV_MODULE_Sitemaps_VERSION}/Sitemaps-${ENV_MODULE_Sitemaps_VERSION}.zip --output /tmp/Sitemaps.zip && \
+    unzip -q /tmp/Sitemaps.zip -d modules/ && \
+    rm /tmp/Sitemaps.zip
+
 ARG ENV_MODULE_Statistics_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Statistics/releases/download/${ENV_MODULE_Statistics_VERSION}/Statistics-${ENV_MODULE_Statistics_VERSION}.zip --output /tmp/Stats.zip && \
     unzip -q /tmp/Stats.zip -d modules/ && \
