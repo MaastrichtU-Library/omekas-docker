@@ -7,6 +7,7 @@ services:
       context: omeka-s/
       args:
         - ENV_PHP_VERSION
+        - ENV_OMEKAS_CLI_VERSION
         - ENV_OMEKAS_VERSION
         - ENV_MODULE_AdvancedSearch_VERSION
         - ENV_MODULE_ArchiveRepertory_VERSION
