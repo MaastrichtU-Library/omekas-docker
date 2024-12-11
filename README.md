@@ -33,29 +33,10 @@ git clone https://github.com/MaastrichtU-Library/omekas-theme-um.git
 **IMPORTANT:** The externals repositories are not automatically updated locally, so make sure to `git pull` changes 
 from those repositories periodically.
 
+## Set configuration options in .env file
+1. Open the `.env` file in a text editor.
+2. Change values accordingly. E.g. change module versions. hostnames, etc.
 
-**Set database connection settings**
-
-1. Edit the `docker-compose.yml` file and enter values for:
-    ```
-    MYSQL_ROOT_PASSWORD:
-    MYSQL_DATABASE: 
-    MYSQL_USER:
-    MYSQL_PASSWORD:
-    ```
-
-1. Copy the example database config for Omeka S
-    ```
-    cp omeka-s/config/example_database.ini omeka-s/config/database.ini
-    ```
-
-1. Edit the `database.ini` file with a text editor and enter the same values for:
-    ```
-    user     = 
-    password = 
-    dbname   = 
-    host     = 
-    ```
 
 ## Build instructions
 Build the Omeka S infra with:
