@@ -48,6 +48,8 @@ services:
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
       - ./externals/freedom:/var/www/html/themes/freedom
       - ./externals/omekas-helpers:/var/www/html/helper
+      - ./externals/tester:/var/www/html/tester
+      - ./externals/Omeka-S-module-PdfViewer:/var/www/html/modules/PdfViewer
     networks:
       default:
         aliases:
