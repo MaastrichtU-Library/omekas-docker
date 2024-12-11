@@ -1,6 +1,5 @@
 .idea
 secret_*
-omeka-s/config/database.ini
 omeka-s/sideload/
 externals/*
 !externals/README.md
