@@ -79,7 +79,7 @@ apt-get update && apt-get install telnet -y
 ```
 1. Use telnet to verify connectivity
 ```
-telnet host.docker.internal 9003
+telnet dockerhost.local 9003
 ```
 
 ## Install Xdebug plugin in browser
