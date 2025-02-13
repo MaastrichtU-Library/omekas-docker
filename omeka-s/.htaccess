@@ -1,6 +1,10 @@
 SetEnv APPLICATION_ENV "production"
 #SetEnv APPLICATION_ENV "development"
 
+# Redirect all requests to non-existent item-set to "HTTP 410 - Gone" page
+Redirect 410 /s/literature/item-set/15
+Redirect 410 /api/item_sets/15
+
 RewriteEngine On
 
 # Redirect incoming ARK URLs to the forward proxy code
