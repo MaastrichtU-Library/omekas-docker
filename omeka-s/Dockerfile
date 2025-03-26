@@ -1,4 +1,4 @@
-ARG ENV_PHP_VERSION
+ARG ENV_PHP_VERSION=8.1
 FROM php:${ENV_PHP_VERSION}-fpm-bookworm
 
 RUN apt-get update && \
@@ -127,8 +127,8 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory/release
     rm /tmp/ArchiveRepertory.zip
 
 ARG ENV_MODULE_Ark_VERSION
-#RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
-RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
+RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
+#RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
     unzip -q /tmp/Ark.zip -d modules/ && \
     # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
     mv modules/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION} modules/Ark && \
@@ -175,6 +175,11 @@ RUN curl -L https://github.com/omeka-s-modules/CustomVocab/releases/download/v${
     unzip -q /tmp/CustomVocab.zip -d modules/ && \
     rm /tmp/CustomVocab.zip
 
+ARG ENV_MODULE_EasyAdmin_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-EasyAdmin/releases/download/${ENV_MODULE_EasyAdmin_VERSION}/EasyAdmin-${ENV_MODULE_EasyAdmin_VERSION}.zip --output /tmp/EasyAdmin.zip && \
+    unzip -q /tmp/EasyAdmin.zip -d modules/ && \
+    rm /tmp/EasyAdmin.zip
+
 ARG ENV_MODULE_EUCookieBar_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-EUCookieBar/releases/download/${ENV_MODULE_EUCookieBar_VERSION}/EUCookieBar-${ENV_MODULE_EUCookieBar_VERSION}.zip --output /tmp/EUCookieBar.zip && \
     unzip -q /tmp/EUCookieBar.zip -d modules/ && \
@@ -189,11 +194,6 @@ ARG ENV_MODULE_FileSideload_VERSION
 RUN curl -L https://github.com/omeka-s-modules/FileSideload/releases/download/v${ENV_MODULE_FileSideload_VERSION}/FileSideload-${ENV_MODULE_FileSideload_VERSION}.zip --output /tmp/FileSideload.zip && \
     unzip -q /tmp/FileSideload.zip -d modules/ && \
     rm /tmp/FileSideload.zip
-
-ARG ENV_MODULE_Generic_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Generic/releases/download/${ENV_MODULE_Generic_VERSION}/Generic-${ENV_MODULE_Generic_VERSION}.zip --output /tmp/Generic.zip && \
-    unzip -q /tmp/Generic.zip -d modules/ && \
-    rm /tmp/Generic.zip
 
 ARG ENV_MODULE_HideProperties_VERSION
 RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${ENV_MODULE_HideProperties_VERSION}/HideProperties-${ENV_MODULE_HideProperties_VERSION}.zip --output /tmp/HideProperties.zip && \
@@ -265,7 +265,7 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/archive/refs/t
     # install module's dependencies via composer
     cd modules/PdfViewer && \
     composer update && \
-    composer install --no-dev && \    
+    composer install --no-dev && \
     rm /tmp/PdfViewer.zip
     
 ARG ENV_MODULE_SearchSolr_VERSION
@@ -299,7 +299,7 @@ RUN echo "INFO: Please install the modules via the Omeka S admin panel."
 # Our own themes will be volume-binded in docker-compose.yml
 ARG ENV_THEME_Default_VERSION
 RUN rm -fr themes/default && \
-    curl -L https://github.com/omeka-s-themes/default/releases/download/v${ENV_THEME_Default_VERSION}/default-${ENV_THEME_Default_VERSION}.zip --output /tmp/theme-default.zip && \
+    curl -L https://github.com/omeka-s-themes/default/releases/download/v${ENV_THEME_Default_VERSION}/theme-default-v${ENV_THEME_Default_VERSION}.zip --output /tmp/theme-default.zip && \
     unzip -q /tmp/theme-default.zip -d themes/ && \
     rm /tmp/theme-default.zip
 

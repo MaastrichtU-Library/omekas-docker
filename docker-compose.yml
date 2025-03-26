@@ -18,10 +18,10 @@ services:
         - ENV_MODULE_CreateMissingThumbnails_VERSION
         - ENV_MODULE_CSVImport_VERSION
         - ENV_MODULE_CustomVocab_VERSION
+        - ENV_MODULE_EasyAdmin_VERSION
         - ENV_MODULE_EUCookieBar_VERSION
         - ENV_MODULE_ExtractText_VERSION
         - ENV_MODULE_FileSideload_VERSION
-        - ENV_MODULE_Generic_VERSION
         - ENV_MODULE_HideProperties_VERSION
         - ENV_MODULE_IiifSearch_VERSION
         - ENV_MODULE_IiifServer_VERSION
