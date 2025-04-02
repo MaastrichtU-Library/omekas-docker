@@ -470,7 +470,7 @@ INSERT INTO `module` (`id`, `is_active`, `version`) VALUES
 ('Sitemaps', 1, '1.1'),
 ('Statistics', 1, '3.4.7'),
 ('UniversalViewer', 1, '3.6.9'),
-('ValueSuggest', 1, '1.17.1');
+('ValueSuggest', 1, '1.17.2');
 
 -- --------------------------------------------------------
 

@@ -290,8 +290,13 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer/releases
     rm /tmp/UniversalViewer.zip
 
 ARG ENV_MODULE_ValueSuggest_VERSION
-RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v${ENV_MODULE_ValueSuggest_VERSION}/ValueSuggest-${ENV_MODULE_ValueSuggest_VERSION}.zip --output /tmp/ValueSuggest.zip && \
+RUN #curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v${ENV_MODULE_ValueSuggest_VERSION}/ValueSuggest-${ENV_MODULE_ValueSuggest_VERSION}.zip --output /tmp/ValueSuggest.zip && \
+#    unzip -q /tmp/ValueSuggest.zip -d modules/ && \
+#    rm /tmp/ValueSuggest.zip
+RUN curl -L https://github.com/mcoonen/ValueSuggest/archive/refs/tags/v${ENV_MODULE_ValueSuggest_VERSION}.zip --output /tmp/ValueSuggest.zip && \
     unzip -q /tmp/ValueSuggest.zip -d modules/ && \
+    # Archives downloaded from commit hash or version tag contain a long and versioned module name so we rename it.
+    mv modules/ValueSuggest-${ENV_MODULE_ValueSuggest_VERSION} modules/ValueSuggest && \
     rm /tmp/ValueSuggest.zip
 
 RUN echo "INFO: Please install the modules via the Omeka S admin panel."
