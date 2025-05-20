@@ -220,6 +220,10 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/dow
 ARG ENV_MODULE_Log_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${ENV_MODULE_Log_VERSION}/Log-${ENV_MODULE_Log_VERSION}.zip --output /tmp/Log.zip && \
     unzip -q /tmp/Log.zip -d modules/ && \
+    # install module's dependencies via composer
+    cd modules/Log && \
+    composer update && \
+    composer install --no-dev && \
     rm /tmp/Log.zip
 
 #RUN curl -L https://github.com/omeka-s-modules/MetadataBrowse/releases/download/v1.4.1/MetadataBrowse-1.4.1.zip --output /tmp/MetadataBrowse.zip && \
@@ -227,7 +231,8 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
 #    rm /tmp/MetadataBrowse.zip
 
 ARG ENV_MODULE_Mirador_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
     unzip /tmp/MiradorViewer.zip -d modules/ && \
     # install module's dependencies via composer
     cd modules/Mirador && \
