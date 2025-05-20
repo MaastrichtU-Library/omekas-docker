@@ -11,6 +11,7 @@ services:
         - ENV_MODULE_AdvancedSearch_VERSION
         - ENV_MODULE_ArchiveRepertory_VERSION
         - ENV_MODULE_Ark_VERSION
+        - ENV_MODULE_BlockPlus_VERSION
         - ENV_MODULE_BlocksDisposition_VERSION
         - ENV_MODULE_BulkEdit_VERSION
         - ENV_MODULE_BulkExport_VERSION
