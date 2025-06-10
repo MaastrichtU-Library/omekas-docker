@@ -228,6 +228,11 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/dow
     unzip /tmp/ImageServer.zip -d modules/ && \
     rm /tmp/ImageServer.zip    
 
+ARG ENV_MODULE_LinkedDataSets_VERSION
+RUN curl -L https://github.com/netwerk-digitaal-erfgoed/Omeka-S-Module-LinkedDataSets/releases/download/v${ENV_MODULE_LinkedDataSets_VERSION}/LinkedDataSets.zip --output /tmp/LinkedDataSets.zip && \
+    unzip -q /tmp/LinkedDataSets.zip -d modules/ && \
+    rm /tmp/LinkedDataSets.zip
+
 ARG ENV_MODULE_Log_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${ENV_MODULE_Log_VERSION}/Log-${ENV_MODULE_Log_VERSION}.zip --output /tmp/Log.zip && \
     unzip -q /tmp/Log.zip -d modules/ && \
