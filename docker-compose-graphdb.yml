@@ -1,0 +1,18 @@
+services:
+
+  graphdb:
+    image: ontotext/graphdb:${ENV_GRAPHDB_VERSION}
+    container_name: graphdb
+    environment:
+      VIRTUAL_HOST: triples.local
+      VIRTUAL_PORT: 7200
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - graphdb:/opt/graphdb/home
+    networks:
+      default:
+        aliases:
+          - triples.local
+
+volumes:
+  graphdb:
