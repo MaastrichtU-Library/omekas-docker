@@ -39,8 +39,8 @@ RewriteRule .* - [L]
 RewriteRule ^files/original/(.*)$ http://%{HTTP_HOST}/download/files/original/$1 [NC,L]
 
 # Rewrite item and media URLs of old sites to the new 'index' site created in July 2025.
-# Only process this rule if the site slug is not "index".
-RewriteCond %{REQUEST_URI} !^/s/index/
+# Only process this rule if the site slug is not "index" or "observant".
+RewriteCond %{REQUEST_URI} !^/s/(index|observant)/
 RewriteRule ^s/[^/]+/(item|media)/([0-9]+)$ /s/index/$1/$2 [R=301,L]
 
 # The following rule tells Apache that if the requested filename
