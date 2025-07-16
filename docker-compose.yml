@@ -11,6 +11,7 @@ services:
         - ENV_MODULE_AdvancedSearch_VERSION
         - ENV_MODULE_ArchiveRepertory_VERSION
         - ENV_MODULE_Ark_VERSION
+        - ENV_MODULE_BlockPlus_VERSION
         - ENV_MODULE_BlocksDisposition_VERSION
         - ENV_MODULE_BulkEdit_VERSION
         - ENV_MODULE_BulkExport_VERSION
@@ -26,6 +27,7 @@ services:
         - ENV_MODULE_IiifSearch_VERSION
         - ENV_MODULE_IiifServer_VERSION
         - ENV_MODULE_ImageServer_VERSION
+        - ENV_MODULE_ItemSetsTree_VERSION
         - ENV_MODULE_Log_VERSION
         - ENV_MODULE_Mirador_VERSION
         - ENV_MODULE_ModelViewer_VERSION
@@ -50,6 +52,7 @@ services:
       - ./externals/omekas-helpers:/var/www/html/helper
       - ./externals/tester:/var/www/html/tester
       - ./externals/Omeka-S-module-PdfViewer:/var/www/html/modules/PdfViewer
+      # - ./externals/Omeka-S-module-BlockPlus:/var/www/html/modules/BlockPlus
     networks:
       default:
         aliases:

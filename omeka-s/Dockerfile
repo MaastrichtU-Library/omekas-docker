@@ -143,6 +143,12 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BlocksDisposition/releas
     unzip -q /tmp/BlocksDisposition.zip -d modules/ && \
     rm /tmp/BlocksDisposition.zip
 
+ARG ENV_MODULE_BlockPlus_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BlockPlus/releases/download/${ENV_MODULE_BlockPlus_VERSION}/BlockPlus-${ENV_MODULE_BlockPlus_VERSION}.zip --output /tmp/BlockPlus.zip && \
+    unzip -q /tmp/BlockPlus.zip -d modules/ && \
+    rm /tmp/BlockPlus.zip
+
+
 ARG ENV_MODULE_BulkEdit_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/download/${ENV_MODULE_BulkEdit_VERSION}/BulkEdit-${ENV_MODULE_BulkEdit_VERSION}.zip --output /tmp/BulkEdit.zip && \
     unzip -q /tmp/BulkEdit.zip -d modules/ && \
@@ -212,10 +218,18 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/down
     unzip /tmp/IiifServer.zip -d modules/ && \
     rm /tmp/IiifServer.zip
 
-ARG ENV_MODULE_ImageServer_VERSION
+
+    ARG ENV_MODULE_ImageServer_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
     unzip /tmp/ImageServer.zip -d modules/ && \
     rm /tmp/ImageServer.zip    
+
+ARG ENV_MODULE_ItemSetsTree_VERSION
+# https://github.com/biblibre/omeka-s-module-ItemSetsTree/releases/download/v0.7.2/ItemSetsTree-0.7.2.zip
+    
+RUN curl -L https://github.com/biblibre/omeka-s-module-ItemSetsTree/releases/download/v${ENV_MODULE_ItemSetsTree_VERSION}/ItemSetsTree-${ENV_MODULE_ItemSetsTree_VERSION}.zip --output /tmp/ItemSetsTree.zip && \
+    unzip /tmp/ItemSetsTree.zip -d modules/ && \
+    rm /tmp/ItemSetsTree.zip
 
 ARG ENV_MODULE_Log_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${ENV_MODULE_Log_VERSION}/Log-${ENV_MODULE_Log_VERSION}.zip --output /tmp/Log.zip && \

@@ -6,3 +6,4 @@ externals/*
 !externals/README.md
 tiled-images/*
 !tiled-images/.gitkeep
+.vscode/*
