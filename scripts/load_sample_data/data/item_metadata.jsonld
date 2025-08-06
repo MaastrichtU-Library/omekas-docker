@@ -1,0 +1,23 @@
+{
+  "schema:name": [
+    {
+      "type": "literal",
+      "property_id": 1451,
+      "value": "Geometrical Solutions Derived from Mechanics. A Treatise of Archimedes"
+    }
+  ],
+  "schema:author": [
+    {
+      "type": "literal",
+      "property_id": 903,
+      "value": "Archimedes"
+    }
+  ],
+  "schema:description": [
+    {
+      "type": "literal",
+      "property_id": 738,
+      "value": "A scientific publication attributed to the ancient mathematician Archimedes, with a translation by Dr. J.L. Heiberg and an introduction by David Eugene Smith. This treatise, derived from manuscripts discovered in the early 20th century, belongs to the late classical era, specifically around the late Hellenistic period. The book primarily discusses the geometric principles relating to mechanics, presenting solutions that intertwine mathematical concepts with practical applications in physics. The content of the treatise elaborates on several key propositions by Archimedes, demonstrating how geometric solutions can be derived from mechanical principles. The work includes explorations of the volumes of various solid shapes such as cylinders, spheres, and parabolas, often relating their properties to practical mechanical applications. Archimedes emphasizes his innovative methods of deriving geometric proofs through intuitive and mechanical reasoning rather than purely analytical approaches. Each proposition builds upon a mechanical foundation, revealing the interconnectedness of geometry and mechanics and providing insights into Archimedes's thought process in discovering mathematical truths."
+    }
+  ]
+}
