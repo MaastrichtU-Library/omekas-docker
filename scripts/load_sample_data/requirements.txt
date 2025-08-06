@@ -1,1 +1,2 @@
 omeka-s-tools@git+https://github.com/mcoonen/omeka_s_tools.git@master
+tqdm

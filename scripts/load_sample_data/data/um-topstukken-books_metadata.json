@@ -1,4 +1,11 @@
 {
+  "system_metadata": {
+    "resource_template": "Visual Art Works",
+    "media_files": [
+      "data/um-topstukken-books-1.jpg",
+      "data/um-topstukken-books-2.jpg"
+    ]
+  },
   "schema:name": [
     {
       "type": "literal",
