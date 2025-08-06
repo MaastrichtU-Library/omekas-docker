@@ -1,4 +1,7 @@
 {
+  "system_metadata": {
+      "resource_template": "Book"
+  },
   "schema:name": [
     {
       "type": "literal",
