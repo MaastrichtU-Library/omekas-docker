@@ -1,6 +1,9 @@
 {
   "system_metadata": {
-      "resource_template": "Book"
+    "resource_template": "Book",
+    "media_files": [
+      "data/geometrical-solutions.pdf"
+    ]
   },
   "schema:name": [
     {

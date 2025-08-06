@@ -12,11 +12,11 @@ if __name__ == "__main__":
 
     # Sample metadata dictionary for a book item
     with open("data/geometrical-solutions_metadata.json", "r", encoding="utf-8") as f:
-        book_item = json.load(f)
+        item_meta = json.load(f)
 
     # Extract the system metadata and remove it from the item dictionary
-    system_metadata = book_item["system_metadata"]
-    book_item.pop("system_metadata", None)
+    system_metadata = item_meta["system_metadata"]
+    item_meta.pop("system_metadata", None)
 
     # Get resource template ID
     resource_template_label = system_metadata["resource_template"]
@@ -24,16 +24,12 @@ if __name__ == "__main__":
     resource_template_id = resource_template["o:id"]
 
     # Prepare an item metadata payload (dict) based on a resource template
-    book_payload = omeka_client.prepare_item_payload_using_template(terms=book_item, template_id=resource_template_id)
-
-    # Add the media file to the item metadata payload
-    # TODO: remove this commented out step
-    #omeka_client.add_media_to_payload(payload=book_payload, media_files=['data/geometrical-solutions.pdf'])
+    item_payload = omeka_client.prepare_item_payload_using_template(terms=item_meta, template_id=resource_template_id)
 
     # Upload the payload to Omeka and create a new item
     new_item = omeka_client.add_item(
-        payload=book_payload,
-        media_files=["data/geometrical-solutions.pdf"],
+        payload=item_payload,
+        media_files=system_metadata["media_files"],
         template_id=resource_template_id,
         class_id=None,
         item_set_id=None
