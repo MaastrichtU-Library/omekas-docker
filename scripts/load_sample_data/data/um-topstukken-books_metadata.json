@@ -1,0 +1,20 @@
+{
+  "schema:name": [
+    {
+      "type": "literal",
+      "value": "Topstukken"
+    }
+  ],
+  "schema:creator": [
+    {
+      "type": "literal",
+      "value": "Romaine"
+    }
+  ],
+  "schema:description": [
+    {
+      "type": "literal",
+      "value": "Photograph of the Topstukken held by Maastricht University Library"
+    }
+  ]
+}

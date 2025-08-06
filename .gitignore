@@ -6,3 +6,4 @@ externals/*
 tiled-images/*
 !tiled-images/.gitkeep
 .venv
+*.sqlite

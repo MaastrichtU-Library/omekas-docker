@@ -1,4 +1,5 @@
 from omeka_s_tools.api import OmekaAPIClient
+import json
 import config as cfg
 
 
@@ -10,26 +11,8 @@ if __name__ == "__main__":
     )
 
     # Sample metadata dictionary for a book item
-    book_item = {
-        "schema:name": [
-            {
-                "type": "literal",
-                "value": "Geometrical Solutions Derived from Mechanics. A Treatise of Archimedes"
-            }
-        ],
-        "schema:author": [
-            {
-                "type": "literal",
-                "value": "Archimedes"
-            }
-        ],
-        "schema:description": [
-            {
-                "type": "literal",
-                "value": "A scientific publication attributed to the ancient mathematician Archimedes, with a translation by Dr. J.L. Heiberg and an introduction by David Eugene Smith. This treatise, derived from manuscripts discovered in the early 20th century, belongs to the late classical era, specifically around the late Hellenistic period. The book primarily discusses the geometric principles relating to mechanics, presenting solutions that intertwine mathematical concepts with practical applications in physics. The content of the treatise elaborates on several key propositions by Archimedes, demonstrating how geometric solutions can be derived from mechanical principles. The work includes explorations of the volumes of various solid shapes such as cylinders, spheres, and parabolas, often relating their properties to practical mechanical applications. Archimedes emphasizes his innovative methods of deriving geometric proofs through intuitive and mechanical reasoning rather than purely analytical approaches. Each proposition builds upon a mechanical foundation, revealing the interconnectedness of geometry and mechanics and providing insights into Archimedes's thought process in discovering mathematical truths."
-            }
-        ]
-    }
+    with open("data/geometrical-solutions_metadata.json", "r", encoding="utf-8") as f:
+        book_item = json.load(f)
 
     # Get resource template ID
     resource_template = omeka_client.get_template_by_label('Book')
@@ -46,8 +29,30 @@ if __name__ == "__main__":
     new_item = omeka_client.add_item(
         payload=book_payload,
         media_files=["data/geometrical-solutions.pdf"],
-        template_id=5,
+        template_id=resource_template_id,
         class_id=None,
         item_set_id=None
     )
     print(f"New item created with ID: {new_item['o:id']}")
+
+
+    # Sample metadata dictionary for an image item
+    with open("data/um-topstukken-books_metadata.json", "r", encoding="utf-8") as f:
+        picture_item = json.load(f)
+
+    # Get resource template ID
+    resource_template = omeka_client.get_template_by_label('Visual Art Works')
+    resource_template_id = resource_template["o:id"]
+
+    # Prepare an item metadata payload (dict) based on a resource template
+    picture_payload = omeka_client.prepare_item_payload_using_template(terms=picture_item, template_id=resource_template_id)
+
+    # Upload the payload to Omeka and create a new item
+    new_item2 = omeka_client.add_item(
+        payload=picture_payload,
+        media_files=["data/um-topstukken-books-1.jpg", "data/um-topstukken-books-2.jpg"],
+        template_id=resource_template_id,
+        class_id=None,
+        item_set_id=None
+    )
+    print(f"New item created with ID: {new_item2['o:id']}")
