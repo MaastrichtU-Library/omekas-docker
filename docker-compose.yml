@@ -51,8 +51,10 @@ services:
       - omeka:/var/www/html/volume
       - ./omeka-s/sideload:/data/sftp/omeka-sideload/
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
-      - ./externals/freedom:/var/www/html/themes/freedom
       - ./externals/omekas-helpers:/var/www/html/helper
+      - ./externals/Omeka-S-module-BlockPlus:/var/www/html/modules/BlockPlus
+#      - ./externals/Omeka-S-module-ItemSetsTree:/var/www/html/modules/itemSetsTree
+
     networks:
       default:
         aliases:
