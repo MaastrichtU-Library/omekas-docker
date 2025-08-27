@@ -4,6 +4,16 @@
 echo "$(ip route|awk '/default/ { print $3 }') dockerhost.local" >> /etc/hosts
 
 ### Omeka configurations that need to happen during runtime ###
+
+# Generate database configuration file
+echo "Creating database.ini in /var/www/html/config/ ..."
+rm -f /var/www/html/config/database.ini
+echo "user     = \"$MYSQL_USER\"" > /var/www/html/config/database.ini
+echo "password = \"$MYSQL_PASSWORD\"" >> /var/www/html/config/database.ini
+echo "dbname   = \"$MYSQL_DATABASE\"" >> /var/www/html/config/database.ini
+echo "host     = \"$MYSQL_HOST\"" >> /var/www/html/config/database.ini
+echo "Done creating database.ini !"
+
 # Note: Docker volume-binds are not available during build stage.
 if [[ ! -d /var/www/html/files/temp ]]
 then

@@ -81,8 +81,28 @@ if ! [ -f /var/solr/solr_schema_modified ]; then
 }
 EOF
 
+    # 1. Solr schema: Add a new field definition
+    curl --retry 5 --connect-timeout 5 -X POST -H 'Content-type:application/json' http://localhost:8983/solr/${ENV_SOLR_CORE}/schema \
+    --data-binary '{
+      "add-field": {
+        "name": "date_year_agg_i",
+        "type": "pint",
+        "stored": true,
+        "indexed": true
+      }
+    }'
+
+    # 2. Solr schema: Add CopyField rules so that the year is copied from multiple date (year) fields to the new field
+    curl --retry 5 --connect-timeout 5 -X POST http://localhost:8983/solr/${ENV_SOLR_CORE}/schema --data-binary '{
+      "add-copy-field": [
+        {"source": "schema_dateIssued_i", "dest": "date_year_agg_i"},
+        {"source": "schema_datePublished_i", "dest": "date_year_agg_i"},
+        {"source": "schema_dateCreated_i", "dest": "date_year_agg_i"}
+      ]
+    }'
+
     touch /var/solr/solr_schema_modified
-    echo "Done"
+    echo "\n Done: Solr schema updated!"
 fi
 
 

@@ -11,6 +11,7 @@ services:
         - ENV_MODULE_AdvancedSearch_VERSION
         - ENV_MODULE_ArchiveRepertory_VERSION
         - ENV_MODULE_Ark_VERSION
+        - ENV_MODULE_BlockPlus_VERSION
         - ENV_MODULE_BlocksDisposition_VERSION
         - ENV_MODULE_BulkEdit_VERSION
         - ENV_MODULE_BulkExport_VERSION
@@ -41,6 +42,10 @@ services:
     container_name: omekas
     environment: 
       VIRTUAL_HOST: omeka.local
+      MYSQL_DATABASE: ${ENV_MYSQL_DATABASE}
+      MYSQL_USER: ${ENV_MYSQL_USER}
+      MYSQL_PASSWORD: ${ENV_MYSQL_PASSWORD}
+      MYSQL_HOST: ${ENV_MYSQL_HOST}
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - omeka:/var/www/html/volume
@@ -61,10 +66,10 @@ services:
     container_name: omekas_db
     command: --max_allowed_packet=2147483648
     environment:
-      MYSQL_ROOT_PASSWORD: very_difficult_password_1 
-      MYSQL_DATABASE: omekas
-      MYSQL_USER: omekas
-      MYSQL_PASSWORD: difficult_omek4s_password
+      MYSQL_ROOT_PASSWORD: ${ENV_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${ENV_MYSQL_DATABASE}
+      MYSQL_USER: ${ENV_MYSQL_USER}
+      MYSQL_PASSWORD: ${ENV_MYSQL_PASSWORD}
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - db:/var/lib/mysql

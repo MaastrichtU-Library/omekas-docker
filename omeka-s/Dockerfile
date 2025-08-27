@@ -138,6 +138,17 @@ RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-Ark/-/archive/${ENV_MODULE
     composer install --no-dev && \
     rm /tmp/Ark.zip
 
+ARG ENV_MODULE_BlockPlus_VERSION
+RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-BlockPlus/-/archive/${ENV_MODULE_BlockPlus_VERSION}/Omeka-S-module-BlockPlus-${ENV_MODULE_BlockPlus_VERSION}.zip --output /tmp/BlockPlus.zip && \
+    unzip -q /tmp/BlockPlus.zip -d modules/ && \
+    # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-BlockPlus-${ENV_MODULE_BlockPlus_VERSION} modules/BlockPlus && \
+    # install module's dependencies via composer
+    cd modules/BlockPlus && \
+    composer update && \
+    composer install --no-dev && \
+    rm /tmp/BlockPlus.zip
+
 ARG ENV_MODULE_BlocksDisposition_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BlocksDisposition/releases/download/${ENV_MODULE_BlocksDisposition_VERSION}/BlocksDisposition-${ENV_MODULE_BlocksDisposition_VERSION}.zip --output /tmp/BlocksDisposition.zip && \
     unzip -q /tmp/BlocksDisposition.zip -d modules/ && \
@@ -227,7 +238,8 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
 #    rm /tmp/MetadataBrowse.zip
 
 ARG ENV_MODULE_Mirador_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
     unzip /tmp/MiradorViewer.zip -d modules/ && \
     # install module's dependencies via composer
     cd modules/Mirador && \
