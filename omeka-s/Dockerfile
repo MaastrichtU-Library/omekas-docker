@@ -285,6 +285,12 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/down
     unzip -q /tmp/SearchSolr.zip -d modules/ && \
     rm /tmp/SearchSolr.zip
 
+ARG ENV_MODULE_SimplePdf_VERSION
+RUN curl -L  \
+    https://github.com/arepr/omeka-s-module-simplepdf/releases/download/${ENV_MODULE_SimplePdf_VERSION}/SimplePdf.zip --output /tmp/SimplePdf.zip && \
+    unzip -q /tmp/SimplePdf.zip -d modules/ && \
+    rm /tmp/SimplePdf.zip
+
 ARG ENV_MODULE_Sitemaps_VERSION
 RUN curl -L https://github.com/ManOnDaMoon/omeka-s-module-Sitemaps/releases/download/v${ENV_MODULE_Sitemaps_VERSION}/Sitemaps-${ENV_MODULE_Sitemaps_VERSION}.zip --output /tmp/Sitemaps.zip && \
     unzip -q /tmp/Sitemaps.zip -d modules/ && \
