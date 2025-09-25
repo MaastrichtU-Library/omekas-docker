@@ -54,6 +54,7 @@ services:
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
       - ./externals/freedom:/var/www/html/themes/freedom
       - ./externals/omekas-helpers:/var/www/html/helper
+      - ./externals/omeka-s-module-simplepdf:/var/www/html/modules/SimplePdf
     networks:
       default:
         aliases:
