@@ -1,8 +1,13 @@
 .idea
 secret_*
-omeka-s/config/database.ini
 omeka-s/sideload/
 externals/*
 !externals/README.md
 tiled-images/*
 !tiled-images/.gitkeep
+# Ignore Python and data files related to the load_sample_data script
+.venv
+*/venv*/
+*.sqlite
+__pycache__
+*/load_sample_data/data
