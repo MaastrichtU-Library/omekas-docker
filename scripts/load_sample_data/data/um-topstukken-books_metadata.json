@@ -1,0 +1,27 @@
+{
+  "system_metadata": {
+    "resource_template": "Visual Art Works",
+    "media_files": [
+      "data/um-topstukken-books-1.jpg",
+      "data/um-topstukken-books-2.jpg"
+    ]
+  },
+  "schema:name": [
+    {
+      "type": "literal",
+      "value": "Topstukken"
+    }
+  ],
+  "schema:creator": [
+    {
+      "type": "literal",
+      "value": "Romaine"
+    }
+  ],
+  "schema:description": [
+    {
+      "type": "literal",
+      "value": "Photograph of the Topstukken held by Maastricht University Library"
+    }
+  ]
+}
