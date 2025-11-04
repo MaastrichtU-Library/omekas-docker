@@ -1,29 +1,11 @@
 SetEnv APPLICATION_ENV "production"
 #SetEnv APPLICATION_ENV "development"
 
-# Redirect all requests to non-existent item-set to "HTTP 410 - Gone" page
-Redirect 410 /s/literature/item-set/15
-Redirect 410 /s/architecture/item-set/15
-Redirect 410 /s/historyoflimburg/item-set/15
-Redirect 410 /s/medicine/item-set/15
-Redirect 410 /s/natural-history/item-set/15
-Redirect 410 /s/psychology/item-set/15
-Redirect 410 /s/chemistry/item-set/15
-Redirect 410 /s/law/item-set/15
-Redirect 410 /s/mswf/item-set/15
-Redirect 410 /s/observant/item-set/15
-Redirect 410 /s/religion/item-set/15
-Redirect 410 /s/humanity/item-set/15
-Redirect 410 /s/music/item-set/15
-Redirect 410 /s/pedagogy/item-set/15
-Redirect 410 /s/umjournals/item-set/15
-Redirect 410 /s/geography/item-set/15
-Redirect 410 /s/heritage/item-set/15
-Redirect 410 /s/mlft/item-set/15
-Redirect 410 /s/physics/item-set/15
-Redirect 410 /api/item_sets/15
-
 RewriteEngine On
+
+# Redirect all requests to non-existent item-set to "HTTP 410 - Gone" page
+RewriteRule ^s/[^/]+/item-set/15/?$ - [G,L]
+RewriteRule ^api/item_sets/15/?$ - [G,L]
 
 # Redirect incoming ARK URLs to the forward proxy code
 RewriteCond %{REQUEST_URI} ark:/([0-9]{5})/([a-zA-Z0-9]+)$
