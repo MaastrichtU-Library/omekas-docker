@@ -116,6 +116,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 USER www-data
 
 # Install modules
+ARG ENV_MODULE_AdvancedResourceTemplate_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-s-module-AdvancedResourceTemplate/releases/download/${ENV_MODULE_AdvancedResourceTemplate_VERSION}/AdvancedResourceTemplate-${ENV_MODULE_AdvancedResourceTemplate_VERSION}.zip --output /tmp/AdvancedResourceTemplate.zip && \
+    unzip -q /tmp/AdvancedResourceTemplate.zip -d modules/ && \
+    rm /tmp/AdvancedResourceTemplate.zip
+
 ARG ENV_MODULE_AdvancedSearch_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/download/${ENV_MODULE_AdvancedSearch_VERSION}/AdvancedSearch-${ENV_MODULE_AdvancedSearch_VERSION}.zip --output /tmp/AdvancedSearch.zip && \
     unzip -q /tmp/AdvancedSearch.zip -d modules/ && \
@@ -170,6 +175,11 @@ RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Common/-/archive/${ENV_M
     # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
     mv modules/Omeka-S-module-Common-${ENV_MODULE_Common_VERSION} modules/Common && \
     rm /tmp/Common.zip
+
+ARG ENV_MODULE_Contribute_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Contribute/releases/download/${ENV_MODULE_Contribute_VERSION}/Contribute-${ENV_MODULE_Contribute_VERSION}.zip --output /tmp/Contribute.zip && \
+    unzip -q /tmp/Contribute.zip -d modules/ && \
+    rm /tmp/Contribute.zip
 
 ARG ENV_MODULE_CreateMissingThumbnails_VERSION
 RUN curl -L https://github.com/biblibre/omeka-s-module-CreateMissingThumbnails/releases/download/v${ENV_MODULE_CreateMissingThumbnails_VERSION}/CreateMissingThumbnails-${ENV_MODULE_CreateMissingThumbnails_VERSION}.zip --output /tmp/CreateMissingThumbnails.zip && \
