@@ -11,8 +11,10 @@ set -m
 # Pre-create the Solr core
 precreate-core ${ENV_SOLR_CORE}
 
-# Start Solr in foreground and continue with the rest of this script 
-solr-foreground &
+# Start Solr in foreground and continue with the rest of this script
+# As of version 10.0, Solr starts in cloud mode by default. Specify --user-managed to run in standalone mode
+# See: https://solr.apache.org/guide/solr/latest/deployment-guide/cluster-types.html
+solr-foreground --user-managed &
 
 # Wait until Solr has started and port 8983 becomes available
 until nc -z localhost 8983; do
