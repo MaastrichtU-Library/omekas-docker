@@ -196,6 +196,11 @@ RUN curl -L https://github.com/omeka-s-modules/CustomVocab/releases/download/v${
     unzip -q /tmp/CustomVocab.zip -d modules/ && \
     rm /tmp/CustomVocab.zip
 
+ARG ENV_MODULE_EasyAdmin_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-EasyAdmin/releases/download/${ENV_MODULE_EasyAdmin_VERSION}/EasyAdmin-${ENV_MODULE_EasyAdmin_VERSION}.zip --output /tmp/EasyAdmin.zip && \
+    unzip -q /tmp/EasyAdmin.zip -d modules/ && \
+    rm /tmp/EasyAdmin.zip
+
 ARG ENV_MODULE_EUCookieBar_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-EUCookieBar/releases/download/${ENV_MODULE_EUCookieBar_VERSION}/EUCookieBar-${ENV_MODULE_EUCookieBar_VERSION}.zip --output /tmp/EUCookieBar.zip && \
     unzip -q /tmp/EUCookieBar.zip -d modules/ && \
