@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Nov 20, 2025 at 03:01 PM
--- Server version: 8.0.40
--- PHP Version: 8.0.27
+-- Gegenereerd op: 09 dec 2025 om 10:17
+-- Serverversie: 8.0.40
+-- PHP-versie: 8.0.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `api_key`
+-- Tabelstructuur voor tabel `api_key`
 --
 
 CREATE TABLE `api_key` (
@@ -38,7 +38,7 @@ CREATE TABLE `api_key` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `api_key`
+-- Gegevens worden geëxporteerd voor tabel `api_key`
 --
 
 INSERT INTO `api_key` (`id`, `owner_id`, `label`, `credential_hash`, `last_ip`, `last_accessed`, `created`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `api_key` (`id`, `owner_id`, `label`, `credential_hash`, `last_ip`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asset`
+-- Tabelstructuur voor tabel `asset`
 --
 
 CREATE TABLE `asset` (
@@ -63,7 +63,7 @@ CREATE TABLE `asset` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bulk_export`
+-- Tabelstructuur voor tabel `bulk_export`
 --
 
 CREATE TABLE `bulk_export` (
@@ -79,7 +79,7 @@ CREATE TABLE `bulk_export` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bulk_exporter`
+-- Tabelstructuur voor tabel `bulk_exporter`
 --
 
 CREATE TABLE `bulk_exporter` (
@@ -91,7 +91,7 @@ CREATE TABLE `bulk_exporter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `bulk_exporter`
+-- Gegevens worden geëxporteerd voor tabel `bulk_exporter`
 --
 
 INSERT INTO `bulk_exporter` (`id`, `owner_id`, `label`, `writer`, `config`) VALUES
@@ -104,7 +104,7 @@ INSERT INTO `bulk_exporter` (`id`, `owner_id`, `label`, `writer`, `config`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `csvimport_entity`
+-- Tabelstructuur voor tabel `csvimport_entity`
 --
 
 CREATE TABLE `csvimport_entity` (
@@ -117,7 +117,7 @@ CREATE TABLE `csvimport_entity` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `csvimport_import`
+-- Tabelstructuur voor tabel `csvimport_import`
 --
 
 CREATE TABLE `csvimport_import` (
@@ -133,7 +133,7 @@ CREATE TABLE `csvimport_import` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_vocab`
+-- Tabelstructuur voor tabel `custom_vocab`
 --
 
 CREATE TABLE `custom_vocab` (
@@ -147,7 +147,7 @@ CREATE TABLE `custom_vocab` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `custom_vocab`
+-- Gegevens worden geëxporteerd voor tabel `custom_vocab`
 --
 
 INSERT INTO `custom_vocab` (`id`, `item_set_id`, `owner_id`, `label`, `lang`, `terms`, `uris`) VALUES
@@ -157,7 +157,7 @@ INSERT INTO `custom_vocab` (`id`, `item_set_id`, `owner_id`, `label`, `lang`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fulltext_search`
+-- Tabelstructuur voor tabel `fulltext_search`
 --
 
 CREATE TABLE `fulltext_search` (
@@ -170,7 +170,7 @@ CREATE TABLE `fulltext_search` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `fulltext_search`
+-- Gegevens worden geëxporteerd voor tabel `fulltext_search`
 --
 
 INSERT INTO `fulltext_search` (`id`, `resource`, `owner_id`, `is_public`, `title`, `text`) VALUES
@@ -182,7 +182,7 @@ INSERT INTO `fulltext_search` (`id`, `resource`, `owner_id`, `is_public`, `title
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hit`
+-- Tabelstructuur voor tabel `hit`
 --
 
 CREATE TABLE `hit` (
@@ -202,7 +202,7 @@ CREATE TABLE `hit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `hit`
+-- Gegevens worden geëxporteerd voor tabel `hit`
 --
 
 INSERT INTO `hit` (`id`, `url`, `entity_id`, `entity_name`, `site_id`, `user_id`, `ip`, `language`, `query`, `referrer`, `user_agent`, `accept_language`, `created`) VALUES
@@ -252,7 +252,7 @@ INSERT INTO `hit` (`id`, `url`, `entity_id`, `entity_name`, `site_id`, `user_id`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item`
+-- Tabelstructuur voor tabel `item`
 --
 
 CREATE TABLE `item` (
@@ -261,7 +261,7 @@ CREATE TABLE `item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `item`
+-- Gegevens worden geëxporteerd voor tabel `item`
 --
 
 INSERT INTO `item` (`id`, `primary_media_id`) VALUES
@@ -272,7 +272,7 @@ INSERT INTO `item` (`id`, `primary_media_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item_item_set`
+-- Tabelstructuur voor tabel `item_item_set`
 --
 
 CREATE TABLE `item_item_set` (
@@ -281,7 +281,7 @@ CREATE TABLE `item_item_set` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `item_item_set`
+-- Gegevens worden geëxporteerd voor tabel `item_item_set`
 --
 
 INSERT INTO `item_item_set` (`item_id`, `item_set_id`) VALUES
@@ -291,7 +291,7 @@ INSERT INTO `item_item_set` (`item_id`, `item_set_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item_set`
+-- Tabelstructuur voor tabel `item_set`
 --
 
 CREATE TABLE `item_set` (
@@ -300,7 +300,7 @@ CREATE TABLE `item_set` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `item_set`
+-- Gegevens worden geëxporteerd voor tabel `item_set`
 --
 
 INSERT INTO `item_set` (`id`, `is_open`) VALUES
@@ -309,7 +309,7 @@ INSERT INTO `item_set` (`id`, `is_open`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item_site`
+-- Tabelstructuur voor tabel `item_site`
 --
 
 CREATE TABLE `item_site` (
@@ -318,7 +318,7 @@ CREATE TABLE `item_site` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `item_site`
+-- Gegevens worden geëxporteerd voor tabel `item_site`
 --
 
 INSERT INTO `item_site` (`item_id`, `site_id`) VALUES
@@ -327,7 +327,7 @@ INSERT INTO `item_site` (`item_id`, `site_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `job`
+-- Tabelstructuur voor tabel `job`
 --
 
 CREATE TABLE `job` (
@@ -343,7 +343,7 @@ CREATE TABLE `job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `job`
+-- Gegevens worden geëxporteerd voor tabel `job`
 --
 
 INSERT INTO `job` (`id`, `owner_id`, `pid`, `status`, `class`, `args`, `log`, `started`, `ended`) VALUES
@@ -351,12 +351,13 @@ INSERT INTO `job` (`id`, `owner_id`, `pid`, `status`, `class`, `args`, `log`, `s
 (2, 1, '41', 'completed', 'AdvancedSearch\\Job\\IndexSearch', '{\"search_engine_id\":2,\"start_resource_id\":1,\"resource_names\":[\"items\"],\"force\":false}', '2023-02-28T14:44:24+00:00 NOTICE (5): Search index #2 (\"Solr\"): start of indexing\n2023-02-28T14:44:24+00:00 INFO (6): Search index is not cleared: reindexing starts at resource #1.\n2023-02-28T14:44:24+00:00 INFO (6): Indexing in Solr core \"Default\": item #1\n2023-02-28T14:44:24+00:00 INFO (6): Search index #2 (\"Solr\"): end of indexing. items: 1 indexed. Execution time: 0 seconds. Failed indexed resources should be checked manually.\n', '2023-02-28 14:44:23', '2023-02-28 14:44:24'),
 (3, 1, '165', 'completed', 'AdvancedSearch\\Job\\IndexSearch', '{\"search_engine_ids\":[2],\"clear_index\":false,\"start_resource_id\":1,\"resources_by_batch\":500,\"sleep_after_loop\":0,\"resource_types\":[\"items\"],\"resources_limit\":0,\"resources_offset\":0,\"visibility\":null,\"force\":false}', NULL, '2025-07-10 14:52:46', '2025-07-10 14:52:47'),
 (4, 1, '181', 'completed', 'Omeka\\Job\\BatchDelete', '{\"resource\":\"logs\",\"query\":{\"sort_by_default\":\"\",\"sort_order_default\":\"\",\"message\":[]}}', NULL, '2025-07-10 14:57:58', '2025-07-10 14:57:58'),
-(5, 1, '163', 'completed', 'AdvancedSearch\\Job\\IndexSearch', '{\"search_engine_ids\":[2],\"clear_index\":false,\"start_resource_id\":1,\"resources_by_batch\":500,\"sleep_after_loop\":0,\"resource_types\":[\"items\"],\"resources_limit\":0,\"resources_offset\":0,\"visibility\":null,\"force\":false}', NULL, '2025-09-29 13:43:46', '2025-09-29 13:43:46');
+(5, 1, '163', 'completed', 'AdvancedSearch\\Job\\IndexSearch', '{\"search_engine_ids\":[2],\"clear_index\":false,\"start_resource_id\":1,\"resources_by_batch\":500,\"sleep_after_loop\":0,\"resource_types\":[\"items\"],\"resources_limit\":0,\"resources_offset\":0,\"visibility\":null,\"force\":false}', NULL, '2025-09-29 13:43:46', '2025-09-29 13:43:46'),
+(6, 1, '162', 'completed', 'Log\\Job\\ArchiveLogsJob', '{\"seconds\":7776000,\"severity\":0,\"references\":[],\"store\":false,\"format\":\"tsv\",\"compress\":true,\"include_id\":false,\"translate\":true,\"delete\":true}', NULL, '2025-12-09 10:16:49', '2025-12-09 10:16:49');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `log`
+-- Tabelstructuur voor tabel `log`
 --
 
 CREATE TABLE `log` (
@@ -371,7 +372,7 @@ CREATE TABLE `log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `log`
+-- Gegevens worden geëxporteerd voor tabel `log`
 --
 
 INSERT INTO `log` (`id`, `owner_id`, `job_id`, `reference`, `severity`, `message`, `context`, `created`) VALUES
@@ -380,12 +381,14 @@ INSERT INTO `log` (`id`, `owner_id`, `job_id`, `reference`, `severity`, `message
 (19, 1, 5, 'search/index/job_5', 6, 'Indexing in Solr core \"{solr_core}\": {ids}', '{\"solr_core\":\"Default\",\"ids\":\"item #1, item #3, item #4\"}', '2025-09-29 13:43:46'),
 (20, 1, 5, 'search/index/job_5', 6, 'Search index #{search_engine_id} (\"{name}\"): end of indexing. {results}. Execution time: {duration} seconds. Failed indexed resources should be checked manually.', '{\"search_engine_id\":2,\"name\":\"Solr\",\"results\":\"items: 3 indexed\",\"duration\":0}', '2025-09-29 13:43:46'),
 (21, 1, 5, 'search/index/job_5', 6, 'End of indexing. Execution time: {duration} seconds. Max memory: {memory}. Failed indexed resources should be checked manually.', '{\"duration\":0,\"memory\":29360128}', '2025-09-29 13:43:46'),
-(22, 1, NULL, '', 3, 'Omeka\\Api\\Exception\\NotFoundException: Omeka\\Entity\\Item entity with criteria {\"id\":\"5\"} not found in /var/www/html/application/src/Api/Adapter/AbstractEntityAdapter.php:722\nStack trace:\n#0 /var/www/html/application/src/Api/Adapter/AbstractEntityAdapter.php(440): Omeka\\Api\\Adapter\\AbstractEntityAdapter->findEntity(Array, Object(Omeka\\Api\\Request))\n#1 /var/www/html/application/src/Api/Manager.php(230): Omeka\\Api\\Adapter\\AbstractEntityAdapter->read(Object(Omeka\\Api\\Request))\n#2 /var/www/html/application/src/Api/Manager.php(115): Omeka\\Api\\Manager->execute(Object(Omeka\\Api\\Request))\n#3 /var/www/html/application/src/Mvc/Controller/Plugin/Api.php(136): Omeka\\Api\\Manager->read(\'items\', \'5\', Array, Array)\n#4 /var/www/html/application/src/Controller/Admin/ItemController.php(69): Omeka\\Mvc\\Controller\\Plugin\\Api->read(\'items\', \'5\')\n#5 /var/www/html/vendor/laminas/laminas-mvc/src/Controller/AbstractActionController.php(71): Omeka\\Controller\\Admin\\ItemController->showAction()\n#6 /var/www/html/vendor/laminas/laminas-eventmanager/src/EventManager.php(319): Laminas\\Mvc\\Controller\\AbstractActionController->onDispatch(Object(Laminas\\Mvc\\MvcEvent))\n#7 /var/www/html/vendor/laminas/laminas-eventmanager/src/EventManager.php(179): Laminas\\EventManager\\EventManager->triggerListeners(Object(Laminas\\Mvc\\MvcEvent), Object(Closure))\n#8 /var/www/html/vendor/laminas/laminas-mvc/src/Controller/AbstractController.php(97): Laminas\\EventManager\\EventManager->triggerEventUntil(Object(Closure), Object(Laminas\\Mvc\\MvcEvent))\n#9 /var/www/html/vendor/laminas/laminas-mvc/src/DispatchListener.php(132): Laminas\\Mvc\\Controller\\AbstractController->dispatch(Object(Laminas\\Http\\PhpEnvironment\\Request), Object(Laminas\\Http\\PhpEnvironment\\Response))\n#10 /var/www/html/vendor/laminas/laminas-eventmanager/src/EventManager.php(319): Laminas\\Mvc\\DispatchListener->onDispatch(Object(Laminas\\Mvc\\MvcEvent))\n#11 /var/www/html/vendor/laminas/laminas-eventmanager/src/EventManager.php(179): Laminas\\EventManager\\EventManager->triggerListeners(Object(Laminas\\Mvc\\MvcEvent), Object(Closure))\n#12 /var/www/html/vendor/laminas/laminas-mvc/src/Application.php(325): Laminas\\EventManager\\EventManager->triggerEventUntil(Object(Closure), Object(Laminas\\Mvc\\MvcEvent))\n#13 /var/www/html/index.php(21): Laminas\\Mvc\\Application->run()\n#14 {main}', '[]', '2025-11-20 15:00:40');
+(22, 1, NULL, '', 3, 'Omeka\\Api\\Exception\\NotFoundException: Omeka\\Entity\\Item entity with criteria {\"id\":\"5\"} not found in /var/www/html/application/src/Api/Adapter/AbstractEntityAdapter.php:722\nStack trace:\n#0 /var/www/html/application/src/Api/Adapter/AbstractEntityAdapter.php(440): Omeka\\Api\\Adapter\\AbstractEntityAdapter->findEntity(Array, Object(Omeka\\Api\\Request))\n#1 /var/www/html/application/src/Api/Manager.php(230): Omeka\\Api\\Adapter\\AbstractEntityAdapter->read(Object(Omeka\\Api\\Request))\n#2 /var/www/html/application/src/Api/Manager.php(115): Omeka\\Api\\Manager->execute(Object(Omeka\\Api\\Request))\n#3 /var/www/html/application/src/Mvc/Controller/Plugin/Api.php(136): Omeka\\Api\\Manager->read(\'items\', \'5\', Array, Array)\n#4 /var/www/html/application/src/Controller/Admin/ItemController.php(69): Omeka\\Mvc\\Controller\\Plugin\\Api->read(\'items\', \'5\')\n#5 /var/www/html/vendor/laminas/laminas-mvc/src/Controller/AbstractActionController.php(71): Omeka\\Controller\\Admin\\ItemController->showAction()\n#6 /var/www/html/vendor/laminas/laminas-eventmanager/src/EventManager.php(319): Laminas\\Mvc\\Controller\\AbstractActionController->onDispatch(Object(Laminas\\Mvc\\MvcEvent))\n#7 /var/www/html/vendor/laminas/laminas-eventmanager/src/EventManager.php(179): Laminas\\EventManager\\EventManager->triggerListeners(Object(Laminas\\Mvc\\MvcEvent), Object(Closure))\n#8 /var/www/html/vendor/laminas/laminas-mvc/src/Controller/AbstractController.php(97): Laminas\\EventManager\\EventManager->triggerEventUntil(Object(Closure), Object(Laminas\\Mvc\\MvcEvent))\n#9 /var/www/html/vendor/laminas/laminas-mvc/src/DispatchListener.php(132): Laminas\\Mvc\\Controller\\AbstractController->dispatch(Object(Laminas\\Http\\PhpEnvironment\\Request), Object(Laminas\\Http\\PhpEnvironment\\Response))\n#10 /var/www/html/vendor/laminas/laminas-eventmanager/src/EventManager.php(319): Laminas\\Mvc\\DispatchListener->onDispatch(Object(Laminas\\Mvc\\MvcEvent))\n#11 /var/www/html/vendor/laminas/laminas-eventmanager/src/EventManager.php(179): Laminas\\EventManager\\EventManager->triggerListeners(Object(Laminas\\Mvc\\MvcEvent), Object(Closure))\n#12 /var/www/html/vendor/laminas/laminas-mvc/src/Application.php(325): Laminas\\EventManager\\EventManager->triggerEventUntil(Object(Closure), Object(Laminas\\Mvc\\MvcEvent))\n#13 /var/www/html/index.php(21): Laminas\\Mvc\\Application->run()\n#14 {main}', '[]', '2025-11-20 15:00:40'),
+(23, 1, 6, 'easy-admin/check/job_6', 5, 'Delete specified logs older than {date_time} with params: severity = {severity}; reference = {references}.', '{\"date_time\":\"2025-09-10 10:16:49\",\"severity\":\"-\",\"references\":\"-\"}', '2025-12-09 10:16:49'),
+(24, 1, 6, 'easy-admin/check/job_6', 5, 'No logs found matching criteria.', '[]', '2025-12-09 10:16:49');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `media`
+-- Tabelstructuur voor tabel `media`
 --
 
 CREATE TABLE `media` (
@@ -410,7 +413,7 @@ CREATE TABLE `media` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migration`
+-- Tabelstructuur voor tabel `migration`
 --
 
 CREATE TABLE `migration` (
@@ -418,7 +421,7 @@ CREATE TABLE `migration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migration`
+-- Gegevens worden geëxporteerd voor tabel `migration`
 --
 
 INSERT INTO `migration` (`version`) VALUES
@@ -461,7 +464,7 @@ INSERT INTO `migration` (`version`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `module`
+-- Tabelstructuur voor tabel `module`
 --
 
 CREATE TABLE `module` (
@@ -471,22 +474,22 @@ CREATE TABLE `module` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `module`
+-- Gegevens worden geëxporteerd voor tabel `module`
 --
 
 INSERT INTO `module` (`id`, `is_active`, `version`) VALUES
-('AdvancedSearch', 1, '3.4.53'),
+('AdvancedSearch', 1, '3.4.54'),
 ('ArchiveRepertory', 1, '3.15.17'),
 ('Ark', 1, '3.5.15'),
 ('BlockPlus', 1, '3.4.42'),
 ('BlocksDisposition', 1, '3.4.5'),
-('BulkEdit', 1, '3.4.36'),
+('BulkEdit', 1, '3.4.37'),
 ('BulkExport', 1, '3.4.37'),
-('Common', 1, '3.4.73'),
+('Common', 1, '3.4.74'),
 ('CreateMissingThumbnails', 1, '0.3.0'),
 ('CSVImport', 1, '2.6.2'),
 ('CustomVocab', 1, '2.0.2'),
-('EasyAdmin', 1, '3.4.36'),
+('EasyAdmin', 1, '3.4.37'),
 ('EUCookieBar', 1, '3.4.5'),
 ('ExtractText', 1, '2.1.0'),
 ('FileSideload', 1, '1.7.1'),
@@ -494,13 +497,13 @@ INSERT INTO `module` (`id`, `is_active`, `version`) VALUES
 ('IiifSearch', 1, '3.4.8'),
 ('IiifServer', 1, '3.6.26'),
 ('ImageServer', 1, '3.6.20'),
-('Log', 1, '3.4.32'),
+('Log', 1, '3.4.33'),
 ('Mirador', 1, '3.4.10'),
 ('ModelViewer', 1, '3.3.0.7-132'),
 ('NdeTermennetwerk', 1, '1.4.0'),
 ('NumericDataTypes', 1, '1.13.0'),
 ('PdfViewer', 1, '3.4.4'),
-('SearchSolr', 1, '3.5.60'),
+('SearchSolr', 0, '3.5.60'),
 ('Sitemaps', 1, '1.1'),
 ('Statistics', 1, '3.4.11'),
 ('UniversalViewer', 1, '3.6.11-4.2.1'),
@@ -509,7 +512,7 @@ INSERT INTO `module` (`id`, `is_active`, `version`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `numeric_data_types_duration`
+-- Tabelstructuur voor tabel `numeric_data_types_duration`
 --
 
 CREATE TABLE `numeric_data_types_duration` (
@@ -522,7 +525,7 @@ CREATE TABLE `numeric_data_types_duration` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `numeric_data_types_integer`
+-- Tabelstructuur voor tabel `numeric_data_types_integer`
 --
 
 CREATE TABLE `numeric_data_types_integer` (
@@ -535,7 +538,7 @@ CREATE TABLE `numeric_data_types_integer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `numeric_data_types_interval`
+-- Tabelstructuur voor tabel `numeric_data_types_interval`
 --
 
 CREATE TABLE `numeric_data_types_interval` (
@@ -549,7 +552,7 @@ CREATE TABLE `numeric_data_types_interval` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `numeric_data_types_timestamp`
+-- Tabelstructuur voor tabel `numeric_data_types_timestamp`
 --
 
 CREATE TABLE `numeric_data_types_timestamp` (
@@ -562,7 +565,7 @@ CREATE TABLE `numeric_data_types_timestamp` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_creation`
+-- Tabelstructuur voor tabel `password_creation`
 --
 
 CREATE TABLE `password_creation` (
@@ -575,7 +578,7 @@ CREATE TABLE `password_creation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `property`
+-- Tabelstructuur voor tabel `property`
 --
 
 CREATE TABLE `property` (
@@ -588,7 +591,7 @@ CREATE TABLE `property` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `property`
+-- Gegevens worden geëxporteerd voor tabel `property`
 --
 
 INSERT INTO `property` (`id`, `owner_id`, `vocabulary_id`, `local_name`, `label`, `comment`) VALUES
@@ -2751,7 +2754,7 @@ INSERT INTO `property` (`id`, `owner_id`, `vocabulary_id`, `local_name`, `label`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resource`
+-- Tabelstructuur voor tabel `resource`
 --
 
 CREATE TABLE `resource` (
@@ -2768,7 +2771,7 @@ CREATE TABLE `resource` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `resource`
+-- Gegevens worden geëxporteerd voor tabel `resource`
 --
 
 INSERT INTO `resource` (`id`, `owner_id`, `resource_class_id`, `resource_template_id`, `thumbnail_id`, `title`, `is_public`, `created`, `modified`, `resource_type`) VALUES
@@ -2780,7 +2783,7 @@ INSERT INTO `resource` (`id`, `owner_id`, `resource_class_id`, `resource_templat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resource_class`
+-- Tabelstructuur voor tabel `resource_class`
 --
 
 CREATE TABLE `resource_class` (
@@ -2793,7 +2796,7 @@ CREATE TABLE `resource_class` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `resource_class`
+-- Gegevens worden geëxporteerd voor tabel `resource_class`
 --
 
 INSERT INTO `resource_class` (`id`, `owner_id`, `vocabulary_id`, `local_name`, `label`, `comment`) VALUES
@@ -4084,7 +4087,7 @@ INSERT INTO `resource_class` (`id`, `owner_id`, `vocabulary_id`, `local_name`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resource_template`
+-- Tabelstructuur voor tabel `resource_template`
 --
 
 CREATE TABLE `resource_template` (
@@ -4097,7 +4100,7 @@ CREATE TABLE `resource_template` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `resource_template`
+-- Gegevens worden geëxporteerd voor tabel `resource_template`
 --
 
 INSERT INTO `resource_template` (`id`, `owner_id`, `resource_class_id`, `title_property_id`, `description_property_id`, `label`) VALUES
@@ -4118,7 +4121,7 @@ INSERT INTO `resource_template` (`id`, `owner_id`, `resource_class_id`, `title_p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resource_template_property`
+-- Tabelstructuur voor tabel `resource_template_property`
 --
 
 CREATE TABLE `resource_template_property` (
@@ -4135,7 +4138,7 @@ CREATE TABLE `resource_template_property` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `resource_template_property`
+-- Gegevens worden geëxporteerd voor tabel `resource_template_property`
 --
 
 INSERT INTO `resource_template_property` (`id`, `resource_template_id`, `property_id`, `alternate_label`, `alternate_comment`, `position`, `data_type`, `is_required`, `is_private`, `default_lang`) VALUES
@@ -4331,7 +4334,7 @@ INSERT INTO `resource_template_property` (`id`, `resource_template_id`, `propert
 -- --------------------------------------------------------
 
 --
--- Table structure for table `search_config`
+-- Tabelstructuur voor tabel `search_config`
 --
 
 CREATE TABLE `search_config` (
@@ -4346,7 +4349,7 @@ CREATE TABLE `search_config` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `search_config`
+-- Gegevens worden geëxporteerd voor tabel `search_config`
 --
 
 INSERT INTO `search_config` (`id`, `engine_id`, `name`, `slug`, `form_adapter`, `settings`, `created`, `modified`) VALUES
@@ -4355,7 +4358,7 @@ INSERT INTO `search_config` (`id`, `engine_id`, `name`, `slug`, `form_adapter`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `search_engine`
+-- Tabelstructuur voor tabel `search_engine`
 --
 
 CREATE TABLE `search_engine` (
@@ -4368,7 +4371,7 @@ CREATE TABLE `search_engine` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `search_engine`
+-- Gegevens worden geëxporteerd voor tabel `search_engine`
 --
 
 INSERT INTO `search_engine` (`id`, `name`, `adapter`, `settings`, `created`, `modified`) VALUES
@@ -4378,7 +4381,7 @@ INSERT INTO `search_engine` (`id`, `name`, `adapter`, `settings`, `created`, `mo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `search_suggester`
+-- Tabelstructuur voor tabel `search_suggester`
 --
 
 CREATE TABLE `search_suggester` (
@@ -4391,7 +4394,7 @@ CREATE TABLE `search_suggester` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `search_suggester`
+-- Gegevens worden geëxporteerd voor tabel `search_suggester`
 --
 
 INSERT INTO `search_suggester` (`id`, `engine_id`, `name`, `settings`, `created`, `modified`) VALUES
@@ -4400,7 +4403,7 @@ INSERT INTO `search_suggester` (`id`, `engine_id`, `name`, `settings`, `created`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `search_suggestion`
+-- Tabelstructuur voor tabel `search_suggestion`
 --
 
 CREATE TABLE `search_suggestion` (
@@ -4414,7 +4417,7 @@ CREATE TABLE `search_suggestion` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `session`
+-- Tabelstructuur voor tabel `session`
 --
 
 CREATE TABLE `session` (
@@ -4424,16 +4427,16 @@ CREATE TABLE `session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `session`
+-- Gegevens worden geëxporteerd voor tabel `session`
 --
 
 INSERT INTO `session` (`id`, `data`, `modified`) VALUES
-('eb47a422ac72227260b1aa77e72c50ae', 0x5f5f4c616d696e61737c613a353a7b733a32303a225f524551554553545f4143434553535f54494d45223b643a313736333635303837362e3532303433383b733a363a225f56414c4944223b613a313a7b733a32383a224c616d696e61735c53657373696f6e5c56616c696461746f725c4964223b733a33323a226332653431633936663966393239613136363233613136656164386338656135223b7d733a34323a224c616d696e61735f56616c696461746f725f437372665f73616c745f6c6f67696e666f726d5f63737266223b613a313a7b733a363a22455850495245223b693a313736333639343033353b7d733a33323a224c616d696e61735f56616c696461746f725f437372665f73616c745f63737266223b613a313a7b733a363a22455850495245223b693a313736333639343037363b7d733a36303a224c616d696e61735f56616c696461746f725f437372665f73616c745f6d6f64756c655f496969665365727665725f636f6e6669677572655f63737266223b613a313a7b733a363a22455850495245223b693a313736333639343036373b7d7d72656469726563745f75726c7c733a33313a22687474703a2f2f6f6d656b612e6c6f63616c2f61646d696e2f6974656d2f35223b4c616d696e61735f56616c696461746f725f437372665f73616c745f6c6f67696e666f726d5f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a223939356331353838613361366235616263653564376531386135373036656535223b733a33323a223930346233343266353839353031333130303832386332623166633963343665223b7d733a343a2268617368223b733a36353a2239303462333432663538393530313331303038323863326231666339633436652d3939356331353838613361366235616263653564376531386135373036656535223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f417574687c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a313a7b733a373a2273746f72616765223b693a313b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4f6d656b614d657373656e6765727c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a303a7b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a39313a7b733a33323a223139626664396562393064383630633765643439346639663239613761396361223b733a33323a226364333737626339366666653630666565353530333136636363313062396139223b733a33323a226439626134383236363930313762363631353766643432383662393666336635223b733a33323a223336353338633337326131393333383961373461336538343733353364633437223b733a33323a223362333563343366386662306664373465313663663533646432666265633964223b733a33323a226165633661636437613466383338303633633365393563373735356166343637223b733a33323a223666646531313966616534306165396639356563316533363765303263313739223b733a33323a223562646563306562343232623132653737626530646166386363383333383331223b733a33323a223532623365343239613730326434316161663132343165643538383438616234223b733a33323a226138316263646463356336663538656264336564643538643863353361326130223b733a33323a223439653664383865616136646265613661373832353164613065363637376431223b733a33323a223764306638633961323862333462336632333434353561373466303063306338223b733a33323a223334323935366331336534383137383064393130366335333930333865653238223b733a33323a223531346262373530643435646164656330356134326136313638616632653965223b733a33323a223364366166316262383365336436303165643331393466623030643035303734223b733a33323a223836393436383435386163656261336366323161306165383837663034373430223b733a33323a223731663035623337646431313831613738346162386132316565363933323262223b733a33323a226232373362656136396136643662353361333139393863633830613339346464223b733a33323a223031393636316265343439623832313265316137326661373862663836356665223b733a33323a223464383137613264613964663366666239666364396538356661313435636465223b733a33323a226535356234366664663234653838626238643532313965343465663738656131223b733a33323a223332373431333630616535303238393734663564383830643664333961323735223b733a33323a223437306261626465303639383861646164653537383430313237626638366330223b733a33323a226138313630383362616438393263323136616565633630353638363163363836223b733a33323a226537363566353436623739356430386666386436666564393539613131306530223b733a33323a223365323765646265306666616263376264663936393836373738356339613432223b733a33323a223736313363666632343432626239653566393730383266336131353063653336223b733a33323a223932633533393736663939333233366637313333653135316164633164313335223b733a33323a223966386439343163636361623430633462376232316531663131346462386562223b733a33323a223733343964353462366437396166336262323164376430656437396131323135223b733a33323a223462326361613439306232643964663134653663623130396336353839656530223b733a33323a226665643938663736383062633230326461383839356565393334336366326639223b733a33323a223739386463623162643331366466663237653965376363626536633538623539223b733a33323a223939643233633866653362623062343436626262323637623434656561326330223b733a33323a226264343163613761393435316166666564626264336238663736653164373434223b733a33323a226239653439323831333435363065626137633835343230653361306232653531223b733a33323a223032666433316133326562616366656661316639383564373032666236303130223b733a33323a223461346264373565613037623534363435626465303165396261336666663965223b733a33323a226136613362613737393639626631643164373430363637353764333832613961223b733a33323a223064373565373231316537353536623766333064356163313633383939346339223b733a33323a223635323633636634353832663230376634326264653365623833343238323530223b733a33323a226461636362636233636361363830323531396139333665656333616239363039223b733a33323a223936636630636466393630623234386162393738323934333439393736343039223b733a33323a223464316636613235616339316264343436633664323465333430343830653134223b733a33323a223363343863653232666262383037666465326164396666666432383230386463223b733a33323a223233656339336438343031656664343764646135373436653036303863376631223b733a33323a223439333934653061663635613662343463383466303039353933613335373063223b733a33323a226239636237376639326638613466616561333462663031666535376361316266223b733a33323a223663363131396231323031313534613561613436316636336465646630633065223b733a33323a223338303633343134643832653433393734363839303565643631343766366162223b733a33323a226537316266656464323763623730636337353264326664396635623464306632223b733a33323a226430363732383535613866373432623738643831353865316530636630343935223b733a33323a223562663738346262376131366432373337336132323562613039386635653838223b733a33323a226438626235343239306134626635353636306339613236363934646339653832223b733a33323a226334383735643965323931373437363761376364303863393435623138393564223b733a33323a226133616436663339646232313738363433396364353434626566636561336133223b733a33323a226163313031373231613939623230396230376236303037323636356631363663223b733a33323a223133303639376565643131666633383931303464646436333762633932653538223b733a33323a223939616635336236386366343862636636303964343665303931383066323636223b733a33323a226231656631646131326165376431363663316665313538653162303132303432223b733a33323a226437343633343639323035373635313635383462666138353131663935346166223b733a33323a223436346463386130323531373562393464343035393064383338313961383134223b733a33323a223037396430386661393238343034383563336231393862343161343165393134223b733a33323a223662383032613230626537356434626238306533363137613737383039303561223b733a33323a223537356430643161343930643538356462653838313131623135343363316661223b733a33323a226333316565336433643639306639333332633663313963633733396539386439223b733a33323a226665316663306662346264613636356536616432663130623837313734616465223b733a33323a223130343938656264396430633531363764633362613631353434373863303464223b733a33323a223632333634393863373937393631663861656362643566356630363463393439223b733a33323a223964323839613736646563326365383330386666396565616366366530393138223b733a33323a226232636533643335646238666565353563363762353764396532306537643861223b733a33323a223562636337643333383538393837613166393463333339653933323838636663223b733a33323a226530313531303835666161636432616339313031336139616330316265386335223b733a33323a226361373034303332393830346638383561366364346330323565303633343664223b733a33323a226639656361393038386134313531356239326137643930666430633034363365223b733a33323a223736633063663966666562323865613466373163383466643962363831396633223b733a33323a223538386632353133623237373630303365396534663832343830323931396135223b733a33323a223931326663393239373532336262323636623737666363303363656230346534223b733a33323a223832616535626165353535623263333366316139366163333831353239343964223b733a33323a223431316131633439336633633633373830663239323661633431623431613036223b733a33323a226338336430373032343663313361316238313762373134643162353635623362223b733a33323a223837386133383632353333326439633063383333376366376339623865653833223b733a33323a223134363735313266373263343236346538363837653933386266353430363331223b733a33323a223136633336303530613030323337306165613963356135306336643236373731223b733a33323a226665366362383932633466393133316539353436623165363761653131636139223b733a33323a223265373833336137653464353132666265393435386231386165306465373263223b733a33323a226236323865313530363834343365303232626635626539333337326333326330223b733a33323a223264333139613362346330343230356533356338363135616439653565653164223b733a33323a223130636665363664343939626239393731393565393363656365373563666532223b733a33323a223934313439333365393362646433306133326438323964323933356230346563223b733a33323a223761313565616438386434313264356438346330333830343239343162396533223b733a33323a226636643862386439663963643832326366343561346361373361653633656436223b733a33323a226462333933326232623938356463623231313730646338336232366133326334223b733a33323a226338356435333934633339383533323836636234313237346537313838363331223b733a33323a226636386434303336333833633235343733393735643138336165363164653833223b733a33323a223264383731646163656337303464393034366362613638663363326561663364223b733a33323a223762306533653038323438666166666365356339383863616434623438303764223b733a33323a223864633133333337663438633134373131343963306461663937343466383764223b733a33323a223434636362343938356365666534643539346338366637653639373261633933223b733a33323a223462373134396130373836313064353464373736646534356532306363643366223b733a33323a223730373031316235336538366131326135626661623731333937376534616339223b733a33323a223531613934326130346335376263666533306264323261633836636235616439223b733a33323a226364356161303865386361313366333830623035613137326466306635323635223b733a33323a223335306366626437613732316131396333303563303962366632373334636362223b733a33323a223134343230396333613461313533376661653239613165316434613830373539223b733a33323a223134623066383239303933336564636332393234383933353231363965666534223b733a33323a223734373931356563366262346462376433383831353938303130386364356162223b733a33323a223434376363323630633338633866316237386461326132313034623435363036223b733a33323a223562643163663763306662306265383230383431656139353562306534333066223b733a33323a223639323263363834626265663834323831633866303734656463643339396366223b733a33323a223862653964633561336164663039653835623031623739306365643236313030223b733a33323a223831636530636332373863663930636632656163313530303734353232336438223b733a33323a223461373531393034383836663266396630306335316438636631313038393231223b733a33323a226166396165373363333962323064386435323861616263366437326336643665223b733a33323a223233623132373935313233663234326462376333656565346339316531613062223b733a33323a226430343561363636376438643230636261636163373764346537613139373762223b733a33323a223037393133343439613939373933373832656561363134333361346230306338223b733a33323a223030386165623838663533383563326666633335386430613034373231393164223b733a33323a226562613736663266316539326439373464383938303231623031366435323363223b733a33323a223461376430613836663337663164653032646136376438373737643734303939223b733a33323a226238353239376535373330353535396439323232383934363130663330626365223b733a33323a226130353537363965663434646661393632626466313665616664376137316230223b733a33323a226235356439393832613838373730316237323964646665393130633766383838223b733a33323a226464633637316461313964636631613538623462346331633964313434373631223b733a33323a223864363936373434393566666434336263623939363865646161343230383162223b733a33323a226662363563336561343634333132306665303534336565663330666434626535223b733a33323a226233613536306334626336306435633666386165626238396164336538323037223b733a33323a226635336337376434353539396461363266616563626161336261346339366565223b733a33323a223664643461646532653836356236333561623136623235393236306366346263223b733a33323a223531393061323965646239373334643034646631363932323834633330663835223b733a33323a223237356361303739306631386532376630323231373836373637383636373739223b733a33323a223462353937353638656564626632383066613532386630666632353233623335223b733a33323a223762633839396561306564373235333436616233643365303034623333346333223b733a33323a223364353863666335613230626238623438393465373839353039326635313338223b733a33323a223263326537343237623837613631663032636563393032363637313263336632223b733a33323a223836313761326561393232326665643738623339373565303466636232323533223b733a33323a226339303932393737353832333533363464323965316234323030633831616665223b733a33323a223630383236386532653532366164306337333732333939396337613364626463223b733a33323a226562653161616661636433363935356432653434656634313530313239653038223b733a33323a226131336666623936666261383137313531343533306637653130333232633935223b733a33323a226136376338383137646336323936316137306663373937303731643430656137223b733a33323a226237376164623031303032626431393434363733396266613438653763376435223b733a33323a223965653236363837316337663861366630613862373432303034333439373765223b733a33323a226135386338363539333161663065343835653739313431393238643361323930223b733a33323a223332383461393432643665616239336562666566396666336632326362633362223b733a33323a226531336633373763653037643639666537613562346166386564396133616666223b733a33323a223963323231346330383431396161623430623731353764623261373466396261223b733a33323a223165386233323737326437336366616565303437353739316131663834373332223b733a33323a226635386362643066633736393737316330346639613439343935333861633266223b733a33323a223162653435303064363662616335653436323834396433663630323566393238223b733a33323a226331653733643462363961353337666662386266393930373662373234356331223b733a33323a223834336465346162343833636363386139323831663162653936626266613861223b733a33323a223030346663386661663837313965326235663664616662353636323633316431223b733a33323a226332303862346561353531616561386337306630363633376632313236633031223b733a33323a223539666230376438613036323562306562353632393732333561353436353861223b733a33323a223539323065383830323135303834663435623934316431343038626434613165223b733a33323a223939663565376239333761343064373765633433343862653065373131616338223b733a33323a223961653138663530363139323665353763303634663232316535353465393962223b733a33323a226430373833383036396432373539633865383137623032303163343663653565223b733a33323a226565333866313732326239306135346462356263366332303133363235373732223b733a33323a223439306532383639633464666334306564336137326533616264346138666362223b733a33323a226562623835626565373464333038396635363430386265383132323135383762223b733a33323a223235386436306462646631306133366433393735333736323964643034353835223b733a33323a223263643137333838383338386638653135663437626137323337313631336336223b733a33323a223161353231313230396634663565613932313332323231626163613335643432223b733a33323a223731396264353561363961663935323339386239613361623134633032303830223b733a33323a223130396139386637623636393037343037333734336566643038366337326533223b733a33323a226332373335373234313036303734303835336336393832333835393131626562223b733a33323a223665663137366465646131623463643336646131303265393433323733633533223b733a33323a223432373539643334303539623938343630616239323431316366373930396431223b733a33323a223531336436643235393038313864626266636366326566666338376234343636223b733a33323a223530636130666130343364373662626230396339633936363830346263623266223b733a33323a226562373230643162353532626165616664663433373032303961626664326433223b733a33323a223337333463306433306263633732396464316532343165303566396235613763223b733a33323a226265666631373830306262393863636466613563623733626462643066646265223b733a33323a226238623162363331646163386163343536336561333965386331393037393164223b733a33323a226330343132376539306337333533623733643462336163633166303365383838223b733a33323a223134646530363237653839623562343339633564333333613665653664353261223b733a33323a226438363331343263303433363833663564316131316337366538326634383138223b733a33323a226362653432383537316361653064636330646434303933633731623063393562223b733a33323a223530623365323661373362643831653734656332633936396233323032343639223b733a33323a223737623166386163363334623937383932313036633633653561616366336566223b7d733a343a2268617368223b733a36353a2237376231663861633633346239373839323130366336336535616163663365662d3530623365323661373362643831653734656332633936396233323032343639223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f6d6f64756c655f496969665365727665725f636f6e6669677572655f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a226335373034323266353535313530616330366338323734303462393033393636223b733a33323a226464376336396436613366396338623062323231616436306532306630616135223b7d733a343a2268617368223b733a36353a2264643763363964366133663963386230623232316164363065323066306161352d6335373034323266353535313530616330366338323734303462393033393636223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d, 1763650876);
+('c80121d83c2820ba8a161d72c4cbcf49', 0x5f5f4c616d696e61737c613a353a7b733a32303a225f524551554553545f4143434553535f54494d45223b643a313736353237353431302e30363236313b733a363a225f56414c4944223b613a313a7b733a32383a224c616d696e61735c53657373696f6e5c56616c696461746f725c4964223b733a33323a223032643936663032336336616363616661656165643765353931323464306131223b7d733a34323a224c616d696e61735f56616c696461746f725f437372665f73616c745f6c6f67696e666f726d5f63737266223b613a313a7b733a363a22455850495245223b693a313736353331383431373b7d733a33323a224c616d696e61735f56616c696461746f725f437372665f73616c745f63737266223b613a313a7b733a363a22455850495245223b693a313736353331383630393b7d733a35333a224c616d696e61735f56616c696461746f725f437372665f73616c745f6d6f64756c655f4c6f675f636f6e6669677572655f63737266223b613a313a7b733a363a22455850495245223b693a313736353331383435363b7d7d72656469726563745f75726c7c733a33313a22687474703a2f2f6f6d656b612e6c6f63616c2f61646d696e2f6d6f64756c65223b4c616d696e61735f56616c696461746f725f437372665f73616c745f6c6f67696e666f726d5f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a223566623731353435626262316161306330653737613832343137363131356538223b733a33323a223132306130623033353536333163613166656337303865643235313134326633223b7d733a343a2268617368223b733a36353a2231323061306230333535363331636131666563373038656432353131343266332d3566623731353435626262316161306330653737613832343137363131356538223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f417574687c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a313a7b733a373a2273746f72616765223b693a313b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4f6d656b614d657373656e6765727c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a303a7b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a3231313a7b733a33323a223630383138616237373735336636303939383430336230633031626466343737223b733a33323a223461616462313265343463663537366433616335623537633639623236346337223b733a33323a223132356534636663313333333565343230643836333931646464353265326361223b733a33323a223431643161363730653533643534363966383633616532366330383336303733223b733a33323a223032666163633062373531323061306231613463373732376166623864633661223b733a33323a223832643839363939316266393631303131353466626234366434386531373039223b733a33323a223734333737303362393933363965313936346264333837343537313966333964223b733a33323a226265396231663166326464646633623161383437313132303637323565363634223b733a33323a223066333438376362613139346138663537383636363530653738343634363063223b733a33323a226466343035656539636331373637653239633333323233363134636663393738223b733a33323a226437346536333835623466333939376233313339393130363435626661383332223b733a33323a223630313130663264366435656664386631363765633866646362316462313433223b733a33323a226633636231313831616231316531323963653636316138316132356462623138223b733a33323a223866356162623966626265636265353562323739633636623934623038383861223b733a33323a223237653935636135346262376464613465323162366463663137616535666536223b733a33323a226264383934363061396161326166613264636133363333633833333636336335223b733a33323a223664633165333734323435653036636236656431376265613932333034373531223b733a33323a226237656662373263343766653834613833646466343231656361633633353261223b733a33323a223365346661333234346136623834643736653162303535333834376438303836223b733a33323a223838353631666634633866383137346634643437326336396666643530326464223b733a33323a223362663436656435376531623133396366623730666433336261653565383839223b733a33323a226536623361623332383565613938623232343936653562393332636566653634223b733a33323a226662643637356530396565646331633633616135666435356261376238343034223b733a33323a226631333433643065333737613565396537323734303639343763353736393633223b733a33323a226462333263623035393735363061333235346261626636646532633135306432223b733a33323a223763333638336265393033356634323264616538366337393566623338666362223b733a33323a223636313864353865316565646637643939303638396537366439386333306636223b733a33323a223762656464623135653833313538643662396164336463623262366130356236223b733a33323a223137303632336362336564623537356635383561633636336130373932376437223b733a33323a226566623338333863653532656130313630303533663634326563613365623534223b733a33323a223162316363636339636462323330383739666637323061366162353036636330223b733a33323a226434396432316166613635643937383733316432643835356566623230383835223b733a33323a223838383631313933373465653633643234376662623436636632396335623434223b733a33323a223836376136393731633139653766353636326134613931636161303834353230223b733a33323a226662306534363465316462363066376631653437303765363661646430386461223b733a33323a223566653334316661336136343536326362323235646534656465656565313964223b733a33323a226335383635386332626533346661643062623364396138336364623564373531223b733a33323a223733383138326336643766633433636637393136383137643337363761376639223b733a33323a226430626130376533666539306530313637353765323138653434343638353733223b733a33323a223539323838636264356639613638353634616538343566626430323730306562223b733a33323a223531393635356664393232323333636464653537366631646636613838383036223b733a33323a226337653434343735663363323665373233326438363166656365646631366363223b733a33323a223762303164343933353037386561303233303634666265386338373030316534223b733a33323a223233376663343564623437393532633963386631633635623162653331643162223b733a33323a223534383536346430663131383133613337333139326163303838316234616363223b733a33323a223332313039643462653132336231363932653962653930356238373862616661223b733a33323a223262396533346537643333613937353765663836663837663338353039636163223b733a33323a223265336530353165386134353135343464636233353530656530363664623065223b733a33323a226533343832386166633165306164333337643565643135623132363538396137223b733a33323a226263663933326232666136663938356465306566623263353439386335663634223b733a33323a226365376166623036383636313737666532643236383735376237326136356462223b733a33323a223361646162616438343364643364396663383936363231656365363330613361223b733a33323a223436356164316535356631323665643131366639313836646433353034653234223b733a33323a223232326232616136636264303033366166366465363936636533316264323232223b733a33323a223531656463623564663665303964646430336436353435316335313135376234223b733a33323a223966613461323066313361333436653833303231623462393462333634646566223b733a33323a223937323534313966646634626237393136653834346663653364306463366132223b733a33323a223462313631623430386431393733393533643962306436336438613032326131223b733a33323a226561323134313534373266316331396332636337323535366237333761383164223b733a33323a223436623436396539623835633136613334396438363436333763613039336537223b733a33323a223132663931353062393666343832616538306430343633303836643233656337223b733a33323a223765386265383530303066386365343061646331643438653830303963323831223b733a33323a223031326130346335656438613335643630306235333438353333646531383136223b733a33323a226235343533626465386131353532353830383064656436373965616333646530223b733a33323a223138383739306336326365396362623339303138393936386433646365386139223b733a33323a223935653161386261303335306439613235623964613836613130646631303763223b733a33323a223831653763653639313265376362323037313438653732353162343630386637223b733a33323a226263323236333930373961646261633939323763376266353862306230643431223b733a33323a223538323832373037313061373734663031333264653031366262323961613331223b733a33323a226432333064613732313534306239616336663963636432303064323362333965223b733a33323a223330623136306431666162316162326437643337326638323736326238613534223b733a33323a223966303133313461363539383661353936363730613362333432336534343532223b733a33323a226232343438336134643635383234646566646531613362323639373931346131223b733a33323a226362653766663638373536633034336234616163646261666238663638373935223b733a33323a226338303333343465373064653937313637626665383036663161666434393061223b733a33323a226638383162353638643137636165663034666434393562363632306166663734223b733a33323a226365636265396339636361636664653062313635376530316661343332633731223b733a33323a226561343738373339666139353830386561336133326163666532326137396638223b733a33323a226336643964383937653638313962646332383264363664306536663365666630223b733a33323a223739613635383232636364646239333264663562643361316433306438316364223b733a33323a223737336463363438326262313033363337393264663162303033323937393766223b733a33323a226335333232663030353231633465383164616135316161663962663432396436223b733a33323a223636323932633536333161656530343163653861353735303166623936373934223b733a33323a226462376464653932323832373532383630393365313730366137653333303666223b733a33323a226532636366336361636361356662343139663135626635653332373638313761223b733a33323a226134636635633862333034653566313965313132326534626433373835626637223b733a33323a223462663937616636353566363462316363383839333335316131326232353039223b733a33323a223930336432643332646138356533653037333431663439656133663465373037223b733a33323a223666383666373166373562323032623861376264653934383135623930306231223b733a33323a223236363333336264333264373861636439336161353266313164353562636234223b733a33323a226363336238633032643631393037633537366333303234366130386563653962223b733a33323a226437633061633138336666636630376464363265663363343161623034623135223b733a33323a223464353335663966626132346463646565353033613235633237663237323937223b733a33323a223366303637323261643766333864373738396530653133356461376534326630223b733a33323a223038636635376632613530633432663130396139363530333536313663393263223b733a33323a226562383233623437653335396132626364616137663336363666623037396332223b733a33323a226161376432326464663935383263623462616661323435663964646163616139223b733a33323a226433383337366337653866616636333565323537643931376165373830326637223b733a33323a226163313738363832343562656364626635343866326565313032663838346463223b733a33323a223336326139363432633435633936363738383562363739643831346331396361223b733a33323a223535323262623062373132393066313932653461623435306134613835333534223b733a33323a223463323736323731633135623130633039323936303536366238323836356466223b733a33323a223931613732303336623233363634336265626563363031356561333361333133223b733a33323a223333323831363535323034343661363831343864663062623431376565663438223b733a33323a226264636134393535623730353561663066663061336238346236323636363631223b733a33323a226132346465336431396435363735663434656539643433613932356466613736223b733a33323a223839663863396433633635356462663761383930643366356233626636343935223b733a33323a223239383234616564323461376564336632343333396234373864383335616462223b733a33323a226438306332333031623862376261333336323839313566356662303235373432223b733a33323a223065613030306366333831633339663065383730663063316435373439323135223b733a33323a223737393236396138613161323761343433373832373735366661643639383766223b733a33323a226366626337303861393335323566653231636636633039393431383630393531223b733a33323a223237326137303931643761656162333639313336383835646134653639613464223b733a33323a223065633662303338636436653633366662383964363335633363303736663239223b733a33323a223362636461633061363636373865616362343865616463666561363066383437223b733a33323a223166333764313832316536386163626266323834396564376633383539363539223b733a33323a223065373930643933383631653161313635646561653935343234323463656236223b733a33323a226164336531363236643631666439653763346661626466316136656231393436223b733a33323a223565383936343235663265663337653533633136333630316631613766356231223b733a33323a223539343263336536623133643639386434373437326636393531356636393562223b733a33323a223363616539396563633033636238306636303164336266353266326434336436223b733a33323a226535626138373366646637373234636265376230386233373261363134383632223b733a33323a226538363434386533363665303338616266633635623636636632313966666234223b733a33323a223539323136656136313237393861643339366132306661383637393133323265223b733a33323a226338333736633435313238383130303839653331363939306536313639306638223b733a33323a223465626232633731623139326537303264646138646435363238636235633237223b733a33323a226666613634613765666437383932313835376161333964646133356337353437223b733a33323a226536303934386538316162376232326232343337326438316664303938323632223b733a33323a223234666439643836336234666362356334613033663238363234333236393634223b733a33323a223238306137376165336262353037643661386466323066623239303639646336223b733a33323a226638393231623165613539363839623639316634323039313338626535393739223b733a33323a226565386664333238393335303339666462303633393162346161616437333039223b733a33323a223233356636323331653163396233393935343964623262623265316531373730223b733a33323a223136343332393864306465303964306263303965626361303066616134663337223b733a33323a223061653463386430323432333938326663383935346234333265643563666534223b733a33323a223336386131386237636130663163343063656665333531626262656464666437223b733a33323a226237353865353139333061343936663036376230333335653532346133623862223b733a33323a223636383262396432386363333663333237653666623163646432373832666363223b733a33323a226437383862366561663562383063326564366336623662663839343761666230223b733a33323a223966343834316432386566626163623339613835313035313930393561316334223b733a33323a223561323538646262636633633465363230323339636236326463343335333164223b733a33323a226131363061306364363965396165366461656663646363363532636166643039223b733a33323a223138383866383064353334653166363339336537316236363132313365303138223b733a33323a223865623939383938643266663934326364356130313734373530633230373336223b733a33323a223262633666393232363933333964613635653537326364646339326363343464223b733a33323a223164366230613735333432633930356433393533383534333132663239323366223b733a33323a223734663164353438363564353832616264353334393735343639396130326330223b733a33323a226432376664306339646637396536333431623762343537373563386632646537223b733a33323a226338333031616339653338303835313035303538623866323133333334333863223b733a33323a226264666461356664346164393761356461376462333866316661316239326466223b733a33323a223437313234363462393336333939386131356434663133636539653832656339223b733a33323a223736356134623438323138616437666166613664366631373135633336363366223b733a33323a223333666461373064636630653832663838366533373261376336353235386462223b733a33323a226537336665613563303161616432393037346138333737313337326239326332223b733a33323a223633303336346631376437663432303537396431306335346532626533303834223b733a33323a226233646132396166613364656661663639383031616133393730323463353730223b733a33323a223832313637383830616362646636656235613435323661373038333961333435223b733a33323a226335653461366633373239383039363631626566363831353266363064396165223b733a33323a223830383631356539333936656666343461643831366438346431323764353464223b733a33323a223461643130616465663831313239643536653366396536623965633139376339223b733a33323a226362343834333030623832386132623733326562643265393665333338343934223b733a33323a226165363739633333323065343737626262613830393037616661323662373632223b733a33323a226531363138303638383565613166623831313761393962613535393333306561223b733a33323a223265643664373362366334386362373330313139633161626534613836646563223b733a33323a223430623336326165386436326461346238613439393831643066336566313735223b733a33323a223764393937343430616435333364376164313537613561303862323365383233223b733a33323a223139613266353933306437326431306634303564633437663033653737666639223b733a33323a223465613934353931663232346237353633363538323034316338643931393239223b733a33323a223866383161363837326538393562326461313366333938643365336236393337223b733a33323a223735353331656361656631626463656232333732636664653539633830346465223b733a33323a226566343433356632356564656562333462383264626236393433306230653837223b733a33323a226362323463376333643137623730326133333361333261336231636137326363223b733a33323a226161656266326334313936336635353963366232663765386465376261623731223b733a33323a223031336237343031343732663463336539366563396561646132303133363965223b733a33323a226362383962636163333838386532353130653639666432633231323238646364223b733a33323a223936383130623431366137323464633765363832643138613861386632373931223b733a33323a226533633765646133363866373164383461356363316333366639653066373234223b733a33323a223464636662643265303834303066303832303139316465336366616530386638223b733a33323a223239633538396639373432633730386535613061333136346634316234663330223b733a33323a223034623464313636366638326532303666336139396135646363323462393836223b733a33323a223137643761633963636566643761623035663632346361363735643063386636223b733a33323a223037336433313939353265333534366366393264313031336163306366373065223b733a33323a223239663936346361363234623861363833643563346236363366633961373139223b733a33323a223033643037386664646166666435333739633039623934396639633039663337223b733a33323a223536616466623238316634336664303532646136393038346630363562313230223b733a33323a223230613862646264303233303836666634393537323664326637623666303266223b733a33323a223839336230383561323766643761343034623262373265383462343137333339223b733a33323a223738356636346233346330396264333432396238356532616636383733646266223b733a33323a223731666462316438393332333332366433323466633532366663373634386331223b733a33323a223263383562333733613037303330396166333332303964333039366162393761223b733a33323a223535613137306233356630626532633433623734333766643165656437646366223b733a33323a226434616366306331333561623061633337393439643735643365363639626631223b733a33323a226464653638353733386230396233653462323032306236303362353464666461223b733a33323a223831643364383966653162356234633431613530393432376238643035646534223b733a33323a223430646664303666633764636163376561323935336537343964623830636361223b733a33323a223961363436633136373134373637353634623232306164323937623735303364223b733a33323a223666396338323837393033656163336662616264316563383262646632363836223b733a33323a226534666661316138626435383263393237643339323835303432353137383661223b733a33323a223931376433623436616438373866636633313364613235343766653437613833223b733a33323a223036643365623737613064396137353739363034366339346631633964363833223b733a33323a223439663238343836393336633463353138653766646333326233316438313239223b733a33323a223963353963343763393163366138636636623838373764366664656633376436223b733a33323a223063393066623836663835393137363131323038353735393661366335373464223b733a33323a223561613636636134623032346635346637393337326164653737393864313364223b733a33323a223038643161336365373364353232393362353466323866366263656464646666223b733a33323a223838346663363832336335313834323632346262326236366665643339353330223b733a33323a226438356237666337373764326131613861616362393765333764666666626533223b733a33323a223462646563306237633031373264626132626435336162346238303539393030223b733a33323a226163393133663734663732333865666430323665623635393135386366383839223b733a33323a226264303462326563636430353539306266366664323938303731303266616136223b733a33323a223336313461323937306135343931326363623362616534636661656336313139223b733a33323a226366666136663563313534376664623539376232666531363233663362343535223b733a33323a226133656264643832396263376432396634326632326566303738616538613239223b733a33323a223433623566323732623432373831363165343466633637656335663632343736223b733a33323a226230323537663830313130366432633836613136313163336437383830396337223b733a33323a223032353738653664306662313230393138306231316434326465306630356232223b733a33323a223535386536366336633837613330303362306539313862393534613039633362223b733a33323a223063643439626330376465346363643933656664323735373364363238646532223b733a33323a226661323665356238646161353637663665333030663938346139326363333237223b733a33323a223538653664383966613235633163623435346134353862396262393362343838223b733a33323a223435396136313938303330623835383934336236666530393561656539663966223b733a33323a226165316637376437326633643138663465356636363663666432643266636133223b733a33323a223535626265316536623737656535333964643338343435393162643838356436223b733a33323a226664313838336331363434366136356133356335313761643563633364316230223b733a33323a226533386165386662373361353338666435303265313763326533346539303034223b733a33323a226232383261386332663830313730643663363931383863613465393561323936223b733a33323a226166303636663264653332303230633264313739383139623439353338396530223b733a33323a226462616638643561353462623830346438626135613862643461393632633836223b733a33323a226432653165366561343835613138353162386333333763323432616130376232223b733a33323a223836316632306264353338613664353939613265636432306566386239306436223b733a33323a223233303762313733663464343438346237663337633335326566396433666330223b733a33323a223437663763363738323966363861326566616136643135386630393539366261223b733a33323a226130663534376364623632663239663639356165366264666632363133353637223b733a33323a223463313664623164333334626438353536313664633739643066373033643531223b733a33323a223837373035333235313661326536346637393434643665353561646164333465223b733a33323a226332326134306335323562303234373237313962633162373664643130353133223b733a33323a223466316638343135303861646363623934326162353233636634383636626132223b733a33323a223661306433326532343661343566356562376138663064643265613136303234223b733a33323a223839666533636430326664343064643362303839333364333836656237636335223b733a33323a223134306438366230383931663438653633653161343533626235616664323165223b733a33323a223237313936366430643865626364613530366166313961623636633335306536223b733a33323a223439623036306439626433333633613266623862353931623964393061346236223b733a33323a223830333061663331306630393838336331633830333663636430323564653834223b733a33323a223638363037646133623365316263363664373330653566303562663038303639223b733a33323a226564376366633532613365653034663230613964643562353035613239333539223b733a33323a223364333135356661396439643837336534356564373334666538356363376665223b733a33323a223532323032386437666362663362653730663866366331333337303038643664223b733a33323a226466626631653266363130323565383034303437343038356565636233386130223b733a33323a226561643436333632386462303365643930313934366133623765653062316232223b733a33323a223165643064316331376139353166353561333866333037396663383037623230223b733a33323a223663316262373765616434313365383566306531313164306137613066353362223b733a33323a226432356661326334396166313366323631323663356239616565383032373838223b733a33323a226236333538353362343234303439646537373562333538313337373264613438223b733a33323a223764353437336637393066653035663966386662646362326532313036346166223b733a33323a223939616234363463363235636465653530626332313135353663613936333333223b733a33323a226135616663363335663936656332306639313063323239396366336164623634223b733a33323a226134376166336134313864346264663430623565633165333965323161653239223b733a33323a223365346334626432623566353164333161323263303163333637643335353031223b733a33323a223733343332623932383835303033333630656432663663323763366132616231223b733a33323a226639613932393630376264623031326538396233346537646136313631376163223b733a33323a226133303032353236333063653865306662336339323939656633656436363865223b733a33323a223130373162643935363735373739396330633730323165656262346466623562223b733a33323a226139643731393234326438346163303532303866396135303865303539383964223b733a33323a226561313264363036666130356135366463613630383437373635623064323436223b733a33323a223764363939656361376634666536396133313461326431643662316637376636223b733a33323a226532343438393736643739373433626431666635373430356231326132633634223b733a33323a226463343061313963346331633763366539653633633261653739383336633432223b733a33323a226161313735353934343662366132336166326537386135396232386130633630223b733a33323a223731323536616331653034346366343862353261656136323939333132383637223b733a33323a223661383863356364636435626535323634326230366634643230363761323636223b733a33323a226436343762336534353462343037303162313565313366346631666433376630223b733a33323a226639303138666364623832636165363233333566616633386662653664323732223b733a33323a226264376535303933386135613839326366636661666333353735623430363663223b733a33323a223739646664346434363831383737336237333732316638646563303032626637223b733a33323a223932646235326361353366633232613664396265346463643535623965646534223b733a33323a223930333336353438363935383765313131633233626136646463326234633436223b733a33323a226639613130346334313230363461376336376235366538376332336532323936223b733a33323a226339323066313437623134343438646164363131326561323134336661643239223b733a33323a223332366230323736303530363265666133313830303136306631613261656330223b733a33323a223361613230306233346565356535326664393231396664663636386333616432223b733a33323a223631663138323936386565633835316339316566353138306633346432303765223b733a33323a223234306631653764376337396130326330333533636137616462653630643730223b733a33323a223132306265666139373734313335336331656663383336333339343036616131223b733a33323a226334366630366136336431356331363930353165316239343832623631613564223b733a33323a223338323764356562306264323439646331343730643736336239373932383936223b733a33323a223962383334386237323963613466366234353333656539316563326463346636223b733a33323a226630333136356161636632646132336462623462323862323233633935343766223b733a33323a223363333236303431666138626631323066316366633561303337393036373932223b733a33323a223837316232356138333738656131306636316162326137633338666137653166223b733a33323a226537323930326462633634353064653366666638343364623334353961326636223b733a33323a223265613566323039306438613431666464613732366637373365333435623534223b733a33323a226336313538356233623263323638373366373866633564376266623235666263223b733a33323a226563373830346633633666616435393964376435623739356263386161393936223b733a33323a223964646366336661373635643761393036373838626661656631373465373563223b733a33323a226635363166346632643532653262623638363039373166616538323361613862223b733a33323a226434653164623862613233633138326336316130626235316631376236636535223b733a33323a226438336636346439386262666239666664653031313231353630623564366238223b733a33323a223865363332366365383934326662373137633432396333366234616366643137223b733a33323a223465393161383936346235633761623861386361363630346563346362613935223b733a33323a223362356464346232353866646139383939376335373839386563373439656166223b733a33323a223438323762646464613430323331393631656231636164623437393432356435223b733a33323a223635343332646436363238343866386331383165323134376537663931376636223b733a33323a223330613663636432363734323433323664656661623833656531363534623664223b733a33323a223439353337663535663337653966623864326562326165396631343736636134223b733a33323a226665393662646335663339663865346433346666346364313933633230353432223b733a33323a223939386538303938343266323161393239303564343732663166623061316162223b733a33323a223066306465633439663762333063656232653862333335613361643434353438223b733a33323a226166393031396439346538333333303732303534343437653033636532633937223b733a33323a223339646461653764656635356261383932396631666231313064653832363038223b733a33323a226464393937336465636262626262303464633265343434663933366230643364223b733a33323a223063326636663064303863336231643538666239386536383262636434613234223b733a33323a223631336365316630346234316238353539326332343865336133356661313437223b733a33323a226663353465623835666665353063323138653139373635633863393536646661223b733a33323a223531613638356362383736383364646631633930383337336430653765333335223b733a33323a226365656565323064373231616463653633656533613462633935383037306461223b733a33323a223438343265636265343162316130633336366131653532623263396465303431223b733a33323a223734626532346264633536643233383466353930623861633038393235326465223b733a33323a226665616132386261363734653661653365356136323765656238316166386566223b733a33323a223261666230636537613038636461626233636133343161653566643730393332223b733a33323a223837393534656664353736356236323636636438383035353233343861333338223b733a33323a223163636264353865343961656635313761333365313962373265363566346361223b733a33323a223561393936613466386135626462323638353261623865646566623864643430223b733a33323a226339643432663562336364386531333330333062376636616163393532653936223b733a33323a226236393236356361316332663364306262353863356562633633323832613434223b733a33323a226661316161636235636438383939373535613139366631663365663262353333223b733a33323a226236656663346666616437366438313632623239333037323430613731623666223b733a33323a223261386165663965313461633839646434303064323933623064643534353263223b733a33323a223535656662663465323934316337633238383838316138613435323363393830223b733a33323a223764626230613930303932653066353736386233393866323439623134346336223b733a33323a223630636237373634396530653530663566303864346631393131663932383864223b733a33323a226262616336613236613261626665353861636332333138326265346162323762223b733a33323a226365646135346331333835663031313262666236633864306162313133636166223b733a33323a223536353566313361343534306636323364336164333461646139313539313735223b733a33323a226239386563636264623639646639313532636332303639356433346562366462223b733a33323a226463306661393962616435383434626334393438396564386336303337613232223b733a33323a223761366465383239386532623537386365613034386266313064363163333561223b733a33323a223935343539356239353333303439373362356137343632313764373261316239223b733a33323a223637396437376266386333356432373739336139363031356130346665666664223b733a33323a223639383735303261666238656663383265623036333935373637306533363731223b733a33323a223136613034393137313830323566343033363833333435633363623434396336223b733a33323a226337376631353264623131346463316566333533313833306631336231376338223b733a33323a223766343563653166336161626365333631646231663937393738656433623831223b733a33323a223535353630616437343561353132656533366333323333363532373830643530223b733a33323a223561636662303839663639343136613536336539336261343565366237663065223b733a33323a226130643937353163643033383535346565333434326438613362623333633538223b733a33323a223462643162373463633630653661643163663832356334346533303632393638223b733a33323a226535343533306239393530656466353634626162643061663565323363626666223b733a33323a223465666634616531346564366431613933646666303563393332643461656336223b733a33323a226635383266633463353236626234376435616239383538396563353266376463223b733a33323a223630643630633061663464643963383931623062616530356630376136653662223b733a33323a223265653262383936376633323932323961643066353263306265383365636561223b733a33323a226630353331626432666133666639386439363430306263646530663830346232223b733a33323a223235616663356136316535333233353461656662616230386434333966353061223b733a33323a223935323061663563663932643966326239633364396236626333346430376331223b733a33323a226337373265353132303637373137666662383765393730633239636232646335223b733a33323a226662346161323539333766623465633731306436363364303233326463383766223b733a33323a223834653336333666653765633664326538393638386462613431363133393663223b733a33323a226135326339643666353263303033363934356534343861386638663463616262223b733a33323a223062366434386566386437333164653033303161366261356536363535623064223b733a33323a226537313563613538646165316330363132393961626631306637633739393963223b733a33323a223566613531356638303435346334356330346363626361326530356462386337223b733a33323a226461323330366231386534626530653563646231393935303237373166313234223b733a33323a226636303863353531616130653865366135343332316232356536333932353137223b733a33323a226133363033396133623266653663663530303530343331356335653966353563223b733a33323a226465346466326235363763383661323965666134343662323062383932636532223b733a33323a223033323665636430643635343237643066306535366530393132343737633163223b733a33323a226339373865633231303466363464346235353532356363636365316464313235223b733a33323a223933316131323830626538376235306432303832323836363863323264643734223b733a33323a223439643639353131623165336138356130343665363638313165353437316331223b733a33323a223432373837336237396365326565396135623861386161633963303031333036223b733a33323a223336336634633932326533393765316664326166653865656231626330376533223b733a33323a223363356464303937646661346438373530333065636431333033636332393233223b733a33323a223330626164323733353034306162353766613038326638303832366536626630223b733a33323a226439626338306164363935386534333934646265326638653737336566353834223b733a33323a223231616461333730353265316534376636356564363639353339626233616662223b733a33323a223161306530623961663338363839326665376634646231323734323661633932223b733a33323a223738623939303236663161373064333836613264613462653831353764616537223b733a33323a226235623961633630313630313466363832393265623039616362363566623466223b733a33323a226239613531396231386431643964656439626230373036343034333264393330223b733a33323a226336333233343231336261373932343434393039376163633930643466386635223b733a33323a226564366632313862393934363834316563663763313539386163323738316330223b733a33323a223466376235396163363738626261663939636634363963303633613337376565223b733a33323a223463653963643637323537623931623737636165326133646336623536613934223b733a33323a223261303639396531616232373531373739626364633862633732363265323038223b733a33323a223532613963356130613734633631613430366537386135303536323562373338223b733a33323a223865343437316163643038616634653337666433383534396639306339393136223b733a33323a226463386364383337363132393262663933306138306633383334623638626235223b733a33323a226166313066616532386133396334633364613766653566393032336531666237223b733a33323a223761316639346133386633303262373164363036393732633933303961643138223b733a33323a223831323566343165623166303935393665303531326462633631656566383863223b733a33323a226531343166363933663934366364396163353864333734313632656430333932223b733a33323a223633333134366638373263326566306534363664643164643564643564373961223b733a33323a226531636533383534613839313631303566656662646334666666623362656666223b733a33323a223962343535653436353366346661363238303862376461396138613930393439223b733a33323a223634326231643363613764643831323066383832373132326362393739363761223b733a33323a223639383932396361363664626236633264336662303538393031386165643361223b733a33323a223836613334653339666261353831383633353333613736326330636134306339223b733a33323a223132633434363831306335346665393438613532343162623561633365313335223b733a33323a223266323431663030393664396439323161633562663833633639633537326334223b733a33323a223266373739306235353732363135613866653166323337353936643838326363223b733a33323a226639653461376464386236643332393939656437383836373663383165333063223b733a33323a223537616564323961623464343639336530653766653738653034316532336331223b733a33323a226163336136383165383137393238343632653134303766313062306339303831223b733a33323a223064323266656134626466623831303435613139306438343865666366323437223b733a33323a226564356533333630306163643965613238373566353937656531323633316364223b733a33323a223961393330323035386463636434666435396239313135633335343263336131223b733a33323a226635646431386432353666653930356537316365376564356632306535616563223b733a33323a223833623163623631646231306232613763613362383631666637316165353065223b733a33323a226339393562393137333763346266626132616231303766316138333132353930223b733a33323a223363656166616630616265316362653430303438343137666265383266316630223b733a33323a226261653136316433643130366631346436393038323637303936636461383333223b733a33323a223032303261396266383665623932613636303265373932393035356235326462223b733a33323a223639356239316166653165343435623036616465366336613831643432656162223b733a33323a226666383062376365313264376431376566653463363632353339353636306130223b733a33323a223634303134363038336661326137333163653639366538316335373563323932223b733a33323a223061653264316463336136643739313764643236303662323833646537383265223b733a33323a226136363035343366623165393936613734363839313432633330653830356533223b733a33323a226265613931643962636336666136346538376338373435366231333630663737223b733a33323a223438666339653663393965363166353664393133613136393334396636376664223b733a33323a226231313137333831303935386138373032336661343463376532313837393666223b733a33323a223362373362633763343161353637396231383865636431353064666133316235223b733a33323a226463353739303063336632386130666562356264333239326365636434336336223b7d733a343a2268617368223b733a36353a2264633537393030633366323861306665623562643332393263656364343363362d3362373362633763343161353637396231383865636431353064666133316235223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f6d6f64756c655f4c6f675f636f6e6669677572655f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a223561306437646338353264376366363934313466363434356338363966313238223b733a33323a223837613233616130353934323564356233333234303864383037663935346436223b7d733a343a2268617368223b733a36353a2238376132336161303539343235643562333332343038643830376639353464362d3561306437646338353264376366363934313466363434356338363966313238223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d, 1765275410);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `setting`
+-- Tabelstructuur voor tabel `setting`
 --
 
 CREATE TABLE `setting` (
@@ -4442,7 +4445,7 @@ CREATE TABLE `setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `setting`
+-- Gegevens worden geëxporteerd voor tabel `setting`
 --
 
 INSERT INTO `setting` (`id`, `value`) VALUES
@@ -4507,8 +4510,8 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('easyadmin_addon_notify_version_inactive', 'true'),
 ('easyadmin_administrator_name', '\"\"'),
 ('easyadmin_allow_empty_files', 'false'),
-('easyadmin_cron_last', '1763650835'),
-('easyadmin_cron_tasks', '[\"session_8\"]'),
+('easyadmin_cron_last', '1765275233'),
+('easyadmin_cron_tasks', '[\"session_8d\"]'),
 ('easyadmin_display_exception', 'false'),
 ('easyadmin_interface', '[\"resource_public_view\"]'),
 ('easyadmin_local_path', '\"\\/var\\/www\\/html\\/files\\/import\"'),
@@ -4607,6 +4610,17 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('imageserver_tile_mode', '\"manual\"'),
 ('installation_title', '\"OmekaS Docker\"'),
 ('locale', '\"\"'),
+('log_archive_compress', '\"1\"'),
+('log_archive_days', '\"90\"'),
+('log_archive_delete', '\"1\"'),
+('log_archive_format', '\"tsv\"'),
+('log_archive_include_id', '\"0\"'),
+('log_archive_references', '[]'),
+('log_archive_severity_max', '\"\"'),
+('log_archive_store', '\"0\"'),
+('log_archive_translate', '\"1\"'),
+('log_cron_days', '\"7\"'),
+('log_cron_last', '1765275409'),
 ('media_alt_text_property', '\"\"'),
 ('media_type_whitelist', '[\"application\\/msword\",\"application\\/ogg\",\"application\\/pdf\",\"application\\/rtf\",\"application\\/vnd.ms-access\",\"application\\/vnd.ms-excel\",\"application\\/vnd.ms-powerpoint\",\"application\\/vnd.ms-project\",\"application\\/vnd.ms-write\",\"application\\/vnd.oasis.opendocument.chart\",\"application\\/vnd.oasis.opendocument.database\",\"application\\/vnd.oasis.opendocument.formula\",\"application\\/vnd.oasis.opendocument.graphics\",\"application\\/vnd.oasis.opendocument.presentation\",\"application\\/vnd.oasis.opendocument.spreadsheet\",\"application\\/vnd.oasis.opendocument.text\",\"application\\/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"application\\/vnd.openxmlformats-officedocument.presentationml.presentation\",\"application\\/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\"application\\/x-gzip\",\"application\\/x-ms-wmp\",\"application\\/x-msdownload\",\"application\\/x-shockwave-flash\",\"application\\/x-tar\",\"application\\/zip\",\"audio\\/midi\",\"audio\\/mp4\",\"audio\\/mpeg\",\"audio\\/ogg\",\"audio\\/x-aac\",\"audio\\/x-aiff\",\"audio\\/x-ms-wma\",\"audio\\/x-ms-wax\",\"audio\\/x-realaudio\",\"audio\\/x-wav\",\"image\\/bmp\",\"image\\/gif\",\"image\\/jp2\",\"image\\/jpeg\",\"image\\/pjpeg\",\"image\\/png\",\"image\\/tiff\",\"image\\/x-icon\",\"text\\/css\",\"text\\/plain\",\"text\\/richtext\",\"video\\/divx\",\"video\\/mp4\",\"video\\/mpeg\",\"video\\/ogg\",\"video\\/quicktime\",\"video\\/webm\",\"video\\/x-ms-asf\",\"video\\/x-msvideo\",\"video\\/x-ms-wmv\",\"application\\/octet-stream\",\"application\\/vnd.threejs+json\",\"model\\/gltf-binary\",\"model\\/gltf+json\",\"model\\/obj\",\"model\\/vnd.collada+xml\",\"model\\/vnd.filmbox\",\"image\\/ktx2\",\"model\\/mtl\",\"model\\/vnd.threejs+json\",\"application\\/alto+xml\"]'),
 ('mirador_annotation_endpoint', '\"\"'),
@@ -4644,7 +4658,7 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site`
+-- Tabelstructuur voor tabel `site`
 --
 
 CREATE TABLE `site` (
@@ -4665,7 +4679,7 @@ CREATE TABLE `site` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `site`
+-- Gegevens worden geëxporteerd voor tabel `site`
 --
 
 INSERT INTO `site` (`id`, `thumbnail_id`, `homepage_id`, `owner_id`, `slug`, `theme`, `title`, `summary`, `navigation`, `item_pool`, `created`, `modified`, `is_public`, `assign_new_items`) VALUES
@@ -4674,7 +4688,7 @@ INSERT INTO `site` (`id`, `thumbnail_id`, `homepage_id`, `owner_id`, `slug`, `th
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site_block_attachment`
+-- Tabelstructuur voor tabel `site_block_attachment`
 --
 
 CREATE TABLE `site_block_attachment` (
@@ -4689,7 +4703,7 @@ CREATE TABLE `site_block_attachment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site_item_set`
+-- Tabelstructuur voor tabel `site_item_set`
 --
 
 CREATE TABLE `site_item_set` (
@@ -4702,7 +4716,7 @@ CREATE TABLE `site_item_set` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site_page`
+-- Tabelstructuur voor tabel `site_page`
 --
 
 CREATE TABLE `site_page` (
@@ -4718,7 +4732,7 @@ CREATE TABLE `site_page` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `site_page`
+-- Gegevens worden geëxporteerd voor tabel `site_page`
 --
 
 INSERT INTO `site_page` (`id`, `site_id`, `slug`, `title`, `is_public`, `created`, `modified`, `layout`, `layout_data`) VALUES
@@ -4727,7 +4741,7 @@ INSERT INTO `site_page` (`id`, `site_id`, `slug`, `title`, `is_public`, `created
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site_page_block`
+-- Tabelstructuur voor tabel `site_page_block`
 --
 
 CREATE TABLE `site_page_block` (
@@ -4740,7 +4754,7 @@ CREATE TABLE `site_page_block` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `site_page_block`
+-- Gegevens worden geëxporteerd voor tabel `site_page_block`
 --
 
 INSERT INTO `site_page_block` (`id`, `page_id`, `layout`, `data`, `position`, `layout_data`) VALUES
@@ -4749,7 +4763,7 @@ INSERT INTO `site_page_block` (`id`, `page_id`, `layout`, `data`, `position`, `l
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site_permission`
+-- Tabelstructuur voor tabel `site_permission`
 --
 
 CREATE TABLE `site_permission` (
@@ -4760,7 +4774,7 @@ CREATE TABLE `site_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `site_permission`
+-- Gegevens worden geëxporteerd voor tabel `site_permission`
 --
 
 INSERT INTO `site_permission` (`id`, `site_id`, `user_id`, `role`) VALUES
@@ -4769,7 +4783,7 @@ INSERT INTO `site_permission` (`id`, `site_id`, `user_id`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site_setting`
+-- Tabelstructuur voor tabel `site_setting`
 --
 
 CREATE TABLE `site_setting` (
@@ -4779,7 +4793,7 @@ CREATE TABLE `site_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `site_setting`
+-- Gegevens worden geëxporteerd voor tabel `site_setting`
 --
 
 INSERT INTO `site_setting` (`id`, `site_id`, `value`) VALUES
@@ -4872,7 +4886,7 @@ INSERT INTO `site_setting` (`id`, `site_id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solr_core`
+-- Tabelstructuur voor tabel `solr_core`
 --
 
 CREATE TABLE `solr_core` (
@@ -4882,7 +4896,7 @@ CREATE TABLE `solr_core` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `solr_core`
+-- Gegevens worden geëxporteerd voor tabel `solr_core`
 --
 
 INSERT INTO `solr_core` (`id`, `name`, `settings`) VALUES
@@ -4891,7 +4905,7 @@ INSERT INTO `solr_core` (`id`, `name`, `settings`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solr_map`
+-- Tabelstructuur voor tabel `solr_map`
 --
 
 CREATE TABLE `solr_map` (
@@ -4906,7 +4920,7 @@ CREATE TABLE `solr_map` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `solr_map`
+-- Gegevens worden geëxporteerd voor tabel `solr_map`
 --
 
 INSERT INTO `solr_map` (`id`, `solr_core_id`, `resource_name`, `field_name`, `source`, `alias`, `pool`, `settings`) VALUES
@@ -4953,7 +4967,7 @@ INSERT INTO `solr_map` (`id`, `solr_core_id`, `resource_name`, `field_name`, `so
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stat`
+-- Tabelstructuur voor tabel `stat`
 --
 
 CREATE TABLE `stat` (
@@ -4970,7 +4984,7 @@ CREATE TABLE `stat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `stat`
+-- Gegevens worden geëxporteerd voor tabel `stat`
 --
 
 INSERT INTO `stat` (`id`, `type`, `url`, `entity_id`, `entity_name`, `hits`, `hits_anonymous`, `hits_identified`, `created`, `modified`) VALUES
@@ -4995,7 +5009,7 @@ INSERT INTO `stat` (`id`, `type`, `url`, `entity_id`, `entity_name`, `hits`, `hi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tabelstructuur voor tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -5010,7 +5024,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `user`
+-- Gegevens worden geëxporteerd voor tabel `user`
 --
 
 INSERT INTO `user` (`id`, `email`, `name`, `created`, `modified`, `password_hash`, `role`, `is_active`) VALUES
@@ -5019,7 +5033,7 @@ INSERT INTO `user` (`id`, `email`, `name`, `created`, `modified`, `password_hash
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_setting`
+-- Tabelstructuur voor tabel `user_setting`
 --
 
 CREATE TABLE `user_setting` (
@@ -5029,7 +5043,7 @@ CREATE TABLE `user_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `user_setting`
+-- Gegevens worden geëxporteerd voor tabel `user_setting`
 --
 
 INSERT INTO `user_setting` (`id`, `user_id`, `value`) VALUES
@@ -5047,7 +5061,7 @@ INSERT INTO `user_setting` (`id`, `user_id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `value`
+-- Tabelstructuur voor tabel `value`
 --
 
 CREATE TABLE `value` (
@@ -5064,7 +5078,7 @@ CREATE TABLE `value` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `value`
+-- Gegevens worden geëxporteerd voor tabel `value`
 --
 
 INSERT INTO `value` (`id`, `resource_id`, `property_id`, `value_resource_id`, `type`, `lang`, `value_annotation_id`, `value`, `uri`, `is_public`) VALUES
@@ -5089,7 +5103,7 @@ INSERT INTO `value` (`id`, `resource_id`, `property_id`, `value_resource_id`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `value_annotation`
+-- Tabelstructuur voor tabel `value_annotation`
 --
 
 CREATE TABLE `value_annotation` (
@@ -5099,7 +5113,7 @@ CREATE TABLE `value_annotation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vocabulary`
+-- Tabelstructuur voor tabel `vocabulary`
 --
 
 CREATE TABLE `vocabulary` (
@@ -5112,7 +5126,7 @@ CREATE TABLE `vocabulary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `vocabulary`
+-- Gegevens worden geëxporteerd voor tabel `vocabulary`
 --
 
 INSERT INTO `vocabulary` (`id`, `owner_id`, `namespace_uri`, `prefix`, `label`, `comment`) VALUES
@@ -5128,18 +5142,18 @@ INSERT INTO `vocabulary` (`id`, `owner_id`, `namespace_uri`, `prefix`, `label`, 
 (10, 1, 'https://omeka.org/s/vocabs/curation/', 'curation', 'Curation', 'Generic and common properties that are useful in Omeka for the curation of resources. The use of more common or more precise ontologies is recommended when it is possible.');
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `api_key`
+-- Indexen voor tabel `api_key`
 --
 ALTER TABLE `api_key`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_C912ED9D7E3C61F9` (`owner_id`);
 
 --
--- Indexes for table `asset`
+-- Indexen voor tabel `asset`
 --
 ALTER TABLE `asset`
   ADD PRIMARY KEY (`id`),
@@ -5147,7 +5161,7 @@ ALTER TABLE `asset`
   ADD KEY `IDX_2AF5A5C7E3C61F9` (`owner_id`);
 
 --
--- Indexes for table `bulk_export`
+-- Indexen voor tabel `bulk_export`
 --
 ALTER TABLE `bulk_export`
   ADD PRIMARY KEY (`id`),
@@ -5156,21 +5170,21 @@ ALTER TABLE `bulk_export`
   ADD KEY `IDX_625A30FD7E3C61F9` (`owner_id`);
 
 --
--- Indexes for table `bulk_exporter`
+-- Indexen voor tabel `bulk_exporter`
 --
 ALTER TABLE `bulk_exporter`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_6093500B7E3C61F9` (`owner_id`);
 
 --
--- Indexes for table `csvimport_entity`
+-- Indexen voor tabel `csvimport_entity`
 --
 ALTER TABLE `csvimport_entity`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_84D382F4BE04EA9` (`job_id`);
 
 --
--- Indexes for table `csvimport_import`
+-- Indexen voor tabel `csvimport_import`
 --
 ALTER TABLE `csvimport_import`
   ADD PRIMARY KEY (`id`),
@@ -5178,7 +5192,7 @@ ALTER TABLE `csvimport_import`
   ADD UNIQUE KEY `UNIQ_17B508814C276F75` (`undo_job_id`);
 
 --
--- Indexes for table `custom_vocab`
+-- Indexen voor tabel `custom_vocab`
 --
 ALTER TABLE `custom_vocab`
   ADD PRIMARY KEY (`id`),
@@ -5187,7 +5201,7 @@ ALTER TABLE `custom_vocab`
   ADD KEY `IDX_8533D2A57E3C61F9` (`owner_id`);
 
 --
--- Indexes for table `fulltext_search`
+-- Indexen voor tabel `fulltext_search`
 --
 ALTER TABLE `fulltext_search`
   ADD PRIMARY KEY (`id`,`resource`),
@@ -5196,7 +5210,7 @@ ALTER TABLE `fulltext_search`
 ALTER TABLE `fulltext_search` ADD FULLTEXT KEY `IDX_AA31FE4A2B36786B3B8BA7C7` (`title`,`text`);
 
 --
--- Indexes for table `hit`
+-- Indexen voor tabel `hit`
 --
 ALTER TABLE `hit`
   ADD PRIMARY KEY (`id`),
@@ -5214,14 +5228,14 @@ ALTER TABLE `hit`
   ADD KEY `IDX_5AD22641D4DB71B5` (`language`);
 
 --
--- Indexes for table `item`
+-- Indexen voor tabel `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_1F1B251ECBE0B084` (`primary_media_id`);
 
 --
--- Indexes for table `item_item_set`
+-- Indexen voor tabel `item_item_set`
 --
 ALTER TABLE `item_item_set`
   ADD PRIMARY KEY (`item_id`,`item_set_id`),
@@ -5229,13 +5243,13 @@ ALTER TABLE `item_item_set`
   ADD KEY `IDX_6D0C9625960278D7` (`item_set_id`);
 
 --
--- Indexes for table `item_set`
+-- Indexen voor tabel `item_set`
 --
 ALTER TABLE `item_set`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `item_site`
+-- Indexen voor tabel `item_site`
 --
 ALTER TABLE `item_site`
   ADD PRIMARY KEY (`item_id`,`site_id`),
@@ -5243,14 +5257,14 @@ ALTER TABLE `item_site`
   ADD KEY `IDX_A1734D1FF6BD1646` (`site_id`);
 
 --
--- Indexes for table `job`
+-- Indexen voor tabel `job`
 --
 ALTER TABLE `job`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_FBD8E0F87E3C61F9` (`owner_id`);
 
 --
--- Indexes for table `log`
+-- Indexen voor tabel `log`
 --
 ALTER TABLE `log`
   ADD PRIMARY KEY (`id`),
@@ -5261,7 +5275,7 @@ ALTER TABLE `log`
   ADD KEY `IDX_8F3F68C5B23DB7B8` (`created`);
 
 --
--- Indexes for table `media`
+-- Indexen voor tabel `media`
 --
 ALTER TABLE `media`
   ADD PRIMARY KEY (`id`),
@@ -5274,19 +5288,19 @@ ALTER TABLE `media`
   ADD KEY `extension` (`extension`);
 
 --
--- Indexes for table `migration`
+-- Indexen voor tabel `migration`
 --
 ALTER TABLE `migration`
   ADD PRIMARY KEY (`version`);
 
 --
--- Indexes for table `module`
+-- Indexen voor tabel `module`
 --
 ALTER TABLE `module`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `numeric_data_types_duration`
+-- Indexen voor tabel `numeric_data_types_duration`
 --
 ALTER TABLE `numeric_data_types_duration`
   ADD PRIMARY KEY (`id`),
@@ -5296,7 +5310,7 @@ ALTER TABLE `numeric_data_types_duration`
   ADD KEY `value` (`value`);
 
 --
--- Indexes for table `numeric_data_types_integer`
+-- Indexen voor tabel `numeric_data_types_integer`
 --
 ALTER TABLE `numeric_data_types_integer`
   ADD PRIMARY KEY (`id`),
@@ -5306,7 +5320,7 @@ ALTER TABLE `numeric_data_types_integer`
   ADD KEY `value` (`value`);
 
 --
--- Indexes for table `numeric_data_types_interval`
+-- Indexen voor tabel `numeric_data_types_interval`
 --
 ALTER TABLE `numeric_data_types_interval`
   ADD PRIMARY KEY (`id`),
@@ -5316,7 +5330,7 @@ ALTER TABLE `numeric_data_types_interval`
   ADD KEY `value` (`value`);
 
 --
--- Indexes for table `numeric_data_types_timestamp`
+-- Indexen voor tabel `numeric_data_types_timestamp`
 --
 ALTER TABLE `numeric_data_types_timestamp`
   ADD PRIMARY KEY (`id`),
@@ -5326,14 +5340,14 @@ ALTER TABLE `numeric_data_types_timestamp`
   ADD KEY `value` (`value`);
 
 --
--- Indexes for table `password_creation`
+-- Indexen voor tabel `password_creation`
 --
 ALTER TABLE `password_creation`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_C77917B4A76ED395` (`user_id`);
 
 --
--- Indexes for table `property`
+-- Indexen voor tabel `property`
 --
 ALTER TABLE `property`
   ADD PRIMARY KEY (`id`),
@@ -5342,7 +5356,7 @@ ALTER TABLE `property`
   ADD KEY `IDX_8BF21CDEAD0E05F6` (`vocabulary_id`);
 
 --
--- Indexes for table `resource`
+-- Indexen voor tabel `resource`
 --
 ALTER TABLE `resource`
   ADD PRIMARY KEY (`id`),
@@ -5355,7 +5369,7 @@ ALTER TABLE `resource`
   ADD KEY `is_public` (`is_public`);
 
 --
--- Indexes for table `resource_class`
+-- Indexen voor tabel `resource_class`
 --
 ALTER TABLE `resource_class`
   ADD PRIMARY KEY (`id`),
@@ -5364,7 +5378,7 @@ ALTER TABLE `resource_class`
   ADD KEY `IDX_C6F063ADAD0E05F6` (`vocabulary_id`);
 
 --
--- Indexes for table `resource_template`
+-- Indexen voor tabel `resource_template`
 --
 ALTER TABLE `resource_template`
   ADD PRIMARY KEY (`id`),
@@ -5375,7 +5389,7 @@ ALTER TABLE `resource_template`
   ADD KEY `IDX_39ECD52EB84E0D1D` (`description_property_id`);
 
 --
--- Indexes for table `resource_template_property`
+-- Indexen voor tabel `resource_template_property`
 --
 ALTER TABLE `resource_template_property`
   ADD PRIMARY KEY (`id`),
@@ -5384,27 +5398,27 @@ ALTER TABLE `resource_template_property`
   ADD KEY `IDX_4689E2F1549213EC` (`property_id`);
 
 --
--- Indexes for table `search_config`
+-- Indexen voor tabel `search_config`
 --
 ALTER TABLE `search_config`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_D684063E78C9C0A` (`engine_id`);
 
 --
--- Indexes for table `search_engine`
+-- Indexen voor tabel `search_engine`
 --
 ALTER TABLE `search_engine`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `search_suggester`
+-- Indexen voor tabel `search_suggester`
 --
 ALTER TABLE `search_suggester`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_F64D915AE78C9C0A` (`engine_id`);
 
 --
--- Indexes for table `search_suggestion`
+-- Indexen voor tabel `search_suggestion`
 --
 ALTER TABLE `search_suggestion`
   ADD PRIMARY KEY (`id`),
@@ -5413,20 +5427,20 @@ ALTER TABLE `search_suggestion`
 ALTER TABLE `search_suggestion` ADD FULLTEXT KEY `IDX_536C3D13B8BA7C7` (`text`);
 
 --
--- Indexes for table `session`
+-- Indexen voor tabel `session`
 --
 ALTER TABLE `session`
   ADD PRIMARY KEY (`id`),
   ADD KEY `modified` (`modified`);
 
 --
--- Indexes for table `setting`
+-- Indexen voor tabel `setting`
 --
 ALTER TABLE `setting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `site`
+-- Indexen voor tabel `site`
 --
 ALTER TABLE `site`
   ADD PRIMARY KEY (`id`),
@@ -5436,7 +5450,7 @@ ALTER TABLE `site`
   ADD KEY `IDX_694309E47E3C61F9` (`owner_id`);
 
 --
--- Indexes for table `site_block_attachment`
+-- Indexen voor tabel `site_block_attachment`
 --
 ALTER TABLE `site_block_attachment`
   ADD PRIMARY KEY (`id`),
@@ -5446,7 +5460,7 @@ ALTER TABLE `site_block_attachment`
   ADD KEY `block_position` (`block_id`,`position`);
 
 --
--- Indexes for table `site_item_set`
+-- Indexen voor tabel `site_item_set`
 --
 ALTER TABLE `site_item_set`
   ADD PRIMARY KEY (`id`),
@@ -5456,7 +5470,7 @@ ALTER TABLE `site_item_set`
   ADD KEY `position` (`position`);
 
 --
--- Indexes for table `site_page`
+-- Indexen voor tabel `site_page`
 --
 ALTER TABLE `site_page`
   ADD PRIMARY KEY (`id`),
@@ -5465,7 +5479,7 @@ ALTER TABLE `site_page`
   ADD KEY `is_public` (`is_public`);
 
 --
--- Indexes for table `site_page_block`
+-- Indexen voor tabel `site_page_block`
 --
 ALTER TABLE `site_page_block`
   ADD PRIMARY KEY (`id`),
@@ -5473,7 +5487,7 @@ ALTER TABLE `site_page_block`
   ADD KEY `page_position` (`page_id`,`position`);
 
 --
--- Indexes for table `site_permission`
+-- Indexen voor tabel `site_permission`
 --
 ALTER TABLE `site_permission`
   ADD PRIMARY KEY (`id`),
@@ -5482,20 +5496,20 @@ ALTER TABLE `site_permission`
   ADD KEY `IDX_C0401D6FA76ED395` (`user_id`);
 
 --
--- Indexes for table `site_setting`
+-- Indexen voor tabel `site_setting`
 --
 ALTER TABLE `site_setting`
   ADD PRIMARY KEY (`id`,`site_id`),
   ADD KEY `IDX_64D05A53F6BD1646` (`site_id`);
 
 --
--- Indexes for table `solr_core`
+-- Indexen voor tabel `solr_core`
 --
 ALTER TABLE `solr_core`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `solr_map`
+-- Indexen voor tabel `solr_map`
 --
 ALTER TABLE `solr_map`
   ADD PRIMARY KEY (`id`),
@@ -5505,7 +5519,7 @@ ALTER TABLE `solr_map`
   ADD KEY `IDX_39A565C527B35A195F8A7F73` (`solr_core_id`,`source`);
 
 --
--- Indexes for table `stat`
+-- Indexen voor tabel `stat`
 --
 ALTER TABLE `stat`
   ADD PRIMARY KEY (`id`),
@@ -5519,21 +5533,21 @@ ALTER TABLE `stat`
   ADD KEY `IDX_20B8FF215F6B6CAC` (`modified`);
 
 --
--- Indexes for table `user`
+-- Indexen voor tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`);
 
 --
--- Indexes for table `user_setting`
+-- Indexen voor tabel `user_setting`
 --
 ALTER TABLE `user_setting`
   ADD PRIMARY KEY (`id`,`user_id`),
   ADD KEY `IDX_C779A692A76ED395` (`user_id`);
 
 --
--- Indexes for table `value`
+-- Indexen voor tabel `value`
 --
 ALTER TABLE `value`
   ADD PRIMARY KEY (`id`),
@@ -5549,13 +5563,13 @@ ALTER TABLE `value`
   ADD KEY `lang` (`lang`);
 
 --
--- Indexes for table `value_annotation`
+-- Indexen voor tabel `value_annotation`
 --
 ALTER TABLE `value_annotation`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `vocabulary`
+-- Indexen voor tabel `vocabulary`
 --
 ALTER TABLE `vocabulary`
   ADD PRIMARY KEY (`id`),
@@ -5564,231 +5578,231 @@ ALTER TABLE `vocabulary`
   ADD KEY `IDX_9099C97B7E3C61F9` (`owner_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `asset`
+-- AUTO_INCREMENT voor een tabel `asset`
 --
 ALTER TABLE `asset`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bulk_export`
+-- AUTO_INCREMENT voor een tabel `bulk_export`
 --
 ALTER TABLE `bulk_export`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bulk_exporter`
+-- AUTO_INCREMENT voor een tabel `bulk_exporter`
 --
 ALTER TABLE `bulk_exporter`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `csvimport_entity`
+-- AUTO_INCREMENT voor een tabel `csvimport_entity`
 --
 ALTER TABLE `csvimport_entity`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `csvimport_import`
+-- AUTO_INCREMENT voor een tabel `csvimport_import`
 --
 ALTER TABLE `csvimport_import`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `custom_vocab`
+-- AUTO_INCREMENT voor een tabel `custom_vocab`
 --
 ALTER TABLE `custom_vocab`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `hit`
+-- AUTO_INCREMENT voor een tabel `hit`
 --
 ALTER TABLE `hit`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `job`
+-- AUTO_INCREMENT voor een tabel `job`
 --
 ALTER TABLE `job`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `log`
+-- AUTO_INCREMENT voor een tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `numeric_data_types_duration`
+-- AUTO_INCREMENT voor een tabel `numeric_data_types_duration`
 --
 ALTER TABLE `numeric_data_types_duration`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `numeric_data_types_integer`
+-- AUTO_INCREMENT voor een tabel `numeric_data_types_integer`
 --
 ALTER TABLE `numeric_data_types_integer`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `numeric_data_types_interval`
+-- AUTO_INCREMENT voor een tabel `numeric_data_types_interval`
 --
 ALTER TABLE `numeric_data_types_interval`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `numeric_data_types_timestamp`
+-- AUTO_INCREMENT voor een tabel `numeric_data_types_timestamp`
 --
 ALTER TABLE `numeric_data_types_timestamp`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `property`
+-- AUTO_INCREMENT voor een tabel `property`
 --
 ALTER TABLE `property`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2150;
 
 --
--- AUTO_INCREMENT for table `resource`
+-- AUTO_INCREMENT voor een tabel `resource`
 --
 ALTER TABLE `resource`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `resource_class`
+-- AUTO_INCREMENT voor een tabel `resource_class`
 --
 ALTER TABLE `resource_class`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1281;
 
 --
--- AUTO_INCREMENT for table `resource_template`
+-- AUTO_INCREMENT voor een tabel `resource_template`
 --
 ALTER TABLE `resource_template`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `resource_template_property`
+-- AUTO_INCREMENT voor een tabel `resource_template_property`
 --
 ALTER TABLE `resource_template_property`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
--- AUTO_INCREMENT for table `search_config`
+-- AUTO_INCREMENT voor een tabel `search_config`
 --
 ALTER TABLE `search_config`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `search_engine`
+-- AUTO_INCREMENT voor een tabel `search_engine`
 --
 ALTER TABLE `search_engine`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `search_suggester`
+-- AUTO_INCREMENT voor een tabel `search_suggester`
 --
 ALTER TABLE `search_suggester`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `search_suggestion`
+-- AUTO_INCREMENT voor een tabel `search_suggestion`
 --
 ALTER TABLE `search_suggestion`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `site`
+-- AUTO_INCREMENT voor een tabel `site`
 --
 ALTER TABLE `site`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `site_block_attachment`
+-- AUTO_INCREMENT voor een tabel `site_block_attachment`
 --
 ALTER TABLE `site_block_attachment`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `site_item_set`
+-- AUTO_INCREMENT voor een tabel `site_item_set`
 --
 ALTER TABLE `site_item_set`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `site_page`
+-- AUTO_INCREMENT voor een tabel `site_page`
 --
 ALTER TABLE `site_page`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `site_page_block`
+-- AUTO_INCREMENT voor een tabel `site_page_block`
 --
 ALTER TABLE `site_page_block`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `site_permission`
+-- AUTO_INCREMENT voor een tabel `site_permission`
 --
 ALTER TABLE `site_permission`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `solr_core`
+-- AUTO_INCREMENT voor een tabel `solr_core`
 --
 ALTER TABLE `solr_core`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `solr_map`
+-- AUTO_INCREMENT voor een tabel `solr_map`
 --
 ALTER TABLE `solr_map`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT for table `stat`
+-- AUTO_INCREMENT voor een tabel `stat`
 --
 ALTER TABLE `stat`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `value`
+-- AUTO_INCREMENT voor een tabel `value`
 --
 ALTER TABLE `value`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `vocabulary`
+-- AUTO_INCREMENT voor een tabel `vocabulary`
 --
 ALTER TABLE `vocabulary`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `api_key`
+-- Beperkingen voor tabel `api_key`
 --
 ALTER TABLE `api_key`
   ADD CONSTRAINT `FK_C912ED9D7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `asset`
+-- Beperkingen voor tabel `asset`
 --
 ALTER TABLE `asset`
   ADD CONSTRAINT `FK_2AF5A5C7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `bulk_export`
+-- Beperkingen voor tabel `bulk_export`
 --
 ALTER TABLE `bulk_export`
   ADD CONSTRAINT `FK_625A30FD7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL,
@@ -5796,127 +5810,127 @@ ALTER TABLE `bulk_export`
   ADD CONSTRAINT `FK_625A30FDBE04EA9` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `bulk_exporter`
+-- Beperkingen voor tabel `bulk_exporter`
 --
 ALTER TABLE `bulk_exporter`
   ADD CONSTRAINT `FK_6093500B7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `csvimport_entity`
+-- Beperkingen voor tabel `csvimport_entity`
 --
 ALTER TABLE `csvimport_entity`
   ADD CONSTRAINT `FK_84D382F4BE04EA9` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`);
 
 --
--- Constraints for table `csvimport_import`
+-- Beperkingen voor tabel `csvimport_import`
 --
 ALTER TABLE `csvimport_import`
   ADD CONSTRAINT `FK_17B508814C276F75` FOREIGN KEY (`undo_job_id`) REFERENCES `job` (`id`),
   ADD CONSTRAINT `FK_17B50881BE04EA9` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`);
 
 --
--- Constraints for table `custom_vocab`
+-- Beperkingen voor tabel `custom_vocab`
 --
 ALTER TABLE `custom_vocab`
   ADD CONSTRAINT `FK_8533D2A57E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `FK_8533D2A5960278D7` FOREIGN KEY (`item_set_id`) REFERENCES `item_set` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `fulltext_search`
+-- Beperkingen voor tabel `fulltext_search`
 --
 ALTER TABLE `fulltext_search`
   ADD CONSTRAINT `FK_AA31FE4A7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `item`
+-- Beperkingen voor tabel `item`
 --
 ALTER TABLE `item`
   ADD CONSTRAINT `FK_1F1B251EBF396750` FOREIGN KEY (`id`) REFERENCES `resource` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_1F1B251ECBE0B084` FOREIGN KEY (`primary_media_id`) REFERENCES `media` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `item_item_set`
+-- Beperkingen voor tabel `item_item_set`
 --
 ALTER TABLE `item_item_set`
   ADD CONSTRAINT `FK_6D0C9625126F525E` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_6D0C9625960278D7` FOREIGN KEY (`item_set_id`) REFERENCES `item_set` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `item_set`
+-- Beperkingen voor tabel `item_set`
 --
 ALTER TABLE `item_set`
   ADD CONSTRAINT `FK_1015EEEBF396750` FOREIGN KEY (`id`) REFERENCES `resource` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `item_site`
+-- Beperkingen voor tabel `item_site`
 --
 ALTER TABLE `item_site`
   ADD CONSTRAINT `FK_A1734D1F126F525E` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_A1734D1FF6BD1646` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `job`
+-- Beperkingen voor tabel `job`
 --
 ALTER TABLE `job`
   ADD CONSTRAINT `FK_FBD8E0F87E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `log`
+-- Beperkingen voor tabel `log`
 --
 ALTER TABLE `log`
   ADD CONSTRAINT `FK_8F3F68C57E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `FK_8F3F68C5BE04EA9` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `media`
+-- Beperkingen voor tabel `media`
 --
 ALTER TABLE `media`
   ADD CONSTRAINT `FK_6A2CA10C126F525E` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
   ADD CONSTRAINT `FK_6A2CA10CBF396750` FOREIGN KEY (`id`) REFERENCES `resource` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `numeric_data_types_duration`
+-- Beperkingen voor tabel `numeric_data_types_duration`
 --
 ALTER TABLE `numeric_data_types_duration`
   ADD CONSTRAINT `FK_E1B5FC60549213EC` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_E1B5FC6089329D25` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `numeric_data_types_integer`
+-- Beperkingen voor tabel `numeric_data_types_integer`
 --
 ALTER TABLE `numeric_data_types_integer`
   ADD CONSTRAINT `FK_6D39C790549213EC` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_6D39C79089329D25` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `numeric_data_types_interval`
+-- Beperkingen voor tabel `numeric_data_types_interval`
 --
 ALTER TABLE `numeric_data_types_interval`
   ADD CONSTRAINT `FK_7E2C936B549213EC` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_7E2C936B89329D25` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `numeric_data_types_timestamp`
+-- Beperkingen voor tabel `numeric_data_types_timestamp`
 --
 ALTER TABLE `numeric_data_types_timestamp`
   ADD CONSTRAINT `FK_7367AFAA549213EC` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_7367AFAA89329D25` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `password_creation`
+-- Beperkingen voor tabel `password_creation`
 --
 ALTER TABLE `password_creation`
   ADD CONSTRAINT `FK_C77917B4A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `property`
+-- Beperkingen voor tabel `property`
 --
 ALTER TABLE `property`
   ADD CONSTRAINT `FK_8BF21CDE7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `FK_8BF21CDEAD0E05F6` FOREIGN KEY (`vocabulary_id`) REFERENCES `vocabulary` (`id`);
 
 --
--- Constraints for table `resource`
+-- Beperkingen voor tabel `resource`
 --
 ALTER TABLE `resource`
   ADD CONSTRAINT `FK_BC91F41616131EA` FOREIGN KEY (`resource_template_id`) REFERENCES `resource_template` (`id`) ON DELETE SET NULL,
@@ -5925,14 +5939,14 @@ ALTER TABLE `resource`
   ADD CONSTRAINT `FK_BC91F416FDFF2E92` FOREIGN KEY (`thumbnail_id`) REFERENCES `asset` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `resource_class`
+-- Beperkingen voor tabel `resource_class`
 --
 ALTER TABLE `resource_class`
   ADD CONSTRAINT `FK_C6F063AD7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `FK_C6F063ADAD0E05F6` FOREIGN KEY (`vocabulary_id`) REFERENCES `vocabulary` (`id`);
 
 --
--- Constraints for table `resource_template`
+-- Beperkingen voor tabel `resource_template`
 --
 ALTER TABLE `resource_template`
   ADD CONSTRAINT `FK_39ECD52E448CC1BD` FOREIGN KEY (`resource_class_id`) REFERENCES `resource_class` (`id`) ON DELETE SET NULL,
@@ -5941,32 +5955,32 @@ ALTER TABLE `resource_template`
   ADD CONSTRAINT `FK_39ECD52EB84E0D1D` FOREIGN KEY (`description_property_id`) REFERENCES `property` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `resource_template_property`
+-- Beperkingen voor tabel `resource_template_property`
 --
 ALTER TABLE `resource_template_property`
   ADD CONSTRAINT `FK_4689E2F116131EA` FOREIGN KEY (`resource_template_id`) REFERENCES `resource_template` (`id`),
   ADD CONSTRAINT `FK_4689E2F1549213EC` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `search_config`
+-- Beperkingen voor tabel `search_config`
 --
 ALTER TABLE `search_config`
   ADD CONSTRAINT `FK_D684063E78C9C0A` FOREIGN KEY (`engine_id`) REFERENCES `search_engine` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `search_suggester`
+-- Beperkingen voor tabel `search_suggester`
 --
 ALTER TABLE `search_suggester`
   ADD CONSTRAINT `FK_F64D915AE78C9C0A` FOREIGN KEY (`engine_id`) REFERENCES `search_engine` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `search_suggestion`
+-- Beperkingen voor tabel `search_suggestion`
 --
 ALTER TABLE `search_suggestion`
   ADD CONSTRAINT `FK_536C3D170913F08` FOREIGN KEY (`suggester_id`) REFERENCES `search_suggester` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `site`
+-- Beperkingen voor tabel `site`
 --
 ALTER TABLE `site`
   ADD CONSTRAINT `FK_694309E4571EDDA` FOREIGN KEY (`homepage_id`) REFERENCES `site_page` (`id`) ON DELETE SET NULL,
@@ -5974,7 +5988,7 @@ ALTER TABLE `site`
   ADD CONSTRAINT `FK_694309E4FDFF2E92` FOREIGN KEY (`thumbnail_id`) REFERENCES `asset` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `site_block_attachment`
+-- Beperkingen voor tabel `site_block_attachment`
 --
 ALTER TABLE `site_block_attachment`
   ADD CONSTRAINT `FK_236473FE126F525E` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE SET NULL,
@@ -5982,51 +5996,51 @@ ALTER TABLE `site_block_attachment`
   ADD CONSTRAINT `FK_236473FEEA9FDD75` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `site_item_set`
+-- Beperkingen voor tabel `site_item_set`
 --
 ALTER TABLE `site_item_set`
   ADD CONSTRAINT `FK_D4CE134960278D7` FOREIGN KEY (`item_set_id`) REFERENCES `item_set` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_D4CE134F6BD1646` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `site_page`
+-- Beperkingen voor tabel `site_page`
 --
 ALTER TABLE `site_page`
   ADD CONSTRAINT `FK_2F900BD9F6BD1646` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`);
 
 --
--- Constraints for table `site_page_block`
+-- Beperkingen voor tabel `site_page_block`
 --
 ALTER TABLE `site_page_block`
   ADD CONSTRAINT `FK_C593E731C4663E4` FOREIGN KEY (`page_id`) REFERENCES `site_page` (`id`);
 
 --
--- Constraints for table `site_permission`
+-- Beperkingen voor tabel `site_permission`
 --
 ALTER TABLE `site_permission`
   ADD CONSTRAINT `FK_C0401D6FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_C0401D6FF6BD1646` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `site_setting`
+-- Beperkingen voor tabel `site_setting`
 --
 ALTER TABLE `site_setting`
   ADD CONSTRAINT `FK_64D05A53F6BD1646` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `solr_map`
+-- Beperkingen voor tabel `solr_map`
 --
 ALTER TABLE `solr_map`
   ADD CONSTRAINT `FK_39A565C527B35A19` FOREIGN KEY (`solr_core_id`) REFERENCES `solr_core` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user_setting`
+-- Beperkingen voor tabel `user_setting`
 --
 ALTER TABLE `user_setting`
   ADD CONSTRAINT `FK_C779A692A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `value`
+-- Beperkingen voor tabel `value`
 --
 ALTER TABLE `value`
   ADD CONSTRAINT `FK_1D7758344BC72506` FOREIGN KEY (`value_resource_id`) REFERENCES `resource` (`id`) ON DELETE CASCADE,
@@ -6035,13 +6049,13 @@ ALTER TABLE `value`
   ADD CONSTRAINT `FK_1D7758349B66727E` FOREIGN KEY (`value_annotation_id`) REFERENCES `value_annotation` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `value_annotation`
+-- Beperkingen voor tabel `value_annotation`
 --
 ALTER TABLE `value_annotation`
   ADD CONSTRAINT `FK_C03BA4EBF396750` FOREIGN KEY (`id`) REFERENCES `resource` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `vocabulary`
+-- Beperkingen voor tabel `vocabulary`
 --
 ALTER TABLE `vocabulary`
   ADD CONSTRAINT `FK_9099C97B7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL;
