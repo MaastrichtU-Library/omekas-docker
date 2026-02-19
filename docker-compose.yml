@@ -25,7 +25,6 @@ services:
         - ENV_MODULE_EUCookieBar_VERSION
         - ENV_MODULE_ExtractText_VERSION
         - ENV_MODULE_FileSideload_VERSION
-        - ENV_MODULE_Generic_VERSION
         - ENV_MODULE_HideProperties_VERSION
         - ENV_MODULE_IiifSearch_VERSION
         - ENV_MODULE_IiifServer_VERSION
@@ -36,6 +35,7 @@ services:
         - ENV_MODULE_NdeTermennetwerk_VERSION
         - ENV_MODULE_NumericDataTypes_VERSION
         - ENV_MODULE_PdfViewer_VERSION
+        - ENV_MODULE_ResourceMeta_VERSION
         - ENV_MODULE_SearchSolr_VERSION
         - ENV_MODULE_Sitemaps_VERSION
         - ENV_MODULE_Statistics_VERSION
@@ -54,7 +54,6 @@ services:
       - omeka:/var/www/html/volume
       - ./omeka-s/sideload:/data/sftp/omeka-sideload/
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
-      - ./externals/freedom:/var/www/html/themes/freedom
       - ./externals/omekas-helpers:/var/www/html/helper
     networks:
       default:

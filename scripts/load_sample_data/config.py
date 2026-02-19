@@ -1,5 +1,5 @@
 # Configuration
 OMEKA_API_URL = "http://omeka.local/api"
-OMEKA_API_KEY = "M009gxu3D6cTCJMQFEUYme4aZUM46hf1"
-OMEKA_API_KEY_ID = "Ssjbd3C7n77nmnjrMRwgnW545W75s01Y"
+OMEKA_API_KEY = "RxXwtNAet0dxD5w6GghVAEioXRh0kjTo"
+OMEKA_API_KEY_ID = "0XhKkvsEtxdoJpbrBd3wj6baaxZ31giS"
 DATA_DIR = "data"

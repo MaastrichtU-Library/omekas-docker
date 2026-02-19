@@ -11,8 +11,10 @@ set -m
 # Pre-create the Solr core
 precreate-core ${ENV_SOLR_CORE}
 
-# Start Solr in foreground and continue with the rest of this script 
-solr-foreground &
+# Start Solr in foreground and continue with the rest of this script
+# As of version 10.0, Solr starts in cloud mode by default. Specify --user-managed to run in standalone mode
+# See: https://solr.apache.org/guide/solr/latest/deployment-guide/cluster-types.html
+solr-foreground --user-managed &
 
 # Wait until Solr has started and port 8983 becomes available
 until nc -z localhost 8983; do
@@ -80,26 +82,6 @@ if ! [ -f /var/solr/solr_schema_modified ]; then
 	}
 }
 EOF
-
-    # 1. Solr schema: Add a new field definition
-    curl --retry 5 --connect-timeout 5 -X POST -H 'Content-type:application/json' http://localhost:8983/solr/${ENV_SOLR_CORE}/schema \
-    --data-binary '{
-      "add-field": {
-        "name": "date_year_agg_i",
-        "type": "pint",
-        "stored": true,
-        "indexed": true
-      }
-    }'
-
-    # 2. Solr schema: Add CopyField rules so that the year is copied from multiple date (year) fields to the new field
-    curl --retry 5 --connect-timeout 5 -X POST http://localhost:8983/solr/${ENV_SOLR_CORE}/schema --data-binary '{
-      "add-copy-field": [
-        {"source": "schema_dateIssued_i", "dest": "date_year_agg_i"},
-        {"source": "schema_datePublished_i", "dest": "date_year_agg_i"},
-        {"source": "schema_dateCreated_i", "dest": "date_year_agg_i"}
-      ]
-    }'
 
     touch /var/solr/solr_schema_modified
     echo "\n Done: Solr schema updated!"

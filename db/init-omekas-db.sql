@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Nov 27, 2025 at 09:28 AM
+-- Generation Time: Feb 19, 2026 at 01:54 PM
 -- Server version: 8.0.40
 -- PHP Version: 8.0.27
 
@@ -42,7 +42,7 @@ CREATE TABLE `api_key` (
 --
 
 INSERT INTO `api_key` (`id`, `owner_id`, `label`, `credential_hash`, `last_ip`, `last_accessed`, `created`) VALUES
-('Ssjbd3C7n77nmnjrMRwgnW545W75s01Y', 1, 'admin-key', '$2y$10$Oi.wfhFJC/tJ9YFC5GhEgu2IJcvad0Ytf/DtVjhgCHqOSxr1Ouj92', NULL, NULL, '2025-08-11 09:53:02');
+('0XhKkvsEtxdoJpbrBd3wj6baaxZ31giS', 1, 'admin-key-411', '$2y$10$ALWAd22X1u.1PhhaI33oIeV04vrXcwO6QdE34hBbd5tY/bFLMDxxG', NULL, NULL, '2025-08-11 10:49:40');
 
 -- --------------------------------------------------------
 
@@ -100,42 +100,6 @@ INSERT INTO `bulk_exporter` (`id`, `owner_id`, `label`, `writer`, `config`) VALU
 (3, 1, 'OpenDocument spreadsheet (ods)', 'BulkExport\\Writer\\OpenDocumentSpreadsheetWriter', '{\"writer\":{\"separator\":\" | \",\"resource_types\":[\"o:Item\"],\"metadata\":null,\"query\":\"\"}}'),
 (4, 1, 'CSV', 'BulkExport\\Writer\\CsvWriter', '{\"writer\":{\"delimiter\":\",\",\"enclosure\":\"\\\"\",\"escape\":\"\\\\\",\"separator\":\" | \",\"resource_types\":[\"o:Item\"],\"metadata\":null,\"query\":\"\"}}'),
 (5, 1, 'Text', 'BulkExport\\Writer\\TextWriter', '{\"writer\":{\"format_fields\":\"label\",\"resource_types\":[\"o:Item\"],\"metadata\":null,\"query\":\"\"}}');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contribution`
---
-
-CREATE TABLE `contribution` (
-  `id` int NOT NULL,
-  `resource_id` int DEFAULT NULL,
-  `owner_id` int DEFAULT NULL,
-  `token_id` int DEFAULT NULL,
-  `email` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `patch` tinyint(1) NOT NULL DEFAULT '0',
-  `submitted` tinyint(1) NOT NULL DEFAULT '0',
-  `reviewed` tinyint(1) NOT NULL DEFAULT '0',
-  `proposal` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
-  `created` datetime NOT NULL,
-  `modified` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contribution_token`
---
-
-CREATE TABLE `contribution_token` (
-  `id` int NOT NULL,
-  `resource_id` int NOT NULL,
-  `token` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `expire` datetime DEFAULT NULL,
-  `created` datetime NOT NULL,
-  `accessed` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -229,6 +193,7 @@ CREATE TABLE `hit` (
   `site_id` int NOT NULL DEFAULT '0',
   `user_id` int NOT NULL DEFAULT '0',
   `ip` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `language` varchar(2) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '',
   `query` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '(DC2Type:json)',
   `referrer` varchar(1024) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL DEFAULT '',
   `user_agent` varchar(1024) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '',
@@ -240,39 +205,51 @@ CREATE TABLE `hit` (
 -- Dumping data for table `hit`
 --
 
-INSERT INTO `hit` (`id`, `url`, `entity_id`, `entity_name`, `site_id`, `user_id`, `ip`, `query`, `referrer`, `user_agent`, `accept_language`, `created`) VALUES
-(1, '/', 0, '', 0, 0, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0', 'en-US,en;q=0.5', '2024-03-26 13:43:37'),
-(2, '/', 0, '', 0, 0, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0', 'en-US,en;q=0.5', '2024-04-15 09:39:14'),
-(3, '/s/default/item', 0, '', 1, 1, '::', NULL, 'http://omeka.local/s/default/item', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-15 12:33:56'),
-(4, '/s/default/item', 0, '', 1, 1, '::', NULL, 'http://omeka.local/s/default/item', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-15 12:34:16'),
-(5, '/s/default/item/1', 1, 'items', 1, 1, '::', NULL, 'http://omeka.local/s/default/item', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-15 12:34:18'),
-(6, '/s/default/item', 0, '', 1, 1, '::', NULL, 'http://omeka.local/s/default/item', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-15 12:34:19'),
-(7, '/', 0, '', 0, 0, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-16 12:07:36'),
-(8, '/', 0, '', 0, 0, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:35:21'),
-(9, '/', 0, '', 0, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:36:02'),
-(10, '/s/default', 0, '', 1, 1, '::', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:36:04'),
-(11, '/s/default/page/welcome', 1, 'site_pages', 1, 1, '::', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:36:04'),
-(12, '/s/default/sitemap.xml', 0, '', 1, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:36:11'),
-(13, '/', 0, '', 0, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:37:24'),
-(14, '/', 0, '', 0, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:45'),
-(15, '/s/default', 0, '', 1, 1, '::', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:46'),
-(16, '/s/default/page/welcome', 1, 'site_pages', 1, 1, '::', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:46'),
-(17, '/s/default/sitemap.xml', 0, '', 1, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:53'),
-(18, '/s/default/sitemapindex.xml', 0, '', 1, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:53'),
-(19, '/s/default/sitemap.xml', 0, '', 1, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:39:28'),
-(20, '/s/default/sitemapindex.xml', 0, '', 1, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:39:29'),
-(21, '/s/default/sitemapindex.xml', 0, '', 1, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:41:32'),
-(22, '/s/default/sitemap.xml', 0, '', 1, 1, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:41:32'),
-(23, '/', 0, '', 0, 0, '::', NULL, '', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-04-30 07:57:12'),
-(24, '/s/index', 0, '', 1, 1, '::', NULL, 'http://omeka.local/admin/site/s/index', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 15:00:00'),
-(25, '/s/index/page/welcome', 1, 'site_pages', 1, 1, '::', NULL, 'http://omeka.local/admin/site/s/index', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 15:00:00'),
-(26, '/s/index/find', 0, '', 1, 1, '::', NULL, 'http://omeka.local/s/index/page/welcome', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 15:00:02'),
-(27, '/s/index/find', 0, '', 1, 1, '::', NULL, 'http://omeka.local/s/index/page/welcome', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 15:00:09'),
-(28, '/s/index/item/1', 1, 'items', 1, 1, '::', NULL, 'http://omeka.local/s/index/find', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 15:00:10'),
-(29, '/', 0, '', 0, 0, '::', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0', 'nl,en-US;q=0.7,en;q=0.3', '2025-08-11 09:52:49'),
-(30, '/', 0, '', 0, 0, '::', NULL, '', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-11-27 09:27:27'),
-(31, '/s/index', 0, '', 1, 0, '::', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-11-27 09:27:29'),
-(32, '/s/index/page/welcome', 1, 'site_pages', 1, 0, '::', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-11-27 09:27:29');
+INSERT INTO `hit` (`id`, `url`, `entity_id`, `entity_name`, `site_id`, `user_id`, `ip`, `language`, `query`, `referrer`, `user_agent`, `accept_language`, `created`) VALUES
+(1, '/', 0, '', 0, 0, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0', 'en-US,en;q=0.5', '2024-03-26 13:43:37'),
+(2, '/', 0, '', 0, 0, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0', 'en-US,en;q=0.5', '2024-04-15 09:39:14'),
+(3, '/s/default/item', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/default/item', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-15 12:33:56'),
+(4, '/s/default/item', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/default/item', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-15 12:34:16'),
+(5, '/s/default/item/1', 1, 'items', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/default/item', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-15 12:34:18'),
+(6, '/s/default/item', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/default/item', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-15 12:34:19'),
+(7, '/', 0, '', 0, 0, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0', 'en-US,en;q=0.5', '2024-04-16 12:07:36'),
+(8, '/', 0, '', 0, 0, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:35:21'),
+(9, '/', 0, '', 0, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:36:02'),
+(10, '/s/default', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:36:04'),
+(11, '/s/default/page/welcome', 1, 'site_pages', 1, 1, '::', 'en', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:36:04'),
+(12, '/s/default/sitemap.xml', 0, '', 1, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:36:11'),
+(13, '/', 0, '', 0, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:37:24'),
+(14, '/', 0, '', 0, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:45'),
+(15, '/s/default', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:46'),
+(16, '/s/default/page/welcome', 1, 'site_pages', 1, 1, '::', 'en', NULL, 'http://omeka.local/', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:46'),
+(17, '/s/default/sitemap.xml', 0, '', 1, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:53'),
+(18, '/s/default/sitemapindex.xml', 0, '', 1, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:38:53'),
+(19, '/s/default/sitemap.xml', 0, '', 1, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:39:28'),
+(20, '/s/default/sitemapindex.xml', 0, '', 1, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:39:29'),
+(21, '/s/default/sitemapindex.xml', 0, '', 1, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:41:32'),
+(22, '/s/default/sitemap.xml', 0, '', 1, 1, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0', 'en-US,en;q=0.5', '2024-10-08 13:41:32'),
+(23, '/', 0, '', 0, 0, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-04-30 07:57:12'),
+(24, '/s/default', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/admin/site', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:52:21'),
+(25, '/s/default/page/welcome', 1, 'site_pages', 1, 1, '::', 'en', NULL, 'http://omeka.local/admin/site', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:52:21'),
+(26, '/s/default/page/welcome', 1, 'site_pages', 1, 1, '::', 'en', NULL, 'http://omeka.local/admin/site', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:52:39'),
+(27, '/s/default/find', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/default/page/welcome', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:52:40'),
+(28, '/s/default/find', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/default/page/welcome', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:52:48'),
+(29, '/s/index', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/admin/site/s/index', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:56:35'),
+(30, '/s/index/page/welcome', 1, 'site_pages', 1, 1, '::', 'en', NULL, 'http://omeka.local/admin/site/s/index', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:56:35'),
+(31, '/s/index/page/welcome', 1, 'site_pages', 1, 1, '::', 'en', NULL, 'http://omeka.local/admin/site/s/index', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:56:38'),
+(32, '/s/index/find', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/page/welcome', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:56:39'),
+(33, '/s/index/item/1', 1, 'items', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/find', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-07-10 14:56:41'),
+(34, '/s/index', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/find', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-09-29 13:38:56'),
+(35, '/s/index/page/welcome', 1, 'site_pages', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/find', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-09-29 13:38:56'),
+(36, '/s/index/find', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/page/welcome', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-09-29 13:38:58'),
+(37, '/s/index/item', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/find', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-09-29 13:38:59'),
+(38, '/s/index/item/1', 1, 'items', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/item', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-09-29 13:39:01'),
+(39, '/s/index/item', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/item/1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-09-29 13:39:03'),
+(40, '/s/index/find', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/item', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-09-29 13:49:10'),
+(41, '/s/index/find', 0, '', 1, 1, '::', 'en', NULL, 'http://omeka.local/s/index/item', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-09-29 13:49:32'),
+(42, '/', 0, '', 0, 0, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2025-11-12 13:24:49'),
+(43, '/s/index/find', 0, '', 1, 1, '::', 'nl', NULL, 'http://omeka.local/s/index/page/welcome', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0', 'nl,en-US;q=0.7,en;q=0.3', '2025-12-09 10:50:44'),
+(44, '/', 0, '', 0, 0, '::', 'en', NULL, '', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'en-US,en;q=0.9', '2026-02-19 13:51:26');
 
 -- --------------------------------------------------------
 
@@ -374,8 +351,12 @@ CREATE TABLE `job` (
 INSERT INTO `job` (`id`, `owner_id`, `pid`, `status`, `class`, `args`, `log`, `started`, `ended`) VALUES
 (1, 1, '49', 'completed', 'Ark\\Job\\CreateArks', NULL, NULL, '2023-02-16 07:52:23', '2023-02-16 07:52:23'),
 (2, 1, '41', 'completed', 'AdvancedSearch\\Job\\IndexSearch', '{\"search_engine_id\":2,\"start_resource_id\":1,\"resource_names\":[\"items\"],\"force\":false}', '2023-02-28T14:44:24+00:00 NOTICE (5): Search index #2 (\"Solr\"): start of indexing\n2023-02-28T14:44:24+00:00 INFO (6): Search index is not cleared: reindexing starts at resource #1.\n2023-02-28T14:44:24+00:00 INFO (6): Indexing in Solr core \"Default\": item #1\n2023-02-28T14:44:24+00:00 INFO (6): Search index #2 (\"Solr\"): end of indexing. items: 1 indexed. Execution time: 0 seconds. Failed indexed resources should be checked manually.\n', '2023-02-28 14:44:23', '2023-02-28 14:44:24'),
-(3, 1, '161', 'completed', 'AdvancedSearch\\Job\\IndexSearch', '{\"search_engine_id\":2,\"start_resource_id\":1,\"resource_names\":[\"items\"],\"force\":false}', NULL, '2025-07-10 15:00:07', '2025-07-10 15:00:08'),
-(4, 1, '164', 'completed', 'Omeka\\Job\\BatchDelete', '{\"resource\":\"logs\",\"query\":{\"message\":[]}}', NULL, '2025-07-10 15:00:18', '2025-07-10 15:00:18');
+(3, 1, '165', 'completed', 'AdvancedSearch\\Job\\IndexSearch', '{\"search_engine_ids\":[2],\"clear_index\":false,\"start_resource_id\":1,\"resources_by_batch\":500,\"sleep_after_loop\":0,\"resource_types\":[\"items\"],\"resources_limit\":0,\"resources_offset\":0,\"visibility\":null,\"force\":false}', NULL, '2025-07-10 14:52:46', '2025-07-10 14:52:47'),
+(4, 1, '181', 'completed', 'Omeka\\Job\\BatchDelete', '{\"resource\":\"logs\",\"query\":{\"sort_by_default\":\"\",\"sort_order_default\":\"\",\"message\":[]}}', NULL, '2025-07-10 14:57:58', '2025-07-10 14:57:58'),
+(5, 1, '163', 'completed', 'AdvancedSearch\\Job\\IndexSearch', '{\"search_engine_ids\":[2],\"clear_index\":false,\"start_resource_id\":1,\"resources_by_batch\":500,\"sleep_after_loop\":0,\"resource_types\":[\"items\"],\"resources_limit\":0,\"resources_offset\":0,\"visibility\":null,\"force\":false}', NULL, '2025-09-29 13:43:46', '2025-09-29 13:43:46'),
+(6, 1, '163', 'completed', 'Log\\Job\\ArchiveLogsJob', '{\"seconds\":7776000,\"severity\":0,\"references\":[],\"store\":false,\"format\":\"tsv\",\"compress\":true,\"include_id\":false,\"translate\":true,\"delete\":true}', NULL, '2025-12-09 10:50:33', '2025-12-09 10:50:33'),
+(7, NULL, '162', 'completed', 'Log\\Job\\ArchiveLogsJob', '{\"seconds\":7776000,\"severity\":0,\"references\":[],\"store\":false,\"format\":\"tsv\",\"compress\":true,\"include_id\":false,\"translate\":true,\"delete\":true}', NULL, '2026-01-06 11:50:35', '2026-01-06 11:50:35'),
+(8, NULL, '162', 'completed', 'Log\\Job\\ArchiveLogsJob', '{\"seconds\":7776000,\"severity\":0,\"references\":[],\"store\":false,\"format\":\"tsv\",\"compress\":true,\"include_id\":false,\"translate\":true,\"delete\":true}', NULL, '2026-02-19 13:51:26', '2026-02-19 13:51:26');
 
 -- --------------------------------------------------------
 
@@ -393,6 +374,20 @@ CREATE TABLE `log` (
   `context` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
   `created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `log`
+--
+
+INSERT INTO `log` (`id`, `owner_id`, `job_id`, `reference`, `severity`, `message`, `context`, `created`) VALUES
+(23, 1, 6, 'easy-admin/check/job_6', 5, 'Delete specified logs older than {date_time} with params: severity = {severity}; reference = {references}.', '{\"date_time\":\"2025-09-10 10:50:33\",\"severity\":\"-\",\"references\":\"-\"}', '2025-12-09 10:50:33'),
+(24, 1, 6, 'easy-admin/check/job_6', 5, 'No logs found matching criteria.', '[]', '2025-12-09 10:50:33'),
+(25, NULL, 7, 'easy-admin/check/job_7', 5, 'Delete specified logs older than {date_time} with params: severity = {severity}; reference = {references}.', '{\"date_time\":\"2025-10-08 11:50:35\",\"severity\":\"-\",\"references\":\"-\"}', '2026-01-06 11:50:35'),
+(26, NULL, 7, 'easy-admin/check/job_7', 5, 'Found {count} logs to process.', '{\"count\":5}', '2026-01-06 11:50:35'),
+(27, NULL, 7, 'easy-admin/check/job_7', 5, 'Deleted {count} logs from database.', '{\"count\":5}', '2026-01-06 11:50:35'),
+(28, NULL, 8, 'easy-admin/check/job_8', 5, 'Delete specified logs older than {date_time} with params: severity = {severity}; reference = {references}.', '{\"date_time\":\"2025-11-21 13:51:26\",\"severity\":\"-\",\"references\":\"-\"}', '2026-02-19 13:51:26'),
+(29, NULL, 8, 'easy-admin/check/job_8', 5, 'Found {count} logs to process.', '{\"count\":1}', '2026-02-19 13:51:26'),
+(30, NULL, 8, 'easy-admin/check/job_8', 5, 'Deleted {count} logs from database.', '{\"count\":1}', '2026-02-19 13:51:26');
 
 -- --------------------------------------------------------
 
@@ -462,8 +457,13 @@ INSERT INTO `migration` (`version`) VALUES
 ('20210810083804'),
 ('20220718090449'),
 ('20220824103916'),
+('20230124033031'),
+('20230410074846'),
+('20230523085358'),
 ('20230601060113'),
-('20230713101012');
+('20230713101012'),
+('20231016000000'),
+('20240103030617');
 
 -- --------------------------------------------------------
 
@@ -482,39 +482,37 @@ CREATE TABLE `module` (
 --
 
 INSERT INTO `module` (`id`, `is_active`, `version`) VALUES
-('AdvancedResourceTemplate', 1, '3.4.47'),
-('AdvancedSearch', 1, '3.4.21'),
-('ArchiveRepertory', 1, '3.15.16'),
-('Ark', 1, '3.5.13.5'),
-('BlockPlus', 1, '3.4.21'),
-('BlocksDisposition', 1, '3.4.2.3-beta'),
-('BulkEdit', 1, '3.4.27'),
-('BulkExport', 1, '3.4.30'),
-('Common', 1, '3.4.73'),
-('Contribute', 1, '3.4.32'),
+('AdvancedSearch', 1, '3.4.53'),
+('ArchiveRepertory', 1, '3.15.17'),
+('Ark', 1, '3.5.15'),
+('BlockPlus', 1, '3.4.42'),
+('BlocksDisposition', 1, '3.4.5'),
+('BulkEdit', 1, '3.4.37'),
+('BulkExport', 1, '3.4.37'),
+('Common', 1, '3.4.74'),
 ('CreateMissingThumbnails', 1, '0.3.0'),
-('CSVImport', 1, '2.6.1'),
+('CSVImport', 1, '2.6.2'),
 ('CustomVocab', 1, '2.0.2'),
-('EasyAdmin', 1, '3.4.36'),
-('EUCookieBar', 1, '3.4.4'),
-('ExtractText', 1, '2.0.0'),
+('EasyAdmin', 1, '3.4.37'),
+('EUCookieBar', 1, '3.4.5'),
+('ExtractText', 1, '2.1.0'),
 ('FileSideload', 1, '1.7.1'),
-('Generic', 1, '3.4.46'),
 ('HideProperties', 1, '1.3.1'),
-('IiifSearch', 1, '3.4.7'),
-('IiifServer', 1, '3.6.16'),
-('ImageServer', 1, '3.6.17'),
-('Log', 1, '3.4.22'),
-('Mirador', 1, '3.4.7.16'),
+('IiifSearch', 1, '3.4.8'),
+('IiifServer', 1, '3.6.26'),
+('ImageServer', 1, '3.6.20'),
+('Log', 1, '3.4.33'),
+('Mirador', 1, '3.4.10'),
 ('ModelViewer', 1, '3.3.0.7-132'),
-('NdeTermennetwerk', 1, '1.2.0'),
-('NumericDataTypes', 1, '1.11.3'),
+('NdeTermennetwerk', 1, '1.4.0'),
+('NumericDataTypes', 1, '1.13.0'),
 ('PdfViewer', 1, '3.4.4'),
-('SearchSolr', 1, '3.5.45'),
+('ResourceMeta', 1, '1.1.0'),
+('SearchSolr', 1, '3.5.60'),
 ('Sitemaps', 1, '1.1'),
-('Statistics', 1, '3.4.7'),
-('UniversalViewer', 1, '3.6.9'),
-('ValueSuggest', 1, '1.17.2');
+('Statistics', 1, '3.4.11'),
+('UniversalViewer', 1, '3.6.11-4.2.1'),
+('ValueSuggest', 1, '1.19.0');
 
 -- --------------------------------------------------------
 
@@ -4094,6 +4092,19 @@ INSERT INTO `resource_class` (`id`, `owner_id`, `vocabulary_id`, `local_name`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `resource_meta_resource_template_meta_names`
+--
+
+CREATE TABLE `resource_meta_resource_template_meta_names` (
+  `id` int UNSIGNED NOT NULL,
+  `resource_template_id` int NOT NULL,
+  `resource_template_property_id` int NOT NULL,
+  `meta_names` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `resource_template`
 --
 
@@ -4123,30 +4134,7 @@ INSERT INTO `resource_template` (`id`, `owner_id`, `resource_class_id`, `title_p
 (10, 1, 811, 1451, 738, 'Letters'),
 (11, 1, 341, 1451, 738, 'Manuscript'),
 (12, 1, 296, 1451, 738, 'Plakkaten'),
-(13, 1, 924, 1451, 738, 'Visual Art Works'),
-(14, 1, NULL, NULL, NULL, 'Contribution'),
-(15, 1, NULL, NULL, NULL, 'Contribution File');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resource_template_data`
---
-
-CREATE TABLE `resource_template_data` (
-  `id` int NOT NULL,
-  `resource_template_id` int NOT NULL,
-  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `resource_template_data`
---
-
-INSERT INTO `resource_template_data` (`id`, `resource_template_id`, `data`) VALUES
-(1, 14, '{\"use_for_resources\":[\"items\"],\"require_resource_class\":\"0\",\"closed_class_list\":\"0\",\"closed_property_list\":\"0\",\"quick_new_resource\":\"yes\",\"autocomplete\":\"no\",\"value_languages\":[],\"default_language\":\"\",\"no_language\":\"0\",\"value_suggest_keep_original_label\":\"0\",\"value_suggest_require_uri\":\"0\",\"automatic_values\":\"\",\"autofillers\":[],\"value_annotations_template\":\"\",\"groups\":[],\"subject_values_order\":[],\"settings\":\"\",\"contribute_template_media\":\"\",\"contribute_author_confirmation_subject\":\"\",\"contribute_author_confirmation_body\":\"\",\"contribute_reviewer_confirmation_subject\":\"\",\"contribute_reviewer_confirmation_body\":\"\",\"suggested_resource_class_ids\":[],\"contribute_templates_media\":[15]}'),
-(2, 15, '{\"use_for_resources\":[\"media\"],\"require_resource_class\":\"0\",\"closed_class_list\":\"0\",\"closed_property_list\":\"0\",\"quick_new_resource\":\"yes\",\"autocomplete\":\"no\",\"value_languages\":[],\"default_language\":\"\",\"no_language\":\"0\",\"value_suggest_keep_original_label\":\"0\",\"value_suggest_require_uri\":\"0\",\"automatic_values\":\"\",\"autofillers\":[],\"value_annotations_template\":\"\",\"groups\":[],\"subject_values_order\":[],\"settings\":\"\",\"contribute_template_media\":\"\",\"contribute_author_confirmation_subject\":\"\",\"contribute_author_confirmation_body\":\"\",\"contribute_reviewer_confirmation_subject\":\"\",\"contribute_reviewer_confirmation_body\":\"\",\"suggested_resource_class_ids\":[]}'),
-(3, 5, '{\"use_for_resources\":[\"items\",\"media\",\"item_sets\"],\"require_resource_class\":\"0\",\"closed_class_list\":\"0\",\"closed_property_list\":\"0\",\"quick_new_resource\":\"yes\",\"autocomplete\":\"no\",\"value_languages\":[],\"default_language\":\"\",\"no_language\":\"0\",\"value_suggest_keep_original_label\":\"0\",\"value_suggest_require_uri\":\"0\",\"title_fallback_properties\":[],\"automatic_values\":\"\",\"autofillers\":[],\"value_annotations_template\":\"\",\"item_sets\":null,\"groups\":[],\"subject_values_order\":[],\"media_templates_minimum\":[],\"settings\":\"\",\"contribute_templates_media\":null,\"contribute_author_confirmation_subject\":\"\",\"contribute_author_confirmation_body\":\"\",\"contribute_reviewer_confirmation_subject\":\"\",\"contribute_reviewer_confirmation_body\":\"\",\"suggested_resource_class_ids\":{\"schema:Book\":790}}');
+(13, 1, 924, 1451, 738, 'Visual Art Works');
 
 -- --------------------------------------------------------
 
@@ -4250,7 +4238,7 @@ INSERT INTO `resource_template_property` (`id`, `resource_template_id`, `propert
 (76, 5, 772, 'Keywords', NULL, 21, '[\"literal\"]', 0, 0, NULL),
 (77, 5, 1636, 'Geographic depiction', NULL, 22, '[\"valuesuggest:geonames:geonames\"]', 0, 0, NULL),
 (78, 5, 1273, 'Genre', NULL, 23, '[\"valuesuggest:lc:genreForms\"]', 0, 0, NULL),
-(79, 5, 1132, 'Link to', 'Links to WorldCat, WikiData or WikiCommons go here.URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.', 24, '[\"uri\"]', 0, 0, NULL),
+(79, 5, 1132, 'Link to', 'Links to WorldCat, WikiData or WikiCommons go here.\r\nURL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.', 24, '[\"uri\"]', 0, 0, NULL),
 (80, 5, 800, 'Collection', NULL, 25, '[\"literal\"]', 0, 0, NULL),
 (81, 5, 1522, 'Related Item', NULL, 26, '[\"literal\",\"uri\"]', 0, 0, NULL),
 (82, 5, 1574, 'License', NULL, 27, '[\"literal\",\"customvocab:2\"]', 0, 0, NULL),
@@ -4359,64 +4347,7 @@ INSERT INTO `resource_template_property` (`id`, `resource_template_id`, `propert
 (185, 13, 1574, 'License', NULL, 13, '[\"literal\",\"customvocab:2\"]', 0, 0, NULL),
 (186, 13, 1441, 'Access condition', NULL, 14, '[\"literal\",\"numeric:timestamp\"]', 0, 0, NULL),
 (187, 13, 1512, 'Copyright', NULL, 15, '[\"literal\",\"valuesuggest:oclc:viaf\"]', 0, 0, NULL),
-(188, 13, 1499, 'Provider', NULL, 16, '[\"literal\",\"valuesuggest:geonames:geonames\",\"valuesuggest:oclc:viaf\"]', 0, 0, NULL),
-(189, 14, 1, NULL, NULL, 1, '[\"literal\"]', 0, 0, NULL),
-(190, 14, 4, NULL, NULL, 2, '[\"literal\"]', 0, 0, NULL),
-(191, 15, 1, NULL, NULL, 1, '[\"literal\"]', 0, 0, NULL),
-(192, 15, 4, NULL, NULL, 2, '[\"literal\"]', 0, 0, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resource_template_property_data`
---
-
-CREATE TABLE `resource_template_property_data` (
-  `id` int NOT NULL,
-  `resource_template_id` int NOT NULL,
-  `resource_template_property_id` int NOT NULL,
-  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `resource_template_property_data`
---
-
-INSERT INTO `resource_template_property_data` (`id`, `resource_template_id`, `resource_template_property_id`, `data`) VALUES
-(1, 14, 189, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"min_values\":\"\",\"max_values\":\"\",\"unique_value\":\"0\",\"order_by_linked_resource_properties\":[],\"locked_value\":\"0\",\"property_read_only\":\"0\",\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"1\",\"fillable\":\"1\",\"menu_broader\":\"0\",\"menu_narrower\":\"0\",\"o:data_type\":[\"literal\"]}'),
-(2, 14, 190, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"min_values\":\"\",\"max_values\":\"\",\"unique_value\":\"0\",\"order_by_linked_resource_properties\":[],\"locked_value\":\"0\",\"property_read_only\":\"0\",\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"1\",\"fillable\":\"1\",\"menu_broader\":\"0\",\"menu_narrower\":\"0\",\"o:data_type\":[\"literal\"]}'),
-(3, 15, 191, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"min_values\":\"\",\"max_values\":\"1\",\"unique_value\":\"0\",\"order_by_linked_resource_properties\":[],\"locked_value\":\"0\",\"property_read_only\":\"0\",\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"1\",\"fillable\":\"1\",\"menu_broader\":\"0\",\"menu_narrower\":\"0\",\"o:data_type\":[\"literal\"]}'),
-(4, 15, 192, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"min_values\":\"\",\"max_values\":\"1\",\"unique_value\":\"0\",\"order_by_linked_resource_properties\":[],\"locked_value\":\"0\",\"property_read_only\":\"0\",\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"1\",\"fillable\":\"1\",\"menu_broader\":\"0\",\"menu_narrower\":\"0\",\"o:data_type\":[\"literal\"]}'),
-(5, 5, 56, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Book title\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"1\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"1\",\"fillable\":\"1\"}'),
-(6, 5, 57, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Author\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:ndeterms:wikipers\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"1\",\"fillable\":\"1\"}'),
-(7, 5, 58, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Translator\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:ndeterms:wikipers\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(8, 5, 59, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Editor\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:ndeterms:wikipers\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(9, 5, 60, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Illustrator\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:ndeterms:wikipers\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(10, 5, 61, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Contributor\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:ndeterms:wikipers\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(11, 5, 62, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Description\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(12, 5, 63, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Place of publication\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:geonames:geonames\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(13, 5, 64, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Publisher\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:ndeterms:wikiall\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(14, 5, 65, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Year of publication\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"numeric:timestamp\",\"numeric:interval\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(15, 5, 66, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Copyright year\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"numeric:timestamp\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(16, 5, 67, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Manufacturer\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:ndeterms:wikiall\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(17, 5, 68, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Physical Description\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(18, 5, 69, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Language\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"valuesuggest:lc:iso6391\",\"customvocab:1\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(19, 5, 70, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Edition\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(20, 5, 71, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Serial Title\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(21, 5, 72, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Volume\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(22, 5, 73, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"ISBN\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(23, 5, 74, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Call number\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:geonames:geonames\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(24, 5, 75, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Abstract\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(25, 5, 76, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Keywords\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(26, 5, 77, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Geographic depiction\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"valuesuggest:geonames:geonames\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(27, 5, 78, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Genre\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"valuesuggest:lc:genreForms\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(28, 5, 79, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Link to\",\"o:alternate_comment\":\"Links to WorldCat, WikiData or WikiCommons go here.URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"uri\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(29, 5, 80, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Collection\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(30, 5, 81, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Related Item\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"uri\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(31, 5, 82, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"License\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"customvocab:2\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(32, 5, 83, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Access condition\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"numeric:timestamp\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(33, 5, 84, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Copyright\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}'),
-(34, 5, 85, '{\"input_control\":\"\",\"default_value\":\"\",\"automatic_value\":\"\",\"display_value\":\"\",\"split_separator\":\"\",\"resource_query\":\"\",\"settings\":\"\",\"o:alternate_label\":\"Provider\",\"o:alternate_comment\":\"\",\"is-title-property\":\"0\",\"is-description-property\":\"0\",\"o:is_required\":\"0\",\"o:is_private\":\"0\",\"o:default_lang\":\"\",\"o:data_type\":[\"literal\",\"valuesuggest:geonames:geonames\",\"valuesuggest:oclc:viaf\"],\"min_values\":\"\",\"max_values\":\"\",\"min_length\":\"\",\"max_length\":\"\",\"automatic_value_issued\":\"\",\"unique_value\":\"0\",\"locked_value\":\"0\",\"property_read_only\":\"0\",\"order_by_linked_resource_properties\":[],\"quick_new_resource\":\"\",\"autocomplete\":\"\",\"value_languages\":[],\"use_language\":\"\",\"custom_vocab_open\":\"0\",\"value_suggest_keep_original_label\":\"\",\"value_suggest_require_uri\":\"\",\"value_annotations_template\":\"\",\"editable\":\"0\",\"fillable\":\"0\"}');
+(188, 13, 1499, 'Provider', NULL, 16, '[\"literal\",\"valuesuggest:geonames:geonames\",\"valuesuggest:oclc:viaf\"]', 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -4428,7 +4359,7 @@ CREATE TABLE `search_config` (
   `id` int NOT NULL,
   `engine_id` int NOT NULL,
   `name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `path` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `form_adapter` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `settings` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '(DC2Type:json)',
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -4439,8 +4370,8 @@ CREATE TABLE `search_config` (
 -- Dumping data for table `search_config`
 --
 
-INSERT INTO `search_config` (`id`, `engine_id`, `name`, `path`, `form_adapter`, `settings`, `created`, `modified`) VALUES
-(1, 2, 'Default', 'find', 'main', '{\"search\":{\"default_results\":\"default\",\"default_query\":\"\",\"default_query_post\":\"\",\"hidden_query_filters\":[]},\"autosuggest\":{\"suggester\":\"1\",\"url\":\"\",\"url_param_name\":\"\",\"limit\":null},\"form\":{\"filters\":[{\"field\":\"dcterms_title_txt\",\"label\":\"Title\",\"type\":\"\",\"options\":[]},{\"field\":\"dcterms_creator_s\",\"label\":\"Creator\",\"type\":\"\",\"options\":[]},{\"field\":\"advanced\",\"label\":\"Filters\",\"type\":\"Advanced\",\"options\":[],\"fields\":{\"title\":{\"value\":\"title\",\"label\":\"Title\"},\"author\":{\"value\":\"author\",\"label\":\"Author\"},\"dcterms:creator\":{\"value\":\"dcterms:creator\",\"label\":\"Creator\"},\"dcterms:subject\":{\"value\":\"dcterms:subject\",\"label\":\"Subject\"},\"date\":{\"value\":\"date\",\"label\":\"Date\"},\"description\":{\"value\":\"description\",\"label\":\"Description\"},\"resource_class_id\":{\"value\":\"resource_class_id\",\"label\":\"Class\"}},\"max_number\":\"5\",\"field_joiner\":\"1\",\"field_joiner_not\":\"1\",\"field_operator\":\"1\",\"field_operators\":{\"eq\":\"is exactly\",\"in\":\"contains\",\"sw\":\"starts with\",\"ew\":\"ends with\",\"ex\":\"has any value\",\"res\":\"is resource with ID\"}}],\"attribute_form\":\"0\",\"button_reset\":\"0\",\"button_submit\":\"1\"},\"display\":{\"search_filters\":\"header\",\"active_facets\":\"none\",\"total_results\":\"header\",\"paginator\":\"header\",\"per_pages\":\"header\",\"sort\":\"header\",\"grid_list\":\"header\",\"grid_list_mode\":\"auto\"},\"pagination\":{\"per_pages\":{\"10\":\"Results by 10\",\"25\":\"Results by 25\",\"50\":\"Results by 50\",\"100\":\"Results by 100\"}},\"sort\":{\"fields\":{\"dcterms:title asc\":{\"name\":\"dcterms:title asc\",\"label\":\"Title\"},\"dcterms:title desc\":{\"name\":\"dcterms:title desc\",\"label\":\"Title (from z to a)\"},\"dcterms:date asc\":{\"name\":\"dcterms:date asc\",\"label\":\"Date\"},\"dcterms:date desc\":{\"name\":\"dcterms:date desc\",\"label\":\"Date (most recent first)\"}}},\"facet\":{\"label\":\"Facets\",\"facets\":{\"resource_class_s\":{\"name\":\"resource_class_s\",\"label\":\"Resource class\",\"type\":\"\",\"options\":[]},\"dcterms_creator_s\":{\"name\":\"dcterms_creator_s\",\"label\":\"Creator\",\"type\":\"\",\"options\":[]}},\"limit\":\"10\",\"order\":\"\",\"languages\":[],\"display_list\":\"available\",\"mode\":\"button\",\"display_submit\":\"above\",\"display_reset\":\"above\",\"label_submit\":\"Apply facets\",\"label_reset\":\"Reset facets\",\"display_active\":\"1\",\"display_count\":\"1\"}}', '2023-02-15 16:01:30', '2023-02-28 14:50:30');
+INSERT INTO `search_config` (`id`, `engine_id`, `name`, `slug`, `form_adapter`, `settings`, `created`, `modified`) VALUES
+(1, 2, 'Default', 'find', 'main', '{\"request\":{\"default_results\":\"default\",\"default_query_post\":\"&resource_name_s=items\",\"validate_form\":\"0\"},\"index\":{\"aliases\":{\"full_text\":{\"name\":\"full_text\",\"label\":\"Full text\",\"fields\":[\"bibo:content\",\"extracttext:extracted_text\"]}}},\"q\":{\"label\":\"Search\",\"suggester\":\"1\",\"suggest_fill_input\":\"0\",\"remove_diacritics\":\"0\"},\"form\":{\"button_submit\":\"1\",\"label_submit\":\"Search\",\"button_reset\":\"0\",\"label_reset\":\"Reset fields\",\"attribute_form\":\"0\",\"advanced\":{\"default_number\":0,\"max_number\":10,\"field_joiner\":true,\"field_joiner_not\":true,\"field_operator\":true,\"field_operators\":{\"eq\":\"is exactly\",\"neq\":\"is not exactly\",\"in\":\"contains\",\"nin\":\"does not contain\",\"sw\":\"starts with\",\"nsw\":\"does not start with\",\"ew\":\"ends with\",\"new\":\"does not end with\",\"ex\":\"has any value\",\"nex\":\"has no values\",\"res\":\"is resource with ID\",\"nres\":\"is not resource with ID\",\"lex\":\"is a linked resource\",\"nlex\":\"is not a linked resource\",\"lres\":\"is linked with resource with ID\",\"nlres\":\"is not linked with resource with ID\"},\"fields\":[]},\"filters\":[]},\"results\":{\"label_default\":\"Search\",\"label_results\":\"Search results\",\"label_no_results\":\"No results\",\"by_resource_type\":\"1\",\"breadcrumbs\":\"0\",\"search_filters\":\"header\",\"active_facets\":\"none\",\"total_results\":\"header\",\"search_form_simple\":\"none\",\"search_form_quick\":\"none\",\"paginator\":\"both\",\"per_page\":\"header\",\"sort\":\"header\",\"grid_list\":\"header\",\"grid_list_mode\":\"auto\",\"thumbnail_mode\":\"default\",\"thumbnail_type\":\"medium\",\"allow_html\":\"0\",\"facets\":\"after\",\"pagination_per_page\":\"0\",\"per_page_list\":{\"10\":\"Results by 10\",\"25\":\"Results by 25\",\"50\":\"Results by 50\",\"100\":\"Results by 100\"},\"label_sort\":\"Sort by\",\"sort_list\":{\"dcterms_date_s asc\":{\"name\":\"dcterms_date_s asc\",\"label\":\"Date (asc)\"},\"dcterms_date_s desc\":{\"name\":\"dcterms_date_s desc\",\"label\":\"Date (desc)\"},\"name_s asc\":{\"name\":\"name_s asc\",\"label\":\"Name (asc)\"},\"name_s desc\":{\"name\":\"name_s desc\",\"label\":\"Name (desc)\"}}},\"facet\":{\"label\":\"Facets\",\"label_no_facets\":\"No facets\",\"mode\":\"button\",\"list\":\"all\",\"display_active\":\"1\",\"label_active_facets\":\"Active facets\",\"display_submit\":\"below\",\"label_submit\":\"Apply facets\",\"display_reset\":\"none\",\"label_reset\":\"Reset facets\",\"display_refine\":\"1\",\"label_refine\":\"Refine results\",\"facets\":{\"resource_template_s\":{\"field\":\"resource_template_s\",\"order\":\"total desc\",\"limit\":100,\"label\":\"Resource Type\",\"type\":\"Checkbox\",\"state\":\"collapse\",\"more\":10,\"display_count\":true,\"mode\":\"button\"},\"dcterms_creator_s\":{\"field\":\"dcterms_creator_s\",\"order\":\"total desc\",\"limit\":100,\"label\":\"Creator\",\"type\":\"Checkbox\",\"state\":\"collapse\",\"more\":100,\"display_count\":true,\"mode\":\"button\"}}}}', '2023-02-15 16:01:30', '2023-02-28 14:50:30');
 
 -- --------------------------------------------------------
 
@@ -4462,8 +4393,8 @@ CREATE TABLE `search_engine` (
 --
 
 INSERT INTO `search_engine` (`id`, `name`, `adapter`, `settings`, `created`, `modified`) VALUES
-(1, 'Internal (sql)', 'internal', '{\"resources\":[\"items\",\"item_sets\"],\"adapter\":{\"default_search_partial_word\":false,\"multifields\":{\"title\":{\"name\":\"title\",\"label\":\"Title\",\"fields\":[\"dcterms:title\",\"dcterms:alternative\",\"bibo:shortTitle\"]},\"author\":{\"name\":\"author\",\"label\":\"Author\",\"fields\":[\"dcterms:creator\",\"dcterms:contributor\",\"bibo:authorList\",\"bibo:contributorList\",\"bibo:director\",\"bibo:editor\",\"bibo:editorList\",\"bibo:interviewee\",\"bibo:interviewer\",\"bibo:organizer\",\"bibo:performer\",\"bibo:producer\",\"bibo:recipient\",\"bibo:translator\"]},\"creator\":{\"name\":\"creator\",\"label\":\"Creator\",\"fields\":[\"dcterms:creator\"]},\"contributor\":{\"name\":\"contributor\",\"label\":\"Contributor\",\"fields\":[\"dcterms:contributor\",\"bibo:authorList\",\"bibo:contributorList\",\"bibo:director\",\"bibo:editor\",\"bibo:editorList\",\"bibo:interviewee\",\"bibo:interviewer\",\"bibo:organizer\",\"bibo:performer\",\"bibo:producer\",\"bibo:recipient\",\"bibo:translator\"]},\"subject\":{\"name\":\"subject\",\"label\":\"Subject\",\"fields\":[\"dcterms:subject\"]},\"description\":{\"name\":\"description\",\"label\":\"Description\",\"fields\":[\"dcterms:description\",\"dcterms:abstract\",\"dcterms:tableOfContents\",\"bibo:abstract\",\"bibo:shortDescription\"]},\"publisher\":{\"name\":\"publisher\",\"label\":\"Publisher\",\"fields\":[\"dcterms:publisher\",\"bibo:distributor\",\"bibo:issuer\"]},\"date\":{\"name\":\"date\",\"label\":\"Date\",\"fields\":[\"dcterms:date\",\"dcterms:available\",\"dcterms:created\",\"dcterms:issued\",\"dcterms:modified\",\"dcterms:valid\",\"dcterms:dateAccepted\",\"dcterms:dateCopyrighted\",\"dcterms:dateSubmitted\",\"bibo:argued\"]},\"type\":{\"name\":\"type\",\"label\":\"Type\",\"fields\":[\"dcterms:type\"]},\"format\":{\"name\":\"format\",\"label\":\"Format\",\"fields\":[\"dcterms:format\",\"dcterms:extent\",\"dcterms:medium\"]},\"identifier\":{\"name\":\"identifier\",\"label\":\"Identifier\",\"fields\":[\"dcterms:identifier\",\"dcterms:bibliographicCitation\",\"bibo:asin\",\"bibo:coden\",\"bibo:doi\",\"bibo:eanucc13\",\"bibo:eissn\",\"bibo:gtin14\",\"bibo:handle\",\"bibo:identifier\",\"bibo:isbn\",\"bibo:isbn10\",\"bibo:isbn13\",\"bibo:issn\",\"bibo:oclcnum\",\"bibo:pmid\",\"bibo:sici\",\"bibo:upc\",\"bibo:uri\"]},\"source\":{\"name\":\"source\",\"label\":\"Source\",\"fields\":[\"dcterms:source\"]},\"provenance\":{\"name\":\"provenance\",\"label\":\"Provenance\",\"fields\":[\"dcterms:provenance\"]},\"language\":{\"name\":\"language\",\"label\":\"Language\",\"fields\":[\"dcterms:language\"]},\"relation\":{\"name\":\"relation\",\"label\":\"Relation\",\"fields\":[\"dcterms:relation\",\"dcterms:isVersionOf\",\"dcterms:hasVersion\",\"dcterms:isReplacedBy\",\"dcterms:replaces\",\"dcterms:isRequiredBy\",\"dcterms:requires\",\"dcterms:isPartOf\",\"dcterms:hasPart\",\"dcterms:isReferencedBy\",\"dcterms:references\",\"dcterms:isFormatOf\",\"dcterms:hasFormat\",\"dcterms:conformsTo\",\"bibo:annotates\",\"bibo:citedBy\",\"bibo:cites\",\"bibo:reproducedIn\",\"bibo:reviewOf\",\"bibo:transcriptOf\",\"bibo:translationOf\"]},\"coverage\":{\"name\":\"coverage\",\"label\":\"Coverage\",\"fields\":[\"dcterms:coverage\",\"dcterms:spatial\",\"dcterms:temporal\"]},\"rights\":{\"name\":\"rights\",\"label\":\"Rights\",\"fields\":[\"dcterms:rights\",\"dcterms:accessRights\",\"dcterms:license\"]},\"audience\":{\"name\":\"audience\",\"label\":\"Audience\",\"fields\":[\"dcterms:audience\",\"dcterms:mediator\",\"dcterms:educationLevel\"]},\"rightsHolder\":{\"name\":\"rightsHolder\",\"label\":\"Rights holder\",\"fields\":[\"dcterms:rightsHolder\",\"bibo:owner\"]},\"accrualAndInstructional\":{\"name\":\"accrualAndInstructional\",\"label\":\"Accrual and instructional metadata\",\"fields\":[\"dcterms:accrualMethod\",\"dcterms:accrualPeriodicity\",\"dcterms:accrualPolicy\",\"dcterms:instructionalMethod\"]},\"bibliographicData\":{\"name\":\"bibliographicData\",\"label\":\"Bibliographic data\",\"fields\":[\"bibo:chapter\",\"bibo:edition\",\"bibo:issue\",\"bibo:locator\",\"bibo:numPages\",\"bibo:numVolumes\",\"bibo:number\",\"bibo:pageEnd\",\"bibo:pageStart\",\"bibo:pages\",\"bibo:section\",\"bibo:volume\"]}}}}', '2023-02-15 16:01:30', NULL),
-(2, 'Solr', 'solarium', '{\"resources\":[\"items\"],\"adapter\":{\"solr_core_id\":\"1\",\"index_name\":\"\"}}', '2023-02-28 14:42:10', '2023-02-28 14:42:12');
+(1, 'Internal (sql)', 'internal', '{\"resource_types\":[\"item_sets\",\"items\"],\"engine_adapter\":{\"default_search_partial_word\":false,\"multifields\":{\"title\":{\"name\":\"title\",\"label\":\"Title\",\"fields\":[\"dcterms:title\",\"dcterms:alternative\",\"bibo:shortTitle\"]},\"author\":{\"name\":\"author\",\"label\":\"Author\",\"fields\":[\"dcterms:creator\",\"dcterms:contributor\",\"bibo:authorList\",\"bibo:contributorList\",\"bibo:director\",\"bibo:editor\",\"bibo:editorList\",\"bibo:interviewee\",\"bibo:interviewer\",\"bibo:organizer\",\"bibo:performer\",\"bibo:producer\",\"bibo:recipient\",\"bibo:translator\"]},\"creator\":{\"name\":\"creator\",\"label\":\"Creator\",\"fields\":[\"dcterms:creator\"]},\"contributor\":{\"name\":\"contributor\",\"label\":\"Contributor\",\"fields\":[\"dcterms:contributor\",\"bibo:authorList\",\"bibo:contributorList\",\"bibo:director\",\"bibo:editor\",\"bibo:editorList\",\"bibo:interviewee\",\"bibo:interviewer\",\"bibo:organizer\",\"bibo:performer\",\"bibo:producer\",\"bibo:recipient\",\"bibo:translator\"]},\"subject\":{\"name\":\"subject\",\"label\":\"Subject\",\"fields\":[\"dcterms:subject\"]},\"description\":{\"name\":\"description\",\"label\":\"Description\",\"fields\":[\"dcterms:description\",\"dcterms:abstract\",\"dcterms:tableOfContents\",\"bibo:abstract\",\"bibo:shortDescription\"]},\"publisher\":{\"name\":\"publisher\",\"label\":\"Publisher\",\"fields\":[\"dcterms:publisher\",\"bibo:distributor\",\"bibo:issuer\"]},\"date\":{\"name\":\"date\",\"label\":\"Date\",\"fields\":[\"dcterms:date\",\"dcterms:available\",\"dcterms:created\",\"dcterms:issued\",\"dcterms:modified\",\"dcterms:valid\",\"dcterms:dateAccepted\",\"dcterms:dateCopyrighted\",\"dcterms:dateSubmitted\",\"bibo:argued\"]},\"type\":{\"name\":\"type\",\"label\":\"Type\",\"fields\":[\"dcterms:type\"]},\"format\":{\"name\":\"format\",\"label\":\"Format\",\"fields\":[\"dcterms:format\",\"dcterms:extent\",\"dcterms:medium\"]},\"identifier\":{\"name\":\"identifier\",\"label\":\"Identifier\",\"fields\":[\"dcterms:identifier\",\"dcterms:bibliographicCitation\",\"bibo:asin\",\"bibo:coden\",\"bibo:doi\",\"bibo:eanucc13\",\"bibo:eissn\",\"bibo:gtin14\",\"bibo:handle\",\"bibo:identifier\",\"bibo:isbn\",\"bibo:isbn10\",\"bibo:isbn13\",\"bibo:issn\",\"bibo:oclcnum\",\"bibo:pmid\",\"bibo:sici\",\"bibo:upc\",\"bibo:uri\"]},\"source\":{\"name\":\"source\",\"label\":\"Source\",\"fields\":[\"dcterms:source\"]},\"provenance\":{\"name\":\"provenance\",\"label\":\"Provenance\",\"fields\":[\"dcterms:provenance\"]},\"language\":{\"name\":\"language\",\"label\":\"Language\",\"fields\":[\"dcterms:language\"]},\"relation\":{\"name\":\"relation\",\"label\":\"Relation\",\"fields\":[\"dcterms:relation\",\"dcterms:isVersionOf\",\"dcterms:hasVersion\",\"dcterms:isReplacedBy\",\"dcterms:replaces\",\"dcterms:isRequiredBy\",\"dcterms:requires\",\"dcterms:isPartOf\",\"dcterms:hasPart\",\"dcterms:isReferencedBy\",\"dcterms:references\",\"dcterms:isFormatOf\",\"dcterms:hasFormat\",\"dcterms:conformsTo\",\"bibo:annotates\",\"bibo:citedBy\",\"bibo:cites\",\"bibo:reproducedIn\",\"bibo:reviewOf\",\"bibo:transcriptOf\",\"bibo:translationOf\"]},\"coverage\":{\"name\":\"coverage\",\"label\":\"Coverage\",\"fields\":[\"dcterms:coverage\",\"dcterms:spatial\",\"dcterms:temporal\"]},\"rights\":{\"name\":\"rights\",\"label\":\"Rights\",\"fields\":[\"dcterms:rights\",\"dcterms:accessRights\",\"dcterms:license\"]},\"audience\":{\"name\":\"audience\",\"label\":\"Audience\",\"fields\":[\"dcterms:audience\",\"dcterms:mediator\",\"dcterms:educationLevel\"]},\"rightsHolder\":{\"name\":\"rightsHolder\",\"label\":\"Rights holder\",\"fields\":[\"dcterms:rightsHolder\",\"bibo:owner\"]},\"accrualAndInstructional\":{\"name\":\"accrualAndInstructional\",\"label\":\"Accrual and instructional metadata\",\"fields\":[\"dcterms:accrualMethod\",\"dcterms:accrualPeriodicity\",\"dcterms:accrualPolicy\",\"dcterms:instructionalMethod\"]},\"bibliographicData\":{\"name\":\"bibliographicData\",\"label\":\"Bibliographic data\",\"fields\":[\"bibo:chapter\",\"bibo:edition\",\"bibo:issue\",\"bibo:locator\",\"bibo:numPages\",\"bibo:numVolumes\",\"bibo:number\",\"bibo:pageEnd\",\"bibo:pageStart\",\"bibo:pages\",\"bibo:section\",\"bibo:volume\"]}}}}', '2023-02-15 16:01:30', NULL),
+(2, 'Solr', 'solarium', '{\"resource_types\":[\"items\"],\"engine_adapter\":{\"solr_core_id\":\"1\",\"index_name\":\"\"}}', '2023-02-28 14:42:10', '2023-02-28 14:42:12');
 
 -- --------------------------------------------------------
 
@@ -4485,7 +4416,7 @@ CREATE TABLE `search_suggester` (
 --
 
 INSERT INTO `search_suggester` (`id`, `engine_id`, `name`, `settings`, `created`, `modified`) VALUES
-(1, 1, 'Internal suggester (sql)', '{\"direct\":false,\"mode_index\":\"start\",\"mode_search\":\"start\",\"limit\":25,\"length\":50,\"fields\":[],\"excluded_fields\":[]}', '2023-02-15 16:01:30', NULL);
+(1, 1, 'Main index', '{\"direct\":false,\"mode_index\":\"start\",\"mode_search\":\"start\",\"limit\":25,\"length\":50,\"fields\":[],\"excluded_fields\":[]}', '2023-02-15 16:01:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -4518,7 +4449,7 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `data`, `modified`) VALUES
-('efba8ed270c2bffb66b25d82c44c269f', 0x5f5f4c616d696e61737c613a373a7b733a32303a225f524551554553545f4143434553535f54494d45223b643a313736343233353731332e3633393739383b733a363a225f56414c4944223b613a313a7b733a32383a224c616d696e61735c53657373696f6e5c56616c696461746f725c4964223b733a33323a226365663931303262613034323164326232343633343963383738393738376635223b7d733a34323a224c616d696e61735f56616c696461746f725f437372665f73616c745f6c6f67696e666f726d5f63737266223b613a313a7b733a363a22455850495245223b693a313736343233393235323b7d733a33323a224c616d696e61735f56616c696461746f725f437372665f73616c745f63737266223b613a313a7b733a363a22455850495245223b693a313736343233393330323b7d733a35393a224c616d696e61735f56616c696461746f725f437372665f73616c745f6d6f64756c655f4561737941646d696e5f636f6e6669677572655f63737266223b613a313a7b733a363a22455850495245223b693a313736343233393237313b7d733a36303a224c616d696e61735f56616c696461746f725f437372665f73616c745f6d6f64756c655f496969665365727665725f636f6e6669677572655f63737266223b613a313a7b733a363a22455850495245223b693a313736343233393330353b7d733a34343a224c616d696e61735f56616c696461746f725f437372665f73616c745f636f6e6669726d666f726d5f63737266223b613a313a7b733a363a22455850495245223b693a313736343233393331333b7d7d72656469726563745f75726c7c733a32343a22687474703a2f2f6f6d656b612e6c6f63616c2f61646d696e223b4c616d696e61735f56616c696461746f725f437372665f73616c745f6c6f67696e666f726d5f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a223532623137663139383030613865633436356336383438323762623930663935223b733a33323a223765333639393531636636313762343263343035623835656165376562333935223b7d733a343a2268617368223b733a36353a2237653336393935316366363137623432633430356238356561653765623339352d3532623137663139383030613865633436356336383438323762623930663935223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f417574687c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a313a7b733a373a2273746f72616765223b693a313b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4f6d656b614d657373656e6765727c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a303a7b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a3130323a7b733a33323a226265323064653731343963316563386662393538396234376639646135343863223b733a33323a223136623630353532356630333066663961306639316139653733636531306462223b733a33323a223636656466623433613338646136303335613735633433383835366364636238223b733a33323a223463313365323136376665623230313562373138323762326539653230336130223b733a33323a223438633566363138376162353635343939333737346232623835393237333465223b733a33323a223437303466666366393765613563663666613633323262306662373936313030223b733a33323a223736363837343338653939666664313936633630343331303336393934303362223b733a33323a226439333131363233616238336139376561633831303337343831386232613038223b733a33323a226531376436616234306336616366636230363333666266356434353131623233223b733a33323a223131313766386633386331373333633262353165666561633138646464303365223b733a33323a223439636137376135663364396538363532353431373032633330313439646535223b733a33323a223366316363656361333734396332336366326532613263663538373436663932223b733a33323a223234393431613561366263613732643464663763316364356433353038313932223b733a33323a223737646631653634653035646530393638653030326632653161376133343139223b733a33323a226533653265666466656530656266396137666539613731663163633438343533223b733a33323a223631346238633036653737366163393361303361623932656631373134366265223b733a33323a226463386466636435373661333661656666613763343736373061656264633932223b733a33323a223739383966393834383334633562326163623435646263633634613931616336223b733a33323a223961356462626161633838356361373263613037633838663531633938393332223b733a33323a226332356362653336656131396262306365336638636231613032316238656631223b733a33323a226531633065303264663462613661663064623836346339346663353539303731223b733a33323a223235373735366435383632636639666130366237653033616164313033333931223b733a33323a223338373632316232653537396537646461623335373462626232323831623364223b733a33323a223434616238313430643862316530333063313033373763356233383034303166223b733a33323a226663643137363532366234363735613332313933333834623263623037653533223b733a33323a223135336338313065353963373738396535353966633234323334363035393664223b733a33323a223434333838373932643539336332643433636334343263623434653939383832223b733a33323a223238306664313161633335633134306666376661643038633261393636623733223b733a33323a223932353131663131376262313732636165646530623261646138393763353161223b733a33323a226231376666623061623962633132313030303666343638363438656135383862223b733a33323a223639376635353036383132653831396230613461643733393466376638633737223b733a33323a223361343432646362356561313734383431663233363561343837653137346436223b733a33323a223664633066636533623166653563306463376131643933393738363263383261223b733a33323a223033323230383962303461383161316362633734353439336231366131313930223b733a33323a226338646563623730346135653166643139353735666230626234666639386138223b733a33323a223237383035346562346161363230636264376631643961343765646365323536223b733a33323a226362336531363236346331616631633262663232363235663731373634303165223b733a33323a226130626564326535386633326632353637336338323530346336666463666634223b733a33323a223964323834643666623832333066363036616230353962663165646463663239223b733a33323a226230653136336161316436323439383335633437326330636638326662326366223b733a33323a223933393965386665363964363763633463613432393866643964626464323232223b733a33323a223963393934616538383563353837333433636235353462393061336433316334223b733a33323a226261613232636361326535326634623762633138656638313930613638323763223b733a33323a223461323433313637623734366165386537636264313133363239383731613366223b733a33323a223866626633316230383237323331313036376261363136313335363866303630223b733a33323a226537613630386139333664623930653638626638353332336631636334303739223b733a33323a226435663936323638306662643964363566656362616130396335626632386430223b733a33323a223862316535653436356139343233396338346537633066616166643230663434223b733a33323a223837646161343732353839653030623739373863376533376266373738313665223b733a33323a223230643336633966396566303762633336616335626333656434663461636466223b733a33323a226336323236363432353231333535353934646239626635316635343130656339223b733a33323a223134653465626432633134633232386135336366333231356537663131613264223b733a33323a226132363361643665323562386438393434646135336562663630613837613035223b733a33323a226135313835396436353564353065663934623863343232333031626566383936223b733a33323a223035306434623237643965653230396565383830383464646637363563383261223b733a33323a223464366138343730386333323232653333343566623832376132633561356466223b733a33323a226431623033366431396130393037376634383563383863326566376361326661223b733a33323a223566333465363538623965396530663635663334306661323336636361333862223b733a33323a223332396230616336663633306362353930613837333331333066613035366338223b733a33323a223536663835353261386132666436643935303137356566333461366262613665223b733a33323a223936356632396335623137373064313039383964636637363339316234326131223b733a33323a223937333037373765633562316130633063626234643463646165616538356239223b733a33323a223335326436383863613933646338376465333334343461646565616135663263223b733a33323a223165613139616462363863323936396130316432343732333339653565653039223b733a33323a226562376163626665336261663530653962383037373663613733316363653939223b733a33323a226234623431343064393566633463626435353333383066346332656361333733223b733a33323a226133613730343162343865623238386136386563363763313134623237313664223b733a33323a223732626361333364323133633661323761326230363361323562313963326330223b733a33323a226163343931326566303663393664333233363263373265373164623535323635223b733a33323a223862616466626462356433333366326631396631343535653564303466633730223b733a33323a226530626437373632336364306338326639376165323736636561393432366531223b733a33323a226263396131656161353861633032383931623432383233623330376666343163223b733a33323a226635653164306330373433333966623833366531396166353262336536353864223b733a33323a223361623631613433653438373038363865386566653239333431373862346332223b733a33323a223462306531333562303236363237613631613966656665653662623331373462223b733a33323a226566323264643432656138366363663261353732333036306538643537666238223b733a33323a226364613236313236616239633238663336343230333465333931356535303337223b733a33323a226132386437623835313231613638326462393431366133656130626237613838223b733a33323a226164363930666338333464306637303764313531326165346566613231373730223b733a33323a223463313665396265373466616663323539366538313964383763323764613634223b733a33323a223966373264643438636430633239333966366466366632346234343330646433223b733a33323a223534643138623337373033653231666135326365313262653566633935353265223b733a33323a226432656436663965343038383435313763386264383461366634366236373937223b733a33323a223864343531653863366663353230326131636632393339373464336539643638223b733a33323a223066386436396365303431346235623732656665643538336361666137613362223b733a33323a226234613932313031613066626332323763653266326466343463666564623637223b733a33323a223464623434363766343438386239663534363837653233663731623862303363223b733a33323a226363396333653064653534396432643564663938323738313834326532373333223b733a33323a226238316166613464663563653230303434343862623533643936613130633233223b733a33323a223131336136633132653330323839613762383561633232656165346365346439223b733a33323a223161316335373631666332303836313766303166616630323338643862383738223b733a33323a223161336132303133656536616165626131333034623965626636613634383864223b733a33323a226130393238383261313235313362343732376536366434396164326163363864223b733a33323a223432616336343130666461373735343163353739653664373636343430376264223b733a33323a223530333536626562613539613835393265643565646666396161363836353939223b733a33323a223033356230663465333738353333323061656432306436643633326532306238223b733a33323a223638396562393738666334613064346662313062643963323265363633333337223b733a33323a226239343433356237616630326262663333356665643764626435646137313830223b733a33323a223762663333313433643734653436393930346632663634333566393865613439223b733a33323a223131633038653234316562313566326337363863303362376362353637356633223b733a33323a223631373636313839383433336239353232323134386634303030363832396438223b733a33323a226637303566383566333761346439393838633966656665643337393438313562223b733a33323a223330653838626233313334346566306630336131623731363530633464333633223b733a33323a223930353936363836663732393436633863383937353764633163333261386166223b733a33323a223934316536623663313133393633373537313265323935396463356633353661223b733a33323a223530363038363263303861653862376537303861313133383135303963363236223b733a33323a223361343838643864666438623332626466333530623765643731663830653762223b733a33323a223961626430383864613836343036313136653931316132313563623964643538223b733a33323a223662376361623734396639376161396230363338326334613831663436393161223b733a33323a226566656231316639653737313765353230333137623166656262343564383932223b733a33323a226539343136613562303037636632303664346138646432623064306131386463223b733a33323a226539303135633262363964333262663361646364633963303930363034346538223b733a33323a226464383534643332613861326132383839373637643235656462643730616164223b733a33323a223066633336333564306163373138653966313432643937343632613864343736223b733a33323a226538363938663634623439343031363664636662366136643463653533333235223b733a33323a223739666635393762313034663937386432393339653332333065663038626638223b733a33323a223338373963666363326664316438666434373439306433353862396130333736223b733a33323a223539326137633638386264323464663733646261636531353965313831383766223b733a33323a226636376535316632303334386631373966646432386165363066643932316333223b733a33323a226562626465386465343738306266643933323534383564303164646264366233223b733a33323a226333653836333832393763353739663234663030373862636335306535333038223b733a33323a223539303561353136643765336464356361343536326561386134363838353038223b733a33323a223236366164383432316337386261666439313536633762336631323163623566223b733a33323a226230313939326561393764653261313964343666383033656162616135356661223b733a33323a226239313032653363613931373530383631633064613233353165353038396336223b733a33323a226136643032353564313634366333653762353264383532653864353032393731223b733a33323a223539623234363036323939306533643766666465313537333762383638613361223b733a33323a223938386435383862643864623038303037396134616137323463623831313237223b733a33323a226232306261353265613966366136653363633532323565303733353466633836223b733a33323a226233653366336237313435323264616231623365636430616338633933633963223b733a33323a223738666264613365323836333561636263343261336333653266646535383338223b733a33323a226533656431316366333866366564653834616435656239353338336332623263223b733a33323a226634323261616466323463656134353930323231303136333463616462613864223b733a33323a223034626130353062613035326261356265623162363462306634313365353137223b733a33323a223530373462313331313565313861343565383065653733303931346462396538223b733a33323a223034373539323237383630623735626232303866333334356435623062663639223b733a33323a223530313431396130336562643036376235386238376465373031316338343165223b733a33323a223631356332303936376338653261353936393732396566353631373935626439223b733a33323a223562363936346164396637633265343136613439646363343337623266616638223b733a33323a223931613265396566306561316134373861313963356537336261353464663531223b733a33323a223464613262616661633031616137646630663063376434643662613936383564223b733a33323a223736623635653434643430666430356530616162363564343462636636336337223b733a33323a223666653334653730613133623462663962303231666433383364353233653564223b733a33323a226438353830326335393964363634653065663465663830663238633937303961223b733a33323a223163383162373936366462303135373134663361616662323934326166373061223b733a33323a223138633337353735616333636566386166393936653230656334646362393866223b733a33323a223838653831613530343033393238316336323966643031363462653661306530223b733a33323a226632326536303164663332326536353562373635666432363761306236333064223b733a33323a223439316337616463656634633038323565303332663636636636363937306261223b733a33323a223639386261653363383266633833656335643137343139643435393361373435223b733a33323a223939656133376565313162613338333635626539643866653531303234613031223b733a33323a223138643033633862303937643834316364626461643134653638373662623465223b733a33323a226232633136653161366263653733643661653531373530663534666435616239223b733a33323a226363313733643239393666353135303933356366386133323833306331323731223b733a33323a223663663638633666613264643963653830383166623936363330396532376530223b733a33323a223665663032353265393932663637383861613534343261366135653337656564223b733a33323a226435376664643261306135343065393561366265353961383531633932653762223b733a33323a226365323935363365383037373062303531653266366431653936343134353563223b733a33323a223166336534653732303065303861303035376166626665643966353861373535223b733a33323a226630353064313765363037313132346638623330353461613063626561646665223b733a33323a226465656437376364303732623266303130333731613763353463623036306561223b733a33323a223031373261346163373430386565633135346433643831613833303561356437223b733a33323a223336326562366561623661643831313932663261656132393831613439373965223b733a33323a226263346631393831626137613661376161376563373863373462383335323263223b733a33323a226634336265366535623866353139383939363931396265643939336333333561223b733a33323a226163326135643530666366616435666161656630333863343763383231636464223b733a33323a223165343238613466393638633263663736613938333933313738383164333039223b733a33323a226138666262373663653030386136333838333534336266636165633038623832223b733a33323a226163393133336332343462323863313338613430383131343064356337336363223b733a33323a223631303966353339323634343063613062376634613564633961636265343231223b733a33323a223135666433633537393162656330666666316237303532376261343839386435223b733a33323a223639346233333236303261326561383639623933393730303265316637633435223b733a33323a223233306439336664383532666262326362623836636433306466666662363163223b733a33323a223138393736396236316638356236623432326434313263313238366363343966223b733a33323a223931653335633162323461616561323131336135306331326664376361366430223b733a33323a223137633935626134613565643264636135643036363739306538356637636238223b733a33323a223463656335666539333631363132653833376432316466383965396135633234223b733a33323a226337376138386435396131663133306366316536623963316566306165393330223b733a33323a223261643763316138633538396564316331666636383633353131383265333138223b733a33323a223563346135666530666136383038623837643737306335623662363932666630223b733a33323a226332666664313035666632653539633462386635303632653264656461313034223b733a33323a226238643362313866616235306134626534656435613661343532653235653834223b733a33323a223334333036633832326564373734653164666633643232336465643564323137223b733a33323a226261626163366165336136623461613562336162346631346164663065323638223b733a33323a223637383037306662303034646566333739393362373131346530633866663238223b733a33323a226139633231636434636233366131323439363632303164623265653939333664223b733a33323a223638333066333366363335393664666465623865393838623636353865656631223b733a33323a226334623031656235373032366164393363656264346266663639363630646265223b733a33323a223032653863636462643430346633393365666533306262353737343163393866223b733a33323a223134636439643261333262376630346231323531656631376631303732643532223b733a33323a223735393265333634313562333637323735326166656464306164356463346338223b733a33323a223637383237653932636363393134636561343966383539323434336234653763223b733a33323a223931333936636366326162626531343433363733356331373939353063636661223b733a33323a226233313164623233636237313534396666343635643639336464373836376532223b733a33323a223365666164326563663963663361396238343936323734353663396634373064223b733a33323a223535393436363963643833623733613165366135313837633830323634393031223b733a33323a223763373433376233336132333461366533376139313262316436373665396261223b733a33323a223339643437623461373737396232356331323930643963346633333232343265223b733a33323a223166646339613862386264313764386437373864633330636164626665343834223b733a33323a223164623336326365393735386434666635633966306162343362633030636363223b733a33323a223362346263356538346334396131303339643338313737646431356333333739223b733a33323a226638616530383066623665313565373836356361373730613337373965323764223b733a33323a226531643838386562323832303130383961663132653863333962366534643933223b733a33323a223463306561316663633233623139613939623234623365313661343038316134223b7d733a343a2268617368223b733a36353a2234633065613166636332336231396139396232346233653136613430383161342d6531643838386562323832303130383961663132653863333962366534643933223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f6d6f64756c655f4561737941646d696e5f636f6e6669677572655f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a223037633564646165316338616466666166333961393632326631396534363032223b733a33323a226564306432346165383162633063643735386263313130393761636238643130223b7d733a343a2268617368223b733a36353a2265643064323461653831626330636437353862633131303937616362386431302d3037633564646165316338616466666166333961393632326631396534363032223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f6d6f64756c655f496969665365727665725f636f6e6669677572655f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a226561326430626137636534616536333862376634626563313966623931386461223b733a33323a223732356333313534646332333433346161306537396366383030383432633832223b7d733a343a2268617368223b733a36353a2237323563333135346463323334333461613065373963663830303834326338322d6561326430626137636534616536333862376634626563313966623931386461223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4561737941646d696e7c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a31343a226c61737442726f77736550616765223b613a313a7b733a353a2261646d696e223b613a313a7b733a353a226974656d73223b733a31313a222f61646d696e2f6974656d223b7d7d733a393a226c6173745175657279223b613a313a7b733a353a2261646d696e223b613a313a7b733a353a226974656d73223b613a333a7b733a373a22736f72745f6279223b733a373a2263726561746564223b733a31303a22736f72745f6f72646572223b733a343a2264657363223b733a343a2270616765223b693a313b7d7d7d7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f636f6e6669726d666f726d5f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a323a7b733a33323a226632633235656561323037313463396166313630333661326166663931353130223b733a33323a226439386539313761396364363737363630623964306665653532333932333335223b733a33323a226363663336333439316139633334616635383665383665636163376433633664223b733a33323a226331616261636334393664386134393561346364346132393333653532313261223b7d733a343a2268617368223b733a36353a2263316162616363343936643861343935613463643461323933336535323132612d6363663336333439316139633334616635383665383665636163376433633664223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d, 1764235713);
+('528a243a9d8e00205b3f265ed05e37e3', 0x5f5f4c616d696e61737c613a353a7b733a32303a225f524551554553545f4143434553535f54494d45223b643a313737313530393233362e3834333036323b733a363a225f56414c4944223b613a313a7b733a32383a224c616d696e61735c53657373696f6e5c56616c696461746f725c4964223b733a33323a226333346333356431396332306331646436313062313032316565343535366533223b7d733a34323a224c616d696e61735f56616c696461746f725f437372665f73616c745f6c6f67696e666f726d5f63737266223b613a313a7b733a363a22455850495245223b693a313737313535323238383b7d733a33323a224c616d696e61735f56616c696461746f725f437372665f73616c745f63737266223b613a313a7b733a363a22455850495245223b693a313737313535323330333b7d733a33373a224c616d696e61735f56616c696461746f725f437372665f73616c745f666f726d5f63737266223b613a313a7b733a363a22455850495245223b693a313737313535323431313b7d7d72656469726563745f75726c7c733a32343a22687474703a2f2f6f6d656b612e6c6f63616c2f61646d696e223b4c616d696e61735f56616c696461746f725f437372665f73616c745f6c6f67696e666f726d5f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a223533643935633734663334646137613961636466353965366639623235313561223b733a33323a223239656530346535623963316633646639643566646566626537616263616163223b7d733a343a2268617368223b733a36353a2232396565303465356239633166336466396435666465666265376162636161632d3533643935633734663334646137613961636466353965366639623235313561223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f417574687c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a313a7b733a373a2273746f72616765223b693a313b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4f6d656b614d657373656e6765727c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a303a7b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a36323a7b733a33323a226137386333613237323530343236333738363739663633393434623464303537223b733a33323a226136366130633333623736653337616231353964623832313266663031393539223b733a33323a226365353163373331396231363962626339336662633638313264646262636666223b733a33323a223136626362366437363262373863323436623935646438643964333134626638223b733a33323a223064373865303132303965373833356534366131313932663833636535313735223b733a33323a226664313661393439366337333565613161663437383661353336366138643333223b733a33323a226164623936323961656630336638356465373937626234313438633565376531223b733a33323a223464343366363461646438313930613430623966356138353830643339306361223b733a33323a223638633262346431656231333033333536663232626261363532656138336230223b733a33323a226464656565396533336236366263633866383533626534323361396133623432223b733a33323a223439616632343132396662306232633663383565636330643730643938626634223b733a33323a223161363565313233666365323533373564653736643864303061303339393231223b733a33323a223030386334346161656164653865663864363062633166653935343661313736223b733a33323a223261363139373832373135663934616438343336633839616438386634626536223b733a33323a226432373030666337623962326134313963303631373335303665633234316464223b733a33323a223166313664363733623161306235323433333934636237336161633130353738223b733a33323a226530353162623964393165376534646630336135326663366130646237316630223b733a33323a223333353834636465393532623439333563343063613161653532323663373736223b733a33323a223834333465363132323634643933366434336338656633396461383931383431223b733a33323a226133626462376265643032326234316665313731366234363339666639383866223b733a33323a223261366466643433323733623063643931623334343439383462326438316433223b733a33323a223563336639336632373035393233613264336536383463663038323564343632223b733a33323a223265376662343364376662383138616532633334343431386361666161616633223b733a33323a226539653166376434666565313162333136623633313031633330643237623938223b733a33323a226631323030376134356362656437376638666462666365313734373261353862223b733a33323a223738346163323938363463303261616665386366306533663031366335646564223b733a33323a226532613463303836373633643136363332323538393431373965363565643534223b733a33323a226638366338653761303536666538643563396536393139626134383665343863223b733a33323a226135356631643366363764646434636634623665643663313664376438306432223b733a33323a223864383764656636333936353131373637326566393966316562346131373234223b733a33323a223363343639653539663430376466623236333838396164386664613939313134223b733a33323a223562653136393135326339366232643664336333373131373639663862316531223b733a33323a223532383836393731306632653331363765353833613037663339326264633761223b733a33323a223066646136393933666533616533303336636137643261613333663665383264223b733a33323a223765396432623266656635623035636139303031363134326561333736656563223b733a33323a226662313139396364626636313832323438343638643039336133633863663835223b733a33323a226336373562303438363437666636373332333063363539636534326330633939223b733a33323a223936336536336564373438386661613735633431653761353530353938376165223b733a33323a226362316564643038346464353863343834393330326237626537366434653031223b733a33323a223232333831643563356562666231393334616531353863356266663035666338223b733a33323a223137333130656233313133393331636130613262623133373366323336633961223b733a33323a226635316466646266633534376262353862663562643362313532393136323535223b733a33323a226333343239386137646130393435616261393261333336623662633337343932223b733a33323a223939353332656564356536626134326432656330326634636436653533343235223b733a33323a226664613433363962366563636138653036653266346663323031346433653263223b733a33323a226439356234643435393939653061336230376431376566656439373234373534223b733a33323a226233656437383238326634353164333036306364353664313634383261383663223b733a33323a226238333430353238303066373661316362653161666635373033323231323937223b733a33323a223030303639653731343566626331623738653936613362346230633366653037223b733a33323a223363313030383965326265316133396135653933356538373637393038303634223b733a33323a226233393732316339653535306430623732626463656333366339626432393232223b733a33323a223237396635393362353436376433343636313734353837393633663962626262223b733a33323a223561653161666537313663656238323630643166333462613832306563373266223b733a33323a223038363833396434643364353033353135316262323765656132626431333931223b733a33323a223638613230656432613836643933366438633132353165373038383565363238223b733a33323a223862393131393134663235303435363236306335376365356261336431376339223b733a33323a223362313237343339663063383434393837373763623236366366316530303135223b733a33323a223339663162386537616534376134353162336436383133633636303438323036223b733a33323a223166653137326337316264313932343562343662343038376436636336643866223b733a33323a223131373637313434303066333738646539343235626664353635626335346139223b733a33323a223530613936326263396139313766316133323164653531393636353166623236223b733a33323a223131386230636163393937376330333963623463353939323463386236343734223b733a33323a223537613932616263373037653766663163653864343733386237613064643939223b733a33323a226135313662376132316161373833653339346338656231313035366666653565223b733a33323a223430663039306165343731353337366534366263373561656436313963333633223b733a33323a223334626136313137663066366239376434353434323337653532303365653039223b733a33323a226238323966643635306132643234383433333666663165646138373062366636223b733a33323a226337373731346131373632396162643066306436313166373136326230376139223b733a33323a223438646461616166376339323162333332323734343061613839653531663661223b733a33323a223130323264373931346331613033376565306561653634623633366130373734223b733a33323a223062653731356463633166333764663463356535396463326466623936376137223b733a33323a226530353631616338373461363963613938323436643330356339373731386634223b733a33323a226334616639333738626238316265333538336330303832313966656538383235223b733a33323a223064396461636437393566313937616331306138353431626439313331643730223b733a33323a223363653134643366616566383135313139636366643735316333616439396565223b733a33323a226636663062356665313661326562663434663036386332383063643865326338223b733a33323a223863383638313164373736613731396434613866303137313865643830303433223b733a33323a223436316663393832633431323433306263626638636262646538366636633435223b733a33323a226633303038666131323536613962346635633335346133646331323136353335223b733a33323a223463623564323030396239326364363863343730353433623131353032353364223b733a33323a223663393332333937373161626466613863326537353630323039636364366561223b733a33323a223465386461653164643334383564383166343865316631316364613235623666223b733a33323a223531346530303031613733373136633036333535353063333662616163313062223b733a33323a223063623037663938313738623532366434616436313839666437356161636361223b733a33323a223233613233346261633635653631643831636137653761396234383437663431223b733a33323a223138313165323562636165316630333361396264366634303834613764613731223b733a33323a223837616361323863356439623639636663393537653738303462373335656132223b733a33323a223130343365643363316432633834343262383139643138386536333237383431223b733a33323a226237373361613830623765643536326430623738323235376362323931333562223b733a33323a223836653239316135353461346261646631323266343362373965663864656366223b733a33323a226266313034383635333565323239636564396638336539616333613930303837223b733a33323a223161336465393837373131633035663866643163663936386663323862373338223b733a33323a226532623733343731666631613738376664643932333932366337363534333432223b733a33323a223466373434373034316237656635333561343461633830613261643731666138223b733a33323a223766343138323766343334393332666266326137383633623161663133313136223b733a33323a226635623730303638333038393562326236303533636539363632653130336462223b733a33323a223131376334656139613161636332396332646234616137326636346430613565223b733a33323a223138656237393239613933303030366132653763323733663165623232613132223b733a33323a223165306435333931303638666262353231343464363437393633356532633537223b733a33323a223133373734653735373931663138313939303364373033396464616134333362223b733a33323a223034656163636331313066616133376561333663623635623232313966613035223b733a33323a223561653839633164663162343363666237336233353462303261313861366238223b733a33323a223839613439326439393338326633303564353431646338643931376563316465223b733a33323a223865656538373231313361383538613938646461316566646362656531306337223b733a33323a223439393663633461666163343231343431316465386563336535376233613138223b733a33323a223161653636343462333936656566386138366364353034396263383939326262223b733a33323a226563613235323763613236623736366330396263323034313030393862623735223b733a33323a223830306131613230663362656534613364366531396336643232623632373436223b733a33323a226462653235656466656438383737656366633161376439356134663561666435223b733a33323a223563303632333561346536373337656536643636386631396638336661646261223b733a33323a223262333962643866396639656663333566646533376537656362366630373037223b733a33323a226534656336363663313565356166646532373831396563343632316533383464223b733a33323a226631663734343036333631616636313965363163623564383337326133646537223b733a33323a223533616161663037386364343765393439383233613032653864616562373239223b733a33323a223539323965383432623462333635333637326538666564396433353839336633223b733a33323a223331333430613037626432326333356437613736663461353433663233396264223b733a33323a223264633062373833626134646435666631323737353763356534663630306166223b733a33323a223835373939363862636361336263353933613033366366386566393332373466223b733a33323a223133333231313738303837386536643365396438343661316136326136383666223b733a33323a223363373932616663663461363735316234646135343435383761666565396462223b733a33323a223938376264663662623233616230613633663330313437616632623330343962223b733a33323a226131653661383730646537653731373466613664343935353633613461336334223b733a33323a226438623738373736613166353039303838613530643863356638656339653765223b733a33323a223966333761336437663161373664653063323330666534316263303931326231223b7d733a343a2268617368223b733a36353a2239663337613364376631613736646530633233306665343162633039313262312d6438623738373736613166353039303838613530643863356638656339653765223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d4c616d696e61735f56616c696461746f725f437372665f73616c745f666f726d5f637372667c4f3a32363a224c616d696e61735c5374646c69625c41727261794f626a656374223a343a7b733a373a2273746f72616765223b613a323a7b733a393a22746f6b656e4c697374223b613a313a7b733a33323a226630306663306231643564653731306438633737393738643664646335393435223b733a33323a223761313331383666623638393934306639396635666331396530623732363832223b7d733a343a2268617368223b733a36353a2237613133313836666236383939343066393966356663313965306237323638322d6630306663306231643564653731306438633737393738643664646335393435223b7d733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b733a31333a2241727261794974657261746f72223b733a31393a2270726f74656374656450726f70657274696573223b613a343a7b693a303b733a373a2273746f72616765223b693a313b733a343a22666c6167223b693a323b733a31333a226974657261746f72436c617373223b693a333b733a31393a2270726f74656374656450726f70657274696573223b7d7d, 1771509236);
 
 -- --------------------------------------------------------
 
@@ -4537,23 +4468,13 @@ CREATE TABLE `setting` (
 
 INSERT INTO `setting` (`id`, `value`) VALUES
 ('administrator_email', '\"admin@example.org\"'),
-('advancedresourcetemplate_autofillers', '[]'),
-('advancedresourcetemplate_closed_property_list', '\"0\"'),
-('advancedresourcetemplate_item_set_queries', '[]'),
-('advancedresourcetemplate_properties_as_search_blacklist', '[\"dcterms:abstract\",\"dcterms:bibliographicCitation\",\"dcterms:description\",\"dcterms:extent\",\"dcterms:identifier\",\"dcterms:tableOfContents\",\"bibo:abstract\",\"bibo:asin\",\"bibo:content\",\"bibo:doi\",\"bibo:eanucc13\",\"bibo:eissn\",\"bibo:gtin14\",\"bibo:handle\",\"bibo:identifier\",\"bibo:isbn\",\"bibo:isbn10\",\"bibo:isbn13\",\"bibo:issn\",\"bibo:issue\",\"bibo:lccn\",\"bibo:authorList\",\"bibo:contributorList\",\"bibo:editorList\",\"bibo:locator\",\"bibo:number\",\"bibo:oclcnum\",\"bibo:pageEnd\",\"bibo:pageStart\",\"bibo:pages\",\"bibo:pmid\",\"bibo:sici\",\"bibo:upc\",\"bibo:uri\",\"curation:data\",\"curation:note\",\"extracttext:extracted_text\"]'),
-('advancedresourcetemplate_properties_as_search_whitelist', '[\"all\"]'),
-('advancedresourcetemplate_properties_display_admin', '\"0\"'),
-('advancedresourcetemplate_resource_form_elements', '[\"metadata_collapse\",\"metadata_description\",\"language\",\"visibility\",\"value_annotation\"]'),
-('advancedresourcetemplate_skip_checks', '\"0\"'),
-('advancedresourcetemplate_skip_private_values', '\"0\"'),
-('advancedresourcetemplate_templates_by_resource', '{\"items\":[1,2,3,4,5,6,7,8,9,10,11,12,13,14],\"media\":[1,2,3,4,5,6,7,8,9,10,11,12,13,15],\"item_sets\":[1,2,3,4,5,6,7,8,9,10,11,12,13],\"value_annotations\":[1,2,3,4,6,7,8,9,10,11,12,13],\"annotations\":[1,2,3,4,6,7,8,9,10,11,12,13]}'),
 ('advancedsearch_all_configs', '{\"1\":\"find\"}'),
 ('advancedsearch_api_config', '\"\"'),
 ('advancedsearch_batch_size', '\"100\"'),
-('advancedsearch_configs', '[\"1\"]'),
 ('advancedsearch_fulltextsearch_alto', '\"0\"'),
-('advancedsearch_index_batch_edit', '\"sync\"'),
 ('advancedsearch_main_config', '\"1\"'),
+('advancedsearch_metadata_improved', 'true'),
+('advancedsearch_search_fields', '[\"common\\/advanced-search\\/sort\",\"common\\/advanced-search\\/fulltext\",\"common\\/advanced-search\\/properties\",\"common\\/advanced-search\\/filters\",\"common\\/advanced-search\\/resource-class\",\"common\\/advanced-search\\/resource-template\",\"common\\/advanced-search\\/item-sets\",\"common\\/advanced-search\\/item-sets-improved\",\"common\\/advanced-search\\/site\",\"common\\/advanced-search\\/has-media-radio\",\"common\\/advanced-search\\/media-types\",\"common\\/advanced-search\\/media-type\",\"common\\/advanced-search\\/owner\",\"common\\/advanced-search\\/visibility-radio\",\"common\\/advanced-search\\/ids\",\"common\\/advanced-search\\/date-time\",\"common\\/advanced-search\\/has-original\",\"common\\/advanced-search\\/has-thumbnails\",\"common\\/advanced-search\\/has-asset\",\"common\\/advanced-search\\/asset\",\"common\\/advanced-search\\/data-type-geography\",\"common\\/advanced-search\\/item-set-is-dynamic\",\"common\\/numeric-data-types-advanced-search\",\"common\\/advanced-search\\/harvests\"]'),
 ('archiverepertory_item_convert', '\"full\"'),
 ('archiverepertory_item_folder', '\"id\"'),
 ('archiverepertory_item_prefix', '\"\"'),
@@ -4568,12 +4489,14 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('ark_note', '\"\"'),
 ('ark_policy_main', '\"Our institution assigns identifiers within the ARK domain under the NAAN 99999 and according to the following principles:\\r\\n\\r\\n* No ARK shall be re-assigned; that is, once an ARK-to-object association has been made public, that association shall be considered unique into the indefinite future.\\r\\n* To help them age and travel well, the Name part of our institution-assigned ARKs shall contain no widely recognizable semantic information (to the extent possible).\\r\\n* Our institution-assigned ARKs shall be generated with a terminal check character that guarantees them against single character errors and transposition errors.\"'),
 ('ark_policy_statement', '\"erc-support:\\r\\nwho: Our Institution\\r\\nwhat: Permanent: Stable Content:\\r\\nwhen: 20160101\\r\\nwhere: http:\\/\\/example.com\\/ark:\\/99999\\/\"'),
+('ark_property', '\"dcterms:identifier\"'),
 ('ark_qualifier', '\"internal\"'),
 ('ark_qualifier_position_format', '\"\"'),
 ('ark_qualifier_static', '\"0\"'),
 ('ark_subnaa', '\"sub\"'),
 ('blockplus_html_config_page', '\"default\"'),
 ('blockplus_html_mode_page', '\"inline\"'),
+('blockplus_page_models', '[]'),
 ('blockplus_property_itemset', '\"\"'),
 ('blocksdisposition_modules', '[]'),
 ('bulkedit_deduplicate_on_save', '\"1\"'),
@@ -4597,25 +4520,6 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('cleanurl_settings', '{\"routes\":[],\"route_aliases\":[]}'),
 ('cleanurl_site_skip_main', '\"0\"'),
 ('cleanurl_site_slug', '\"s\\/\"'),
-('contribute_allow_update', '\"submission\"'),
-('contribute_author_confirmation_body', '\"\"'),
-('contribute_author_confirmation_subject', '\"\"'),
-('contribute_author_message_body', '\"Hello,\\r\\n\\r\\nYour contribution on {main_title} has been rejected.\\r\\n\\r\\nFollow the instructions to fill all required fields.\\r\\n\\r\\nPlease contact us if you have any question.\\r\\n\\r\\nSincerely,\"'),
-('contribute_author_message_subject', '\"Your contribution on {main_title}\"'),
-('contribute_filter_user_emails', '[]'),
-('contribute_filter_user_settings', '[]'),
-('contribute_message_add', '\"\"'),
-('contribute_message_edit', '\"\"'),
-('contribute_modes', '[\"open\"]'),
-('contribute_notify_recipients', '[]'),
-('contribute_redirect_submit', '\"\"'),
-('contribute_reviewer_confirmation_body', '\"\"'),
-('contribute_reviewer_confirmation_subject', '\"\"'),
-('contribute_sender_email', '\"\"'),
-('contribute_sender_name', '\"\"'),
-('contribute_templates', '[\"5\",\"14\"]'),
-('contribute_templates_media', '[\"15\"]'),
-('contribute_token_duration', '\"30\"'),
 ('default_site', '\"\"'),
 ('default_to_private', '\"0\"'),
 ('disable_file_validation', '\"0\"'),
@@ -4624,8 +4528,8 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('easyadmin_addon_notify_version_inactive', 'true'),
 ('easyadmin_administrator_name', '\"\"'),
 ('easyadmin_allow_empty_files', 'false'),
-('easyadmin_cron_last', '1764235671'),
-('easyadmin_cron_tasks', '[\"session_8\"]'),
+('easyadmin_cron_last', '1771509086'),
+('easyadmin_cron_tasks', '[\"session_8d\"]'),
 ('easyadmin_display_exception', 'false'),
 ('easyadmin_interface', '[\"resource_public_view\"]'),
 ('easyadmin_local_path', '\"\\/var\\/www\\/html\\/files\\/import\"'),
@@ -4659,15 +4563,13 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('iiifserver_manifest_attribution_property', '\"\"'),
 ('iiifserver_manifest_behavior_default', '[\"none\"]'),
 ('iiifserver_manifest_behavior_property', '\"\"'),
-('iiifserver_manifest_cache', '\"1\"'),
-('iiifserver_manifest_cache_derivativemedia', '\"0\"'),
+('iiifserver_manifest_cache', '\"0\"'),
 ('iiifserver_manifest_canvas_label', '\"template\"'),
 ('iiifserver_manifest_canvas_label_property', '\"\"'),
 ('iiifserver_manifest_collection_properties', '[]'),
 ('iiifserver_manifest_default_version', '\"2\"'),
-('iiifserver_manifest_description_property', '\"dcterms:bibliographicCitation\"'),
 ('iiifserver_manifest_external_property', '\"dcterms:hasFormat\"'),
-('iiifserver_manifest_homepage', '\"resource\"'),
+('iiifserver_manifest_homepage', '[\"resource\"]'),
 ('iiifserver_manifest_homepage_property', '\"\"'),
 ('iiifserver_manifest_html_descriptive', '\"1\"'),
 ('iiifserver_manifest_item_properties', '[]'),
@@ -4693,7 +4595,7 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('iiifserver_manifest_start_property', '\"\"'),
 ('iiifserver_manifest_structures_property', '\"\"'),
 ('iiifserver_manifest_structures_skip_flat', '\"0\"'),
-('iiifserver_manifest_summary_property', '\"template\"'),
+('iiifserver_manifest_summary_property', '\"dcterms:bibliographicCitation\"'),
 ('iiifserver_manifest_viewing_direction_default', '\"left-to-right\"'),
 ('iiifserver_manifest_viewing_direction_property', '\"\"'),
 ('iiifserver_media_api_default_supported_version', '{\"service\":\"2\",\"level\":\"2\"}'),
@@ -4723,19 +4625,26 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('imageserver_info_rights_uri', '\"https:\\/\\/rightsstatements.org\\/vocab\\/CNE\\/1.0\\/\"'),
 ('imageserver_info_rights_url', '\"\"'),
 ('imageserver_tile_fallback', '\"tile_large\"'),
-('imageserver_tile_manual', '\"1\"'),
+('imageserver_tile_mode', '\"manual\"'),
 ('installation_title', '\"OmekaS Docker\"'),
 ('locale', '\"\"'),
+('log_archive_compress', '\"1\"'),
+('log_archive_days', '\"90\"'),
+('log_archive_delete', '\"1\"'),
+('log_archive_format', '\"tsv\"'),
+('log_archive_include_id', '\"0\"'),
+('log_archive_references', '[]'),
+('log_archive_severity_max', '\"\"'),
+('log_archive_store', '\"0\"'),
+('log_archive_translate', '\"1\"'),
+('log_cron_days', '\"7\"'),
+('log_cron_last', '1771509086'),
 ('media_alt_text_property', '\"\"'),
 ('media_type_whitelist', '[\"application\\/msword\",\"application\\/ogg\",\"application\\/pdf\",\"application\\/rtf\",\"application\\/vnd.ms-access\",\"application\\/vnd.ms-excel\",\"application\\/vnd.ms-powerpoint\",\"application\\/vnd.ms-project\",\"application\\/vnd.ms-write\",\"application\\/vnd.oasis.opendocument.chart\",\"application\\/vnd.oasis.opendocument.database\",\"application\\/vnd.oasis.opendocument.formula\",\"application\\/vnd.oasis.opendocument.graphics\",\"application\\/vnd.oasis.opendocument.presentation\",\"application\\/vnd.oasis.opendocument.spreadsheet\",\"application\\/vnd.oasis.opendocument.text\",\"application\\/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"application\\/vnd.openxmlformats-officedocument.presentationml.presentation\",\"application\\/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\"application\\/x-gzip\",\"application\\/x-ms-wmp\",\"application\\/x-msdownload\",\"application\\/x-shockwave-flash\",\"application\\/x-tar\",\"application\\/zip\",\"audio\\/midi\",\"audio\\/mp4\",\"audio\\/mpeg\",\"audio\\/ogg\",\"audio\\/x-aac\",\"audio\\/x-aiff\",\"audio\\/x-ms-wma\",\"audio\\/x-ms-wax\",\"audio\\/x-realaudio\",\"audio\\/x-wav\",\"image\\/bmp\",\"image\\/gif\",\"image\\/jp2\",\"image\\/jpeg\",\"image\\/pjpeg\",\"image\\/png\",\"image\\/tiff\",\"image\\/x-icon\",\"text\\/css\",\"text\\/plain\",\"text\\/richtext\",\"video\\/divx\",\"video\\/mp4\",\"video\\/mpeg\",\"video\\/ogg\",\"video\\/quicktime\",\"video\\/webm\",\"video\\/x-ms-asf\",\"video\\/x-msvideo\",\"video\\/x-ms-wmv\",\"application\\/octet-stream\",\"application\\/vnd.threejs+json\",\"model\\/gltf-binary\",\"model\\/gltf+json\",\"model\\/obj\",\"model\\/vnd.collada+xml\",\"model\\/vnd.filmbox\",\"image\\/ktx2\",\"model\\/mtl\",\"model\\/vnd.threejs+json\",\"application\\/alto+xml\"]'),
 ('mirador_annotation_endpoint', '\"\"'),
-('mirador_config_collection', '\"\"'),
-('mirador_config_collection_2', '\"\"'),
-('mirador_config_item', '\"\"'),
-('mirador_config_item_2', '\"\"'),
 ('mirador_plugins', '[]'),
 ('mirador_plugins_2', '[]'),
-('mirador_preselected_items', '\"0\"'),
+('mirador_preselected_items', '0'),
 ('mirador_version', '\"3\"'),
 ('modelviewer_config_default', '\"\"'),
 ('modelviewer_config_property', '\"dcterms:abstract\"'),
@@ -4744,8 +4653,11 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('recaptcha_secret_key', '\"\"'),
 ('recaptcha_site_key', '\"\"'),
 ('searchsolr_server_id', '\"1ik8m4\"'),
+('searchsolr_solarium_adapter', '\"auto\"'),
+('searchsolr_solarium_timeout', '5'),
 ('statistics_default_user_status_admin', '\"hits\"'),
 ('statistics_default_user_status_public', '\"anonymous\"'),
+('statistics_disable_dashboard', 'true'),
 ('statistics_include_bots', '\"0\"'),
 ('statistics_per_page_admin', '\"100\"'),
 ('statistics_per_page_public', '\"10\"'),
@@ -4758,7 +4670,7 @@ INSERT INTO `setting` (`id`, `value`) VALUES
 ('universalviewer_version', '\"4\"'),
 ('use_htmlpurifier', '\"0\"'),
 ('value_languages', '[]'),
-('version', '\"4.0.4\"'),
+('version', '\"4.1.1\"'),
 ('version_notifications', '\"1\"');
 
 -- --------------------------------------------------------
@@ -4789,7 +4701,7 @@ CREATE TABLE `site` (
 --
 
 INSERT INTO `site` (`id`, `thumbnail_id`, `homepage_id`, `owner_id`, `slug`, `theme`, `title`, `summary`, `navigation`, `item_pool`, `created`, `modified`, `is_public`, `assign_new_items`) VALUES
-(1, NULL, 1, 1, 'index', 'default', 'default site', 'Default site created at Docker bootstrap phase', '[{\"type\":\"browse\",\"data\":{\"label\":\"Browse\",\"query\":\"\"},\"links\":[]},{\"type\":\"search-page\",\"data\":{\"label\":\"Search\",\"advancedsearch_config_id\":\"1\"},\"links\":[]}]', '[]', '2023-02-15 16:04:55', '2025-07-10 14:59:57', 1, 1);
+(1, NULL, 1, 1, 'index', 'default', 'Default site', 'Default site created at Docker bootstrap phase', '[{\"type\":\"browse\",\"data\":{\"label\":\"Browse\",\"query\":\"\"},\"links\":[]},{\"type\":\"searchingPage\",\"data\":{\"label\":\"Search\",\"advancedsearch_config_id\":\"1\"},\"links\":[]}]', '[]', '2023-02-15 16:04:55', '2025-07-10 14:56:31', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -4832,15 +4744,17 @@ CREATE TABLE `site_page` (
   `title` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_public` tinyint(1) NOT NULL,
   `created` datetime NOT NULL,
-  `modified` datetime DEFAULT NULL
+  `modified` datetime DEFAULT NULL,
+  `layout` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `layout_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '(DC2Type:json)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `site_page`
 --
 
-INSERT INTO `site_page` (`id`, `site_id`, `slug`, `title`, `is_public`, `created`, `modified`) VALUES
-(1, 1, 'welcome', 'Welcome', 1, '2023-02-15 16:04:55', '2023-02-15 16:04:55');
+INSERT INTO `site_page` (`id`, `site_id`, `slug`, `title`, `is_public`, `created`, `modified`, `layout`, `layout_data`) VALUES
+(1, 1, 'welcome', 'Welcome', 1, '2023-02-15 16:04:55', '2023-02-15 16:04:55', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4853,15 +4767,16 @@ CREATE TABLE `site_page_block` (
   `page_id` int NOT NULL,
   `layout` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json_array)',
-  `position` int NOT NULL
+  `position` int NOT NULL,
+  `layout_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '(DC2Type:json)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `site_page_block`
 --
 
-INSERT INTO `site_page_block` (`id`, `page_id`, `layout`, `data`, `position`) VALUES
-(1, 1, 'html', '{\"html\":\"Welcome to your new site. This is an example page.\"}', 1);
+INSERT INTO `site_page_block` (`id`, `page_id`, `layout`, `data`, `position`, `layout_data`) VALUES
+(1, 1, 'html', '{\"html\":\"Welcome to your new site. This is an example page.\"}', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -4900,19 +4815,22 @@ CREATE TABLE `site_setting` (
 --
 
 INSERT INTO `site_setting` (`id`, `site_id`, `value`) VALUES
-('advancedresourcetemplate_block_metadata_fields', 1, '{\"values-type\":{\"dcterms:type\":\"\"},\"values-creator\":{\"dcterms:creator\":\"\"},\"values-date\":{\"dcterms:date\":\"\",\"dcterms:created\":\"\",\"dcterms:issued\":\"\"},\"values-subject\":{\"dcterms:subject\":\"\"},\"values-rights = Terms of use\":{\"dcterms:rights\":\"\",\"dcterms:license\":\"\"}}'),
-('advancedresourcetemplate_block_metadata_show_info', 1, '\"none\"'),
-('advancedresourcetemplate_block_metadata_show_label', 1, 'false'),
-('advancedresourcetemplate_block_metadata_show_locale', 1, 'false'),
-('advancedresourcetemplate_properties_as_search_blacklist', 1, '[\"dcterms:abstract\",\"dcterms:bibliographicCitation\",\"dcterms:description\",\"dcterms:extent\",\"dcterms:identifier\",\"dcterms:tableOfContents\",\"bibo:abstract\",\"bibo:asin\",\"bibo:content\",\"bibo:doi\",\"bibo:eanucc13\",\"bibo:eissn\",\"bibo:gtin14\",\"bibo:handle\",\"bibo:identifier\",\"bibo:isbn\",\"bibo:isbn10\",\"bibo:isbn13\",\"bibo:issn\",\"bibo:issue\",\"bibo:lccn\",\"bibo:authorList\",\"bibo:contributorList\",\"bibo:editorList\",\"bibo:locator\",\"bibo:number\",\"bibo:oclcnum\",\"bibo:pageEnd\",\"bibo:pageStart\",\"bibo:pages\",\"bibo:pmid\",\"bibo:sici\",\"bibo:upc\",\"bibo:uri\",\"curation:data\",\"curation:note\",\"extracttext:extracted_text\"]'),
-('advancedresourcetemplate_properties_as_search_whitelist', 1, '[\"all\"]'),
-('advancedresourcetemplate_properties_display', 1, '[]'),
-('advancedresourcetemplate_properties_display_site', 1, '\"\"'),
-('advancedresourcetemplate_skip_private_values', 1, '\"\"'),
 ('advancedsearch_configs', 1, '[\"1\"]'),
+('advancedsearch_item_sets_config', 1, '\"1\"'),
+('advancedsearch_item_sets_redirect_page_url', 1, '[]'),
+('advancedsearch_item_sets_redirect_search_first', 1, '[\"all\"]'),
+('advancedsearch_item_sets_redirects', 1, '{\"default\":\"first\"}'),
+('advancedsearch_item_sets_scope', 1, '\"0\"'),
+('advancedsearch_item_sets_template_form', 1, '\"\"'),
+('advancedsearch_items_config', 1, '\"1\"'),
+('advancedsearch_items_template_form', 1, '\"\"'),
 ('advancedsearch_main_config', 1, '\"1\"'),
-('advancedsearch_redirect_itemset', 1, '\"1\"'),
-('advancedsearch_search_fields', 1, '\"\"'),
+('advancedsearch_media_config', 1, '\"1\"'),
+('advancedsearch_media_template_form', 1, '\"\"'),
+('advancedsearch_metadata_improved', 1, 'true'),
+('advancedsearch_redirect_itemset', 1, '\"first\"'),
+('advancedsearch_redirect_itemsets', 1, '{\"default\":\"first\"}'),
+('advancedsearch_search_fields', 1, '[\"common\\/advanced-search\\/sort\",\"common\\/advanced-search\\/fulltext\",\"common\\/advanced-search\\/properties\",\"common\\/advanced-search\\/filters\",\"common\\/advanced-search\\/resource-class\",\"common\\/advanced-search\\/item-sets\",\"common\\/advanced-search\\/has-media-radio\",\"common\\/advanced-search\\/media-types\",\"common\\/advanced-search\\/media-type\",\"common\\/advanced-search\\/ids\",\"common\\/advanced-search\\/data-type-geography\",\"common\\/numeric-data-types-advanced-search\"]'),
 ('attachment_link_type', 1, '\"item\"'),
 ('blockplus_breadcrumbs_collections_url', 1, '\"\"'),
 ('blockplus_breadcrumbs_crumbs', 1, '[\"home\",\"collections\",\"itemset\",\"itemsetstree\",\"current\"]'),
@@ -4920,6 +4838,9 @@ INSERT INTO `site_setting` (`id`, `site_id`, `value`) VALUES
 ('blockplus_breadcrumbs_prepend', 1, '[]'),
 ('blockplus_breadcrumbs_separator', 1, '\"\"'),
 ('blockplus_items_order_for_itemsets', 1, '[]'),
+('blockplus_page_model_rights', 1, '\"0\"'),
+('blockplus_page_model_skip_blockplus', 1, '\"0\"'),
+('blockplus_page_models', 1, '[]'),
 ('blockplus_page_types', 1, '{\"home\":\"Home\",\"exhibit\":\"Exhibit\",\"exhibit_page\":\"Exhibit page\",\"simple\":\"Simple page\"}'),
 ('blockplus_prevnext_item_sets_query', 1, '\"\"'),
 ('blockplus_prevnext_items_query', 1, '\"\"'),
@@ -4935,13 +4856,15 @@ INSERT INTO `site_setting` (`id`, `site_id`, `value`) VALUES
 ('bulkexport_formatters', 1, '[\"csv\",\"json-ld\",\"ods\",\"tsv\",\"txt\"]'),
 ('bulkexport_language', 1, '\"\"'),
 ('bulkexport_limit', 1, '\"1000\"'),
-('bulkexport_metadata', 1, '[\"url\",\"o:resource_class\",\"properties_small\"]'),
-('bulkexport_metadata_exclude', 1, '[\"properties_large\",\"extracttext:extracted_text\"]'),
+('bulkexport_metadata', 1, '[\"url\",\"o:resource_class\"]'),
+('bulkexport_metadata_exclude', 1, '[\"extracttext:extracted_text\"]'),
 ('bulkexport_template', 1, '\"\"'),
+('bulkexport_views', 1, '[\"item_browse\"]'),
 ('disable_jsonld_embed', 1, '\"0\"'),
 ('eucookiebar_message', 1, '\"<p>Warning: this site uses cookies or other means to steal your personal data and to allow Google or Facebook to fetch them. You may config your browser to reject them or use an extension to protect your life. See terms and conditions. By visiting this site, you accept them.<\\/p>\\r\\n\"'),
 ('eucookiebar_options', 1, '\"{\\r\\n    \\\"acceptButton\\\": true,\\r\\n    \\\"acceptText\\\": \\\"OK\\\",\\r\\n    \\\"declineButton\\\": false,\\r\\n    \\\"declineText\\\": \\\"Disable Cookies\\\",\\r\\n    \\\"policyButton\\\": false,\\r\\n    \\\"policyText\\\": \\\"Privacy Policy\\\",\\r\\n    \\\"policyURL\\\": \\\"\\/\\\",\\r\\n    \\\"bottom\\\": true,\\r\\n    \\\"fixed\\\": true,\\r\\n    \\\"zindex\\\": \\\"99999\\\"\\r\\n}\"'),
 ('exclude_resources_not_in_site', 1, '\"0\"'),
+('favicon', 1, '\"\"'),
 ('filter_locale_values', 1, '\"0\"'),
 ('imageserver_default_thumbnail_type', 1, '\"large\"'),
 ('imageserver_tile_fallback', 1, '\"tile_large\"'),
@@ -4957,6 +4880,7 @@ INSERT INTO `site_setting` (`id`, `site_id`, `value`) VALUES
 ('mirador_preselected_items', 1, '\"0\"'),
 ('mirador_skip_default_css', 1, '\"0\"'),
 ('mirador_version', 1, '\"3\"'),
+('pdfviewer', 1, '{\"pdfviewer_template\":\"common\\/pdf-viewer\"}'),
 ('pdfviewer_template', 1, '\"common\\/pdf-viewer\"'),
 ('property_label_information', 1, '\"none\"'),
 ('search_resource_names', 1, '[\"site_pages\",\"items\"]'),
@@ -4966,10 +4890,11 @@ INSERT INTO `site_setting` (`id`, `site_id`, `value`) VALUES
 ('show_locale_label', 1, '\"1\"'),
 ('show_page_pagination', 1, '\"1\"'),
 ('show_user_bar', 1, '\"0\"'),
-('show_value_annotations', 1, '\"0\"'),
+('show_value_annotations', 1, '\"\"'),
 ('sitemaps_enableindex', 1, '\"0\"'),
 ('sitemaps_enablesitemap', 1, '\"1\"'),
 ('sitemaps_maxentries', 1, '\"500\"'),
+('subnav_display', 1, '\"\"'),
 ('theme_settings_omekas-theme-um', 1, '{\"siteMainColor\":\"#920b0b\",\"UMLogoLink\":\"home\",\"logoRight\":\"\",\"logoFooter\":\"\",\"mainText\":\"Main text here.\",\"footer\":\"Powered by Omeka S\",\"footerBar\":\"Text for footerbar\",\"searchController\":\"find\",\"CustomFieldList\":\"modsrdf:name, modsrdf:subject, schema:dateIssued, schema:contributor, modsrdf:namePrincipal\",\"IiifViewer\":\"mirador\",\"cover_vh\":\"30\",\"highlight_Image_1\":\"\",\"highlight_Link_1\":\"\",\"highlight_Link_Text_1\":\"\",\"highlight_Image_2\":\"\",\"highlight_Link_2\":\"\",\"highlight_Link_Text_2\":\"\",\"highlight_Image_3\":\"\",\"highlight_Link_3\":\"\",\"highlight_Link_Text_3\":\"\",\"highlight_Image_4\":\"\",\"highlight_Link_4\":\"\",\"highlight_Link_Text_4\":\"\"}'),
 ('universalviewer_config', 1, '\"{}\"'),
 ('universalviewer_config_theme', 1, '\"0\"'),
@@ -5007,6 +4932,7 @@ CREATE TABLE `solr_map` (
   `resource_name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `field_name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `source` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alias` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pool` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
   `settings` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5015,44 +4941,46 @@ CREATE TABLE `solr_map` (
 -- Dumping data for table `solr_map`
 --
 
-INSERT INTO `solr_map` (`id`, `solr_core_id`, `resource_name`, `field_name`, `source`, `pool`, `settings`) VALUES
-(1, 1, 'generic', 'resource_name_s', 'resource_name', '[]', '{\"formatter\":\"\",\"label\":\"Resource type\"}'),
-(2, 1, 'generic', 'is_public_b', 'is_public', '[]', '{\"formatter\":\"\",\"label\":\"Public\"}'),
-(3, 1, 'generic', 'owner_id_i', 'owner/o:id', '[]', '[]'),
-(4, 1, 'generic', 'site_id_is', 'site/o:id', '[]', '[]'),
-(5, 1, 'resources', 'resource_class_s', 'resource_class/o:term', '[]', '{\"formatter\":\"\",\"label\":\"Resource class\"}'),
-(6, 1, 'resources', 'resource_template_s', 'resource_template/o:label', '[]', '{\"formatter\":\"\",\"label\":\"Resource template\"}'),
-(7, 1, 'resources', 'title_s', 'o:title', '[]', '{\"formatter\":\"\",\"label\":\"Title\"}'),
-(8, 1, 'resources', 'dcterms_title_txt', 'dcterms:title', '[]', '{\"formatter\":\"\",\"label\":\"Title\"}'),
-(9, 1, 'resources', 'dcterms_creator_txt', 'dcterms:creator', '[]', '{\"formatter\":\"\",\"label\":\"Creator\"}'),
-(10, 1, 'resources', 'dcterms_subject_txt', 'dcterms:subject', '[]', '{\"formatter\":\"\",\"label\":\"Subject\"}'),
-(11, 1, 'resources', 'dcterms_description_txt', 'dcterms:description', '[]', '{\"formatter\":\"\",\"label\":\"Description\"}'),
-(12, 1, 'resources', 'dcterms_publisher_txt', 'dcterms:publisher', '[]', '{\"formatter\":\"\",\"label\":\"Publisher\"}'),
-(13, 1, 'items', 'dcterms_contributor_txt', 'dcterms:contributor', '[]', '{\"formatter\":\"\",\"label\":\"Contributor\"}'),
-(14, 1, 'resources', 'dcterms_date_txt', 'dcterms:date', '[]', '{\"formatter\":\"\",\"label\":\"Date\"}'),
-(15, 1, 'resources', 'dcterms_type_txt', 'dcterms:type', '[]', '{\"formatter\":\"\",\"label\":\"Type\"}'),
-(16, 1, 'resources', 'dcterms_format_txt', 'dcterms:format', '[]', '{\"formatter\":\"\",\"label\":\"Format\"}'),
-(17, 1, 'resources', 'dcterms_identifier_txt', 'dcterms:identifier', '[]', '{\"formatter\":\"\",\"label\":\"Identifier\"}'),
-(18, 1, 'resources', 'dcterms_source_txt', 'dcterms:source', '[]', '{\"formatter\":\"\",\"label\":\"Source\"}'),
-(19, 1, 'resources', 'dcterms_language_txt', 'dcterms:language', '[]', '{\"formatter\":\"\",\"label\":\"Language\"}'),
-(20, 1, 'resources', 'dcterms_relation_txt', 'dcterms:relation', '[]', '{\"formatter\":\"\",\"label\":\"Relation\"}'),
-(21, 1, 'resources', 'dcterms_coverage_txt', 'dcterms:coverage', '[]', '{\"formatter\":\"\",\"label\":\"Coverage\"}'),
-(22, 1, 'resources', 'dcterms_rights_txt', 'dcterms:rights', '[]', '{\"formatter\":\"\",\"label\":\"Rights\"}'),
-(23, 1, 'resources', 'dcterms_spatial_txt', 'dcterms:spatial', '[]', '{\"formatter\":\"\",\"label\":\"Spatial coverage\"}'),
-(24, 1, 'resources', 'dcterms_temporal_txt', 'dcterms:temporal', '[]', '{\"formatter\":\"\",\"label\":\"Temporal coverage\"}'),
-(25, 1, 'resources', 'dcterms_spatial_ss', 'dcterms:spatial', '[]', '{\"formatter\":\"\",\"label\":\"Spatial coverage\"}'),
-(26, 1, 'resources', 'dcterms_temporal_dr', 'dcterms:temporal', '[]', '{\"formatter\":\"date_range\",\"label\":\"Temporal coverage\"}'),
-(27, 1, 'resources', 'dcterms_type_ss', 'dcterms:type', '[]', '{\"formatter\":\"\",\"label\":\"Type\"}'),
-(28, 1, 'resources', 'dcterms_subject_ss', 'dcterms:subject', '[]', '{\"formatter\":\"\",\"label\":\"Subject\"}'),
-(29, 1, 'resources', 'dcterms_creator_ss', 'dcterms:creator', '[]', '{\"formatter\":\"\",\"label\":\"Creator\"}'),
-(30, 1, 'resources', 'dcterms_publisher_ss', 'dcterms:publisher', '[]', '{\"formatter\":\"\",\"label\":\"Publisher\"}'),
-(31, 1, 'resources', 'dcterms_language_ss', 'dcterms:language', '[]', '{\"formatter\":\"\",\"label\":\"Language\"}'),
-(32, 1, 'resources', 'dcterms_rights_ss', 'dcterms:rights', '[]', '{\"formatter\":\"\",\"label\":\"Rights\"}'),
-(33, 1, 'resources', 'item_set_dcterms_title_ss', 'item_set/dcterms:title', '[]', '{\"formatter\":\"\",\"label\":\"Item Set\"}'),
-(34, 1, 'resources', 'dcterms_title_s', 'dcterms:title', '[]', '{\"formatter\":\"\",\"label\":\"Title\"}'),
-(35, 1, 'resources', 'dcterms_date_s', 'dcterms:date', '[]', '{\"formatter\":\"\",\"label\":\"Date\"}'),
-(36, 1, 'resources', 'dcterms_creator_s', 'dcterms:creator', '[]', '{\"formatter\":\"\",\"label\":\"Creator\"}'),
-(37, 1, 'items', 'item_set_id_is', 'item_set/o:id', '[]', '{\"formatter\":\"\",\"label\":\"Item set id\"}');
+INSERT INTO `solr_map` (`id`, `solr_core_id`, `resource_name`, `field_name`, `source`, `alias`, `pool`, `settings`) VALUES
+(1, 1, 'generic', 'resource_name_s', 'resource_name', 'resource_name', '[]', '{\"formatter\":\"text\",\"label\":\"Resource type\",\"parts\":{\"1\":\"main\"}}'),
+(2, 1, 'generic', 'is_public_b', 'is_public', 'is_public', '[]', '{\"formatter\":\"text\",\"label\":\"Public\",\"parts\":{\"1\":\"main\"}}'),
+(3, 1, 'generic', 'owner_id_i', 'owner/o:id', 'owner_id', '[]', '{\"formatter\":\"text\",\"parts\":{\"1\":\"main\"}}'),
+(4, 1, 'generic', 'site_id_is', 'site/o:id', 'site_id', '[]', '{\"formatter\":\"text\",\"parts\":{\"1\":\"main\"}}'),
+(5, 1, 'resources', 'resource_class_s', 'resource_class/o:term', 'resource_class_term', '[]', '{\"formatter\":\"text\",\"label\":\"Resource class\",\"parts\":{\"1\":\"main\"}}'),
+(6, 1, 'resources', 'resource_template_s', 'resource_template/o:label', 'resource_template_label', '[]', '{\"formatter\":\"text\",\"label\":\"Resource template\",\"parts\":{\"1\":\"main\"}}'),
+(7, 1, 'resources', 'title_s', 'o:title', 'title', '[]', '{\"formatter\":\"text\",\"label\":\"Title\",\"parts\":{\"1\":\"main\"}}'),
+(8, 1, 'resources', 'dcterms_title_txt', 'dcterms:title', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Title\",\"parts\":{\"1\":\"main\"}}'),
+(9, 1, 'resources', 'dcterms_creator_txt', 'dcterms:creator', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Creator\",\"parts\":{\"1\":\"main\"}}'),
+(10, 1, 'resources', 'dcterms_subject_txt', 'dcterms:subject', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Subject\",\"parts\":{\"1\":\"main\"}}'),
+(11, 1, 'resources', 'dcterms_description_txt', 'dcterms:description', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Description\",\"parts\":{\"1\":\"main\"}}'),
+(12, 1, 'resources', 'dcterms_publisher_txt', 'dcterms:publisher', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Publisher\",\"parts\":{\"1\":\"main\"}}'),
+(13, 1, 'items', 'dcterms_contributor_txt', 'dcterms:contributor', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Contributor\",\"parts\":{\"1\":\"main\"}}'),
+(14, 1, 'resources', 'dcterms_date_txt', 'dcterms:date', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Date\",\"parts\":{\"1\":\"main\"}}'),
+(15, 1, 'resources', 'dcterms_type_txt', 'dcterms:type', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Type\",\"parts\":{\"1\":\"main\"}}'),
+(16, 1, 'resources', 'dcterms_format_txt', 'dcterms:format', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Format\",\"parts\":{\"1\":\"main\"}}'),
+(17, 1, 'resources', 'dcterms_identifier_txt', 'dcterms:identifier', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Identifier\",\"parts\":{\"1\":\"main\"}}'),
+(18, 1, 'resources', 'dcterms_source_txt', 'dcterms:source', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Source\",\"parts\":{\"1\":\"main\"}}'),
+(19, 1, 'resources', 'dcterms_language_txt', 'dcterms:language', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Language\",\"parts\":{\"1\":\"main\"}}'),
+(20, 1, 'resources', 'dcterms_relation_txt', 'dcterms:relation', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Relation\",\"parts\":{\"1\":\"main\"}}'),
+(21, 1, 'resources', 'dcterms_coverage_txt', 'dcterms:coverage', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Coverage\",\"parts\":{\"1\":\"main\"}}'),
+(22, 1, 'resources', 'dcterms_rights_txt', 'dcterms:rights', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Rights\",\"parts\":{\"1\":\"main\"}}'),
+(23, 1, 'resources', 'dcterms_spatial_txt', 'dcterms:spatial', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Spatial coverage\",\"parts\":{\"1\":\"main\"}}'),
+(24, 1, 'resources', 'dcterms_temporal_txt', 'dcterms:temporal', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Temporal coverage\",\"parts\":{\"1\":\"main\"}}'),
+(25, 1, 'resources', 'dcterms_spatial_ss', 'dcterms:spatial', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Spatial coverage\",\"parts\":{\"1\":\"main\"}}'),
+(26, 1, 'resources', 'dcterms_temporal_dr', 'dcterms:temporal', NULL, '[]', '{\"formatter\":\"date_range\",\"label\":\"Temporal coverage\",\"normalization\":[],\"parts\":[\"main\"]}'),
+(27, 1, 'resources', 'dcterms_type_ss', 'dcterms:type', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Type\",\"parts\":{\"1\":\"main\"}}'),
+(28, 1, 'resources', 'dcterms_subject_ss', 'dcterms:subject', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Subject\",\"parts\":{\"1\":\"main\"}}'),
+(29, 1, 'resources', 'dcterms_creator_ss', 'dcterms:creator', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Creator\",\"parts\":{\"1\":\"main\"}}'),
+(30, 1, 'resources', 'dcterms_publisher_ss', 'dcterms:publisher', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Publisher\",\"parts\":{\"1\":\"main\"}}'),
+(31, 1, 'resources', 'dcterms_language_ss', 'dcterms:language', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Language\",\"parts\":{\"1\":\"main\"}}'),
+(32, 1, 'resources', 'dcterms_rights_ss', 'dcterms:rights', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Rights\",\"parts\":{\"1\":\"main\"}}'),
+(33, 1, 'resources', 'item_set_dcterms_title_ss', 'item_set/dcterms:title', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Item Set\",\"parts\":{\"1\":\"main\"}}'),
+(34, 1, 'resources', 'dcterms_title_s', 'dcterms:title', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Title\",\"parts\":{\"1\":\"main\"}}'),
+(35, 1, 'resources', 'dcterms_date_s', 'dcterms:date', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Date\",\"parts\":{\"1\":\"main\"}}'),
+(36, 1, 'resources', 'dcterms_creator_s', 'dcterms:creator', NULL, '[]', '{\"formatter\":\"text\",\"label\":\"Creator\",\"parts\":{\"1\":\"main\"}}'),
+(37, 1, 'items', 'item_set_id_is', 'item_set/o:id', 'item_set_id', '[]', '{\"formatter\":\"text\",\"label\":\"Item set id\",\"parts\":{\"1\":\"main\"}}'),
+(38, 1, 'generic', 'id_i', 'o:id', 'id', '[]', '{\"formatter\":\"text\",\"parts\":{\"1\":\"main\"}}'),
+(39, 1, 'generic', 'name_s', 'o:title', 'name', '[]', '{\"formatter\":\"text\",\"parts\":{\"1\":\"main\"}}');
 
 -- --------------------------------------------------------
 
@@ -5078,21 +5006,23 @@ CREATE TABLE `stat` (
 --
 
 INSERT INTO `stat` (`id`, `type`, `url`, `entity_id`, `entity_name`, `hits`, `hits_anonymous`, `hits_identified`, `created`, `modified`) VALUES
-(1, 'page', '/', 0, '', 10, 7, 3, '2024-03-26 13:43:37', '2025-11-27 09:27:27'),
+(1, 'page', '/', 0, '', 10, 7, 3, '2024-03-26 13:43:37', '2026-02-19 13:51:26'),
 (2, 'page', '/s/default/item', 0, '', 3, 0, 3, '2024-04-15 12:33:56', '2024-04-15 12:34:19'),
 (3, 'page', '/s/default/item/1', 1, 'items', 1, 0, 1, '2024-04-15 12:34:18', '2024-04-15 12:34:18'),
 (4, 'resource', '/s/default/item/1', 1, 'items', 1, 0, 1, '2024-04-15 12:34:18', '2024-04-15 12:34:18'),
-(5, 'page', '/s/default', 0, '', 2, 0, 2, '2024-10-08 13:36:04', '2024-10-08 13:38:46'),
-(6, 'page', '/s/default/page/welcome', 1, 'site_pages', 2, 0, 2, '2024-10-08 13:36:04', '2024-10-08 13:38:46'),
-(7, 'resource', '/s/default/page/welcome', 1, 'site_pages', 2, 0, 2, '2024-10-08 13:36:04', '2024-10-08 13:38:46'),
+(5, 'page', '/s/default', 0, '', 3, 0, 3, '2024-10-08 13:36:04', '2025-07-10 14:52:21'),
+(6, 'page', '/s/default/page/welcome', 1, 'site_pages', 4, 0, 4, '2024-10-08 13:36:04', '2025-07-10 14:52:39'),
+(7, 'resource', '/s/default/page/welcome', 1, 'site_pages', 4, 0, 4, '2024-10-08 13:36:04', '2025-07-10 14:52:39'),
 (8, 'page', '/s/default/sitemap.xml', 0, '', 4, 0, 4, '2024-10-08 13:36:11', '2024-10-08 13:41:32'),
 (9, 'page', '/s/default/sitemapindex.xml', 0, '', 3, 0, 3, '2024-10-08 13:38:53', '2024-10-08 13:41:32'),
-(10, 'page', '/s/index', 0, '', 2, 1, 1, '2025-07-10 15:00:00', '2025-11-27 09:27:29'),
-(11, 'page', '/s/index/page/welcome', 1, 'site_pages', 2, 1, 1, '2025-07-10 15:00:00', '2025-11-27 09:27:29'),
-(12, 'resource', '/s/index/page/welcome', 1, 'site_pages', 2, 1, 1, '2025-07-10 15:00:00', '2025-11-27 09:27:29'),
-(13, 'page', '/s/index/find', 0, '', 2, 0, 2, '2025-07-10 15:00:02', '2025-07-10 15:00:09'),
-(14, 'page', '/s/index/item/1', 1, 'items', 1, 0, 1, '2025-07-10 15:00:10', '2025-07-10 15:00:10'),
-(15, 'resource', '/s/index/item/1', 1, 'items', 1, 0, 1, '2025-07-10 15:00:10', '2025-07-10 15:00:10');
+(10, 'page', '/s/default/find', 0, '', 2, 0, 2, '2025-07-10 14:52:40', '2025-07-10 14:52:48'),
+(11, 'page', '/s/index', 0, '', 2, 0, 2, '2025-07-10 14:56:35', '2025-09-29 13:38:56'),
+(12, 'page', '/s/index/page/welcome', 1, 'site_pages', 3, 0, 3, '2025-07-10 14:56:35', '2025-09-29 13:38:56'),
+(13, 'resource', '/s/index/page/welcome', 1, 'site_pages', 3, 0, 3, '2025-07-10 14:56:35', '2025-09-29 13:38:56'),
+(14, 'page', '/s/index/find', 0, '', 5, 0, 5, '2025-07-10 14:56:39', '2025-12-09 10:50:44'),
+(15, 'page', '/s/index/item/1', 1, 'items', 2, 0, 2, '2025-07-10 14:56:41', '2025-09-29 13:39:01'),
+(16, 'resource', '/s/index/item/1', 1, 'items', 2, 0, 2, '2025-07-10 14:56:41', '2025-09-29 13:39:01'),
+(17, 'page', '/s/index/item', 0, '', 2, 0, 2, '2025-09-29 13:38:59', '2025-09-29 13:39:03');
 
 -- --------------------------------------------------------
 
@@ -5265,26 +5195,6 @@ ALTER TABLE `bulk_exporter`
   ADD KEY `IDX_6093500B7E3C61F9` (`owner_id`);
 
 --
--- Indexes for table `contribution`
---
-ALTER TABLE `contribution`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_EA351E1541DEE7B9` (`token_id`),
-  ADD KEY `IDX_EA351E1589329D25` (`resource_id`),
-  ADD KEY `IDX_EA351E157E3C61F9` (`owner_id`),
-  ADD KEY `contribute_email_idx` (`email`),
-  ADD KEY `contribute_modified_idx` (`modified`);
-
---
--- Indexes for table `contribution_token`
---
-ALTER TABLE `contribution_token`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_3A44AA8989329D25` (`resource_id`),
-  ADD KEY `contribution_token_idx` (`token`),
-  ADD KEY `contribution_expire_idx` (`expire`);
-
---
 -- Indexes for table `csvimport_entity`
 --
 ALTER TABLE `csvimport_entity`
@@ -5332,7 +5242,8 @@ ALTER TABLE `hit`
   ADD KEY `IDX_5AD22641ED646567` (`referrer`),
   ADD KEY `IDX_5AD22641C44967C5` (`user_agent`),
   ADD KEY `IDX_5AD22641C2F0CDFC` (`accept_language`),
-  ADD KEY `IDX_5AD22641B23DB7B8` (`created`);
+  ADD KEY `IDX_5AD22641B23DB7B8` (`created`),
+  ADD KEY `IDX_5AD22641D4DB71B5` (`language`);
 
 --
 -- Indexes for table `item`
@@ -5378,7 +5289,8 @@ ALTER TABLE `log`
   ADD KEY `IDX_8F3F68C57E3C61F9` (`owner_id`),
   ADD KEY `IDX_8F3F68C5BE04EA9` (`job_id`),
   ADD KEY `IDX_8F3F68C5AEA34913` (`reference`),
-  ADD KEY `IDX_8F3F68C5F660D16B` (`severity`);
+  ADD KEY `IDX_8F3F68C5F660D16B` (`severity`),
+  ADD KEY `IDX_8F3F68C5B23DB7B8` (`created`);
 
 --
 -- Indexes for table `media`
@@ -5484,6 +5396,15 @@ ALTER TABLE `resource_class`
   ADD KEY `IDX_C6F063ADAD0E05F6` (`vocabulary_id`);
 
 --
+-- Indexes for table `resource_meta_resource_template_meta_names`
+--
+ALTER TABLE `resource_meta_resource_template_meta_names`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_E4071E6A16131EA2A6B767B` (`resource_template_id`,`resource_template_property_id`),
+  ADD KEY `IDX_E4071E6A16131EA` (`resource_template_id`),
+  ADD KEY `IDX_E4071E6A2A6B767B` (`resource_template_property_id`);
+
+--
 -- Indexes for table `resource_template`
 --
 ALTER TABLE `resource_template`
@@ -5495,13 +5416,6 @@ ALTER TABLE `resource_template`
   ADD KEY `IDX_39ECD52EB84E0D1D` (`description_property_id`);
 
 --
--- Indexes for table `resource_template_data`
---
-ALTER TABLE `resource_template_data`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uniq_resource_template_id` (`resource_template_id`);
-
---
 -- Indexes for table `resource_template_property`
 --
 ALTER TABLE `resource_template_property`
@@ -5509,14 +5423,6 @@ ALTER TABLE `resource_template_property`
   ADD UNIQUE KEY `UNIQ_4689E2F116131EA549213EC` (`resource_template_id`,`property_id`),
   ADD KEY `IDX_4689E2F116131EA` (`resource_template_id`),
   ADD KEY `IDX_4689E2F1549213EC` (`property_id`);
-
---
--- Indexes for table `resource_template_property_data`
---
-ALTER TABLE `resource_template_property_data`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_resource_template_id` (`resource_template_id`),
-  ADD KEY `idx_resource_template_property_id` (`resource_template_property_id`);
 
 --
 -- Indexes for table `search_config`
@@ -5721,18 +5627,6 @@ ALTER TABLE `bulk_exporter`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `contribution`
---
-ALTER TABLE `contribution`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `contribution_token`
---
-ALTER TABLE `contribution_token`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `csvimport_entity`
 --
 ALTER TABLE `csvimport_entity`
@@ -5754,19 +5648,19 @@ ALTER TABLE `custom_vocab`
 -- AUTO_INCREMENT for table `hit`
 --
 ALTER TABLE `hit`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `numeric_data_types_duration`
@@ -5811,28 +5705,22 @@ ALTER TABLE `resource_class`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1281;
 
 --
+-- AUTO_INCREMENT for table `resource_meta_resource_template_meta_names`
+--
+ALTER TABLE `resource_meta_resource_template_meta_names`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `resource_template`
 --
 ALTER TABLE `resource_template`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `resource_template_data`
---
-ALTER TABLE `resource_template_data`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `resource_template_property`
 --
 ALTER TABLE `resource_template_property`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
-
---
--- AUTO_INCREMENT for table `resource_template_property_data`
---
-ALTER TABLE `resource_template_property_data`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT for table `search_config`
@@ -5904,13 +5792,13 @@ ALTER TABLE `solr_core`
 -- AUTO_INCREMENT for table `solr_map`
 --
 ALTER TABLE `solr_map`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `stat`
 --
 ALTER TABLE `stat`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -5959,20 +5847,6 @@ ALTER TABLE `bulk_export`
 --
 ALTER TABLE `bulk_exporter`
   ADD CONSTRAINT `FK_6093500B7E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL;
-
---
--- Constraints for table `contribution`
---
-ALTER TABLE `contribution`
-  ADD CONSTRAINT `FK_EA351E1541DEE7B9` FOREIGN KEY (`token_id`) REFERENCES `contribution_token` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `FK_EA351E157E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `FK_EA351E1589329D25` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`) ON DELETE SET NULL;
-
---
--- Constraints for table `contribution_token`
---
-ALTER TABLE `contribution_token`
-  ADD CONSTRAINT `FK_3A44AA8989329D25` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `csvimport_entity`
@@ -6105,6 +5979,13 @@ ALTER TABLE `resource_class`
   ADD CONSTRAINT `FK_C6F063ADAD0E05F6` FOREIGN KEY (`vocabulary_id`) REFERENCES `vocabulary` (`id`);
 
 --
+-- Constraints for table `resource_meta_resource_template_meta_names`
+--
+ALTER TABLE `resource_meta_resource_template_meta_names`
+  ADD CONSTRAINT `FK_E4071E6A16131EA` FOREIGN KEY (`resource_template_id`) REFERENCES `resource_template` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_E4071E6A2A6B767B` FOREIGN KEY (`resource_template_property_id`) REFERENCES `resource_template_property` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `resource_template`
 --
 ALTER TABLE `resource_template`
@@ -6114,24 +5995,11 @@ ALTER TABLE `resource_template`
   ADD CONSTRAINT `FK_39ECD52EB84E0D1D` FOREIGN KEY (`description_property_id`) REFERENCES `property` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `resource_template_data`
---
-ALTER TABLE `resource_template_data`
-  ADD CONSTRAINT `FK_31D1FFC816131EA` FOREIGN KEY (`resource_template_id`) REFERENCES `resource_template` (`id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `resource_template_property`
 --
 ALTER TABLE `resource_template_property`
   ADD CONSTRAINT `FK_4689E2F116131EA` FOREIGN KEY (`resource_template_id`) REFERENCES `resource_template` (`id`),
   ADD CONSTRAINT `FK_4689E2F1549213EC` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `resource_template_property_data`
---
-ALTER TABLE `resource_template_property_data`
-  ADD CONSTRAINT `FK_B133BBAA16131EA` FOREIGN KEY (`resource_template_id`) REFERENCES `resource_template` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_B133BBAA2A6B767B` FOREIGN KEY (`resource_template_property_id`) REFERENCES `resource_template_property` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `search_config`
