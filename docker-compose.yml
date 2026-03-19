@@ -52,6 +52,7 @@ services:
       - ./omeka-s/sideload:/data/sftp/omeka-sideload/
       - ./externals/omekas-theme-um:/var/www/html/themes/omekas-theme-um
       - ./externals/omekas-helpers:/var/www/html/helper
+      - ./externals/Omeka-S-Module-HelloWorld:/var/www/html/modules/HelloWorld
     networks:
       default:
         aliases:
