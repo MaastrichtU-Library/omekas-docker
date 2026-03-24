@@ -1,4 +1,4 @@
-ARG ENV_PHP_VERSION
+ARG ENV_PHP_VERSION=8.1
 FROM php:${ENV_PHP_VERSION}-fpm-bookworm
 
 RUN apt-get update && \
@@ -121,14 +121,18 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-AdvancedSearch/releases/
     unzip -q /tmp/AdvancedSearch.zip -d modules/ && \
     rm /tmp/AdvancedSearch.zip
 
+ARG ENV_MODULE_SearchSolr_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
+    unzip -q /tmp/SearchSolr.zip -d modules/ && \
+    rm /tmp/SearchSolr.zip
+
 ARG ENV_MODULE_ArchiveRepertory_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory/releases/download/${ENV_MODULE_ArchiveRepertory_VERSION}/ArchiveRepertory-${ENV_MODULE_ArchiveRepertory_VERSION}.zip --output /tmp/ArchiveRepertory.zip && \
     unzip -q /tmp/ArchiveRepertory.zip -d modules/ && \
     rm /tmp/ArchiveRepertory.zip
 
 ARG ENV_MODULE_Ark_VERSION
-#RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
-RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
+RUN curl -L https://gitlab.com/Daniel-KM/Omeka-S-module-Ark/-/archive/${ENV_MODULE_Ark_VERSION}/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION}.zip --output /tmp/Ark.zip && \
     unzip -q /tmp/Ark.zip -d modules/ && \
     # Archives downloaded from gitlab contain a long and versioned module name so we rename it.
     mv modules/Omeka-S-module-Ark-${ENV_MODULE_Ark_VERSION} modules/Ark && \
@@ -186,6 +190,11 @@ RUN curl -L https://github.com/omeka-s-modules/CustomVocab/releases/download/v${
     unzip -q /tmp/CustomVocab.zip -d modules/ && \
     rm /tmp/CustomVocab.zip
 
+ARG ENV_MODULE_EasyAdmin_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-EasyAdmin/releases/download/${ENV_MODULE_EasyAdmin_VERSION}/EasyAdmin-${ENV_MODULE_EasyAdmin_VERSION}.zip --output /tmp/EasyAdmin.zip && \
+    unzip -q /tmp/EasyAdmin.zip -d modules/ && \
+    rm /tmp/EasyAdmin.zip
+
 ARG ENV_MODULE_EUCookieBar_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-EUCookieBar/releases/download/${ENV_MODULE_EUCookieBar_VERSION}/EUCookieBar-${ENV_MODULE_EUCookieBar_VERSION}.zip --output /tmp/EUCookieBar.zip && \
     unzip -q /tmp/EUCookieBar.zip -d modules/ && \
@@ -200,11 +209,6 @@ ARG ENV_MODULE_FileSideload_VERSION
 RUN curl -L https://github.com/omeka-s-modules/FileSideload/releases/download/v${ENV_MODULE_FileSideload_VERSION}/FileSideload-${ENV_MODULE_FileSideload_VERSION}.zip --output /tmp/FileSideload.zip && \
     unzip -q /tmp/FileSideload.zip -d modules/ && \
     rm /tmp/FileSideload.zip
-
-ARG ENV_MODULE_Generic_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Generic/releases/download/${ENV_MODULE_Generic_VERSION}/Generic-${ENV_MODULE_Generic_VERSION}.zip --output /tmp/Generic.zip && \
-    unzip -q /tmp/Generic.zip -d modules/ && \
-    rm /tmp/Generic.zip
 
 ARG ENV_MODULE_HideProperties_VERSION
 RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${ENV_MODULE_HideProperties_VERSION}/HideProperties-${ENV_MODULE_HideProperties_VERSION}.zip --output /tmp/HideProperties.zip && \
@@ -236,15 +240,14 @@ RUN curl -L https://github.com/netwerk-digitaal-erfgoed/Omeka-S-Module-LinkedDat
 ARG ENV_MODULE_Log_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${ENV_MODULE_Log_VERSION}/Log-${ENV_MODULE_Log_VERSION}.zip --output /tmp/Log.zip && \
     unzip -q /tmp/Log.zip -d modules/ && \
+    # install module's dependencies via composer
+    cd modules/Log && \
+    composer update && \
+    composer install --no-dev && \
     rm /tmp/Log.zip
 
-#RUN curl -L https://github.com/omeka-s-modules/MetadataBrowse/releases/download/v1.4.1/MetadataBrowse-1.4.1.zip --output /tmp/MetadataBrowse.zip && \
-#    unzip -q /tmp/MetadataBrowse.zip -d modules/ && \
-#    rm /tmp/MetadataBrowse.zip
-
 ARG ENV_MODULE_Mirador_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
     unzip /tmp/MiradorViewer.zip -d modules/ && \
     # install module's dependencies via composer
     cd modules/Mirador && \
@@ -273,32 +276,24 @@ RUN curl -L https://github.com/omeka-s-modules/NumericDataTypes/releases/downloa
     rm /tmp/NumericDataTypes.zip
 
 ARG ENV_MODULE_PdfViewer_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/releases/download/${ENV_MODULE_PdfViewer_VERSION}/PdfViewer-${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
-#    unzip -q /tmp/PdfViewer.zip -d modules/ && \
-#    rm /tmp/PdfViewer.zip
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/archive/refs/tags/${ENV_MODULE_PdfViewer_VERSION}.zip --output /tmp/PdfViewer.zip && \
     unzip -q /tmp/PdfViewer.zip -d modules/ && \
     mv modules/Omeka-S-module-PdfViewer-${ENV_MODULE_PdfViewer_VERSION} modules/PdfViewer && \
     # install module's dependencies via composer
     cd modules/PdfViewer && \
     composer update && \
-    composer install --no-dev && \    
+    composer install --no-dev && \
     rm /tmp/PdfViewer.zip
-    
-ARG ENV_MODULE_SearchSolr_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/${ENV_MODULE_SearchSolr_VERSION}/SearchSolr-${ENV_MODULE_SearchSolr_VERSION}.zip --output /tmp/SearchSolr.zip && \
-    unzip -q /tmp/SearchSolr.zip -d modules/ && \
-    rm /tmp/SearchSolr.zip
+
+ARG ENV_MODULE_ResourceMeta_VERSION
+RUN curl -L https://github.com/omeka-s-modules/ResourceMeta/releases/download/v${ENV_MODULE_ResourceMeta_VERSION}/ResourceMeta-${ENV_MODULE_ResourceMeta_VERSION}.zip --output /tmp/ResourceMeta.zip && \
+    unzip -q /tmp/ResourceMeta.zip -d modules/ && \
+    rm /tmp/ResourceMeta.zip
 
 ARG ENV_MODULE_Sitemaps_VERSION
 RUN curl -L https://github.com/ManOnDaMoon/omeka-s-module-Sitemaps/releases/download/v${ENV_MODULE_Sitemaps_VERSION}/Sitemaps-${ENV_MODULE_Sitemaps_VERSION}.zip --output /tmp/Sitemaps.zip && \
     unzip -q /tmp/Sitemaps.zip -d modules/ && \
     rm /tmp/Sitemaps.zip
-
-ARG ENV_MODULE_Statistics_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Statistics/releases/download/${ENV_MODULE_Statistics_VERSION}/Statistics-${ENV_MODULE_Statistics_VERSION}.zip --output /tmp/Stats.zip && \
-    unzip -q /tmp/Stats.zip -d modules/ && \
-    rm /tmp/Stats.zip
 
 ARG ENV_MODULE_UniversalViewer_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer/releases/download/${ENV_MODULE_UniversalViewer_VERSION}/UniversalViewer-${ENV_MODULE_UniversalViewer_VERSION}.zip --output /tmp/UniversalViewer.zip && \
@@ -310,13 +305,11 @@ RUN curl -L https://github.com/omeka-s-modules/ValueSuggest/releases/download/v$
     unzip -q /tmp/ValueSuggest.zip -d modules/ && \
     rm /tmp/ValueSuggest.zip
 
-RUN echo "INFO: Please install the modules via the Omeka S admin panel."
-
 # Install the default theme
 # Our own themes will be volume-binded in docker-compose.yml
 ARG ENV_THEME_Default_VERSION
 RUN rm -fr themes/default && \
-    curl -L https://github.com/omeka-s-themes/default/releases/download/v${ENV_THEME_Default_VERSION}/default-${ENV_THEME_Default_VERSION}.zip --output /tmp/theme-default.zip && \
+    curl -L https://github.com/omeka-s-themes/default/releases/download/v${ENV_THEME_Default_VERSION}/theme-default-v${ENV_THEME_Default_VERSION}.zip --output /tmp/theme-default.zip && \
     unzip -q /tmp/theme-default.zip -d themes/ && \
     rm /tmp/theme-default.zip
 
