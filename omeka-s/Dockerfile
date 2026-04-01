@@ -233,8 +233,13 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/dow
     rm /tmp/ImageServer.zip    
 
 ARG ENV_MODULE_LinkedDataSets_VERSION
-RUN curl -L https://github.com/netwerk-digitaal-erfgoed/Omeka-S-Module-LinkedDataSets/releases/download/v${ENV_MODULE_LinkedDataSets_VERSION}/LinkedDataSets.zip --output /tmp/LinkedDataSets.zip && \
+#RUN curl -L https://github.com/netwerk-digitaal-erfgoed/Omeka-S-Module-LinkedDataSets/releases/download/v${ENV_MODULE_LinkedDataSets_VERSION}/LinkedDataSets.zip --output /tmp/LinkedDataSets.zip && \
+#    unzip -q /tmp/LinkedDataSets.zip -d modules/ && \
+#    rm /tmp/LinkedDataSets.zip
+RUN curl -L https://github.com/mcoonen/Omeka-S-Module-LinkedDataSets/archive/refs/tags/${ENV_MODULE_LinkedDataSets_VERSION}.zip --output /tmp/LinkedDataSets.zip && \
     unzip -q /tmp/LinkedDataSets.zip -d modules/ && \
+    # Archives downloaded from commit hash or version tag contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-Module-LinkedDataSets-${ENV_MODULE_LinkedDataSets_VERSION} modules/LinkedDataSets && \
     rm /tmp/LinkedDataSets.zip
 
 ARG ENV_MODULE_Log_VERSION
