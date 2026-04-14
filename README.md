@@ -73,6 +73,8 @@ docker compose logs -f
 ## Manual configurations post-start
 There are some manual configuration steps to perform after the Docker containers have started.
 - [Configure Solr backend](README-02-Solr.md)
+- [Usage of IIP and Cantaloupe IIIF servers](README-04-ExternalImageServers.md)
+- [Configure LinkedDataSets module and Triple store](README-05-LinkedDataSets-and-Triple-store.md)
 
 
 ## Usage
