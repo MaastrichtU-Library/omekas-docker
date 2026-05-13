@@ -99,6 +99,10 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     dba bcmath \
     # for module BulkExport
     zip \
+    # for module ImageServer
+    exif \
+    ffi \
+    vips \
     # for module NumericDataTypes
     intl
     
