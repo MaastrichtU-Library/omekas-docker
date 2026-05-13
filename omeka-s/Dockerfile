@@ -97,10 +97,13 @@ COPY php-config/99-omeka.ini $PHP_INI_DIR/conf.d/
 
 # PHP-FPM config
 RUN sed -i 's|error_log = /proc/self/fd/2|error_log = /var/log/php-fpm.log|g' /usr/local/etc/php-fpm.d/docker.conf && \
-    sed -i 's|access.log = /proc/self/fd/2|access.log = /var/log/php-fpm.log|g' /usr/local/etc/php-fpm.d/docker.conf && \
-    sed -i 's|listen = 9000|listen = /run/php-fpm.sock|g' /usr/local/etc/php-fpm.d/zz-docker.conf && \
-    echo 'listen.owner = www-data' >> /usr/local/etc/php-fpm.d/zz-docker.conf && \
-    echo 'listen.group = www-data' >> /usr/local/etc/php-fpm.d/zz-docker.conf
+    sed -i 's|access.log = /proc/self/fd/2|access.log = /var/log/php-fpm.log|g' /usr/local/etc/php-fpm.d/docker.conf
+
+# Override the default listen address on port 9000 to a Unix socket.
+# As of January 2026, the file `zz-docker.conf` only contains daemonize = no under the [global] directive. This should not be overridden.
+# It is recommended to place user configuration in its own .conf file within /usr/local/etc/php-fpm.d/
+# Source: readme on https://hub.docker.com/_/php
+RUN printf '[www]\nlisten = /run/php-fpm.sock\nlisten.owner = www-data\nlisten.group = www-data\n' \ > /usr/local/etc/php-fpm.d/zz-socket-user-config.conf
 
 # Apache config
 COPY apache-config/000-default.conf /etc/apache2/sites-available/
