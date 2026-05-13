@@ -94,6 +94,8 @@ jq -r '.[] | [.label, .version, .url, .namespaceUri, .prefix] | @tsv' /opt/vocab
           --base-path "$OMEKAS_BASE_PATH"
   done
 
+# TODO: Import custom vocabularies
+# e.g. omeka-s-cli custom-vocabulary:import custom_vocab_terms.json 3 (or 4, 5, 6)
 
 # Download and import resource templates defined in resource-templates.json
 mkdir -p /tmp/resource-templates/
