@@ -119,6 +119,22 @@ RUN install-php-extensions xdebug \
 # In Docker it cannot be installed via apt because of unmet php dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Section for module ImageServer
+# Modify the config for FFI
+RUN echo "ffi.enable = true" >> /usr/local/etc/php/conf.d/docker-php-ext-ffi.ini
+
+# Use composer to install the 'jcupitt/vips' PHP wrapper library, so that the module can use the 'vips' PHP-extension via 'ffi'.
+# 'jcupitt/vips' has been added to our composer.json and composer.lock files, which we will now copy into the container.
+# This has the advantage that we do not need to provide a GitHub API token to the Docker build (composer would otherwise resolve the entire dependency tree, whereby it needs API access to GitHub).
+COPY composer/composer.json composer/composer.lock /var/www/html/
+RUN chown www-data:www-data /var/www/html/composer.json /var/www/html/composer.lock
+
+# Install everything from composer.json to the 'vendor/' folder in the Omeka root, including the 'jcupitt/vips' library.
+USER www-data
+RUN composer install --no-dev --prefer-dist --no-interaction
+USER root
+# END of section for module ImageServer
+
 # Switching to www-data to avoid running composer as root (see https://getcomposer.org/root)
 USER www-data
 
