@@ -284,8 +284,18 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
     rm /tmp/Log.zip
 
 ARG ENV_MODULE_Mirador_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+#    unzip /tmp/MiradorViewer.zip -d modules/ && \
+#    # install module's dependencies via composer
+#    cd modules/Mirador && \
+#    composer update && \
+#    composer install --no-dev && \
+#    rm /tmp/MiradorViewer.zip
+
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-Mirador/archive/refs/tags/${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
     unzip /tmp/MiradorViewer.zip -d modules/ && \
+    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-Mirador-${ENV_MODULE_Mirador_VERSION} modules/Mirador && \
     # install module's dependencies via composer
     cd modules/Mirador && \
     composer update && \
