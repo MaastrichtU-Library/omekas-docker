@@ -32,8 +32,18 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     dba bcmath \
     # for module BulkExport
     zip \
+    # for module ImageServer
+    exif \
+    ffi \
+    ## For the module config's "Image processor" setting we need the deprecated 'php-vips-ext' php-extension, as the image processor does not work with the newer 'php-vips' a.k.a. 'jcupitt/vips' package
+    vips \
     # for module NumericDataTypes
     intl
+
+# Section for module ImageServer's Fast Tile script
+# The Fast Tile script (ImageServer/data/scripts/iiiftile.php) uses the 'jcupitt/vips' package and PHP extension 'ffi' to call the OS's 'libvips' library
+# Modify the config for FFI
+RUN echo "ffi.enable = true" >> /usr/local/etc/php/conf.d/docker-php-ext-ffi.ini
 
 
 
@@ -149,6 +159,18 @@ VOLUME ${ENV_OMEKAS_BASE_PATH}/volume/
 # Precreate the IIIF manifest cache folders
 RUN mkdir -p ${ENV_OMEKAS_BASE_PATH}/files/iiif/2 && \
     mkdir -p ${ENV_OMEKAS_BASE_PATH}/files/iiif/3
+
+# Section for module ImageServer
+# Copy the modified composer.json and composer.lock files, which mention the `jcupitt/vips' package, into the container.
+# This has the advantage that we do not need to provide a GitHub API token to the Docker build (composer would otherwise resolve the entire dependency tree, whereby it needs API access to GitHub).
+COPY composer/composer.json composer/composer.lock /var/www/html/
+RUN chown www-data:www-data /var/www/html/composer.json /var/www/html/composer.lock
+
+# Install everything from composer.json to the 'vendor/' folder in the Omeka root, including the 'jcupitt/vips' library.
+USER www-data
+RUN composer install --no-dev --prefer-dist --no-interaction
+USER root
+# END of section for module ImageServer
 
 # Download default themes
 # Our own themes will be volume-binded in docker-compose.yml

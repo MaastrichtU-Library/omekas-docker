@@ -1,7 +1,7 @@
 [
   {
     "name": "Common",
-    "version": "3.4.74",
+    "version": "3.4.85",
     "url": null,
     "notes": "Needs to be installed first, because a lot of modules depend on it"
   },
@@ -95,25 +95,29 @@
   },
   {
     "name": "IiifSearch",
-    "version": "3.4.8",
+    "version": "3.4.14",
     "url": "https://github.com/smachefert/Omeka-S-module-IiifSearch/archive/refs/tags/v{version}.zip",
     "notes": "If search is not working: deselect 'Cache > Cache manifest for instant access' in IiifServer module settings"
   },
   {
     "name": "IiifServer",
-    "version": "3.6.26",
-    "url": null
+    "version": "3.6.33-pl3",
+    "url": "https://github.com/mcoonen/Omeka-S-module-IiifServer/archive/refs/tags/{version}.zip"
   },
   {
     "name": "ImageServer",
-    "version": "3.6.20",
-    "url": null
+    "version": "3.6.25-pl2",
+    "url": "https://github.com/mcoonen/Omeka-S-module-ImageServer/archive/refs/tags/{version}.zip"
+  },
+  {
+    "name": "LinkedDataSets",
+    "version": "0.3.1-mc",
+    "url": "https://github.com/mcoonen/Omeka-S-Module-LinkedDataSets/archive/refs/tags/{version}.zip"
   },
   {
     "name": "Mirador",
-    "version": "3.4.10",
-    "url": "https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/{version}/Mirador-{version}.zip",
-    "notes": "3.4.9: Plugins Annotations/OCRhelper not working. 3.4.10: OCRhelper works, Annotations broken (console TypeError in browser). 3.4.11: Mirador v4 incompatible with plugins Annotations and OCR Helper. Also, not possible to select v3 and v4 plugins in the site settings. Avoid this version"
+    "version": "3.4.17-pl2",
+    "url": "https://github.com/mcoonen/Omeka-S-module-Mirador/archive/refs/tags/{version}.zip"
   },
   {
     "name": "ModelViewer",
