@@ -10,7 +10,7 @@ Credits to the setup by 'giocomai' [Docker Hub](https://hub.docker.com/r/giocoma
 
 In order to resolve DNS entries to the Dockerized Omeka S infra, you need to edit `/etc/hosts` on your host machine. Insert the following line that points all containers to `127.0.0.1`.
 ```
-127.0.0.1	localhost omeka.local solr.local db.local iipsrv.local cantaloupe.local viewer.local
+127.0.0.1	localhost omeka.local solr.local db.local iipsrv.local cantaloupe.local viewer.local triples.local
 ```
 
 
@@ -60,6 +60,11 @@ To run external IIIF-tooling as well, use:
 docker compose -f docker-compose-iiif-external.yml up -d
 ```
 
+To run Triple store tooling as well, use:
+```
+docker compose -f docker-compose-graphdb.yml up -d
+```
+
 To see logs:
 ```
 docker compose logs -f
@@ -68,6 +73,8 @@ docker compose logs -f
 ## Manual configurations post-start
 There are some manual configuration steps to perform after the Docker containers have started.
 - [Configure Solr backend](README-02-Solr.md)
+- [Usage of IIP and Cantaloupe IIIF servers](README-04-ExternalImageServers.md)
+- [Configure LinkedDataSets module and Triple store](README-05-LinkedDataSets-and-Triple-store.md)
 
 
 ## Usage
