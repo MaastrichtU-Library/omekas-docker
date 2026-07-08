@@ -57,14 +57,29 @@ wait_for_db
             --time-zone "${OMEKAS_TIME_ZONE:-UTC}" \
             --locale "${OMEKAS_LOCALE:-en_US}" \
             --base-path ${OMEKAS_BASE_PATH:-/var/www/html}
+
+        # Install everything from composer.json to the 'vendor/' folder in the Omeka root, including the 'jcupitt/vips' library.
+        echo "Installing composer dependencies for module ImageServer ..."
+        composer install --working-dir=${OMEKAS_BASE_PATH} --no-dev --prefer-dist --no-interaction
     fi
 
 # Note: Docker volume-binds are not available during build stage.
-if [[ ! -d ${OMEKAS_BASE_PATH}/files/temp ]]
-then
-    mkdir ${OMEKAS_BASE_PATH}/files/temp
-    chown www-data:www-data ${OMEKAS_BASE_PATH}/volume/files/temp
-fi
+# Ensure that some of the necessary directories exist and are owned by www-data
+dirs=(
+    "${OMEKAS_BASE_PATH}/files/temp"
+    "${OMEKAS_BASE_PATH}/files/datacatalogs" # module Linked Data Sets
+    "${OMEKAS_BASE_PATH}/files/datadumps"    # module Linked Data Sets
+    "${OMEKAS_BASE_PATH}/files/tile"         # module ImageServer
+    "${OMEKAS_BASE_PATH}/files/tile/cache"   # module ImageServer
+)
+
+for dir in "${dirs[@]}"; do
+    if [[ ! -d "$dir" ]]; then
+        echo "Creating directory $dir..."
+        mkdir -p "$dir"
+        chown www-data:www-data "$dir"
+    fi
+done
 
 # Unpack the initial ARK database
 tar -xvf /tmp/init-arkandnoid-db.tar.gz -C ${OMEKAS_BASE_PATH}/files/

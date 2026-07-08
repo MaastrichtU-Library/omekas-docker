@@ -129,6 +129,7 @@ RUN a2dismod mpm_prefork && \
 RUN a2enmod http2
 
 # Required to enable CORS for serving IIIF images to external clients.
+# TODO: module IiifServer also sets CORS headers in its config by default. This invalidates the Apache CORS headers. Two options: 1) remove CORS headers from apache config file, 2) unattendedly configure the module and unchecking the "Append CORS headers to web server response" checkbox
 RUN a2enmod headers
 
 
@@ -160,17 +161,10 @@ VOLUME ${ENV_OMEKAS_BASE_PATH}/volume/
 RUN mkdir -p ${ENV_OMEKAS_BASE_PATH}/files/iiif/2 && \
     mkdir -p ${ENV_OMEKAS_BASE_PATH}/files/iiif/3
 
-# Section for module ImageServer
+# For module ImageServer
 # Copy the modified composer.json and composer.lock files, which mention the `jcupitt/vips' package, into the container.
 # This has the advantage that we do not need to provide a GitHub API token to the Docker build (composer would otherwise resolve the entire dependency tree, whereby it needs API access to GitHub).
-COPY composer/composer.json composer/composer.lock /var/www/html/
-RUN chown www-data:www-data /var/www/html/composer.json /var/www/html/composer.lock
-
-# Install everything from composer.json to the 'vendor/' folder in the Omeka root, including the 'jcupitt/vips' library.
-USER www-data
-RUN composer install --no-dev --prefer-dist --no-interaction
-USER root
-# END of section for module ImageServer
+COPY composer/composer.json composer/composer.lock ${ENV_OMEKAS_BASE_PATH}
 
 # Download default themes
 # Our own themes will be volume-binded in docker-compose.yml
@@ -192,12 +186,14 @@ RUN jq -r '.[] | "\(.name) \(.version) \(if .url == null then "null" else .url e
         fi; \
     done
 
+# copy files into Omeka folder
+COPY config/ ${ENV_OMEKAS_BASE_PATH}/config/
+COPY .htaccess ${ENV_OMEKAS_BASE_PATH}/.htaccess
+
 # Set correct ownership on www folders
 RUN chown -R www-data:www-data ${ENV_OMEKAS_BASE_PATH}/
 
 # Copy other files and folders into the container
-COPY config/ ${ENV_OMEKAS_BASE_PATH}/config/
-COPY .htaccess ${ENV_OMEKAS_BASE_PATH}/.htaccess
 COPY init-arkandnoid-db.tar.gz /tmp/
 COPY install/vocabularies.json /opt/vocabularies.json
 COPY install/resource-templates.json /opt/resource-templates.json

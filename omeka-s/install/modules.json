@@ -9,7 +9,13 @@
     "name": "Log",
     "version": "3.4.33",
     "url": null,
-    "notes": "Needs to be installed second, because a lot of modules depend on it"
+    "notes": "Needs to be installed early, because other modules depend on it"
+  },
+  {
+    "name": "NumericDataTypes",
+    "version": "1.13.0",
+    "url": null,
+    "notes": "Needs to be installed early, because other modules depend on it"
   },
   {
     "name": "AdvancedSearch",
@@ -36,7 +42,7 @@
   {
     "name": "BlockPlus",
     "version": "3.4.42",
-    "url": null
+    "url": "https://github.com/Daniel-KM/Omeka-s-module-BlockPlus/releases/download/{version}/BlockPlus-{version}.zip"
   },
   {
     "name": "BlocksDisposition",
@@ -96,7 +102,7 @@
   {
     "name": "IiifSearch",
     "version": "3.4.14",
-    "url": "https://github.com/smachefert/Omeka-S-module-IiifSearch/archive/refs/tags/v{version}.zip",
+    "url": "https://github.com/Daniel-KM/Omeka-S-module-IiifSearch/releases/download/{version}/IiifSearch-{version}.zip",
     "notes": "If search is not working: deselect 'Cache > Cache manifest for instant access' in IiifServer module settings"
   },
   {
@@ -127,11 +133,6 @@
   {
     "name": "NdeTermennetwerk",
     "version": "1.4.0",
-    "url": null
-  },
-  {
-    "name": "NumericDataTypes",
-    "version": "1.13.0",
     "url": null
   },
   {
