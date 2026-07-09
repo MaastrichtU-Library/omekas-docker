@@ -14,17 +14,25 @@ echo "dbname   = \"$MYSQL_DATABASE\"" >> /var/www/html/config/database.ini
 echo "host     = \"$MYSQL_HOST\"" >> /var/www/html/config/database.ini
 echo "Done creating database.ini !"
 
-# Note: Docker volume-binds are not available during build stage.
-if [[ ! -d /var/www/html/files/temp ]]
-then
-    mkdir /var/www/html/files/temp
-    chown www-data:www-data /var/www/html/volume/files/temp
-fi
+# Ensure that some of the necessary directories exist and are owned by www-data
+dirs=(
+    "/var/www/html/files/temp"
+    "/var/www/html/files/datacatalogs"
+    "/var/www/html/files/datadumps"
+)
+
+for dir in "${dirs[@]}"; do
+    if [[ ! -d "$dir" ]]; then
+        echo "Creating directory $dir..."
+        mkdir -p "$dir"
+        chown www-data:www-data "$dir"
+    fi
+done
 
 # Unpack the initial ARK database
 tar -xvf /tmp/init-arkandnoid-db.tar.gz -C /var/www/html/files/
 
-### End of Omeka configurations ###
+### End of Omeka runtime configurations ###
 
 
 # Start Apache and PHP-FPM

@@ -29,6 +29,7 @@ services:
         - ENV_MODULE_IiifSearch_VERSION
         - ENV_MODULE_IiifServer_VERSION
         - ENV_MODULE_ImageServer_VERSION
+        - ENV_MODULE_LinkedDataSets_VERSION
         - ENV_MODULE_Log_VERSION
         - ENV_MODULE_Mirador_VERSION
         - ENV_MODULE_ModelViewer_VERSION
@@ -38,7 +39,6 @@ services:
         - ENV_MODULE_ResourceMeta_VERSION
         - ENV_MODULE_SearchSolr_VERSION
         - ENV_MODULE_Sitemaps_VERSION
-        - ENV_MODULE_Statistics_VERSION
         - ENV_MODULE_UniversalViewer_VERSION
         - ENV_MODULE_ValueSuggest_VERSION
         - ENV_THEME_Default_VERSION

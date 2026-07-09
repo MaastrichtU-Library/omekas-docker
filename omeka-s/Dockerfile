@@ -36,10 +36,13 @@ COPY php-config/99-omeka.ini $PHP_INI_DIR/conf.d/
 
 # PHP-FPM config
 RUN sed -i 's|error_log = /proc/self/fd/2|error_log = /var/log/php-fpm.log|g' /usr/local/etc/php-fpm.d/docker.conf && \
-    sed -i 's|access.log = /proc/self/fd/2|access.log = /var/log/php-fpm.log|g' /usr/local/etc/php-fpm.d/docker.conf && \
-    sed -i 's|listen = 9000|listen = /run/php-fpm.sock|g' /usr/local/etc/php-fpm.d/zz-docker.conf && \
-    echo 'listen.owner = www-data' >> /usr/local/etc/php-fpm.d/zz-docker.conf && \
-    echo 'listen.group = www-data' >> /usr/local/etc/php-fpm.d/zz-docker.conf
+    sed -i 's|access.log = /proc/self/fd/2|access.log = /var/log/php-fpm.log|g' /usr/local/etc/php-fpm.d/docker.conf
+
+# Override the default listen address on port 9000 to a Unix socket.
+# As of January 2026, the file `zz-docker.conf` only contains daemonize = no under the [global] directive. This should not be overridden.
+# It is recommended to place user configuration in its own .conf file within /usr/local/etc/php-fpm.d/
+# Source: readme on https://hub.docker.com/_/php
+RUN printf '[www]\nlisten = /run/php-fpm.sock\nlisten.owner = www-data\nlisten.group = www-data\n' \ > /usr/local/etc/php-fpm.d/zz-socket-user-config.conf
 
 # Apache config
 COPY apache-config/000-default.conf /etc/apache2/sites-available/
@@ -96,6 +99,11 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     dba bcmath \
     # for module BulkExport
     zip \
+    # for module ImageServer
+    exif \
+    ffi \
+    ## For the module config's "Image processor" setting we need the deprecated 'php-vips-ext' php-extension, as the image processor does not work with the newer 'php-vips' a.k.a. 'jcupitt/vips' package
+    vips \
     # for module NumericDataTypes
     intl
     
@@ -111,6 +119,22 @@ RUN install-php-extensions xdebug \
 # Some modules require composer
 # In Docker it cannot be installed via apt because of unmet php dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Section for module ImageServer's Fast Tile script
+# The Fast Tile script (ImageServer/data/scripts/iiiftile.php) uses the 'jcupitt/vips' package and PHP extension 'ffi' to call the OS's 'libvips' library
+# Modify the config for FFI
+RUN echo "ffi.enable = true" >> /usr/local/etc/php/conf.d/docker-php-ext-ffi.ini
+
+# Copy the modified composer.json and composer.lock files, which mention the `jcupitt/vips' package, into the container.
+# This has the advantage that we do not need to provide a GitHub API token to the Docker build (composer would otherwise resolve the entire dependency tree, whereby it needs API access to GitHub).
+COPY composer/composer.json composer/composer.lock /var/www/html/
+RUN chown www-data:www-data /var/www/html/composer.json /var/www/html/composer.lock
+
+# Install everything from composer.json to the 'vendor/' folder in the Omeka root, including the 'jcupitt/vips' library.
+USER www-data
+RUN composer install --no-dev --prefer-dist --no-interaction
+USER root
+# END of section for module ImageServer
 
 # Switching to www-data to avoid running composer as root (see https://getcomposer.org/root)
 USER www-data
@@ -226,21 +250,49 @@ RUN curl -L https://github.com/zerocrates/HideProperties/releases/download/v${EN
     rm /tmp/HideProperties.zip
 
 ARG ENV_MODULE_IiifSearch_VERSION
-RUN curl -L https://github.com/smachefert/Omeka-S-module-IiifSearch/archive/refs/tags/v${ENV_MODULE_IiifSearch_VERSION}.zip --output /tmp/IiifSearch.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifSearch/releases/download/${ENV_MODULE_IiifSearch_VERSION}/IiifSearch-${ENV_MODULE_IiifSearch_VERSION}.zip --output /tmp/IiifSearch.zip && \
     unzip /tmp/IiifSearch.zip -d modules/ && \
-    # Archives downloaded from commit hash or version tag contain a long and versioned module name so we rename it.
-    mv modules/Omeka-S-module-IiifSearch-${ENV_MODULE_IiifSearch_VERSION} modules/IiifSearch && \
     rm /tmp/IiifSearch.zip
 
 ARG ENV_MODULE_IiifServer_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
+#    unzip /tmp/IiifServer.zip -d modules/ && \
+#    rm /tmp/IiifServer.zip
+
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-IiifServer/archive/refs/tags/${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
     unzip /tmp/IiifServer.zip -d modules/ && \
+    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-IiifServer-${ENV_MODULE_IiifServer_VERSION} modules/IiifServer && \
+    # install module's dependencies via composer
+    cd modules/IiifServer && \
+    composer update && \
+    composer install --no-dev && \
     rm /tmp/IiifServer.zip
 
 ARG ENV_MODULE_ImageServer_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
+#    unzip /tmp/ImageServer.zip -d modules/ && \
+#    rm /tmp/ImageServer.zip
+
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-ImageServer/archive/refs/tags/${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
     unzip /tmp/ImageServer.zip -d modules/ && \
-    rm /tmp/ImageServer.zip    
+    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-ImageServer-${ENV_MODULE_ImageServer_VERSION} modules/ImageServer && \
+    # install module's dependencies via composer
+    cd modules/ImageServer && \
+    composer update && \
+    composer install --no-dev && \
+    rm /tmp/ImageServer.zip
+
+ARG ENV_MODULE_LinkedDataSets_VERSION
+#RUN curl -L https://github.com/netwerk-digitaal-erfgoed/Omeka-S-Module-LinkedDataSets/releases/download/v${ENV_MODULE_LinkedDataSets_VERSION}/LinkedDataSets.zip --output /tmp/LinkedDataSets.zip && \
+#    unzip -q /tmp/LinkedDataSets.zip -d modules/ && \
+#    rm /tmp/LinkedDataSets.zip
+RUN curl -L https://github.com/mcoonen/Omeka-S-Module-LinkedDataSets/archive/refs/tags/${ENV_MODULE_LinkedDataSets_VERSION}.zip --output /tmp/LinkedDataSets.zip && \
+    unzip -q /tmp/LinkedDataSets.zip -d modules/ && \
+    # Archives downloaded from commit hash or version tag contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-Module-LinkedDataSets-${ENV_MODULE_LinkedDataSets_VERSION} modules/LinkedDataSets && \
+    rm /tmp/LinkedDataSets.zip
 
 ARG ENV_MODULE_Log_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${ENV_MODULE_Log_VERSION}/Log-${ENV_MODULE_Log_VERSION}.zip --output /tmp/Log.zip && \
@@ -252,8 +304,18 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
     rm /tmp/Log.zip
 
 ARG ENV_MODULE_Mirador_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+#    unzip /tmp/MiradorViewer.zip -d modules/ && \
+#    # install module's dependencies via composer
+#    cd modules/Mirador && \
+#    composer update && \
+#    composer install --no-dev && \
+#    rm /tmp/MiradorViewer.zip
+
+RUN curl -L https://github.com/mcoonen/Omeka-S-module-Mirador/archive/refs/tags/${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
     unzip /tmp/MiradorViewer.zip -d modules/ && \
+    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-Mirador-${ENV_MODULE_Mirador_VERSION} modules/Mirador && \
     # install module's dependencies via composer
     cd modules/Mirador && \
     composer update && \
@@ -299,11 +361,6 @@ ARG ENV_MODULE_Sitemaps_VERSION
 RUN curl -L https://github.com/ManOnDaMoon/omeka-s-module-Sitemaps/releases/download/v${ENV_MODULE_Sitemaps_VERSION}/Sitemaps-${ENV_MODULE_Sitemaps_VERSION}.zip --output /tmp/Sitemaps.zip && \
     unzip -q /tmp/Sitemaps.zip -d modules/ && \
     rm /tmp/Sitemaps.zip
-
-ARG ENV_MODULE_Statistics_VERSION
-RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Statistics/releases/download/${ENV_MODULE_Statistics_VERSION}/Statistics-${ENV_MODULE_Statistics_VERSION}.zip --output /tmp/Stats.zip && \
-    unzip -q /tmp/Stats.zip -d modules/ && \
-    rm /tmp/Stats.zip
 
 ARG ENV_MODULE_UniversalViewer_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer/releases/download/${ENV_MODULE_UniversalViewer_VERSION}/UniversalViewer-${ENV_MODULE_UniversalViewer_VERSION}.zip --output /tmp/UniversalViewer.zip && \
