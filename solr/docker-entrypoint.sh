@@ -83,6 +83,37 @@ if ! [ -f /var/solr/solr_schema_modified ]; then
 }
 EOF
 
+    # Add a SuggestComponent (dictionary 'omekaSuggest') and its '/suggest' request handler
+    curl --retry 5 --connect-timeout 5 -X POST -H 'Content-type:application/json' http://localhost:8983/solr/${ENV_SOLR_CORE}/config --data-binary '{
+        "add-searchcomponent": {
+            "name": "suggest",
+            "class": "solr.SuggestComponent",
+            "suggester": {
+                "name": "omekaSuggest",
+                "lookupImpl": "FuzzyLookupFactory",
+                "dictionaryImpl": "DocumentDictionaryFactory",
+                "field": "o_title_txt",
+                "suggestAnalyzerFieldType": "text_general",
+                "buildOnStartup": "true",
+                "buildOnCommit": "false"
+            }
+        }
+    }'
+
+    curl --retry 5 --connect-timeout 5 -X POST -H 'Content-type:application/json' http://localhost:8983/solr/${ENV_SOLR_CORE}/config --data-binary '{
+        "add-requesthandler": {
+            "name": "/suggest",
+            "class": "solr.SearchHandler",
+            "startup": "lazy",
+            "defaults": {
+                "suggest": "true",
+                "suggest.count": "10",
+                "suggest.dictionary": "omekaSuggest"
+            },
+            "components": ["suggest"]
+        }
+    }'
+
     touch /var/solr/solr_schema_modified
     echo "\n Done: Solr schema updated!"
 fi
