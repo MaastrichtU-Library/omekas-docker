@@ -95,7 +95,7 @@ EOF
                 "field": "o_title_txt",
                 "suggestAnalyzerFieldType": "text_general",
                 "buildOnStartup": "true",
-                "buildOnCommit": "false"
+                "buildOnCommit": "true"
             }
         }
     }'
