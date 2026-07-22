@@ -90,10 +90,11 @@ EOF
             "class": "solr.SuggestComponent",
             "suggester": {
                 "name": "omekaSuggest",
-                "lookupImpl": "FuzzyLookupFactory",
+                "lookupImpl": "AnalyzingInfixLookupFactory",
                 "dictionaryImpl": "DocumentDictionaryFactory",
                 "field": "o_title_txt",
                 "suggestAnalyzerFieldType": "text_general",
+                "highlight": "false",
                 "buildOnStartup": "true",
                 "buildOnCommit": "true"
             }
