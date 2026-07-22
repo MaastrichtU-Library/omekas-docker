@@ -110,6 +110,7 @@ services:
       - /etc/ssl/certs:/etc/nginx/certs/
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./proxy/omeka.conf:/etc/nginx/vhost.d/omeka.local
+      - ./proxy/solr.conf:/etc/nginx/vhost.d/solr.local
 
 volumes:
   db:
