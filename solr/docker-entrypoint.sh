@@ -83,6 +83,12 @@ if ! [ -f /var/solr/solr_schema_modified ]; then
 }
 EOF
 
+    # Merge the following fields into a shared multivalued field so the suggester returns a single combined, ranked list of title- and author-based suggestions:
+    # - o_title_txt
+    # - schema_author_txt
+    curl --retry 5 --connect-timeout 5 -X POST http://localhost:8983/solr/${ENV_SOLR_CORE}/schema --data-binary '{"add-copy-field":{"source":"o_title_txt","dest":"suggest_txt" }}'
+    curl --retry 5 --connect-timeout 5 -X POST http://localhost:8983/solr/${ENV_SOLR_CORE}/schema --data-binary '{"add-copy-field":{"source":"schema_author_txt","dest":"suggest_txt" }}'
+
     # Add a SuggestComponent (dictionary 'omekaSuggest') and its '/suggest' request handler
     curl --retry 5 --connect-timeout 5 -X POST -H 'Content-type:application/json' http://localhost:8983/solr/${ENV_SOLR_CORE}/config --data-binary '{
         "add-searchcomponent": {
@@ -92,7 +98,7 @@ EOF
                 "name": "omekaSuggest",
                 "lookupImpl": "AnalyzingInfixLookupFactory",
                 "dictionaryImpl": "DocumentDictionaryFactory",
-                "field": "o_title_txt",
+                "field": "suggest_txt",
                 "suggestAnalyzerFieldType": "text_general",
                 "highlight": "false",
                 "buildOnStartup": "true",
