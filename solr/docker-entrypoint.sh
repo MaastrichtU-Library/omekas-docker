@@ -29,6 +29,39 @@ if ! [ -f /var/solr/solr_schema_modified ]; then
     # See: https://gitlab.com/Daniel-KM/Omeka-S-module-SearchSolr/-/blob/master/README.md#fixing-the-issue-when-there-is-no-result
     curl --retry 5 --connect-timeout 5 -X POST http://localhost:8983/solr/${ENV_SOLR_CORE}/schema --data-binary '{"add-copy-field":{"source":"*","dest":"_text_" }}'
 
+
+    # Optimize search for prefix matching, so that searching "napo" will find "Napoléon".
+    # Step 1: Create text_search field type with EdgeNGram for prefix matching
+    curl -X POST -H "Content-Type: application/json" \
+      "http://localhost:8983/solr/omekas/schema" \
+      -d '{
+        "add-field-type": {
+          "name": "text_search",
+          "class": "solr.TextField",
+          "indexAnalyzer": {
+            "tokenizer": {"class": "solr.StandardTokenizerFactory"},
+            "filters": [
+              {"class": "solr.LowerCaseFilterFactory"},
+              {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": true},
+              {"class": "solr.EdgeNGramFilterFactory", "minGramSize": 2, "maxGramSize": 20}
+            ]
+          },
+          "queryAnalyzer": {
+            "tokenizer": {"class": "solr.StandardTokenizerFactory"},
+            "filters": [
+              {"class": "solr.LowerCaseFilterFactory"},
+              {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": true}
+            ]
+          }
+        }
+      }'
+
+    # Step 2: Apply text_search type to _text_ field
+    curl -X POST -H "Content-Type: application/json" \
+      "http://localhost:8983/solr/omekas/schema" \
+      -d '{"replace-field": {"name": "_text_", "type": "text_search", "multiValued": true, "indexed": true, "stored": false}}'
+
+
     # Add the 'solr.ASCIIFoldingFilterFactory' class to the index- and query-analyzers
     curl --retry 5 --connect-timeout 5 -X POST -H 'Content-type:application/json' http://localhost:8983/solr/${ENV_SOLR_CORE}/schema --data-binary @- << EOF
 {
