@@ -121,6 +121,27 @@ jq -r '.[] | [.name, .version, .url] | @tsv' /opt/omekas-install/resource-templa
     done
 
 # -----------------------------------------------------
+# Section for custom resource templates
+# - The Photo template depends on multiple custom vocabularies
+# - Some custom vocabularies depend on existence of specific item-sets
+# -----------------------------------------------------
+
+# Import custom vocabularies
+for file in /opt/omekas-install/custom-vocabs/*; do
+    $OSC custom-vocabulary:import "$file"
+done
+
+# Import the custom resource templates
+jq -r '.[] | [.name, .version, .url] | @tsv' /opt/omekas-install/custom-resource-templates.json | \
+    while IFS=$'\t' read -r name version url; do
+        resolved_url=$(echo "$url" | sed "s/{version}/${version}/g" | sed "s/{name}/${name}/g")
+        curl -L ${resolved_url} --output /tmp/resource-templates/${name}.json
+        $OSC resource-template:import \
+            "/tmp/resource-templates/${name}.json" \
+            --base-path ${OMEKAS_BASE_PATH}
+    done
+
+# -----------------------------------------------------
 # Apache and PHP-FPM startup
 # -----------------------------------------------------
 service apache2 start

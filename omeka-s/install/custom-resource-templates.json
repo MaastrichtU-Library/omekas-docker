@@ -1,0 +1,7 @@
+[
+  {
+    "name": "Photo",
+    "version": "1.2.0",
+    "url": "https://raw.githubusercontent.com/MaastrichtU-Library/omekas-resource-templates/refs/tags/{version}/{name}.json"
+  }
+]
