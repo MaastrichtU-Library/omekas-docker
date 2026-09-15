@@ -1,0 +1,24 @@
+{
+  "o:resource_class": {
+    "generator": "resource_class",
+    "values": [ "schema:Collection" ]
+  },
+  "dcterms:title": [
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "Maastricht University departments"
+      ]
+    }
+  ],
+  "dcterms:description": [
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "Faculties and other Maastricht University departments e.g. Faculty of Law, University Library or Maastricht University Medical Centre"
+      ]
+    }
+  ]
+}

@@ -81,6 +81,15 @@ for dir in "${dirs[@]}"; do
     fi
 done
 
+# -----------------------------------------------------
+# Apache and PHP-FPM startup
+# -----------------------------------------------------
+# Started here (rather than at the end of the script) because later steps
+# query the Omeka S REST API (e.g. the item-sets existence check below),
+# which requires the web server to already be up.
+service apache2 start
+php-fpm -D
+
 # Unpack the initial ARK database
 tar -xvf /tmp/init-arkandnoid-db.tar.gz -C ${OMEKAS_BASE_PATH}/files/
 
@@ -123,10 +132,26 @@ jq -r '.[] | [.name, .version, .url] | @tsv' /opt/omekas-install/resource-templa
 # -----------------------------------------------------
 # Section for custom resource templates
 # - The Photo template depends on multiple custom vocabularies
-# - Some custom vocabularies depend on existence of specific item-sets
+# - Some custom vocabularies depend on existence of specific item-sets and items (e.g. departments)
 # -----------------------------------------------------
 
+# Create item-sets and items for departments (needed for custom vocabularies), if not existing already
+# First read the title from the JSON file, then check the Omeka S API to see if an item-set with that title already exists.
+# Note: for jq 1.6 we need the additional check if item_sets_response is empty, since jq 1.6 exits with code 0 on empty stdin (fixed in jq 1.7)
+itemset_title=$(jq -r '."dcterms:title"[0].values[0]' /opt/omekas-install/items-itemsets/itemset-1-departments.json)
+item_sets_response=$(curl -sf http://localhost/api/item_sets)
+if [ -n "$item_sets_response" ] && echo "$item_sets_response" | jq -e --arg title "$itemset_title" 'any(.[]; ."dcterms:title"[]?."@value" == $title)' >/dev/null; then
+    echo -e "\033[0;33mDummy item-sets and items for departments already created. Skipping."
+else
+    echo -e "\033[0;32mCreating dummy item-sets and items for departments..."
+    $OSC dummy:create-item-sets --config /opt/omekas-install/items-itemsets/itemset-1-departments.json
+    for file in /opt/omekas-install/items-itemsets/item-*; do
+        $OSC dummy:create-items --config "$file"
+    done
+fi
+
 # Import custom vocabularies
+# TODO: Contact Omeka-S-CLI maintainer to implement custom-vocabulary:import for type "Items" (currently only supports types "Terms" and "URIs")
 for file in /opt/omekas-install/custom-vocabs/*; do
     $OSC custom-vocabulary:import "$file"
 done
@@ -141,11 +166,6 @@ jq -r '.[] | [.name, .version, .url] | @tsv' /opt/omekas-install/custom-resource
             --base-path ${OMEKAS_BASE_PATH}
     done
 
-# -----------------------------------------------------
-# Apache and PHP-FPM startup
-# -----------------------------------------------------
-service apache2 start
-php-fpm -D
 
 # End with a persistent foreground process
 tail -F ${OMEKAS_BASE_PATH}/logs/application.log \

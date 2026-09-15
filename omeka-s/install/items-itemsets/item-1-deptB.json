@@ -1,0 +1,74 @@
+{
+  "o:is_public": {
+    "generator": "boolean"
+  },
+  "o:item_set": {
+    "generator": "item_set",
+    "min": 1,
+    "max": 1
+  },
+  "o:resource_class": {
+    "generator": "resource_class",
+    "values": [ "schema:Organization" ]
+  },
+  "dcterms:title": [
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [ "Faculty of Health, Medicine and Life Sciences" ]
+    }
+  ],
+  "dcterms:alternative": [
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "Faculteit der Geneeskunde"
+      ]
+    },
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "Faculteit der Gezondheidswetenschappen"
+      ]
+    },
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "Biomedische Wetenschappen"
+      ]
+    }
+  ],
+  "bibo:shortTitle": [
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "FHML"
+      ]
+    },
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "FdG"
+      ]
+    },
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "FdGW"
+      ]
+    },
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "BMW"
+      ]
+    }
+  ]
+}

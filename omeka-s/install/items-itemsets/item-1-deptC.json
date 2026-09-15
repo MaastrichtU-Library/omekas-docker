@@ -1,0 +1,46 @@
+{
+  "o:is_public": {
+    "generator": "boolean"
+  },
+  "o:item_set": {
+    "generator": "item_set",
+    "min": 1,
+    "max": 1
+  },
+  "o:resource_class": {
+    "generator": "resource_class",
+    "values": [ "schema:Organization" ]
+  },
+  "dcterms:title": [
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [ "Facility Services" ]
+    }
+  ],
+  "dcterms:alternative": [
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "Facilitaire Dienst"
+      ]
+    }
+  ],
+  "bibo:shortTitle": [
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "FS"
+      ]
+    },
+    {
+      "generator": "literal",
+      "mode": "values",
+      "values": [
+        "FD"
+      ]
+    }
+  ]
+}
