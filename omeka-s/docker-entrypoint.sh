@@ -98,6 +98,7 @@ tar -xvf /tmp/init-arkandnoid-db.tar.gz -C ${OMEKAS_BASE_PATH}/files/
 
 # Configure search page
 # TODO: configure Advanced Search page and settings via SQL import?
+# TODO EDIT 2026-09-15: Test the latest version of Advanced Search (and SearchSolr?) module, which seems to have a yaml and json export/import feature.
 
 # Download and import vocabularies defined in vocabularies.json
 jq -r '.[] | [.label, .version, .url, .namespaceUri, .prefix] | @tsv' /opt/omekas-install/vocabularies.json | \
@@ -129,12 +130,12 @@ jq -r '.[] | [.name, .version, .url] | @tsv' /opt/omekas-install/resource-templa
             --base-path ${OMEKAS_BASE_PATH}
     done
 
+
 # -----------------------------------------------------
 # Section for custom resource templates
 # - The Photo template depends on multiple custom vocabularies
 # - Some custom vocabularies depend on existence of specific item-sets and items (e.g. departments)
 # -----------------------------------------------------
-
 # Create item-sets and items for departments (needed for custom vocabularies), if not existing already
 # First read the title from the JSON file, then check the Omeka S API to see if an item-set with that title already exists.
 # Note: for jq 1.6 we need the additional check if item_sets_response is empty, since jq 1.6 exits with code 0 on empty stdin (fixed in jq 1.7)
