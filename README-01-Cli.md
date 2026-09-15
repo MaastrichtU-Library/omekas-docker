@@ -39,3 +39,32 @@ omeka-s-cli module:list
 # Or using the base path
 omeka-s-cli module:list --base-path /var/www/html
 ```
+
+### Export and import of Omeka S settings across instances
+Version 0.16.0 of the Omeka S CLI added the ability to export and import settings across instances. This is useful for migrating settings from one instance to another (e.g. from TEST/ACCEPT to DEV), or for backing up your configuration.
+
+The commands below demonstrate the gist of it
+```bash
+# Export settings from the server instance to files
+omeka-s-cli config:export ./config
+
+# Tar the exported config files for transfer to another instance
+tar -czvf omeka-config.tar.gz ./config
+
+# Transfer the tar file to the other instance (e.g. via scp)
+scp omeka-config.tar.gz user@other-instance:/path/to/destination/
+
+# On the other instance, extract the tar file
+tar -xzvf omeka-config.tar.gz
+
+# Import the settings into the other instance.
+# First do a dry-run
+omeka-s-cli config:import ./config --dry-run
+
+# If the dry-run looks good, run the import for real
+omeka-s-cli config:import ./config
+```
+
+Check the outcome in your Omeka S admin interface. You should see the settings applied from the other instance.
+
+Read more in the [Omeka S CLI 0.16.0 release notes](https://github.com/GhentCDH/Omeka-S-Cli/releases/tag/v0.16.0)
