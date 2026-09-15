@@ -84,12 +84,6 @@ done
 # Unpack the initial ARK database
 tar -xvf /tmp/init-arkandnoid-db.tar.gz -C ${OMEKAS_BASE_PATH}/files/
 
-# Install all modules defined in modules.json
-jq -r '.[].name' /opt/modules.json | \
-    while read -r name; do
-        $OSC module:install "${name}" --base-path ${OMEKAS_BASE_PATH}
-    done
-
 # Create site
 # TODO: create site via SQL import?
 
@@ -97,7 +91,7 @@ jq -r '.[].name' /opt/modules.json | \
 # TODO: configure Advanced Search page and settings via SQL import?
 
 # Download and import vocabularies defined in vocabularies.json
-jq -r '.[] | [.label, .version, .url, .namespaceUri, .prefix] | @tsv' /opt/vocabularies.json | \
+jq -r '.[] | [.label, .version, .url, .namespaceUri, .prefix] | @tsv' /opt/omekas-install/vocabularies.json | \
   while IFS=$'\t' read -r label version url namespaceUri prefix; do
       resolved_url=$(echo "$url" | sed "s/{version}/${version}/g")
       $OSC vocabulary:import \
@@ -109,12 +103,15 @@ jq -r '.[] | [.label, .version, .url, .namespaceUri, .prefix] | @tsv' /opt/vocab
           --base-path "$OMEKAS_BASE_PATH"
   done
 
-# TODO: Import custom vocabularies
-# e.g. omeka-s-cli custom-vocabulary:import custom_vocab_terms.json 3 (or 4, 5, 6)
+# Install all modules defined in modules.json
+jq -r '.[].name' /opt/omekas-install/modules.json | \
+    while read -r name; do
+        $OSC module:install "${name}" --base-path ${OMEKAS_BASE_PATH}
+    done
 
 # Download and import resource templates defined in resource-templates.json
 mkdir -p /tmp/resource-templates/
-jq -r '.[] | [.name, .version, .url] | @tsv' /opt/resource-templates.json | \
+jq -r '.[] | [.name, .version, .url] | @tsv' /opt/omekas-install/resource-templates.json | \
     while IFS=$'\t' read -r name version url; do
         resolved_url=$(echo "$url" | sed "s/{version}/${version}/g" | sed "s/{name}/${name}/g")
         curl -L ${resolved_url} --output /tmp/resource-templates/${name}.json

@@ -175,8 +175,8 @@ RUN omeka-s-cli theme:download freedom
 # Download all modules defined in modules.json
 # When url is null, the module is downloaded via the omeka-s-cli registry shorthand (Name:version).
 # When url is set, the {version} placeholder is replaced and the full URL is passed to omeka-s-cli.
-COPY install/modules.json /opt/modules.json
-RUN jq -r '.[] | "\(.name) \(.version) \(if .url == null then "null" else .url end)"' /opt/modules.json | \
+COPY install/modules.json /opt/omekas-install/modules.json
+RUN jq -r '.[] | "\(.name) \(.version) \(if .url == null then "null" else .url end)"' /opt/omekas-install/modules.json | \
     while read -r name version url; do \
         if [ "$url" = "null" ]; then \
             omeka-s-cli module:download "${name}:${version}"; \
@@ -195,8 +195,7 @@ RUN chown -R www-data:www-data ${ENV_OMEKAS_BASE_PATH}/
 
 # Copy other files and folders into the container
 COPY init-arkandnoid-db.tar.gz /tmp/
-COPY install/vocabularies.json /opt/vocabularies.json
-COPY install/resource-templates.json /opt/resource-templates.json
+COPY install/ /opt/omekas-install/
 COPY docker-entrypoint.sh /
 
 # Expose ports to Docker network
