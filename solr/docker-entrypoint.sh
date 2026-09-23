@@ -32,8 +32,7 @@ if ! [ -f /var/solr/solr_schema_modified ]; then
 
     # Optimize search for prefix matching, so that searching "napo" will find "Napoléon".
     # Step 1: Create text_search field type with EdgeNGram for prefix matching
-    curl -X POST -H "Content-Type: application/json" \
-      "http://localhost:8983/solr/omekas/schema" \
+    curl -X POST -H "Content-Type: application/json" http://localhost:8983/solr/${ENV_SOLR_CORE}/schema \
       -d '{
         "add-field-type": {
           "name": "text_search",
@@ -57,8 +56,7 @@ if ! [ -f /var/solr/solr_schema_modified ]; then
       }'
 
     # Step 2: Apply text_search type to _text_ field
-    curl -X POST -H "Content-Type: application/json" \
-      "http://localhost:8983/solr/omekas/schema" \
+    curl -X POST -H "Content-Type: application/json" http://localhost:8983/solr/${ENV_SOLR_CORE}/schema \
       -d '{"replace-field": {"name": "_text_", "type": "text_search", "multiValued": true, "indexed": true, "stored": false}}'
 
 
