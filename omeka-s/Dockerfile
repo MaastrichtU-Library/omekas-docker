@@ -245,19 +245,19 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifSearch/releases/down
     rm /tmp/IiifSearch.zip
 
 ARG ENV_MODULE_IiifServer_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
-#    unzip /tmp/IiifServer.zip -d modules/ && \
-#    rm /tmp/IiifServer.zip
-
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-IiifServer/archive/refs/tags/${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
     unzip /tmp/IiifServer.zip -d modules/ && \
-    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
-    mv modules/Omeka-S-module-IiifServer-${ENV_MODULE_IiifServer_VERSION} modules/IiifServer && \
-    # install module's dependencies via composer
-    cd modules/IiifServer && \
-    composer update && \
-    composer install --no-dev && \
     rm /tmp/IiifServer.zip
+
+#RUN curl -L https://github.com/mcoonen/Omeka-S-module-IiifServer/archive/refs/tags/${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
+#    unzip /tmp/IiifServer.zip -d modules/ && \
+#    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
+#    mv modules/Omeka-S-module-IiifServer-${ENV_MODULE_IiifServer_VERSION} modules/IiifServer && \
+#    # install module's dependencies via composer
+#    cd modules/IiifServer && \
+#    composer update && \
+#    composer install --no-dev && \
+#    rm /tmp/IiifServer.zip
 
 ARG ENV_MODULE_ImageServer_VERSION
 #RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
