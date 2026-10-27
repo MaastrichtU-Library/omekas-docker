@@ -260,19 +260,19 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/down
 #    rm /tmp/IiifServer.zip
 
 ARG ENV_MODULE_ImageServer_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
-#    unzip /tmp/ImageServer.zip -d modules/ && \
-#    rm /tmp/ImageServer.zip
-
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-ImageServer/archive/refs/tags/${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
     unzip /tmp/ImageServer.zip -d modules/ && \
-    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
-    mv modules/Omeka-S-module-ImageServer-${ENV_MODULE_ImageServer_VERSION} modules/ImageServer && \
-    # install module's dependencies via composer
-    cd modules/ImageServer && \
-    composer update && \
-    composer install --no-dev && \
     rm /tmp/ImageServer.zip
+
+#RUN curl -L https://github.com/mcoonen/Omeka-S-module-ImageServer/archive/refs/tags/${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
+#    unzip /tmp/ImageServer.zip -d modules/ && \
+#    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
+#    mv modules/Omeka-S-module-ImageServer-${ENV_MODULE_ImageServer_VERSION} modules/ImageServer && \
+#    # install module's dependencies via composer
+#    cd modules/ImageServer && \
+#    composer update && \
+#    composer install --no-dev && \
+#    rm /tmp/ImageServer.zip
 
 ARG ENV_MODULE_LinkedDataSets_VERSION
 #RUN curl -L https://github.com/netwerk-digitaal-erfgoed/Omeka-S-Module-LinkedDataSets/releases/download/v${ENV_MODULE_LinkedDataSets_VERSION}/LinkedDataSets.zip --output /tmp/LinkedDataSets.zip && \
