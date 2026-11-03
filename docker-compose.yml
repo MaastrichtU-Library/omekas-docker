@@ -41,7 +41,7 @@ services:
         - ENV_MODULE_ValueSuggest_VERSION
         - ENV_THEME_Default_VERSION
     container_name: omekas
-    environment: 
+    environment:
       VIRTUAL_HOST: omeka.local
       MYSQL_DATABASE: ${ENV_MYSQL_DATABASE}
       MYSQL_USER: ${ENV_MYSQL_USER}
@@ -91,6 +91,7 @@ services:
     container_name: omekas_solr
     environment:
       ENV_SOLR_CORE: omekas
+      SOLR_LOG_LEVEL: WARN
       VIRTUAL_HOST: solr.local
       VIRTUAL_PORT: 8983
     volumes:
