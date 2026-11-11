@@ -283,15 +283,17 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/downloa
     rm /tmp/MiradorViewer.zip
 
 # Overwrite Mirador's prebuilt ESM bundle (asset/vendor/mirador-esm/) with one rebuilt against
-# mirador-ocr-helper 2.1.1 (https://github.com/Daniel-KM/mirador-ocr-helper @ 431914e).
+# mirador-ocr-helper 2.1.1-pl1 (https://github.com/mcoonen/mirador-ocr-helper, branch
+# release/2.1.1-pl1 @ 82eebb9, on top of Daniel-KM/mirador-ocr-helper @ 431914e).
 # The bundle in the Mirador 3.4.17 release predates the fix that hides the OCR side panel when an item has no OCR texts.
+# 2.1.1-pl1 also fixes React error #130 in Firefox, which hid the image of items with ALTO OCR.
 # Every chunk in the bundle shares minified exports, so the whole mirador-esm/ folder is replaced, not only plugin-ocr-helper.js.
 # This must stay after the composer step above, because composer downloads the upstream bundle into that folder.
-# Remove this block once a Mirador release ships a bundle containing mirador-ocr-helper >= 2.1.1.
-COPY --chown=www-data:www-data patches/Mirador/mirador-esm-ocr-helper-2.1.1.tar.gz /tmp/
+# Remove this block once a Mirador release ships a bundle containing both fixes.
+COPY --chown=www-data:www-data patches/Mirador/mirador-esm-ocr-helper-2.1.1-pl1.tar.gz /tmp/
 RUN rm -rf modules/Mirador/asset/vendor/mirador-esm && \
-    tar -xzf /tmp/mirador-esm-ocr-helper-2.1.1.tar.gz -C modules/Mirador/asset/vendor/ && \
-    rm /tmp/mirador-esm-ocr-helper-2.1.1.tar.gz
+    tar -xzf /tmp/mirador-esm-ocr-helper-2.1.1-pl1.tar.gz -C modules/Mirador/asset/vendor/ && \
+    rm /tmp/mirador-esm-ocr-helper-2.1.1-pl1.tar.gz
 
 ARG ENV_MODULE_ModelViewer_VERSION
 RUN curl -L https://gitlab.com/mcoonen/Omeka-S-module-ModelViewer/-/archive/${ENV_MODULE_ModelViewer_VERSION}/Omeka-S-module-ModelViewer-${ENV_MODULE_ModelViewer_VERSION}.zip --output /tmp/ModelViewer.zip && \
