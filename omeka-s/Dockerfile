@@ -182,6 +182,11 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BlocksDisposition/releas
     unzip -q /tmp/BlocksDisposition.zip -d modules/ && \
     rm /tmp/BlocksDisposition.zip
 
+ARG ENV_MODULE_BotChallenge_VERSION
+RUN curl -L  https://github.com/Daniel-KM/Omeka-S-module-BotChallenge/releases/download/${ENV_MODULE_BotChallenge_VERSION}/BotChallenge-${ENV_MODULE_BotChallenge_VERSION}.zip --output /tmp/BotChallenge.zip && \
+    unzip -q /tmp/BotChallenge.zip -d modules/ && \
+    rm /tmp/BotChallenge.zip
+
 ARG ENV_MODULE_BulkEdit_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/download/${ENV_MODULE_BulkEdit_VERSION}/BulkEdit-${ENV_MODULE_BulkEdit_VERSION}.zip --output /tmp/BulkEdit.zip && \
     unzip -q /tmp/BulkEdit.zip -d modules/ && \
