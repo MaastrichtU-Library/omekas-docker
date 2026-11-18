@@ -322,6 +322,11 @@ RUN curl -L https://github.com/ManOnDaMoon/omeka-s-module-Sitemaps/releases/down
     unzip -q /tmp/Sitemaps.zip -d modules/ && \
     rm /tmp/Sitemaps.zip
 
+ARG ENV_MODULE_Timeline_VERSION
+RUN curl -L https://github.com/Daniel-KM/Omeka-s-module-Timeline/releases/download/${ENV_MODULE_Timeline_VERSION}/Timeline-${ENV_MODULE_Timeline_VERSION}.zip --output /tmp/Timeline.zip && \
+    unzip -q /tmp/Timeline.zip -d modules/ && \
+    rm /tmp/Timeline.zip
+
 ARG ENV_MODULE_UniversalViewer_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer/releases/download/${ENV_MODULE_UniversalViewer_VERSION}/UniversalViewer-${ENV_MODULE_UniversalViewer_VERSION}.zip --output /tmp/UniversalViewer.zip && \
     unzip /tmp/UniversalViewer.zip -d modules/ && \

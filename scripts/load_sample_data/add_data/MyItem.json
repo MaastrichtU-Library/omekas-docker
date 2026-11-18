@@ -1,0 +1,65 @@
+{
+  "system_metadata": {
+    "resource_template": "Visual Art Works",
+    "media_files": [
+      "add_data/MyItem.jpg"
+    ]
+  },
+  "schema:contentType": [
+    {
+      "type": "literal",
+      "value": "Grafiek/houtsnede"
+    }
+  ],
+  "schema:name": [
+    {
+      "type": "literal",
+      "value": "Man in slaap"
+    }
+  ],
+  "schema:description": [
+    {
+      "type": "literal",
+      "value": "5/14"
+    }
+  ],
+  "schema:contentSize": [
+    {
+      "type": "literal",
+      "is_public": true,
+      "value": "48,5 cm x 67,5 cm"
+    }
+  ],
+  "schema:size": [
+    {
+      "type": "literal",
+      "value": "67,5 cm x 87,5 cm"
+    }
+  ],
+  "schema:creator": [
+    {
+      "type": "literal",
+      "value": "L. A. M. Janssen"
+    }
+  ],
+  "schema:dateCreated": [
+    {
+      "type": "numeric:timestamp",
+      "is_public": true,
+      "value": "1984-02-23"
+    }
+  ],
+  "schema:itemlocation": [
+    {
+      "type": "literal",
+      "is_public": true,
+      "value": "Oxfordlaan 55"
+    }
+  ],
+  "schema:itemLocation": [
+    {
+      "type": "literal",
+      "value": "gang tweede verdieping"
+    }
+  ]
+} 
