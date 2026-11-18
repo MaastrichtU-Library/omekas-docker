@@ -70,5 +70,5 @@ Commit messages reference a Jira ticket in brackets, for example `Upgraded Searc
 - Most modules have a `phpunit.xml` and a `tests/` or `test/` directory. Many test bootstraps (`dirname(__DIR__, 3) . '/vendor/autoload.php'` and `CommonTest\Bootstrap`) expect the module to sit inside an Omeka S core checkout at `modules/<Name>`. The host has no Omeka core next to `externals/`, so those bootstraps will not resolve as-is.
 - **Do not run DB-backed tests against the development database.** `CommonTest\Bootstrap` and `Omeka\Test\DbTestCase` **drop and recreate the schema**. Prefer pure unit tests that need no database or Omeka services, like `Omeka-S-module-Common/tests/phpunit-unit.xml` with `bootstrap-unit.php`. Mock Laminas services where needed.
 - Modules with their own `vendor/` and standalone bootstrap can be tested directly on the host, for example LinkedDataSets with `composer phpunit` (it also has `phpstan`, `phpcs` and `phpmd` scripts).
-- Host PHP is 8.5, but the container runs `ENV_PHP_VERSION` (currently 8.2). Write code and tests that work on 8.2.
+- Host PHP is 8.5, but the container runs `ENV_PHP_VERSION` (currently 8.3). Write code and tests that work on 8.3.
 - Ask the developer before running anything inside the running `omekas` container (`docker exec`). Never start a container to run tests.
