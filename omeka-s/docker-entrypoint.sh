@@ -101,11 +101,11 @@ tar -xvf /tmp/init-arkandnoid-db.tar.gz -C ${OMEKAS_BASE_PATH}/files/
 # TODO EDIT 2026-09-15: Test the latest version of Advanced Search (and SearchSolr?) module, which seems to have a yaml and json export/import feature.
 
 # Download and import vocabularies defined in vocabularies.json
-jq -r '.[] | [.label, .version, .url, .namespaceUri, .prefix] | @tsv' /opt/omekas-install/vocabularies.json | \
-  while IFS=$'\t' read -r label version url namespaceUri prefix; do
-      resolved_url=$(echo "$url" | sed "s/{version}/${version}/g")
+jq -r '.[] | [.label, .version, .source, .namespaceUri, .prefix] | @tsv' /opt/omekas-install/vocabularies.json | \
+  while IFS=$'\t' read -r label version source namespaceUri prefix; do
+      resolved_source=$(echo "$source" | sed "s/{version}/${version}/g")
       $OSC vocabulary:import \
-          --url "$resolved_url" \
+          --source "$resolved_source" \
           --namespace-uri "$namespaceUri" \
           --prefix "$prefix" \
           --label "$label - $version" \
