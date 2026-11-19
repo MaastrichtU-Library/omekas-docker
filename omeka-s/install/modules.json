@@ -26,7 +26,7 @@
   {
     "name": "SearchSolr",
     "version": "3.5.72",
-    "url": null,
+    "url": "https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/{version}/SearchSolr-{version}.zip",
     "notes": ""
   },
   {
