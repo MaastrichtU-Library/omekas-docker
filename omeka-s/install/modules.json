@@ -1,7 +1,7 @@
 [
   {
     "name": "Common",
-    "version": "3.4.85",
+    "version": "3.4.96",
     "url": null,
     "notes": "Needs to be installed first, because a lot of modules depend on it"
   },
@@ -19,15 +19,15 @@
   },
   {
     "name": "AdvancedSearch",
-    "version": "3.4.53",
+    "version": "3.4.64",
     "url": null,
-    "notes": "Avoid 3.4.54 and SearchSolr 3.5.61 because of bug https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/issues/18"
+    "notes": ""
   },
   {
     "name": "SearchSolr",
-    "version": "3.5.60",
-    "url": "https://github.com/Daniel-KM/Omeka-S-module-SearchSolr/releases/download/{version}/SearchSolr-{version}.zip",
-    "notes": "Avoid 3.5.61, see AdvancedSearch notes"
+    "version": "3.5.72",
+    "url": null,
+    "notes": ""
   },
   {
     "name": "ArchiveRepertory",
@@ -47,6 +47,11 @@
   {
     "name": "BlocksDisposition",
     "version": "3.4.5",
+    "url": null
+  },
+  {
+    "name": "BotChallenge",
+    "version": "3.4.9",
     "url": null
   },
   {
@@ -101,19 +106,19 @@
   },
   {
     "name": "IiifSearch",
-    "version": "3.4.14",
-    "url": "https://github.com/Daniel-KM/Omeka-S-module-IiifSearch/releases/download/{version}/IiifSearch-{version}.zip",
+    "version": "3.4.18",
+    "url": null,
     "notes": "If search is not working: deselect 'Cache > Cache manifest for instant access' in IiifServer module settings"
   },
   {
     "name": "IiifServer",
-    "version": "3.6.33-pl3",
-    "url": "https://github.com/mcoonen/Omeka-S-module-IiifServer/archive/refs/tags/{version}.zip"
+    "version": "3.6.36",
+    "url": null
   },
   {
     "name": "ImageServer",
-    "version": "3.6.25-pl2",
-    "url": "https://github.com/mcoonen/Omeka-S-module-ImageServer/archive/refs/tags/{version}.zip"
+    "version": "3.6.28",
+    "url": null
   },
   {
     "name": "LinkedDataSets",
@@ -122,8 +127,8 @@
   },
   {
     "name": "Mirador",
-    "version": "3.4.17-pl2",
-    "url": "https://github.com/mcoonen/Omeka-S-module-Mirador/archive/refs/tags/{version}.zip"
+    "version": "3.4.18",
+    "url": null
   },
   {
     "name": "ModelViewer",
