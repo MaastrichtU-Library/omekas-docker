@@ -40,17 +40,7 @@
     "url": "https://raw.githubusercontent.com/MaastrichtU-Library/omekas-resource-templates/refs/tags/{version}/{name}.json"
   },
   {
-  "name": "Journal_Article_K_M",
-  "version": "1.2.0",
-  "url": "https://raw.githubusercontent.com/MaastrichtU-Library/omekas-resource-templates/refs/tags/{version}/{name}.json"
-  },
-  {
     "name": "Journal_Collection",
-    "version": "1.2.0",
-    "url": "https://raw.githubusercontent.com/MaastrichtU-Library/omekas-resource-templates/refs/tags/{version}/{name}.json"
-  },
-  {
-    "name": "Journal_Issue",
     "version": "1.2.0",
     "url": "https://raw.githubusercontent.com/MaastrichtU-Library/omekas-resource-templates/refs/tags/{version}/{name}.json"
   },

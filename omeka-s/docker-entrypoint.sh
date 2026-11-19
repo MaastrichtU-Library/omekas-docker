@@ -114,8 +114,13 @@ jq -r '.[] | [.label, .version, .source, .namespaceUri, .prefix] | @tsv' /opt/om
   done
 
 # Install all modules defined in modules.json
+# Skip the LinkedDataSets module for now. It will be installed after import of the custom vocabularies and custom resource templates (because of customvocab IDs)
 jq -r '.[].name' /opt/omekas-install/modules.json | \
     while read -r name; do
+        if [ "${name}" = "LinkedDataSets" ]; then
+            echo "Skipping module:install for ${name}"
+            continue
+        fi
         $OSC module:install "${name}" --base-path ${OMEKAS_BASE_PATH}
     done
 
@@ -132,11 +137,9 @@ jq -r '.[] | [.name, .version, .url] | @tsv' /opt/omekas-install/resource-templa
 
 
 # -----------------------------------------------------
-# Section for custom resource templates
-# - The Photo template depends on multiple custom vocabularies
-# - Some custom vocabularies depend on existence of specific item-sets and items (e.g. departments)
+# Section for custom resource templates, which depend on the existence of custom vocabularies
 # -----------------------------------------------------
-# Create item-sets and items for departments (needed for custom vocabularies), if not existing already
+# Some custom vocabularies depend on existence of specific item-sets and items (e.g. departments), so we need to conditionally create those first
 # First read the title from the JSON file, then check the Omeka S API to see if an item-set with that title already exists.
 # Note: for jq 1.6 we need the additional check if item_sets_response is empty, since jq 1.6 exits with code 0 on empty stdin (fixed in jq 1.7)
 itemset_title=$(jq -r '."dcterms:title"[0].values[0]' /opt/omekas-install/items-itemsets/itemset-1-departments.json)
@@ -152,7 +155,6 @@ else
 fi
 
 # Import custom vocabularies
-# TODO: Contact Omeka-S-CLI maintainer to implement custom-vocabulary:import for type "Items" (currently only supports types "Terms" and "URIs")
 for file in /opt/omekas-install/custom-vocabs/*; do
     $OSC custom-vocabulary:import "$file"
 done
@@ -166,6 +168,9 @@ jq -r '.[] | [.name, .version, .url] | @tsv' /opt/omekas-install/custom-resource
             "/tmp/resource-templates/${name}.json" \
             --base-path ${OMEKAS_BASE_PATH}
     done
+
+# Install the LinkedDataSets module
+$OSC module:install LinkedDataSets --base-path ${OMEKAS_BASE_PATH}
 
 
 # End with a persistent foreground process

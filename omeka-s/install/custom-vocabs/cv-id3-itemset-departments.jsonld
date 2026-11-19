@@ -1,0 +1,14 @@
+{
+  "@context": {
+    "dcterms": "http://purl.org/dc/terms/",
+    "o": "http://omeka.org/s/vocabs/o#",
+    "o-ref": "https://omeka-s-contrib.github.io/omeka-s-ref/ns#"
+  },
+  "o:label": "Maastricht University department",
+  "o:lang": "en",
+  "o:item_set": {
+    "o-ref:ref": {
+      "dcterms:title": "Maastricht University departments"
+    }
+  }
+}
