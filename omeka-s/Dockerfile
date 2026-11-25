@@ -182,6 +182,11 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BlocksDisposition/releas
     unzip -q /tmp/BlocksDisposition.zip -d modules/ && \
     rm /tmp/BlocksDisposition.zip
 
+ARG ENV_MODULE_BotChallenge_VERSION
+RUN curl -L  https://github.com/Daniel-KM/Omeka-S-module-BotChallenge/releases/download/${ENV_MODULE_BotChallenge_VERSION}/BotChallenge-${ENV_MODULE_BotChallenge_VERSION}.zip --output /tmp/BotChallenge.zip && \
+    unzip -q /tmp/BotChallenge.zip -d modules/ && \
+    rm /tmp/BotChallenge.zip
+
 ARG ENV_MODULE_BulkEdit_VERSION
 RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-BulkEdit/releases/download/${ENV_MODULE_BulkEdit_VERSION}/BulkEdit-${ENV_MODULE_BulkEdit_VERSION}.zip --output /tmp/BulkEdit.zip && \
     unzip -q /tmp/BulkEdit.zip -d modules/ && \
@@ -205,8 +210,18 @@ RUN curl -L https://github.com/biblibre/omeka-s-module-CreateMissingThumbnails/r
     rm /tmp/CreateMissingThumbnails.zip
 
 ARG ENV_MODULE_CSVImport_VERSION
-RUN curl -L https://github.com/omeka-s-modules/CSVImport/releases/download/v${ENV_MODULE_CSVImport_VERSION}/CSVImport-${ENV_MODULE_CSVImport_VERSION}.zip --output /tmp/CSVImport.zip && \
+# Use Daniel-KM's forked version 2.6.3, until https://github.com/omeka-s-modules/CSVImport/pull/235 is merged and released.
+# This contains an updated OpenSpout version that is compatible with BulkExport 3.4.40 and higher
+#RUN curl -L https://github.com/omeka-s-modules/CSVImport/releases/download/v${ENV_MODULE_CSVImport_VERSION}/CSVImport-${ENV_MODULE_CSVImport_VERSION}.zip --output /tmp/CSVImport.zip && \
+#    unzip -q /tmp/CSVImport.zip -d modules/ && \
+#    rm /tmp/CSVImport.zip
+RUN curl -L  https://github.com/Daniel-KM/Omeka-S-module-CSVImport/archive/refs/tags/${ENV_MODULE_CSVImport_VERSION}.zip --output /tmp/CSVImport.zip && \
     unzip -q /tmp/CSVImport.zip -d modules/ && \
+    # Archives downloaded from commit hash or version tag contain a long and versioned module name so we rename it.
+    mv modules/Omeka-S-module-CSVImport-${ENV_MODULE_CSVImport_VERSION} modules/CSVImport && \
+    cd modules/CSVImport && \
+    composer update && \
+    composer install --no-dev && \
     rm /tmp/CSVImport.zip
 
 ARG ENV_MODULE_CustomVocab_VERSION
@@ -245,33 +260,13 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifSearch/releases/down
     rm /tmp/IiifSearch.zip
 
 ARG ENV_MODULE_IiifServer_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
-#    unzip /tmp/IiifServer.zip -d modules/ && \
-#    rm /tmp/IiifServer.zip
-
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-IiifServer/archive/refs/tags/${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/${ENV_MODULE_IiifServer_VERSION}/IiifServer-${ENV_MODULE_IiifServer_VERSION}.zip --output /tmp/IiifServer.zip && \
     unzip /tmp/IiifServer.zip -d modules/ && \
-    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
-    mv modules/Omeka-S-module-IiifServer-${ENV_MODULE_IiifServer_VERSION} modules/IiifServer && \
-    # install module's dependencies via composer
-    cd modules/IiifServer && \
-    composer update && \
-    composer install --no-dev && \
     rm /tmp/IiifServer.zip
 
 ARG ENV_MODULE_ImageServer_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
-#    unzip /tmp/ImageServer.zip -d modules/ && \
-#    rm /tmp/ImageServer.zip
-
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-ImageServer/archive/refs/tags/${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-ImageServer/releases/download/${ENV_MODULE_ImageServer_VERSION}/ImageServer-${ENV_MODULE_ImageServer_VERSION}.zip --output /tmp/ImageServer.zip && \
     unzip /tmp/ImageServer.zip -d modules/ && \
-    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
-    mv modules/Omeka-S-module-ImageServer-${ENV_MODULE_ImageServer_VERSION} modules/ImageServer && \
-    # install module's dependencies via composer
-    cd modules/ImageServer && \
-    composer update && \
-    composer install --no-dev && \
     rm /tmp/ImageServer.zip
 
 ARG ENV_MODULE_LinkedDataSets_VERSION
@@ -294,18 +289,8 @@ RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Log/releases/download/${
     rm /tmp/Log.zip
 
 ARG ENV_MODULE_Mirador_VERSION
-#RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
-#    unzip /tmp/MiradorViewer.zip -d modules/ && \
-#    # install module's dependencies via composer
-#    cd modules/Mirador && \
-#    composer update && \
-#    composer install --no-dev && \
-#    rm /tmp/MiradorViewer.zip
-
-RUN curl -L https://github.com/mcoonen/Omeka-S-module-Mirador/archive/refs/tags/${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
+RUN curl -L https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases/download/${ENV_MODULE_Mirador_VERSION}/Mirador-${ENV_MODULE_Mirador_VERSION}.zip --output /tmp/MiradorViewer.zip && \
     unzip /tmp/MiradorViewer.zip -d modules/ && \
-    # Archives downloaded from Github tags contain a long and versioned module name so we rename it.
-    mv modules/Omeka-S-module-Mirador-${ENV_MODULE_Mirador_VERSION} modules/Mirador && \
     # install module's dependencies via composer
     cd modules/Mirador && \
     composer update && \
