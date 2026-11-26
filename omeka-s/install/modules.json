@@ -7,7 +7,7 @@
   },
   {
     "name": "Log",
-    "version": "3.4.33",
+    "version": "3.4.43",
     "url": null,
     "notes": "Needs to be installed early, because other modules depend on it"
   },
@@ -61,7 +61,7 @@
   },
   {
     "name": "BulkExport",
-    "version": "3.4.37",
+    "version": "3.4.43",
     "url": null
   },
   {
@@ -71,8 +71,8 @@
   },
   {
     "name": "CSVImport",
-    "version": "2.6.2",
-    "url": null
+    "version": "2.6.3",
+    "url": "https://github.com/Daniel-KM/Omeka-S-module-CSVImport/archive/refs/tags/{version}.zip"
   },
   {
     "name": "CustomVocab",
@@ -107,7 +107,7 @@
   {
     "name": "IiifSearch",
     "version": "3.4.18",
-    "url": null,
+    "url": "https://github.com/Daniel-KM/Omeka-S-module-IiifSearch/releases/download/{version}/IiifSearch-{version}.zip",
     "notes": "If search is not working: deselect 'Cache > Cache manifest for instant access' in IiifServer module settings"
   },
   {
